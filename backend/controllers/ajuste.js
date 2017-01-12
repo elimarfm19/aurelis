@@ -1,25 +1,25 @@
 'use strict'
 
-const Ajuste = require('../models/mod_ajuste')
+const Ajuste = require('../models/ajuste')
  
  function getAjuste(req,res){
 
 	let ajusteId = req.params.id
 
 	Ajuste.findById(ajusteId,(err,ajuste)=>{
-	 	if(err) return res.status(500).send({message:'Error al realizar la peticion: ${ err }'})
+	 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
 	 	if(!ajuste) return res.status(404).send({message:'El ajuste no existe'})
 	 	
-	 	res.status(200).send({ajuste:ajuste})
+	 	res.status(200).send(ajuste)
 	})
 }
 
 function getAjustes(req,res){
 	Ajuste.find({},(err,ajuste)=>{
- 	if(err) return res.status(500).send({message:'Error al realizar la peticion: ${ err }'})
- 	if(!ajuste) return res.status(404).send({message:'No hay registros de Ajustes'})
+ 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+ 	if(ajuste == "") return res.status(404).send({message:'No hay registros de Ajustes'})
  	
- 	res.status(200).send({ajuste:ajuste})
+ 	res.status(200).send(ajuste)
  	})
 }
 
@@ -38,10 +38,10 @@ function storeAjuste(req,res){
 
 	ajuste.save((err,ajusteStored)=>{
 
-		if (err) res.status(500).send({message:'Error al guardar en la base de datos: ${ err }'})
+		if (err) res.status(500).send({message:`Error al guardar en la base de datos: ${ err }`})
 		
 		
-		res.status(200).send({ajuste:ajusteStored})		
+		res.status(200).send(ajusteStored)		
 
 	})
 
@@ -52,9 +52,9 @@ function updateAjuste(req,res){
 	let update = req.body
 
 		Ajuste.findByIdAndUpdate(ajusteId,update,(err,ajusteUpdated)=>{
-			if(err) return res.status(500).send({message:'Error al actualizar el ajuste: ${ err }'})
+			if(err) return res.status(500).send({message:`Error al actualizar el ajuste: ${ err }`})
 			
-			res.status(200).send({ajuste: ajusteUpdated })
+			res.status(200).send(ajusteUpdated)
 			
 		})
 
@@ -64,11 +64,11 @@ function deleteAjuste(req,res){
 	let ajusteId = req.params.id
 
 	Ajuste.findById(ajusteId,(err,ajuste)=>{
-		if(err) return res.status(500).send({message:'Error al borrar el ajuste: ${ err }'})
+		if(err) return res.status(500).send({message:`Error al borrar el ajuste: ${ err }`})
 		if(!ajuste) return res.status(404).send({message:'el ajuste no existe'})
 
 		ajuste.remove(err => {
-			if(err) return res.status(500).send({message:'Error al borrar el ajuste: ${ err }'})
+			if(err) return res.status(500).send({message:`Error al borrar el ajuste: ${ err }`})
 			res.status(200).send({message:'el ajuste ha sido eliminado'})
 		})
 	})

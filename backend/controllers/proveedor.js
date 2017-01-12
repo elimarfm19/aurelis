@@ -1,25 +1,25 @@
 'use strict'
 
-const Proveedor = require('../models/mod_persona')
+const Proveedor = require('../models/persona')
  
  function getProveedor(req,res){
 
 	let proveedorId = req.params.id
 
 	Proveedor.findById(proveedorId,(err,proveedor)=>{
-	 	if(err) return res.status(500).send({message:'Error al realizar la peticion: ${ err }'})
+	 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
 	 	if(!proveedor) return res.status(404).send({message:'El proveedor no existe'})
 	 	
-	 	res.status(200).send({proveedor:proveedor})
+	 	res.status(200).send(proveedor)
 	})
 }
 
 function getProveedores(req,res){
 	Proveedor.find({},(err,proveedor)=>{
- 	if(err) return res.status(500).send({message:'Error al realizar la peticion: ${ err }'})
- 	if(!proveedor) return res.status(404).send({message:'No hay registros de Proveedores'})
+ 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+ 	if(proveedor == "") return res.status(404).send({message:'No hay registros de Proveedores'})
  	
- 	res.status(200).send({proveedor:proveedor})
+ 	res.status(200).send(proveedor)
  	})
 }
 
@@ -38,10 +38,10 @@ function storeProveedor(req,res){
 
 	proveedor.save((err,dStored)=>{
 
-		if (err) res.status(500).send({message:'Error al guardar en la base de datos: ${ err }'})
+		if (err) res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
 		
 		
-		res.status(200).send({proveedor:proveedorStored})		
+		res.status(200).send(proveedorStored)		
 
 	})
 
@@ -52,9 +52,9 @@ function updateProveedor(req,res){
 	let update = req.body
 
 		Proveedor.findByIdAndUpdate(proveedorId,update,(err,proveedorUpdated)=>{
-			if(err) return res.status(500).send({message:'Error al actualizar el proveedor: ${ err }'})
+			if(err) return res.status(500).send({message:`Error al actualizar el proveedor: ${ err }`})
 			
-			res.status(200).send({proveedor:proveedorUpdated})
+			res.status(200).send(proveedorUpdated)
 			
 		})
 
@@ -64,11 +64,11 @@ function deleteProveedor(req,res){
 	let proveedorId = req.params.id
 
 	Proveedor.findById(proveedorId,(err,proveedor)=>{
-		if(err) return res.status(500).send({message:'Error al borrar el proveedor: ${ err }'})
+		if(err) return res.status(500).send({message:`Error al borrar el proveedor: ${ err }`})
 		if(!proveedor) return res.status(404).send({message:'el proveedor no existe'})
 
 		proveedor.remove(err => {
-			if(err) return res.status(500).send({message:'Error al borrar el proveedor: ${ err }'})
+			if(err) return res.status(500).send({message:`Error al borrar el proveedor: ${ err }`})
 			res.status(200).send({message:'el proveedor ha sido eliminado'})
 		})
 	})

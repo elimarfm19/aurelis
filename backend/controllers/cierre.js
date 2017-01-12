@@ -1,25 +1,25 @@
 'use strict'
 
-const Cierre = require('../models/mod_cierre')
+const Cierre = require('../models/cierre')
  
  function getCierre(req,res){
 
 	let cierreId = req.params.id
 
 	Cierre.findById(cierreId,(err,cierre)=>{
-	 	if(err) return res.status(500).send({message:'Error al realizar la peticion: ${ err }'})
+	 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
 	 	if(!cierre) return res.status(404).send({message:'El cierre no existe'})
 	 	
-	 	res.status(200).send({cierre:cierre})
+	 	res.status(200).send(cierre)
 	})
 }
 
 function getCierres(req,res){
 	Cierre.find({},(err,cierre)=>{
- 	if(err) return res.status(500).send({message:'Error al realizar la peticion: ${ err }'})
- 	if(!cierre) return res.status(404).send({message:'No hay registros de Cierres'})
+ 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+ 	if(cierre == "") return res.status(404).send({message:'No hay registros de Cierres'})
  	
- 	res.status(200).send({cierre:cierre})
+ 	res.status(200).send(cierre)
  	})
 }
 
@@ -39,10 +39,10 @@ function storeCierre(req,res){
 
 	cierre.save((err,cierreStored)=>{
 
-		if (err) res.status(500).send({message:'Error al guardar en la base de datos: ${ err }'})
+		if (err) res.status(500).send({message:`Error al guardar en la base de datos: ${ err }`})
 		
 		
-		res.status(200).send({cierre:cierreStored})		
+		res.status(200).send(cierreStored)		
 
 	})
 
@@ -53,9 +53,9 @@ function updateCierre(req,res){
 	let update = req.body
 
 		Cierre.findByIdAndUpdate(cierreId,update,(err,cierreUpdated)=>{
-			if(err) return res.status(500).send({message:'Error al actualizar el cierre: ${ err }'})
+			if(err) return res.status(500).send({message:`Error al actualizar el cierre: ${ err }`})
 			
-			res.status(200).send({cierre:cierreUpdated})
+			res.status(200).send(cierreUpdated)
 			
 		})
 
@@ -65,11 +65,11 @@ function deleteCierre(req,res){
 	let cierreId = req.params.id
 
 	Cierre.findById(cierreId,(err,cierre)=>{
-		if(err) return res.status(500).send({message:'Error al borrar el cierre: ${ err }'})
+		if(err) return res.status(500).send({message:`Error al borrar el cierre: ${ err }`})
 		if(!cierre) return res.status(404).send({message:'el cierre no existe'})
 
 		cierre.remove(err => {
-			if(err) return res.status(500).send({message:'Error al borrar el cierre: ${ err }'})
+			if(err) return res.status(500).send({message:`Error al borrar el cierre: ${ err }`})
 			res.status(200).send({message:'el cierre ha sido eliminado'})
 		})
 	})

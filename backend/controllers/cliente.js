@@ -1,25 +1,25 @@
 'use strict'
 
-const Cliente = require('../models/mod_persona')
+const Cliente = require('../models/cliente')
  
  function getCliente(req,res){
 
 	let clienteId = req.params.id
 
 	Cliente.findById(clienteId,(err,cliente)=>{
-	 	if(err) return res.status(500).send({message:'Error al realizar la peticion: ${ err }'})
+	 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
 	 	if(!cliente) return res.status(404).send({message:'El cliente no existe'})
 	 	
-	 	res.status(200).send({cliente:cliente})
+	 	res.status(200).send(cliente)
 	})
 }
 
 function getClientes(req,res){
-	Cliente.find({},(err,cliente)=>{
- 	if(err) return res.status(500).send({message:'Error al realizar la peticion: ${ err }'})
- 	if(!cliente) return res.status(404).send({message:'No hay registros de Clientes'})
+	Cliente.find({},(err,clientes)=>{
+ 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+ 	if(clientes == "") return res.status(404).send({message:'No hay registros de Clientes'})
  	
- 	res.status(200).send({cliente:cliente})
+ 	res.status(200).send(clientes)
  	})
 }
 
@@ -28,7 +28,7 @@ function storeCliente(req,res){
 	//res.status(200).send({message:'el producto se ha recibido'})
 	let cliente = new Cliente()
 
-    cliente.tipo_persona = req.body.tipo_persona
+    cliente.tipo_cliente = req.body.tipo_cliente
     cliente.nombres = req.body.nombres
     cliente.apellidos = req.body.apellidos
     cliente.ced_rif = req.body.ced_rif
@@ -38,10 +38,10 @@ function storeCliente(req,res){
 
 	cliente.save((err,clienteStored)=>{
 
-		if (err) res.status(500).send({message:'Error al guardar en la base de datos: ${ err }'})
+		if (err) res.status(500).send({message:`Error al guardar en la base de datos: ${ err }`})
 		
 		
-		res.status(200).send({cliente:clienteStored})		
+		res.status(200).send(clienteStored)		
 
 	})
 
@@ -52,9 +52,9 @@ function updateCliente(req,res){
 	let update = req.body
 
 		Cliente.findByIdAndUpdate(clienteId,update,(err,clienteUpdated)=>{
-			if(err) return res.status(500).send({message:'Error al actualizar el cliente: ${ err }'})
+			if(err) return res.status(500).send({message:`Error al actualizar el cliente: ${ err }`})
 			
-			res.status(200).send({cliente:clienteUpdated})
+			res.status(200).send(clienteUpdated)
 			
 		})
 
@@ -64,11 +64,11 @@ function deleteCliente(req,res){
 	let clienteId = req.params.id
 
 	Cliente.findById(clienteId,(err,cliente)=>{
-		if(err) return res.status(500).send({message:'Error al borrar el cliente: ${ err }'})
+		if(err) return res.status(500).send({message:`Error al borrar el cliente: ${ err }`})
 		if(!cliente) return res.status(404).send({message:'el cliente no existe'})
 
 		cliente.remove(err => {
-			if(err) return res.status(500).send({message:'Error al borrar el cliente: ${ err }'})
+			if(err) return res.status(500).send({message:`Error al borrar el cliente: ${ err }`})
 			res.status(200).send({message:'el cliente ha sido eliminado'})
 		})
 	})

@@ -14,8 +14,4 @@ var Ajuste = new Schema({
     peso_entrega: Number
 });
 
-Ajuste.path('model').validate(function (v) {
-    return ((v != "") && (v != null));
-});
-
-module.exports = mongoose.model('mod_ajuste', Ajuste);
+module.exports = mongoose.model('Ajuste', Ajuste);

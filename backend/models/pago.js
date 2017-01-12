@@ -10,8 +10,5 @@ var Pago = new Schema({
     monto_pagado: Number
 });
 
-Pago.path('model').validate(function (v) {
-    return ((v != "") && (v != null));
-});
 
-module.exports = mongoose.model('mod_pago', Pago);
+module.exports = mongoose.model('Pago', Pago);

@@ -14,7 +14,7 @@ const Images = new Schema({
 });
 */
 // ESQUEMA PARA PERSONAS
-const PersonaSchema = Schema({
+const Persona = Schema({
     tipo_persona: {
         type: String,
         enum: ['Cliente','Proveedor']
@@ -27,8 +27,4 @@ const PersonaSchema = Schema({
     email: String  
 });
 
-Persona.path('model').validate(function (v) {
-    return ((v != "") && (v != null));
-});
-
-module.exports = mongoose.model('mod_persona', Persona);
+module.exports = mongoose.model('Persona', Persona);

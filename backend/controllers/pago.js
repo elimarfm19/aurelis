@@ -1,25 +1,25 @@
 'use strict'
 
-const Pago = require('../models/mod_pago')
+const Pago = require('../models/pago')
  
  function getPago(req,res){
 
 	let pagoId = req.params.id
 
 	Pago.findById(pagoId,(err,pago)=>{
-	 	if(err) return res.status(500).send({message:'Error al realizar la peticion: ${ err }'})
+	 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
 	 	if(!pago) return res.status(404).send({message:'El pago no existe'})
 	 	
-	 	res.status(200).send({pago:pago})
+	 	res.status(200).send(pago)
 	})
 }
 
 function getPagos(req,res){
 	Pago.find({},(err,pago)=>{
- 	if(err) return res.status(500).send({message:'Error al realizar la peticion: ${ err }'})
- 	if(!pago) return res.status(404).send({message:'No hay registros de pagos'})
+ 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+ 	if(pago == "") return res.status(404).send({message:'No hay registros de pagos'})
  	
- 	res.status(200).send({pago:pago})
+ 	res.status(200).send(pago)
  	})
 }
 
@@ -34,10 +34,10 @@ function storePago(req,res){
 
 	pago.save((err,pagoStored)=>{
 
-		if (err) res.status(500).send({message:'Error al guardar en la base de datos: ${ err }'})
+		if (err) res.status(500).send({message:`Error al guardar en la base de datos: ${ err }`})
 		
 		
-		res.status(200).send({pago:pagoStored})		
+		res.status(200).send(pagoStored)		
 
 	})
 
@@ -48,9 +48,9 @@ function updatePago(req,res){
 	let update = req.body
 
 		Pago.findByIdAndUpdate(pagoId,update,(err,pagoUpdated)=>{
-			if(err) return res.status(500).send({message:'Error al actualizar el pago: ${ err }'})
+			if(err) return res.status(500).send({message:`Error al actualizar el pago: ${ err }`})
 			
-			res.status(200).send({pago:pagoUpdated})
+			res.status(200).send(pagoUpdated)
 			
 		})
 
@@ -60,11 +60,11 @@ function deletePago(req,res){
 	let pagoId = req.params.id
 
 	Pago.findById(pagoId,(err,pago)=>{
-		if(err) return res.status(500).send({message:'Error al borrar el pago: ${ err }'})
+		if(err) return res.status(500).send({message:`Error al borrar el pago: ${ err }`})
 		if(!pago) return res.status(404).send({message:'el pago no existe'})
 
 		pago.remove(err => {
-			if(err) return res.status(500).send({message:'Error al borrar el pago: ${ err }'})
+			if(err) return res.status(500).send({message:`Error al borrar el pago: ${ err }`})
 			res.status(200).send({message:'el pago ha sido eliminado'})
 		})
 	})

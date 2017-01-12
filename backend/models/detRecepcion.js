@@ -8,8 +8,5 @@ var detRecepcion = new Schema({
     cod_pieza: String
 });
 
-detPago.path('model').validate(function (v) {
-    return ((v != "") && (v != null));
-});
 
-module.exports = mongoose.model('mod_det-recepcion', detRecepcion);
+module.exports = mongoose.model('detRecepcion', detRecepcion);

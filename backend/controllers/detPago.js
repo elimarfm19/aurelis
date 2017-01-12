@@ -1,25 +1,25 @@
 'use strict'
 
-const DetPago = require('../models/mod_det-pago')
+const DetPago = require('../models/detPago')
  
  function getdetPago(req,res){
 
 	let detPagoId = req.params.id
 
 	DetPago.findById(detPagoId,(err,detPago)=>{
-	 	if(err) return res.status(500).send({message:'Error al realizar la peticion: ${ err }'})
+	 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
 	 	if(!detPago) return res.status(404).send({message:'El Pago no existe'})
 	 	
-	 	res.status(200).send({detPago:detPago})
+	 	res.status(200).send(detPago)
 	})
 }
 
 function getdetPagos(req,res){
 	DetPago.find({},(err,detPago)=>{
- 	if(err) return res.status(500).send({message:'Error al realizar la peticion: ${ err }'})
- 	if(!detPago) return res.status(404).send({message:'No hay registros de Pagos'})
+ 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+ 	if(detPago == "") return res.status(404).send({message:'No hay registros de Pagos'})
  	
- 	res.status(200).send({detPago:detPago})
+ 	res.status(200).send(detPago)
  	})
 }
 
@@ -36,10 +36,10 @@ function storedetPago(req,res){
 
 	detPago.save((err,detPagoStored)=>{
 
-		if (err) res.status(500).send({message:'Error al guardar en la base de datos: ${ err }'})
+		if (err) res.status(500).send({message:`Error al guardar en la base de datos: ${ err }`})
 		
 		
-		res.status(200).send({detPago:detPagoStored})		
+		res.status(200).send(detPagoStored)		
 
 	})
 
@@ -50,9 +50,9 @@ function updatedetPago(req,res){
 	let update = req.body
 
 		DetPago.findByIdAndUpdate(detPagoId,update,(err,detPagoUpdated)=>{
-			if(err) return res.status(500).send({message:'Error al actualizar el detalle de pago: ${ err }'})
+			if(err) return res.status(500).send({message:`Error al actualizar el detalle de pago: ${ err }`})
 			
-			res.status(200).send({detPago:detPagoUpdated})
+			res.status(200).send(detPagoUpdated)
 			
 		})
 
@@ -62,11 +62,11 @@ function deletedetPago(req,res){
 	let detPagoId = req.params.id
 
 	DetPago.findById(detPagoId,(err,detPago)=>{
-		if(err) return res.status(500).send({message:'Error al borrar el detalle de pago: ${ err }'})
+		if(err) return res.status(500).send({message:`Error al borrar el detalle de pago: ${ err }`})
 		if(!detPago) return res.status(404).send({message:'el detalle de pago no existe'})
 
 		detPago.remove(err => {
-			if(err) return res.status(500).send({message:'Error al borrar el detalle de pago: ${ err }'})
+			if(err) return res.status(500).send({message:`Error al borrar el detalle de pago: ${ err }`})
 			res.status(200).send({message:'el detalle de pago ha sido eliminado'})
 		})
 	})

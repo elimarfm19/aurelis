@@ -12,8 +12,4 @@ var detPago = new Schema({
     monto: Number
 });
 
-detPago.path('model').validate(function (v) {
-    return ((v != "") && (v != null));
-});
-
-module.exports = mongoose.model('mod_det-pago', detPago);
+module.exports = mongoose.model('detPago', detPago);

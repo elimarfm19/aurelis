@@ -10,8 +10,4 @@ var Recepcion = new Schema({
     cantidad: Number 
 });
 
-Cierre.path('model').validate(function (v) {
-    return ((v != "") && (v != null));
-});
-
-module.exports = mongoose.model('mod_recepcion', Recepcion);
+module.exports = mongoose.model('Recepcion', Recepcion);

@@ -11,8 +11,4 @@ var Entrega = new Schema({
     status: Number
 });
 
-Ajuste.path('model').validate(function (v) {
-    return ((v != "") && (v != null));
-});
-
-module.exports = mongoose.model('mod_entrega', Entrega);
+module.exports = mongoose.model('Entrega', Entrega);

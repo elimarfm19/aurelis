@@ -8,18 +8,15 @@
  *
  * Main module of the application.
  */
-
-angular
-  .module('aurelisApp', [
-    'ngAnimate',
+var app = angular.module('aurelisApp', ['ngResource','ngAnimate','ngProgress',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch',
-    'ngPagination'
-  ])
-  .config(function ($routeProvider) {
+    'ngTouch']);
+
+
+  app.config(function ($routeProvider) {
     $routeProvider
        .when('/', {
         templateUrl: '/views/vista_inicio.html',
@@ -28,8 +25,8 @@ angular
       })
       .when('/cliente', {
         templateUrl: '/views/vista_cliente.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        controller: 'ctrl-cliente',
+        controllerAs: 'cli'
       })
       .when('/cierre_cliente', {
         templateUrl: '/views/vista_cierre_c.html',
@@ -60,5 +57,14 @@ angular
         redirectTo: '/'
       });
   });
+  
+  // Create a resource factory to access products table from database 
+app.factory('Cliente', function($resource) {
+  return $resource('http://localhost:3001/clientes/:id', { id: '@_id' }, {
+    update: { // We need to define this method manually as it is not provided with ng-resource
+      method: 'PUT'
+    }
+  });
+});
 
 

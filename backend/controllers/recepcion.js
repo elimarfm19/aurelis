@@ -1,25 +1,25 @@
 'use strict'
 
-const Recepcion = require('../models/mod_recepcion')
+const Recepcion = require('../models/recepcion')
  
  function getRecepcion(req,res){
 
 	let recepcionId = req.params.id
 
 	Recepcion.findById(recepcionId,(err,recepcion)=>{
-	 	if(err) return res.status(500).send({message:'Error al realizar la peticion: ${ err }'})
+	 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
 	 	if(!recepcion) return res.status(404).send({message:'La recepcion no existe'})
 	 	
-	 	res.status(200).send({recepcion:recepcion})
+	 	res.status(200).send(recepcion)
 	})
 }
 
 function getRecepciones(req,res){
 	Recepcion.find({},(err,recepcion)=>{
- 	if(err) return res.status(500).send({message:'Error al realizar la peticion: ${ err }'})
- 	if(!recepcion) return res.status(404).send({message:'No hay registros de recepcion'})
+ 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+ 	if(recepcion == "") return res.status(404).send({message:'No hay registros de recepcion'})
  	
- 	res.status(200).send({recepcion:recepcion})
+ 	res.status(200).send(recepcion)
  	})
 }
 
@@ -34,10 +34,10 @@ function storeRecepcion(req,res){
 
 	recepcion.save((err,recepcionStored)=>{
 
-		if (err) res.status(500).send({message:'Error al guardar en la base de datos: ${ err }'})
+		if (err) res.status(500).send({message:`Error al guardar en la base de datos: ${ err }`})
 		
 		
-		res.status(200).send({recepcion:recepcionStored})		
+		res.status(200).send(recepcionStored)		
 
 	})
 
@@ -48,7 +48,7 @@ function updateRecepcion(req,res){
 	let update = req.body
 
 		Recepcion.findByIdAndUpdate(recepcionId,update,(err,recepcionUpdated)=>{
-			if(err) return res.status(500).send({message:'Error al actualizar la recepcion: ${ err }'})
+			if(err) return res.status(500).send({message:`Error al actualizar la recepcion: ${ err }`})
 			
 			res.status(200).send({recepcion:recepcionUpdated})
 			
@@ -60,11 +60,11 @@ function deleteRecepcion(req,res){
 	let recepcionId = req.params.id
 
 	Recepcion.findById(recepcionId,(err,recepcion)=>{
-		if(err) return res.status(500).send({message:'Error al borrar la recepcion: ${ err }'})
+		if(err) return res.status(500).send({message:`Error al borrar la recepcion: ${ err }`})
 		if(!recepcion) return res.status(404).send({message:'la recepcion no existe'})
 
 		recepcion.remove(err => {
-			if(err) return res.status(500).send({message:'Error al borrar la recepcion: ${ err }'})
+			if(err) return res.status(500).send({message:`Error al borrar la recepcion: ${ err }`})
 			res.status(200).send({message:'la recepcion ha sido eliminada'})
 		})
 	})

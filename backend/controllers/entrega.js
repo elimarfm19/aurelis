@@ -1,25 +1,25 @@
 'use strict'
 
-const Entrega = require('../models/mod_entrega')
+const Entrega = require('../models/entrega')
  
  function getEntrega(req,res){
 
 	let entregaId = req.params.id
 
 	Entrega.findById(entregaId,(err,entrega)=>{
-	 	if(err) return res.status(500).send({message:'Error al realizar la peticion: ${ err }'})
+	 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
 	 	if(!entrega) return res.status(404).send({message:'La entrega no existe'})
 	 	
-	 	res.status(200).send({entrega:entrega})
+	 	res.status(200).send(entrega)
 	})
 }
 
 function getEntregas(req,res){
 	Entrega.find({},(err,entrega)=>{
- 	if(err) return res.status(500).send({message:'Error al realizar la peticion: ${ err }'})
- 	if(!entrega) return res.status(404).send({message:'No hay registros de Entrega'})
+ 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+ 	if(entrega == "") return res.status(404).send({message:'No hay registros de Entrega'})
  	
- 	res.status(200).send({entrega:entrega})
+ 	res.status(200).send(entrega)
  	})
 }
 
@@ -35,10 +35,10 @@ function storeEntrega(req,res){
 
 	entrega.save((err,entregaStored)=>{
 
-		if (err) res.status(500).send({message:'Error al guardar en la base de datos: ${ err }'})
+		if (err) res.status(500).send({message:`Error al guardar en la base de datos: ${ err }`})
 		
 		
-		res.status(200).send({entrega:entregaStored})		
+		res.status(200).send(entregaStored)		
 
 	})
 
@@ -49,9 +49,9 @@ function updateEntrega(req,res){
 	let update = req.body
 
 		Entrega.findByIdAndUpdate(entregaId,update,(err,entregaUpdated)=>{
-			if(err) return res.status(500).send({message:'Error al actualizar la entrega: ${ err }'})
+			if(err) return res.status(500).send({message:`Error al actualizar la entrega: ${ err }`})
 			
-			res.status(200).send({entrega:entregaUpdated})
+			res.status(200).send(entregaUpdated)
 			
 		})
 
@@ -61,12 +61,12 @@ function deleteEntrega(req,res){
 	let entregaId = req.params.id
 
 	Entrega.findById(entregaId,(err,entrega)=>{
-		if(err) return res.status(500).send({message:'Error al borrar la entrega: ${ err }'})
+		if(err) return res.status(500).send({message:`Error al borrar la entrega: ${ err }`})
 		if(!entrega) return res.status(404).send({message:'la entrega no existe'})
 
 		entrega.remove(err => {
-			if(err) return res.status(500).send({message:'Error al borrar la entrega: ${ err }'})
-			res.status(200).send({message:'la entrega ha sido eliminado'})
+			if(err) return res.status(500).send({message:`Error al borrar la entrega: ${ err }`})
+			res.status(200).send({message:'la entrega ha sido eliminada'})
 		})
 	})
 }

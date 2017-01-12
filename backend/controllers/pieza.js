@@ -1,25 +1,25 @@
 'use strict'
 
-const Pieza = require('../models/mod_pieza')
+const Pieza = require('../models/pieza')
  
  function getPieza(req,res){
 
 	let piezaId = req.params.id
 
 	Pieza.findById(piezaId,(err,pago)=>{
-	 	if(err) return res.status(500).send({message:'Error al realizar la peticion: ${ err }'})
+	 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
 	 	if(!pieza) return res.status(404).send({message:'La pieza no existe'})
 	 	
-	 	res.status(200).send({pieza:pieza})
+	 	res.status(200).send(pieza)
 	})
 }
 
 function getPiezas(req,res){
 	Pieza.find({},(err,pieza)=>{
- 	if(err) return res.status(500).send({message:'Error al realizar la peticion: ${ err }'})
- 	if(!pieza) return res.status(404).send({message:'No hay registros de piezas'})
+ 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+ 	if(pieza == "") return res.status(404).send({message:'No hay registros de piezas'})
  	
- 	res.status(200).send({pieza:pieza})
+ 	res.status(200).send(pieza)
  	})
 }
 
@@ -38,10 +38,10 @@ function storePieza(req,res){
 
 	pieza.save((err,piezaStored)=>{
 
-		if (err) res.status(500).send({message:'Error al guardar en la base de datos: ${ err }'})
+		if (err) res.status(500).send({message:`Error al guardar en la base de datos: ${ err }`})
 		
 		
-		res.status(200).send({pieza:piezaStored})		
+		res.status(200).send(piezaStored)		
 
 	})
 
@@ -52,9 +52,9 @@ function updatePieza(req,res){
 	let update = req.body
 
 		Pieza.findByIdAndUpdate(piezaId,update,(err,piezaUpdated)=>{
-			if(err) return res.status(500).send({message:'Error al actualizar la pieza: ${ err }'})
+			if(err) return res.status(500).send({message:`Error al actualizar la pieza: ${ err }`})
 			
-			res.status(200).send({pieza:piezaUpdated})
+			res.status(200).send(piezaUpdated)
 			
 		})
 
@@ -64,11 +64,11 @@ function deletePieza(req,res){
 	let piezaId = req.params.id
 
 	Pieza.findById(piezaId,(err,pieza)=>{
-		if(err) return res.status(500).send({message:'Error al borrar la pieza: ${ err }'})
+		if(err) return res.status(500).send({message:`Error al borrar la pieza: ${ err }`})
 		if(!pieza) return res.status(404).send({message:'la pieza no existe'})
 
 		pieza.remove(err => {
-			if(err) return res.status(500).send({message:'Error al borrar la pieza: ${ err }'})
+			if(err) return res.status(500).send({message:`Error al borrar la pieza: ${ err }`})
 			res.status(200).send({message:'la pieza ha sido eliminada'})
 		})
 	})

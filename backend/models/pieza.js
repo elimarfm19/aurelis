@@ -14,8 +14,4 @@ var Pieza = new Schema({
     ajuste: String
 });
 
-Cierre.path('model').validate(function (v) {
-    return ((v != "") && (v != null));
-});
-
 module.exports = mongoose.model('mod_pieza', Pieza);
