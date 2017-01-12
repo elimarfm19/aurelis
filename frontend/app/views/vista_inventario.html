@@ -1,0 +1,54 @@
+
+<div class="container" >
+  </br>
+  </br>
+  </br>
+  <div class="tab-content col-md-9 col-md-offset-1">
+    <div  class="tab-pane fade in active" id="proveedores" ng-controller="ctrlpaginado">
+      <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Inventario de Piezas Disponibles </h3>
+      <br>
+      <div class="col-md-4 col-md-offset-8"> 
+        <input type="text" placeholder="Buscar" style="font-weight: 600; font-family: 'Tahoma';" ng-pagination-search="personas">
+      </div>
+      <br>
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr class="active">                        
+                <th class="center-align">Proveedor</th>
+                <th class="center-align">Id</th>
+                <th class="center-align">Peso Bruto</th>
+                <th class="center-align">Ley</th>                          
+                <th class="center-align">Puro</th>                          
+                <th class="center-align">Peso Entrega</th>                          
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-pagination="item in personas" ng-pagination-size="10">
+                <td class="center-align"  field="proveedor">
+                  {{item.proveedor}}
+                </td>
+                <td class="center-align" field="id">
+                  {{item.cod_pieza}}
+                </td>
+                <td class="center-align" field="pero_bruto">
+                  {{item.peso_bruto}}
+                </td>
+                <td class="center-align" field="ley">
+                  {{item.ley}}
+                </td>
+                <td class="center-align" field="puro">
+                  {{item.puro}}
+                </td>                        
+                <td class="center-align" field="peso_entrega">
+                  {{item.peso_entrega}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ng-pagination-control pagination-id="personas"></ng-pagination-control>
+      </div>                
+    </div>
+  </div>
