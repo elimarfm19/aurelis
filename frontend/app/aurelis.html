@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="es" ng-app="aurelisApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Inicio</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <!-- Normalize CSS -->
+  	<link rel="stylesheet" href="../css/normalize.css">
+     <!-- Materialize CSS -->
+  	<link rel="stylesheet" href="../css/materialize.min.css">
+     <!-- Material Design Iconic Font CSS -->
+  	<link rel="stylesheet" href="../css/material-design-iconic-font.min.css">
+    <!-- Malihu jQuery custom content scroller CSS -->
+  	<link rel="stylesheet" href="../css/jquery.mCustomScrollbar.css">
+    <!-- Sweet Alert CSS -->
+    <link rel="stylesheet" href="../css/sweetalert.css">
+    <!-- MaterialDark CSS -->
+	  <link rel="stylesheet" href="../css/style.css">
+  	<link rel="stylesheet" href="../css/bootstrap.css">
+  	<link rel="stylesheet" href="../css/bootstrap.min.css">
+    <!-- endbuild -->
+    
+  </head>
+  <body ng-app="myapp">
+      <!-- Nav Header -->
+      <div class="ContentPage-Nav full-width">
+        <ul class="full-width">
+          <li class="btn-MobileMenu ShowHideMenu">
+            <a ng-href="#" class="tooltipped waves-effect waves-light" data-position="bottom" data-delay="50" data-tooltip="">
+              <i class="zmdi zmdi-more-vert"></i>
+            </a>
+          </li>
+          <li>
+            <figure>
+              <img src="../assets/img/user.png" alt="UserImage">
+            </figure>
+          </li>
+          <li style="padding:0 5px;">User Name</li>
+          <li>
+            <a ng-href="#" class="tooltipped waves-effect waves-light btn-ExitSystem" data-position="bottom" data-delay="50" data-tooltip="Salir">
+              <i class="zmdi zmdi-power"></i>
+            </a>
+          </li>
+        </ul>	
+      </div>
+
+      <!-- Nav Lateral -->
+      <section class="NavLateral full-width">
+        <div class="NavLateral-FontMenu full-width ShowHideMenu"></div>
+          <div class="NavLateral-content full-width">
+            <header class="NavLateral-title full-width center-align">Inicio
+              <i class="zmdi zmdi-close NavLateral-title-btn ShowHideMenu"></i>
+            </header>
+            <figure class="full-width NavLateral-logo">
+              <a target="_blank" ng-href="http://www.techsoluxy.com" ><img src="../assets/img/logo.png" alt="software a medida" class="responsive-img center-box"></a>
+              <!--  <figcaption class="center-align">User</figcaption>-->
+            </figure>
+            <div class="NavLateral-Nav">
+              <ul class="full-width">
+                <li class="NavLateralDivider"></li>
+                <li>
+                  <a ng-href="#inicio" class="waves-effect waves-light">
+                    <i class="zmdi zmdi-home zmdi-hc-fw"></i> 
+                    Inicio
+                  </a>
+                  
+                </li>
+                <li class="NavLateralDivider"></li>
+                <li>
+                  <a ng-ref="" class="NavLateral-DropDown waves-effect waves-light">
+                    <i class="zmdi zmdi-assignment-account zmdi-hc-fw"></i> 
+                    <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i>Clientes
+                  </a>
+                  <ul class="full-width">
+                  <li>
+                    <a href="#cliente" class="waves-effect waves-light">
+                      <i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Gestión
+                    </a>
+                  </li>    
+                  <li class="NavLateralDivider"></li>
+                  <li>
+                    <a ng-href="#cierre_cliente" class="waves-effect waves-light">
+                      <i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i> Cierre
+                    </a>
+                  </li>
+                  <li class="NavLateralDivider"></li>  
+                  <li>
+                    <a ng-href="#entrega" class="waves-effect waves-light"><i class="zmdi zmdi-upload zmdi-hc-fw"></i> Entrega</a>
+                  </li>
+                </li>							
+              </ul>
+                        
+              <li class="NavLateralDivider"></li>
+              <li>
+                <a ng-href="#" class="NavLateral-DropDown waves-effect waves-light">
+                  <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
+                  <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i>Edición
+                </a>
+                <ul class="full-width">                          
+                  <li class="NavLateralDivider"></li>
+                  <li><a ng-href="entrega.html" class="waves-effect waves-light"><i class="zmdi zmdi-wrench zmdi-hc-fw"></i> Ajuste de Cierre</a></li>
+                  <li class="NavLateralDivider"></li>
+                  <li><a ng-href="recepcion.html" class="waves-effect waves-light"><i class="zmdi zmdi-puzzle-piece zmdi-hc-fw"></i> Ajuste de Pieza</a></li>
+                </ul>
+              </li>
+              <li class="NavLateralDivider"></li>
+              <li>
+                <a ng-href="#" class="NavLateral-DropDown waves-effect waves-light">
+                  <i class="zmdi zmdi-collection-plus zmdi-hc-fw"></i>
+                  <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i> Inventario
+                </a>            
+              </li>
+              <li class="NavLateralDivider"></li>
+              <li>
+                <a ng-href="" class="NavLateral-DropDown  waves-effect waves-light"><i class="zmdi zmdi-card zmdi-hc-fw"></i> <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i>Proveedores</a>
+                <ul class="full-width">
+                  <li>
+                    <a ng-href="#proveedor" class="waves-effect waves-light">
+                      <i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Gestión
+                    </a>
+                  </li>
+                  <li class="NavLateralDivider"></li>
+                  <li>
+                    <a ng-href="#cierre_proveedor" class="waves-effect waves-light">
+                      <i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i> Cierre
+                    </a>
+                  </li>
+                  <li class="NavLateralDivider"></li>
+                  <li>
+                    <a ng-href="recepcion.html" class="waves-effect waves-light">
+                      <i class="zmdi zmdi-download zmdi-hc-fw"></i> Recepción
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="NavLateralDivider"></li>
+              <li>
+                <a ng-href="#" class="NavLateral-DropDown  waves-effect waves-light"><i class="zmdi zmdi-collection-text zmdi-hc-fw"></i> <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i>Reportes</a>
+                <ul class="full-width">
+                  <li>
+                    <a ng-href="template.html" class="waves-effect waves-light ">Blank Page</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="NavLateralDivider"></li>
+              <!--Salir menu vertical-->
+              <li>
+                <a ng-href="inicio.html" class="NavLateral-DropDown  waves-effect waves-light"><i class="zmdi zmdi-power zmdi-hc-fw"></i> Salir</a>
+              </li>
+              <li class="NavLateralDivider"></li>
+            </div>
+          </div>
+      </section>
+
+
+
+    <div class="tamanno" >
+        <section class="ContentPage" style="background-image: url(../assets/img/fondo_2.jpeg); background-size: 100% 100%">
+          
+            <div ng-view=""></div>
+
+        </section>
+    </div>
+
+  
+  <footer class="footer-MaterialDark">
+      <div class="NavLateralDivider"></div>
+        <div class="center-align">
+      
+        Copyright ©
+        <a target="_blank" ng-href="http://www.techsoluxy.com" >Techsoluxy, C.A.</a>
+          Aurelis - 2016. Todos los derechos reservados.
+        <a target="_blank" ng-href="humans.txt" >Equipo desarrollador.</a>
+      </div>
+      <br>
+      <div class="NavLateralDivider"></div>
+  </footer>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.7/angular.min.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.js"></script>
+    <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.3/angular-route.js"></script>
+    <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="../bower_components/angular-touch/angular-touch.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        
+        <script src="../js/routes_inicio.js"></script>
+        <script src="../js/controllers/main.js"></script>
+        <script src="../js/controllers/ctrl-inicio.js"></script>
+        
+        <!-- endbuild -->
+
+        <!-- Sweet Alert JS -->
+        <script src="../js/sweetalert.min.js"></script>
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../js/jquery-2.2.0.min.js"><\/script>')</script>
+        <!-- Materialize JS -->
+        <script src="../js/materialize.min.js"></script>
+        <!-- Malihu jQuery custom content scroller JS -->
+        <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <!-- MaterialDark JS -->
+        <script src="../js/main.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        
+  
+</body>
+</html>

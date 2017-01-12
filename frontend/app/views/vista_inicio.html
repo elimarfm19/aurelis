@@ -1,0 +1,223 @@
+
+<div class="container" >
+ </br>
+        <ul class="nav nav-tabs col-md-12" style="margin-left:0.2cm; " >
+          <li class="active"><a style="color:black; font-weight:600; font-family: 'Tahoma';" href="#proveedores" data-toggle="tab">Proveedores</a></li>
+          <li><a style="color:black; font-weight:600; font-family: 'Tahoma';" href="#clientes" data-toggle="tab">Clientes</a></li>
+        </ul>
+
+        <div class="tab-content col-md-9 col-md-offset-1">
+          <div  class="tab-pane fade in active" id="proveedores" ng-controller="ctrlpaginado">
+            <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Próximas Recepciones de Proveedores </h3>
+            <br>
+            <div class="col-md-4 col-md-offset-8"> 
+              <input type="text" placeholder="Buscar" style="font-weight: 600; font-family: 'Tahoma';" ng-pagination-search="personas">
+            </div>
+            <br>
+            <div class="col-md-12">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="active">
+                          <th class="center-align">Orden</th>
+                          <th class="center-align">Proveedor</th>
+                          <th class="center-align">Cierre (g)</th>
+                          <th class="center-align">Entregado (g)</th>
+                          <th class="center-align">Por Cerrar (g)</th>
+                          <th class="center-align">Precio</th>
+                          <th class="center-align">Fecha de Entrega</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-pagination="item in personas" ng-pagination-size="10">
+                          <td class="center-align" style="cursor: not-allowed;" field="orden">
+                            {{item.orden}}
+                          </td>
+                          <td class="center-align" field="cliente">
+                            {{item.cliente}}
+                          </td>
+                          <td class="center-align" field="cierre">
+                            {{item.cierre |currency: ''}}
+                          </td>
+                          <td class="center-align" field="entregado">
+                            <a data-toggle="modal" data-target="#entregaProveedorModal">{{item.entregado |currency: ''}}</a>
+                          </td>
+                          <td class="center-align" field="por_cerrar">
+                            {{item.cierre - item.entregado | currency: ''}}
+                          </td>
+                          <td class="center-align" field="precio">
+                            {{item.precio | currency: ''}}
+                          </td>
+                          <td class="center-align" field="fecha_entrega">
+                            {{item.fecha_entrega}}
+                          </td>
+                        </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <ng-pagination-control pagination-id="personas"></ng-pagination-control>
+              </div>                
+        </div>
+
+        <div class="tab-pane" id="clientes" ng-controller="ctrlpaginado">
+            <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Próximas Entregas a Clientes </h3>
+            <br>
+            <div class="col-md-4 col-md-offset-8"> 
+              <input type="text" placeholder="Buscar" style="font-weight: 600; font-family: 'Tahoma';" ng-pagination-search="personas">
+            </div>
+            <br>
+            <div class="col-md-12">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="active">
+                          <th class="center-align">Orden</th>
+                          <th class="center-align">Cliente</th>
+                          <th class="center-align">Cierre (g)</th>
+                          <th class="center-align">Entregado (g)</th>
+                          <th class="center-align">Por Cerrar (g)</th>
+                          <th class="center-align">Precio</th>
+                          <th class="center-align">Fecha de Entrega</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-pagination="item in personas" ng-pagination-size="10">
+                          <td class="center-align" style="cursor: not-allowed;" field="orden">
+                            {{item.orden}}
+                          </td>
+                          <td class="center-align" field="cliente">
+                            {{item.cliente}}
+                          </td>
+                          <td class="center-align" field="cierre">
+                            {{item.cierre | currency: ''}}
+                          </td>
+                          <td class="center-align" field="entregado">
+                             <a data-toggle="modal" data-target="#entregaClienteModal">{{item.entregado | currency: ''}}</a>
+                          </td>
+                          <td class="center-align" field="por_cerrar">
+                            {{item.cierre - item.entregado | currency: ''}}
+                          </td>
+                          <td class="center-align" field="precio">
+                            {{item.precio | currency: ''}}
+                          </td>
+                          <td class="center-align" field="fecha_entrega">
+                            {{item.fecha_entrega}}
+                          </td>
+                        </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <ng-pagination-control pagination-id="personas"></ng-pagination-control>
+              </div>                
+        </div>
+</div>
+
+                       
+
+<div class="container">
+    <!-- Modal -->
+  <div class="modal fade" id="entregaProveedorModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="tamanno">
+			    <div class="" ng-controller="ctrlmodal" style="margin-top:100px; ">
+	          <div class="row " style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
+				    <br>
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align modal-title">Entregas</h3>                  
+            </div>	    
+            <br>
+	          <div class="col-md-12">
+             <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="active">
+                          <th class="center-align">Fecha</th>                          
+                          <th class="center-align">Cantidad (g)</th>
+                          <th class="center-align">Precio</th>
+                          <th class="center-align">Total</th>                          
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-pagination="item in personas" ng-pagination-size="10">
+                          <td class="center-align"  field="fecha">
+                            {{item.fecha}}
+                          </td>
+
+                          <td class="center-align" field="cantidad">
+                            {{item.cantidad | currency: ''}}
+                          </td>
+                          <td class="center-align" field="precio">
+                            {{item.precio | currency:  ''}}
+                          </td>
+                          <td class="center-align" field="total">
+                            {{item.cantidad*item.precio | currency: ''}}
+                          </td>                        
+                        </tr>
+                    </tbody>
+                  </table>
+               </div>
+                <ng-pagination-control pagination-id="personas"></ng-pagination-control>
+               </br>
+              </div>
+	        </div>
+	      </div>
+      </div>
+    </div>
+  </div>  
+</div>
+<div class="container">
+    <!-- Modal -->
+  <div class="modal fade" id="entregaClienteModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="tamanno">
+			    <div class="" ng-controller="ctrlmodal" style="margin-top:100px; ">
+	          <div class="row " style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
+				    <br>
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align modal-title">Entregas</h3>                  
+            </div>	    
+            <br>
+	          <div class="col-md-12">
+             <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="active">
+                          <th class="center-align">Fecha</th>
+                          <th class="center-align">Proveedor</th>
+                          <th class="center-align">Cantidad (g)</th>
+                          <th class="center-align">Precio</th>
+                          <th class="center-align">Total</th>                          
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-pagination="item in personas" ng-pagination-size="10">
+                          <td class="center-align"  field="fecha">
+                            {{item.fecha}}
+                          </td>
+                          <td class="center-align" field="proveedor">
+                            {{item.proveedor}}
+                          </td>
+                          <td class="center-align" field="cantidad">
+                            {{item.cantidad | currency: ''}}
+                          </td>
+                          <td class="center-align" field="precio">
+                            {{item.precio | currency:  ''}}
+                          </td>
+                          <td class="center-align" field="total">
+                            {{item.cantidad*item.precio | currency: ''}}
+                          </td>                        
+                        </tr>
+                    </tbody>
+                  </table>
+               </div>
+                <ng-pagination-control pagination-id="personas"></ng-pagination-control>
+               </br>
+              </div>
+	        </div>
+	      </div>
+      </div>
+    </div>
+  </div>  
+</div>
