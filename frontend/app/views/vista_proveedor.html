@@ -1,28 +1,26 @@
- </br>
+</br>
           <ul class="nav nav-tabs col-md-12" style="margin-left:0.2cm; ">
-            <li class="active"><a style="color:black; font-weight:600; font-family: 'Tahoma';" href="#clientes" data-toggle="tab">Proveedores</a></li>
+            <li class="active"><a style="color:black; font-weight:600; font-family: 'Tahoma';" href="#proveedores" data-toggle="tab">Proveedores</a></li>
           </ul>
 
         <div class="tab-content col-md-10 col-md-offset-1">
-            <div class="tab-pane fade in active" id="clientes" ng-controller="ctrlpaginado">
+            <div class="tab-pane fade in active" >
               <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Gestión de Proveedores</h3>
             
               <br>
 
-              <div class="row">
-                  <div class="btn-group col-md-4">
-                    <input type="text" placeholder="Buscar" style="font-weight: 600; font-family: 'Tahoma';" ng-pagination-search="personas">
-                  </div>
-                  <div class="btn-group col-md-2 col-md-offset-6">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                      <span class="glyphicon glyphicon-plus" style="font-weight: 600; font-family: 'Tahoma';"> Nuevo</span>
-                    </button>
-                  </div>
+            <div class="row">
+                <div class="btn-group col-md-2 col-md-offset-10">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                    <span class="glyphicon glyphicon-plus" style="font-weight: 600; font-family: 'Tahoma';"> Nuevo</span>
+                  </button>
                 </div>
+              </div>
 
-                <br>
-                <div class="col-md-12">
-                  <div class="table-responsive">
+              <br>
+              <div class="col-md-12">
+                <div class="table-responsive">
+                  <form name="Codenx" novalidate>
                     <table class="table table-hover">
                         <thead>
                             <tr class="active">
@@ -31,32 +29,39 @@
                               <th class="center-align">Teléfono</th>
                               <th class="center-align">Dirección</th>
                               <th class="center-align">Email</th>
+                              <th class="center-align"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-pagination="item in personas" ng-pagination-size="10">
-                              <td class="center-align" editable-td field="ci">
-                                {{item.ci}}
+                            <tr ng-repeat="proveedor in proveedores">
+                              <td class="center-align">
+                                {{proveedor.ced_rif}}
                               </td>
-                              <td class="center-align" editable-td row="{{item}}" field="nombre_apellido">
-                                {{item.nombre_apellido}}
+                              <td class="center-align">
+                                {{proveedor.nombres}} {{proveedor.apellidos}}
                               </td>
-                              <td class="center-align" editable-td row="{{item}}" field="tlf">
-                                {{item.tlf}}
+                              <td class="center-align">
+                                {{proveedor.tlf}}
                               </td>
-                              <td class="center-align" row="{{item}}" field="direccion">                        
-                                  <a ng-href="#proveedor"> <img style="max-width: 20px; height: 20px;" src="../assets/img/eye.png" alt="Paris" data-toggle="modal" data-target="#direccionModal"></a>                              
+                              <td class="center-align">
+                                <!--<img style="max-width: 20px; height: 20px;" src="../assets/img/eye.png" alt="Paris" data-toggle="modal" data-target="#direccionModal">-->
+                                {{proveedor.direccion}}
                               </td>
-                              <td class="center-align" editable-td row="{{item}}" field="email">
-                                {{item.email}}
+                              <td class="center-align">
+                                {{proveedor.email}}
+                              </td>
+                              <td class="center-align">                                  
+                                  <button class="btn btn-danger glyphicon glyphicon-trash btn-xs" ng-click="remove(proveedor)"></button>
+                                  <button class="btn btn-warning glyphicon glyphicon-pencil btn-xs" ng-click="edit(proveedor._id)" data-toggle="modal" data-target="#myModal"></button>
                               </td>
                             </tr>
                         </tbody>
                       </table>
-                    </div>
-                    <ng-pagination-control pagination-id="personas"></ng-pagination-control>
-                  </div>                
-              </div>
+                    </form>
+                   
+                  </div>
+                </div>                
+            </div>
         </div>
 
 <div class="container">
@@ -72,41 +77,43 @@
               <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align modal-title">Nuevo Proveedor</h3>                  
             </div>	    
             <br>
-	          <form class="col s12">
+	          <form name="Codenx" novalidate class="col s12">
               <div class="row">
                 <div class="input-field col s6">
-                  <input id="nombre" type="text" class="validate">
+                  <input id="nombre" type="text" class="validate" ng-model="proveedor.nombres">
                   <label for="nombre">Nombre(s)</label>
                 </div>
                 <div class="input-field col s6">
-                  <input id="apellido" type="text" class="validate">
+                  <input id="apellido" type="text" class="validate" ng-model="proveedor.apellidos">
                   <label for="apellido">Apellidos</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s6">
-                   <input id="ci" type="text" class="validate">
-                   <label for="ci">C.I. / RIF</label>
+                   <input id="ced_rif" type="text" class="validate" ng-model="proveedor.ced_rif">
+                   <label for="ced_rif">C.I. / RIF</label>
                 </div>
                 <div class="input-field col s6">
-                   <input id="tlf" type="tel" class="validate">
+                   <input id="tlf" type="tel" class="validate" ng-model="proveedor.tlf">
                    <label for="tlf">Teléfono</label>
                 </div>
              </div>
              <div class="row">
                 <div class="input-field col s12">
-                   <input id="email" type="email" class="validate">
+                   <input id="email" type="email" class="validate" ng-model="proveedor.email">
                    <label for="email">Email</label>
                 </div>
              </div>
              <div class="row">
                 <div class="input-field col s12">
-                   <input id="direccion" type="text" class="validate">
+                   <input id="direccion" type="text" class="validate" ng-model="proveedor.direccion">
                    <label for="direccion">Dirección</label>
                 </div>
              </div>
              <div style="text-align:center">
-                 <button class="waves-effect waves-teal btn-flat btn-primary">Guardar &nbsp; <i class="zmdi zmdi-mail-send center-align" href="home.html"></i><a ></a></button>
+                 <button class="btn btn-primary" ng-click="add(proveedor)" ng-if="!proveedor._id" type="submit" ng-disabled="!Codenx.$valid">Add proveedor</button>
+                 <button class="btn btn-info" ng-click="update(proveedor)" ng-if="proveedor._id" type="submit">Update</button>
+                 <button class="btn" ng-click="deselect()" ng-if="proveedor._id">Clear</button>
              </div>
              <br>                                                
 	         </form>
@@ -116,6 +123,7 @@
     </div>
   </div>  
 </div>
+<div data-loading></div>
 
 <div class="container">
     <!-- Modal -->
@@ -127,19 +135,16 @@
 				    <br>
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align modal-title">Dirección</h3>                  
+              <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align modal-title">Dirección del Proveedor</h3>                  
             </div>	    
             <br>
 	          <form class="col s12">              
              <div class="row">
-                <div class="input-field col s12">
-                   <input id="direccion" type="text" class="validate">                   
+                <div class="center-align">
+                   {{proveedor.direccion}}                   
                 </div>
              </div>            
-             <div style="text-align:center">
-                 <button class="waves-effect waves-teal btn-flat btn-primary">Guardar &nbsp; <i class="zmdi zmdi-mail-send center-align" href="home.html"></i><a ></a></button>
-             </div>
-             <br>                                                
+             <br><br><br>                                                
 	         </form>
 	        </div>
 	      </div>
