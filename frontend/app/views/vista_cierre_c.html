@@ -8,13 +8,11 @@
             <br>
 	          <form class="col s12">
               <div class="row ">                            
-                <div class="input-field col-md-6 col-md-offset-3">                                                
-                  <select class="select">
+                <div class="input-field col-md-6 col-md-offset-3"> 
+                <select class="select"  ng-controller="ctrl-cliente">
                     <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Seleccione un Cliente</option>
-                    <option  value="1" id="c" >Cliente 1</option>
-                    <option  value="2">Cliente 2</option>
-                    <option  value="3">Cliente 3</option>                                    
-                  </select>                                
+                    <option ng-repeat="cliente in clientes" value="{{ cliente._id }}" id="c" >{{ cliente.nombres }}  {{ cliente.apellidos }}</option>                                   
+                  </select>                                                                             
                 </div>                            
               </div>
               <br>                
