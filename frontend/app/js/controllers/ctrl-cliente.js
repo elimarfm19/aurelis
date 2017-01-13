@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ctrl-cliente', function($scope,$http, Cliente, ngProgress) {
+app.controller('ctrl-cliente', function($scope,$http,Cliente,ngProgress) {
 
 $scope.cliente = new Cliente();
 

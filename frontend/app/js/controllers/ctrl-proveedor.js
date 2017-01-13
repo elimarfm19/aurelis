@@ -5,7 +5,7 @@ app.controller('ctrl-proveedor', function($scope,$http,Proveedor,ngProgress) {
 $scope.proveedor = new Proveedor();
 
 var refresh = function() {
-  $scope.proveedores = Proveedores.query(); 
+  $scope.proveedores = Proveedor.query(); 
   $scope.proveedor ="";
 }
 refresh();
