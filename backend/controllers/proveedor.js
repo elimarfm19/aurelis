@@ -15,11 +15,11 @@ const Proveedor = require('../models/persona')
 }
 
 function getProveedores(req,res){
-	Proveedor.find({},(err,proveedor)=>{
+	Proveedor.find({},(err,proveedores)=>{
  	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
- 	if(proveedor == "") return res.status(404).send({message:'No hay registros de Proveedores'})
+ 	if(proveedores == "") return res.status(404).send({message:'No hay registros de Proveedores'})
  	
- 	res.status(200).send(proveedor)
+ 	res.status(200).send(proveedores)
  	})
 }
 
@@ -41,7 +41,7 @@ function storeProveedor(req,res){
 		if (err) res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
 		
 		
-		res.status(200).send(proveedorStored)		
+		res.status(200).send(storeProveedor)		
 
 	})
 
