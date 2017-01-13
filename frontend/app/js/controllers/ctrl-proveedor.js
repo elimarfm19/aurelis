@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ctrl-proveedor', function($scope,$http,Proveedor,ngProgress) {
+app.controller('ctrl-proveedor', function($scope,Proveedor,ngProgress) {
 
 $scope.proveedor = new Proveedor();
 
@@ -35,5 +35,7 @@ $scope.edit = function(id) {
 $scope.deselect = function() {
   $scope.proveedor = "";
 }
-
+$scope.direccion = function(id) {
+  $scope.proveedor = Proveedor.get({ id: id });
+};
 })

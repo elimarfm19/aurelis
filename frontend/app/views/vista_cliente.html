@@ -44,8 +44,8 @@
                                 {{cliente.tlf}}
                               </td>
                               <td class="center-align">
-                                <!--<img style="max-width: 20px; height: 20px;" src="../assets/img/eye.png" alt="Paris" data-toggle="modal" data-target="#direccionModal">-->
-                                {{cliente.direccion}}
+                               <img style="max-width: 20px; height: 20px;" src="../assets/img/eye.png" alt="Paris" data-toggle="modal" data-target="#direccionModal" ng-click="direccion(cliente._id)">
+                                
                               </td>
                               <td class="center-align">
                                 {{cliente.email}}
@@ -111,9 +111,9 @@
                 </div>
              </div>
              <div style="text-align:center">
-                 <button class="btn btn-primary" ng-click="add(cliente)" ng-if="!cliente._id" type="submit" ng-disabled="!Codenx.$valid">Add cliente</button>
-                 <button class="btn btn-info" ng-click="update(cliente)" ng-if="cliente._id" type="submit">Update</button>
-                 <button class="btn" ng-click="deselect()" ng-if="cliente._id">Clear</button>
+                 <button class="btn btn-primary" ng-click="add(cliente)" ng-if="!cliente._id" type="submit" ng-disabled="!Codenx.$valid">AÑADIR</button>
+                 <button class="btn btn-info" ng-click="update(cliente)" ng-if="cliente._id" type="submit">ACTUALIZAR</button>
+                 <button class="btn" ng-click="deselect()" ng-if="cliente._id">LIMPIAR</button>
              </div>
              <br>                                                
 	         </form>
@@ -141,7 +141,7 @@
 	          <form class="col s12">              
              <div class="row">
                 <div class="center-align">
-                   {{cliente.direccion}}                   
+                 {{ cliente.direccion }}                  
                 </div>
              </div>            
              <br><br><br>                                                

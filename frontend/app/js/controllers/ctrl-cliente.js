@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ctrl-cliente', function($scope,$http,Cliente,ngProgress) {
+app.controller('ctrl-cliente', function($scope,Cliente,ngProgress) {
 
 $scope.cliente = new Cliente();
 
@@ -35,5 +35,7 @@ $scope.edit = function(id) {
 $scope.deselect = function() {
   $scope.cliente = "";
 }
-
+$scope.direccion = function(id) {
+  $scope.cliente = Cliente.get({ id: id });
+}; 
 })

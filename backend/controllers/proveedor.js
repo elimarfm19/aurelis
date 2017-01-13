@@ -36,12 +36,12 @@ function storeProveedor(req,res){
     proveedor.direccion = req.body.direccion
     proveedor.email = req.body.email
 
-	proveedor.save((err,dStored)=>{
+	proveedor.save((err,proveedorStored)=>{
 
 		if (err) res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
 		
 		
-		res.status(200).send(storeProveedor)		
+		res.status(200).send(proveedorStored)		
 
 	})
 
