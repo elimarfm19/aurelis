@@ -25,8 +25,8 @@ var app = angular.module('aurelisApp', ['ngResource','ngAnimate','ngProgress',
       })
       .when('/cliente', {
         templateUrl: '/views/vista_cliente.html',
-        controller: '',
-        controllerAs: ''
+        controller: 'ctrl-cliente',
+        controllerAs: 'cli'
       })
       .when('/cierre_cliente', {
         templateUrl: '/views/vista_cierre_c.html',
