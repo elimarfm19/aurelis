@@ -6,10 +6,10 @@
 				    <br>
 	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nuevo Cierre</h3>
             <br>
-	          <form class="col s12">
+	          <form name="Codenx" novalidate class="col s12">
               <div class="row ">                            
                 <div class="input-field col-md-6 col-md-offset-3"> 
-                <select class="select"  ng-controller="ctrl-cliente">
+                <select class="select" ng-controller="ctrl-cliente">
                     <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Seleccione un Cliente</option>
                     <option ng-repeat="cliente in clientes" value="{{ cliente._id }}" id="c" >{{ cliente.nombres }}  {{ cliente.apellidos }}</option>                                   
                   </select>                                                                             
@@ -18,21 +18,21 @@
               <br>                
               <div class="row ">
                 <div class="input-field col s6">
-                  <input ng-model="cantidad" id="cantidad" type="text" class="validate" >
+                  <input ng-required="true" ng-model="cantidad" id="cantidad" type="text" class="validate" >
                   <label for="cantidad">Cantidad (g)</label>
                 </div>
                 <div class="input-field col s6">
-                  <input ng-model="precio" id="precio" type="text" class="validate" onkeyup="format(this)" onchange="format(this)">
+                  <input ng-required="true" ng-model="precio" id="precio" type="text" class="validate" onkeyup="format(this)" onchange="format(this)">
                   <label for="precio">Precio * g</label>
                 </div>                                
               </div>
               <div class="row ">
                 <div class="input-field col s6">
-                  <input disabled value="{{cantidad*precio | currency: 'Bs '}}" id="total_c" type="text" class="validate" > 
+                  <input disabled value="{{cantidad*precio | currency: 'Bs '}}" id="total_c" type="text" class="validate" style="text-align: right;">
                   <label for="total_c">Total Cierre</label>
                 </div>
                 <div class="input-field col s6">
-                   <input disabled value="9111" id="total_p" type="text" class="validate">
+                   <input disabled value="{{cantidad*precio | currency: 'Bs '}}" id="total_p" type="text" class="validate" style="text-align: right;">
                    <label for="total_p">Total Pagado</label>
                 </div>                               
               </div>
@@ -44,9 +44,7 @@
               </div> 
               <br>  
               <div style="text-align:center">                        
-                <button class="waves-effect waves-light waves-teal btn-flat btn-primary">Guardar  
-                  <i class="zmdi zmdi-mail-send center-align zmdi-hc-3x" href="pago_cliente.html"></i>
-                </button>
+                <button class="btn btn-primary" ng-click="add(cierre)" ng-if="!cierre._id" type="submit" ng-disabled="!Codenx.$valid">AÑADIR</button>
               </div>
               <br>                                                                       
 	        </form>           
