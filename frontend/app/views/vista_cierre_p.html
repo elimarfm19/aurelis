@@ -9,7 +9,7 @@
 	          <form name="Codenx" novalidate class="col s12">
               <div class="row ">                            
                 <div class="input-field col-md-6 col-md-offset-3"> 
-                <select class="select" ng-controller="ctrl-proveedor">
+                <select class="select" ng-controller="ctrl-proveedor" ng-required="true">
                     <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Seleccione un Proveedor</option>
                     <option ng-repeat="proveedor in proveedores" value="{{ proveedor._id }}" id="c" >{{ proveedor.nombres }}  {{ proveedor.apellidos }}</option>                                   
                   </select>                                                                             

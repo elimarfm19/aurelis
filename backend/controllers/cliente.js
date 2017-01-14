@@ -27,11 +27,10 @@ function storeCliente(req,res){
 	console.log(req.body)
 	//res.status(200).send({message:'el producto se ha recibido'})
 	let cliente = new Cliente()
-
-    cliente.tipo_cliente = req.body.tipo_cliente
+    
     cliente.nombres = req.body.nombres
-    cliente.apellidos = req.body.apellidos
-    cliente.ced_rif = req.body.ced_rif
+    cliente.apellidos = req.body.apellidos	
+    cliente.ced_rif = req.body.nacionalidad + req.body.ced_rif
     cliente.tlf = req.body.tlf
     cliente.direccion = req.body.direccion
     cliente.email = req.body.email

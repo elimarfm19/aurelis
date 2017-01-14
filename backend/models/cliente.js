@@ -21,6 +21,7 @@ const Cliente = Schema({
     },
     nombres: String,
     apellidos: String,
+    nacionalidad: String,
     ced_rif: String,
     tlf: String,
     direccion: String,
