@@ -32,7 +32,7 @@
                         <tbody>
                             <tr ng-repeat="cliente in clientes">
                               <td class="center-align">
-                                {{cliente.ced_rif}}
+                                {{cliente.nacionalidad}}{{cliente.ced_rif}}
                               </td>
                               <td class="center-align">
                                 {{cliente.nombres}} {{cliente.apellidos}}
@@ -94,8 +94,10 @@
                   </select>
                 </div>  
                 <div class="input-field col s4">                 
-                   <input ng-required="true" id="ced_rif" type="text" class="validate" ng-model="cliente.ced_rif">
+                   <input ng-required="true" id="ced_rif" type="text" class="validate" ng-model="cliente.ced_rif" ng-change="verifyDuplicate()">
                    <label for="ced_rif">C.I. / RIF</label>
+                   <div class="card-panel red lighten-2"  ng-show="isvalid" ng-model="isvalid" style="color:white">                   Cedula Existe 
+                   </div>
                 </div>
                 <div class="input-field col s6">
                    <input ng-required="true" id="tlf" type="tel" class="validate" ng-model="cliente.tlf">

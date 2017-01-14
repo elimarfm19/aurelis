@@ -38,4 +38,18 @@ $scope.deselect = function() {
 $scope.direccion = function(id) {
   $scope.cliente = Cliente.get({ id: id });
 }; 
+$scope.verifyDuplicate = function() {
+
+      $scope.isvalid = false;
+
+       angular.forEach($scope.clientes, function(value, key){
+        if(!$scope.isvalid)
+        {
+          if(value.ced_rif == $scope.cliente.ced_rif)
+          {
+            $scope.isvalid = true;
+          }
+        }
+        });
+    };
 })

@@ -30,7 +30,8 @@ function storeCliente(req,res){
     
     cliente.nombres = req.body.nombres
     cliente.apellidos = req.body.apellidos	
-    cliente.ced_rif = req.body.nacionalidad + req.body.ced_rif
+    cliente.ced_rif = req.body.ced_rif
+    cliente.nacionalidad = req.body.nacionalidad
     cliente.tlf = req.body.tlf
     cliente.direccion = req.body.direccion
     cliente.email = req.body.email
@@ -49,8 +50,9 @@ function storeCliente(req,res){
 function updateCliente(req,res){
 	let clienteId = req.params.id
 	let update = req.body
-
+ 
 		Cliente.findByIdAndUpdate(clienteId,update,(err,clienteUpdated)=>{
+			
 			if(err) return res.status(500).send({message:`Error al actualizar el cliente: ${ err }`})
 			
 			res.status(200).send(clienteUpdated)
