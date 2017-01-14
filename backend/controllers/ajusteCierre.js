@@ -1,6 +1,6 @@
 'use strict'
 
-const Ajuste = require('../models/ajuste')
+const Ajuste = require('../models/ajusteCierre')
  
  function getAjuste(req,res){
 

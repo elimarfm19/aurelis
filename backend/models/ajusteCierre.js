@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 // ESQUEMA PARA AJUSTES
-var Ajuste = new Schema({
+var ajusteCierre = new Schema({
     cod_pieza: String,
     cod_entrega: String,
     fecha: Date,
@@ -14,4 +14,4 @@ var Ajuste = new Schema({
     peso_entrega: Number
 });
 
-module.exports = mongoose.model('Ajuste', Ajuste);
+module.exports = mongoose.model('ajusteCierre', ajusteCierre);

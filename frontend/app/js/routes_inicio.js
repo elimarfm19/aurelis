@@ -30,8 +30,8 @@ var app = angular.module('aurelisApp', ['ngResource','ngAnimate','ngProgress',
       })
       .when('/cierre_cliente', {
         templateUrl: '/views/vista_cierre_c.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        controller: 'ctrl-cierre',
+        controllerAs: 'cie'
       })
       .when('/proveedores', {
         templateUrl: '/views/vista_proveedor.html',
@@ -48,7 +48,7 @@ var app = angular.module('aurelisApp', ['ngResource','ngAnimate','ngProgress',
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
-      .when('/ajuste Cierre', {
+      .when('/ajusteCierre', {
         templateUrl: '/views/vista_ajuste_cierre.html',
         controller: 'MainCtrl',
         controllerAs: 'main'

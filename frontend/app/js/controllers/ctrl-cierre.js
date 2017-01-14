@@ -35,7 +35,12 @@ $scope.edit = function(id) {
 $scope.deselect = function() {
   $scope.cierre = "";
 }
+
 })
+
+
+
+
 
 	app.controller('ctrlModalPagos', function($scope){
 		$scope.personas=[{

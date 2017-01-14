@@ -13,7 +13,7 @@ const detRecepcionController = require('../controllers/detRecepcion')
 const detPagoController = require('../controllers/detPago')
 const detEntregaController = require('../controllers/detEntrega')
 const cierreController = require('../controllers/cierre')
-const ajusteController = require('../controllers/ajuste')
+const ajusteController = require('../controllers/ajusteCierre')
 
 var cors = require('cors')
 const api = express.Router()
