@@ -15,12 +15,13 @@ const Images = new Schema({
 */
 // ESQUEMA PARA PERSONAS
 const Persona = Schema({
-    tipo_persona: {
-        type: String,
-        enum: ['Cliente','Proveedor']
-    },
+    
     nombres: String,
     apellidos: String,
+    nacionalidad:{
+        type: String,
+        enum: ['V','E','J']
+    },
     ced_rif: String,
     tlf: String,
     direccion: String,

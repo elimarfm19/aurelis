@@ -89,7 +89,14 @@
                 </div>
               </div>
               <div class="row">
-                <div class="input-field col s6">
+                <div class="input-field col s2">
+                  <select class="select" name="nacionalidad" id="nacionalidad" ng-model="proveedor.nacionalidad" ng-required="true">
+                      <option value="V" selected>V</option>
+                      <option value="E">E</option>
+                      <option value="J">J</option>
+                  </select>
+                </div>
+                <div class="input-field col s4">
                    <input ng-required="true" id="ced_rif" type="text" class="validate" ng-model="proveedor.ced_rif">
                    <label for="ced_rif">C.I. / RIF</label>
                 </div>
