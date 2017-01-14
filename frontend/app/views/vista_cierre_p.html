@@ -1,39 +1,41 @@
-<div class="container"> 
+
+    <div class="container"> 
       <div class="tamanno">
 			  <div class="container col-md-6 col-md-offset-3" style="margin-top:100px; ">
 	        <div class="row" style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
 				    <br>
 	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nuevo Cierre</h3>
             <br>
-	          <form class="col s12">
+	          <form name="Codenx" novalidate class="col s12">
               <div class="row ">                            
-                <div class="input-field col-md-6 col-md-offset-3">                                                
-                  <select class="select">
+                <div class="input-field col-md-6 col-md-offset-3"> 
+                <select class="select" ng-controller="ctrl-proveedor">
                     <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Seleccione un Proveedor</option>
-                    <option  value="1" id="p" >Proveedor 1</option>
-                    <option  value="2">Proveedor 2</option>
-                    <option  value="3">Proveedor 3</option>                                    
-                  </select>                                
+                    <option ng-repeat="proveedor in proveedores" value="{{ proveedor._id }}" id="c" >{{ proveedor.nombres }}  {{ proveedor.apellidos }}</option>                                   
+                  </select>                                                                             
                 </div>                            
               </div>
-              <br>                
+              <br>    
+
+              
+
               <div class="row ">
                 <div class="input-field col s6">
-                  <input ng-model="cantidad" id="cantidad" type="text" class="validate" >
+                  <input ng-required="true" ng-model="cantidad" id="cantidad" type="text" class="validate" >
                   <label for="cantidad">Cantidad (g)</label>
                 </div>
                 <div class="input-field col s6">
-                  <input ng-model="precio" id="precio" type="text" class="validate" onkeyup="format(this)" onchange="format(this)">
+                  <input ng-required="true" ng-model="precio" id="precio" type="text" class="validate" onkeyup="format(this)" onchange="format(this)">
                   <label for="precio">Precio * g</label>
                 </div>                                
               </div>
               <div class="row ">
                 <div class="input-field col s6">
-                  <input disabled value="{{cantidad*precio | currency: 'Bs '}}" id="total_c" type="text" class="validate" > 
+                  <input disabled value="{{cantidad*precio | currency: 'Bs '}}" id="total_c" type="text" class="validate" style="text-align: right;">
                   <label for="total_c">Total Cierre</label>
                 </div>
                 <div class="input-field col s6">
-                   <input disabled value="9111" id="total_p" type="text" class="validate">
+                   <input disabled value="{{cantidad*precio | currency: 'Bs '}}" id="total_p" type="text" class="validate" style="text-align: right;">
                    <label for="total_p">Total Pagado</label>
                 </div>                               
               </div>
@@ -45,9 +47,7 @@
               </div> 
               <br>  
               <div style="text-align:center">                        
-                <button class="waves-effect waves-light waves-teal btn-flat btn-primary">Guardar  
-                  <i class="zmdi zmdi-mail-send center-align zmdi-hc-3x" href="pago_cliente.html"></i>
-                </button>
+                <button class="btn btn-primary" ng-click="add(cierre)" ng-if="!cierre._id" type="submit" ng-disabled="!Codenx.$valid">AÑADIR</button>
               </div>
               <br>                                                                       
 	        </form>           
@@ -56,7 +56,7 @@
      </div>
      <br>
 
-<div class="container">
+     <div class="container">
     <!-- Modal -->
   <div class="modal fade" id="pagosModal" role="dialog">
     <div class="modal-dialog">

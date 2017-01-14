@@ -30,8 +30,8 @@ var app = angular.module('aurelisApp', ['ngResource','ngAnimate','ngProgress',
       })
       .when('/cierre_cliente', {
         templateUrl: '/views/vista_cierre_c.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        controller: 'ctrl-cierre',
+        controllerAs: 'cie'
       })
       .when('/proveedores', {
         templateUrl: '/views/vista_proveedor.html',
@@ -48,7 +48,7 @@ var app = angular.module('aurelisApp', ['ngResource','ngAnimate','ngProgress',
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
-      .when('/ajuste Cierre', {
+      .when('/ajusteCierre', {
         templateUrl: '/views/vista_ajuste_cierre.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
@@ -73,7 +73,7 @@ var app = angular.module('aurelisApp', ['ngResource','ngAnimate','ngProgress',
       });
   });
   
-  // Create a resource factory to access products table from database 
+  // Create a resource factory to access clientes table from database 
 app.factory('Cliente', function($resource) {
   return $resource('http://localhost:3001/clientes/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
@@ -81,9 +81,17 @@ app.factory('Cliente', function($resource) {
     }
   });
 });
-// Create a resource factory to access products table from database 
+// Create a resource factory to access proveedores table from database 
 app.factory('Proveedor', function($resource) {
   return $resource('http://localhost:3001/proveedores/:id', { id: '@_id' }, {
+    update: { // We need to define this method manually as it is not provided with ng-resource
+      method: 'PUT'
+    }
+  });
+});
+// Create a resource factory to access cierres table from database 
+app.factory('Cierre', function($resource) {
+  return $resource('http://localhost:3001/cierres/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }

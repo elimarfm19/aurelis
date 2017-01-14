@@ -28,6 +28,7 @@ function storeCierre(req,res){
 	//res.status(200).send({message:'el producto se ha recibido'})
 	let cierre = new Cierre()
 
+	cierre.id_cierre = req.body.id_cierre
     cierre.cod_persona = req.body.cod_persona
     cierre.fecha_cierre = req.body.fecha_cierre
     cierre.fecha_entrega = req.body.fecha_entrega

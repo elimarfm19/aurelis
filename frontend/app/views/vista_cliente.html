@@ -6,17 +6,14 @@
         <div class="tab-content col-md-10 col-md-offset-1">
             <div class="tab-pane fade in active" >
               <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Gestión de Clientes</h3>
-            
               <br>
-
             <div class="row">
                 <div class="btn-group col-md-2 col-md-offset-10">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="deselect()">
                     <span class="glyphicon glyphicon-plus" style="font-weight: 600; font-family: 'Tahoma';"> Nuevo</span>
                   </button>
                 </div>
               </div>
-
               <br>
               <div class="col-md-12">
                 <div class="table-responsive">
@@ -80,33 +77,33 @@
 	          <form name="Codenx" novalidate class="col s12">
               <div class="row">
                 <div class="input-field col s6">
-                  <input id="nombre" type="text" class="validate" ng-model="cliente.nombres">
+                  <input ng-required="true" id="nombre" type="text" class="validate" ng-model="cliente.nombres">
                   <label for="nombre">Nombre(s)</label>
                 </div>
                 <div class="input-field col s6">
-                  <input id="apellido" type="text" class="validate" ng-model="cliente.apellidos">
+                  <input ng-required="true" id="apellido" type="text" class="validate" ng-model="cliente.apellidos">
                   <label for="apellido">Apellidos</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s6">
-                   <input id="ced_rif" type="text" class="validate" ng-model="cliente.ced_rif">
+                   <input ng-required="true" id="ced_rif" type="text" class="validate" ng-model="cliente.ced_rif">
                    <label for="ced_rif">C.I. / RIF</label>
                 </div>
                 <div class="input-field col s6">
-                   <input id="tlf" type="tel" class="validate" ng-model="cliente.tlf">
+                   <input ng-required="true" id="tlf" type="tel" class="validate" ng-model="cliente.tlf">
                    <label for="tlf">Teléfono</label>
                 </div>
              </div>
              <div class="row">
                 <div class="input-field col s12">
-                   <input id="email" type="email" class="validate" ng-model="cliente.email">
+                   <input ng-required="true" id="email" type="email" class="validate" ng-model="cliente.email">
                    <label for="email">Email</label>
                 </div>
              </div>
              <div class="row">
                 <div class="input-field col s12">
-                   <input id="direccion" type="text" class="validate" ng-model="cliente.direccion">
+                   <input ng-required="true" id="direccion" type="text" class="validate" ng-model="cliente.direccion">
                    <label for="direccion">Dirección</label>
                 </div>
              </div>
@@ -152,3 +149,4 @@
     </div>
   </div>  
 </div>
+
