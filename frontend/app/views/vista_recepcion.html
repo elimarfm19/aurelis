@@ -10,7 +10,7 @@
                 <div class="input-field col s6">                                                                
                   <select class="select" ng-controller="ctrl-proveedor">
                     <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Seleccione un Proveedor</option>
-                    <option ng-repeat="proveeedor in provedores" value="{{ proveedor._id }}" id="p" >{{ proveedor.nombres }}  {{ proveedor.apellidos }}</option>                                   
+                    <option ng-repeat="proveedor in proveedores" value="{{ proveedor._id }}" id="p" >{{ proveedor.nombres }}  {{ proveedor.apellidos }}</option>                                   
                   </select>                                                 
                 </div>          
                 <div class="input-field col s6">                                                
