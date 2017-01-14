@@ -6,7 +6,7 @@ const Pieza = require('../models/pieza')
 
 	let piezaId = req.params.id
 
-	Pieza.findById(piezaId,(err,pago)=>{
+	Pieza.findById(piezaId,(err,pieza)=>{
 	 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
 	 	if(!pieza) return res.status(404).send({message:'La pieza no existe'})
 	 	
@@ -28,11 +28,12 @@ function storePieza(req,res){
 	//res.status(200).send({message:'el producto se ha recibido'})
 	let pieza = new Pieza()
 
-    pieza.pieza = req.body.cod_proveedor
+    pieza.cod_pieza = req.body.cod_pieza
+	pieza.cod_proveedor = req.body.cod_proveedor
     pieza.status = req.body.status
     pieza.peso_bruto = req.body.peso_bruto
     pieza.ley = req.body.ley
-    pieza.puro = req.body.puro
+	pieza.puro = req.body.peso_bruto * (req.body.ley / 1000)
     pieza.peso_entrega = req.body.peso_entrega
     pieza.ajuste = req.body.ajuste
 
@@ -50,13 +51,16 @@ function storePieza(req,res){
 function updatePieza(req,res){
 	let piezaId = req.params.id
 	let update = req.body
+		
+		update.puro = update.peso_bruto * (update.ley/1000)
 
 		Pieza.findByIdAndUpdate(piezaId,update,(err,piezaUpdated)=>{
 			if(err) return res.status(500).send({message:`Error al actualizar la pieza: ${ err }`})
-			
+
 			res.status(200).send(piezaUpdated)
 			
 		})
+		
 
 }
 

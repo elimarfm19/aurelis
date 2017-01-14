@@ -45,7 +45,7 @@ $scope.verifyDuplicate = function() {
        angular.forEach($scope.clientes, function(value, key){
         if(!$scope.isvalid)
         {
-          if(value.ced_rif == $scope.cliente.ced_rif)
+         if(value.nacionalidad+value.ced_rif == $scope.cliente.nacionalidad+$scope.cliente.ced_rif)
           {
             $scope.isvalid = true;
           }
