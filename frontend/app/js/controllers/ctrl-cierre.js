@@ -6,19 +6,22 @@ $scope.cierre = new Cierre();
 
 var refresh = function() {
   $scope.cierres = Cierre.query(); 
-  $scope.cierre ="";
+  //$scope.cierre ="";
 }
 refresh();
 
 $scope.add = function(cierre) {
   console.log(cierre);
   Cierre.save(cierre,function(cierre){
-    refresh();
+  	
+   //refresh();
+   $scope.cierre = Cierre.get({ id: cierre._id });
   });
 };
 $scope.update = function(cierre) {
-  $scope.cierre.$update(function(){
-    refresh();
+  $scope.cierre.$update(function(cierreUpdated){
+  	
+  	refresh();
   });
 };
 
