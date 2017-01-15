@@ -1,7 +1,9 @@
 'use strict'
 
 const Pago = require('../models/pago')
- 
+const Cierre = require('../models/cierre')
+const Cliente = require('../models/cliente')
+
  function getPago(req,res){
 
 	let pagoId = req.params.id
@@ -15,12 +17,36 @@ const Pago = require('../models/pago')
 }
 
 function getPagos(req,res){
-	Pago.find({},(err,pago)=>{
- 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
- 	if(pago == "") return res.status(404).send({message:'No hay registros de pagos'})
- 	
- 	res.status(200).send(pago)
- 	})
+
+	Pago.find({}).populate({
+		path: 'cierre',
+		model: 'Cierre',
+		populate: {
+			path: 'cliente',
+			model: 'Cliente'
+		}
+	}).exec(function(err,pagos){
+		if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+			if(pagos == "") return res.status(404).send({message:'No hay registros de pagos'})
+				res.status(200).send(pagos);
+		});
+}
+function getPagosCierre(req,res){
+
+	let CierreId = req.params.id
+
+	Pago.find({cierre:CierreId}).populate({
+		path: 'cierre',
+		model: 'Cierre',
+		populate: {
+			path: 'cliente',
+			model: 'Cliente'
+		}
+	}).exec(function(err,pagos){
+		if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+			if(pagos == "") return res.status(404).send({message:'No hay registros de pagos'})
+				res.status(200).send(pagos);
+		});
 }
 
 function storePago(req,res){
@@ -73,6 +99,7 @@ function deletePago(req,res){
 module.exports = {
 	getPago,
 	getPagos,
+	getPagosCierre,
 	storePago,
 	updatePago,
 	deletePago

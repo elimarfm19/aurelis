@@ -2,12 +2,14 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var Cierre = require('../models/cierre');
+
 
 // ESQUEMA PARA PAGOS
 var Pago = new Schema({
-    cod_cierre: String,
     fecha: Date,
-    monto_pagado: Number
+    monto_pagado: Number,
+    cierre: { type: Schema.ObjectId, ref: "Cierre" }
 });
 
 

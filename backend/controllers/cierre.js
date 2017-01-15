@@ -1,7 +1,8 @@
 'use strict'
 
 const Cierre = require('../models/cierre')
- 
+const Cliente = require('../models/cliente')
+
  function getCierre(req,res){
 
 	let cierreId = req.params.id
@@ -15,11 +16,28 @@ const Cierre = require('../models/cierre')
 }
 
 function getCierres(req,res){
-	Cierre.find({},(err,cierre)=>{
+	Cierre.find({},(err,cierres)=>{
  	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
- 	if(cierre == "") return res.status(404).send({message:'No hay registros de Cierres'})
+ 	if(cierres == "") return res.status(404).send({message:'No hay registros de Cierres'})
  	
- 	res.status(200).send(cierre)
+ 	Cliente.populate(cierres, {path: "cliente"},function(err, cierres){
+            res.status(200).send(cierres);
+        }); 
+
+ 	})
+}
+function getCierresCliente(req,res){
+
+	let ClienteId = req.params.id
+
+	Cierre.find({cliente:ClienteId},(err,cierres)=>{
+ 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+ 	if(cierres == "") return res.status(404).send({message:'No hay registros de Cierres'})
+ 	
+ 	Cliente.populate(cierres, {path: "cliente"},function(err, cierres){
+            res.status(200).send(cierres);
+        }); 
+
  	})
 }
 
@@ -27,14 +45,12 @@ function storeCierre(req,res){
 	console.log(req.body)
 	//res.status(200).send({message:'el producto se ha recibido'})
 	let cierre = new Cierre()
-
-	cierre.id_cierre = req.body.id_cierre
-    cierre.cod_persona = req.body.cod_persona
+    cierre.cliente = req.body.cliente
     cierre.fecha_cierre = req.body.fecha_cierre
     cierre.fecha_entrega = req.body.fecha_entrega
     cierre.cantidad = req.body.cantidad
     cierre.precio = req.body.precio
-    cierre.total = req.body.total
+    cierre.total = req.body.cantidad * req.body.precio
     cierre.monto_pagado = req.body.monto_pagado
     cierre.status = req.body.status
 
@@ -52,8 +68,10 @@ function storeCierre(req,res){
 function updateCierre(req,res){
 	let cierreId = req.params.id
 	let update = req.body
+	  	update.total = update.cantidad * update.precio
+	  	update.cliente = update.cliente
 
-		Cierre.findByIdAndUpdate(cierreId,update,(err,cierreUpdated)=>{
+	  	Cierre.findByIdAndUpdate(cierreId,update,{new: true},(err,cierreUpdated)=>{
 			if(err) return res.status(500).send({message:`Error al actualizar el cierre: ${ err }`})
 			
 			res.status(200).send(cierreUpdated)
@@ -105,6 +123,7 @@ function deleteCierre(req,res){
 module.exports = {
 	getCierre,
 	getCierres,
+	getCierresCliente,
 	storeCierre,
 	updateCierre,
 	deleteCierre
