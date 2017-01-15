@@ -6,9 +6,9 @@
 	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nueva Recepcion de Proveedores</h3>
             <br>
 	          <form class="col s12">
-              <div class="row " ng-controller="ctrl-proveedor" >                            
+              <div class="row " ng-controller="ctrl-cierre" >                            
                 <div class="input-field col s6" >   
-                  <select id="s1" class="select" value="proveedor.cod_persona" ng-model="proveedor" ng-options="proveedor.nombres +' '+ proveedor.apellidos for proveedor in proveedores"></select>
+                  <select id="s1" class="select" value="cierre.cliente.cod_persona" ng-model="cierre" ng-options="cierre.cliente.nombres +' '+ cierre.cliente.apellidos for cierre in cierres"></select>
                 </div> 
                 <div class="input-field col s6" ng-controller="ctrl-cierre" ng-if="cierre.cod_persona==p002">   
                   <select id="s2" class="select" value="cierre.fecha_entrega" ng-disabled="!proveedor" ng-model="cierre" ng-options="cierre.fecha_entrega + ' '+ cierre.cod_persona for cierre in cierres" ></select>
