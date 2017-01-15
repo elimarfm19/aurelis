@@ -84,10 +84,16 @@ api.delete('/recepciones/:id',cors(),recepcionController.deleteRecepcion)
 
 // PAGO--------------------------------------------------------------------------
 api.options('/pagos/:id', cors())
+api.options('/pagos/cierre/:id', cors())
 api.options('/pagos/', cors())
+
 api.get('/pagos',cors(),pagoController.getPagos)
 
+api.get('/pagos/cierre/:id',cors(),pagoController.getPagosCierre)
+
 api.get('/pagos/:id',cors(),pagoController.getPago)
+
+
 
 api.post('/pagos',cors(),pagoController.storePago)
 

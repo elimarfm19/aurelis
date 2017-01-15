@@ -3,10 +3,10 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var Cliente = require('../models/cliente');
+
 // ESQUEMA PARA CIERRES
 var Cierre = new Schema({
-    id_cierre: String,
-    cod_persona: String,
     fecha_cierre: Date,
     fecha_entrega: Date,
     cantidad: Number,
@@ -16,7 +16,8 @@ var Cierre = new Schema({
     status: {
         type: String,
         enum: ['Abierto','Cerrado','Eliminado']
-    }
+    },
+    cliente: { type: Schema.ObjectId, ref: "Cliente" }
 });
 
 module.exports = mongoose.model('Cierre', Cierre);
