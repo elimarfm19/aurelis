@@ -48,6 +48,11 @@ var app = angular.module('aurelisApp', ['ngResource','ngAnimate','ngProgress',
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
+      .when('/recepcion', {
+        templateUrl: '/views/vista_recepcion.html',
+        controller: 'MainCtrl',
+        controllerAs: 'main'
+      })
       .when('/ajusteCierre', {
         templateUrl: '/views/vista_ajuste_cierre.html',
         controller: 'MainCtrl',
@@ -55,13 +60,13 @@ var app = angular.module('aurelisApp', ['ngResource','ngAnimate','ngProgress',
       })
       .when('/ajustePieza', {
         templateUrl: '/views/vista_ajuste_pieza.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        controller: 'ctrl-pieza',
+        controllerAs: 'ajuste_pieza'
       })
       .when('/inventario', {
         templateUrl: '/views/vista_inventario.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        controller: 'ctrl-pieza',
+        controllerAs: 'inv'
       })
       .when('/about', {
         templateUrl: '/views/views/about.html',
@@ -92,6 +97,14 @@ app.factory('Proveedor', function($resource) {
 // Create a resource factory to access cierres table from database 
 app.factory('Cierre', function($resource) {
   return $resource('http://localhost:3001/cierres/:id', { id: '@_id' }, {
+    update: { // We need to define this method manually as it is not provided with ng-resource
+      method: 'PUT'
+    }
+  });
+});
+// Create a resource factory to access inventario table from database 
+app.factory('Pieza', function($resource) {
+  return $resource('http://localhost:3001/piezas/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }

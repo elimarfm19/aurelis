@@ -31,7 +31,7 @@ function storeProveedor(req,res){
     proveedor.nombres = req.body.nombres
     proveedor.apellidos = req.body.apellidos
 	proveedor.nacionalidad = req.body.nacionalidad
-    proveedor.ced_rif = req.body.nacionalidad+req.body.ced_rif
+    proveedor.ced_rif = req.body.ced_rif
     proveedor.tlf = req.body.tlf
     proveedor.direccion = req.body.direccion
     proveedor.email = req.body.email

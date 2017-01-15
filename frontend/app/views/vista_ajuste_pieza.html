@@ -4,51 +4,101 @@
   </br>
   </br>
   <div class="tab-content col-md-9 col-md-offset-1">
-    <div  class="tab-pane fade in active" id="proveedores" ng-controller="ctrlpaginado">
-      <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Ajuste de Piezas Entregadas </h3>
-      <br>
-      <div class="col-md-4 col-md-offset-8"> 
-        <input type="text" placeholder="Buscar" style="font-weight: 600; font-family: 'Tahoma';" ng-pagination-search="personas">
-      </div>
+    <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Ajuste de Piezas Entregadas </h3>
+
       <br>
       <div class="col-md-12">
         <div class="table-responsive">
-          <table class="table table-hover">
-            <thead>
-              <tr class="active">                        
-                <th class="center-align">Proveedor</th>
-                <th class="center-align">Id</th>
-                <th class="center-align">Peso Bruto</th>
-                <th class="center-align">Ley</th>                          
-                <th class="center-align">Puro</th>                          
-                <th class="center-align">Peso Entrega</th>                          
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-pagination="item in personas" ng-pagination-size="10">
-                <td class="center-align"  field="proveedor">
-                  {{item.proveedor}}
-                </td>
-                <td class="center-align" field="id">
-                  {{item.cod_pieza}}
-                </td>
-                <td class="center-align" field="pero_bruto">
-                  {{item.peso_bruto}}
-                </td>
-                <td class="center-align" field="ley">
-                  {{item.ley}}
-                </td>
-                <td class="center-align" field="puro">
-                  {{item.puro}}
-                </td>                        
-                <td class="center-align" field="peso_entrega">
-                  {{item.peso_entrega}}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <form name"Codenx" novalidate>
+            <table class="table table-hover">
+              <thead>
+                <tr class="active">                        
+                  <th class="center-align">Proveedor</th>
+                  <th class="center-align">Cod. Pieza</th>
+                  <th class="center-align">Peso Bruto (g)</th>
+                  <th class="center-align">Ley</th>                          
+                  <th class="center-align">Puro (g)</th>                          
+                  <th class="center-align">Peso Entrega (g)</th>
+                  <th class="center-align"></th>                          
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="pieza in piezas" ng-if="pieza.status == 'Entregado'">
+                  <td class="center-align">
+                    {{pieza.cod_proveedor}}
+                  </td>
+                  <td class="center-align">
+                    {{pieza.cod_pieza}}
+                  </td>
+                  <td class="center-align">
+                    {{pieza.peso_bruto}}
+                  </td>
+                  <td class="center-align">
+                    {{pieza.ley}}
+                  </td>
+                  <td class="center-align">
+                    {{pieza.puro}}
+                  </td>                        
+                  <td class="center-align">
+                    {{pieza.peso_entrega}}
+                  </td>
+                  <td class="center-align">                                  
+                    <button class="btn btn-warning glyphicon glyphicon-pencil btn-xs" ng-click="edit(pieza._id)" data-toggle="modal" data-target="#myModal"></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
         </div>
-        <ng-pagination-control pagination-id="personas"></ng-pagination-control>
       </div>                
     </div>
   </div>
+
+
+  <div class="container">
+    <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="tamanno">
+			    <div class="" style="margin-top:100px; ">
+	          <div class="row " style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
+				    <br>
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align modal-title">Pieza N° {{pieza.cod_pieza}} (Proveedor {{pieza.cod_proveedor}})</h3>                  
+            </div>	    
+            <br>
+	          <form name="Codenx" novalidate class="col s12">
+              <div class="row">
+                <div class="input-field col s6">
+                  <input ng-required="true" id="peso_bruto" type="text" class="validate" ng-model="pieza.peso_bruto">
+                  <label for="peso_bruto">Peso Bruto</label>
+                </div>
+                <div class="input-field col s6">
+                  <input ng-required="true" id="ley" type="text" class="validate" ng-model="pieza.ley">
+                  <label for="ley">Ley</label>
+                </div>
+              </div>
+              <div class="row">  
+                <div class="input-field col s6">                 
+                   <input ng-required="true" id="peso_entrega" type="text" class="validate" ng-model="pieza.peso_entrega">
+                   <label for="peso_entrega">Peso Entrega</label>
+                </div>
+                <div class="input-field col s6">
+                  <input disable id="puro" type="text" class="validate" value="{{pieza.peso_bruto * (pieza.ley / 1000)}}">
+                  <label for="puro">Puro</label>
+                </div>
+              </div>
+             <div style="text-align:center">
+                 <button class="btn btn-info" ng-click="update(pieza)" ng-if="pieza._id" type="submit" data-dismiss="modal">ACTUALIZAR</button>
+                 <button class="btn" ng-click="deselect()" ng-if="cliente._id">LIMPIAR</button>
+             </div>
+             <br>                                                
+	         </form>
+	        </div>
+	      </div>
+      </div>
+    </div>
+  </div>  
+</div>
+<div data-loading></div>

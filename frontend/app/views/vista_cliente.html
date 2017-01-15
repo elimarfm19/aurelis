@@ -96,7 +96,7 @@
                 <div class="input-field col s4">                 
                    <input ng-required="true" id="ced_rif" type="text" class="validate" ng-model="cliente.ced_rif" ng-change="verifyDuplicate()">
                    <label for="ced_rif">C.I. / RIF</label>
-                   <div class="card-panel red lighten-2"  ng-show="isvalid" ng-model="isvalid" style="color:white">                   Cedula Existe 
+                   <div class="card-panel red lighten-2"  ng-show="isvalid" ng-model="isvalid" style="color:white">                   Cédula Existe 
                    </div>
                 </div>
                 <div class="input-field col s6">
@@ -117,8 +117,8 @@
                 </div>
              </div>
              <div style="text-align:center">
-                 <button class="btn btn-primary" ng-click="add(cliente)" ng-if="!cliente._id" type="submit" ng-disabled="!Codenx.$valid">AÑADIR</button>
-                 <button class="btn btn-info" ng-click="update(cliente)" ng-if="cliente._id" type="submit">ACTUALIZAR</button>
+                 <button class="btn btn-primary" ng-click="add(cliente)" ng-if="!cliente._id" type="submit" ng-disabled="!Codenx.$valid" data-dismiss="modal">AÑADIR</button>
+                 <button class="btn btn-info" ng-click="update(cliente)" ng-if="cliente._id" type="submit" data-dismiss="modal">ACTUALIZAR</button>
                  <button class="btn" ng-click="deselect()" ng-if="cliente._id">LIMPIAR</button>
              </div>
              <br>                                                

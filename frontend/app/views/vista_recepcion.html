@@ -1,0 +1,136 @@
+<div class="container"> 
+      <div class="tamanno">
+			  <div class="container col-md-6 col-md-offset-3" style="margin-top:100px; ">
+	        <div class="row" style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
+				    <br>
+	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nueva Recepcion de Proveedores</h3>
+            <br>
+	          <form class="col s12">
+              <div class="row ">                            
+                <div class="input-field col s6">                                                                
+                  <select class="select" ng-controller="ctrl-proveedor">
+                    <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Seleccione un Proveedor</option>
+                    <option ng-repeat="proveedor in proveedores" value="{{ proveedor._id }}" id="p" >{{ proveedor.nombres }}  {{ proveedor.apellidos }}</option>                                   
+                  </select>                                                 
+                </div>          
+                <div class="input-field col s6">                                                
+                  <select class="select">
+                    <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Seleccione un Cierre</option>
+                    <option  value="1" id="c" > 20-11-16 Resta: 2.000,00</option>
+                    <option  value="2"> 23-11-16 Resta: 1.750,00</option>
+                    <option  value="3"> 29-11-16 Resta: 1.250,00</option>                                    
+                  </select>                                                 
+                </div>                    
+              </div>
+              <br>                
+              <div class="row ">
+                <div class="input-field col s6">
+                  <input disabled value="{{cantidad*precio | currency: 'Bs '}}" id="total_c" type="text" class="validate" > 
+                  <label for="total_c">Total entrega</label>
+                </div>
+                <div class="input-field col s6">
+                   <input disabled value="" id="total_p" type="text" class="validate">
+                   <label for="total_p">Diferencia Cierre</label>                   
+                </div>                               
+              </div>
+              <div style="text-align:center">
+              <!-- Trigger the modal with a button -->
+                <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#pagosModal">Piezas
+                  <i class="zmdi zmdi-puzzle-piece"></i>
+                </button>
+              </div> 
+              <br>  
+              <div style="text-align:center">                        
+                <button class="waves-effect waves-light waves-teal btn-flat btn-primary">Guardar  
+                  <i class="zmdi zmdi-mail-send center-align zmdi-hc-3x" href="#"></i>
+                </button>
+              </div>
+              <br>                                                                       
+	        </form>           
+	      </div>
+	    </div>
+     </div>
+     <br>
+
+<div class="container">
+    <!-- Modal -->
+  <div class="modal fade" id="pagosModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content" ng-controller="ctrlModalPagos">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title center-align" style="color:black; font-weight:600; font-family: 'Tahoma';">Piezas Dispónibles</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <!--<div class="btn-group col-md-2 col-md-offset-9" >
+              <button type="button" class="btn btn-primary" ng-click="agregar()">
+                <span class="glyphicon glyphicon-plus" style="font-weight: 600; font-family: 'Tahoma';"> Nuevo</span>
+              </button>
+            </div>-->
+          </div>
+          <br>
+          <div class="row">
+            <div class="table-responsive">
+                <table class="tablem table-hover table-striped">
+                    <thead>
+                        <tr class="active">
+                          <th class="center-align">Proveedor </th>
+                          <th class="center-align">Id</th>
+                          <th class="center-align">Peso Bruto</th>
+                          <th class="center-align">Ley</th>
+                          <th class="center-align">Puro</th>
+                          <th class="center-align">Peso Entrega</th>
+                          <th class="center-align">Edtatus</th>
+                          <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-pagination="item in personas" ng-pagination-size="10">
+                          <td class="center-align" editable-td field="proveedor">
+                            {{item.proveedor}}
+                          </td>
+                          <td class="center-align" editable-td row="{{item}}" field="cod_pieza">
+                            {{item.cod_pieza}}
+                          </td>
+                          <td class="center-align" editable-td row="{{item}}" field="peso_bruto">
+                            {{item.peso_bruto}}
+                          </td>
+                          <td class="center-align" editable-td row="{{item}}" field="ley">
+                            {{item.ley}}
+                          </td>
+                          <td class="center-align" editable-td row="{{item}}" field="puro">
+                            {{item.puro}}
+                          </td>
+                          <td class="center-align" editable-td row="{{item}}" field="peso_entrega">
+                            {{item.peso_entrega}}
+                          </td>
+                          <td class="center-align">
+                           <!-- <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />-->                      
+                             <select multiple ng-model="selectedValues">
+                              <option value="1">Blue</option>
+                              <option value="2">Green</option>
+                              <option value="3">Yellow</option>
+                              <option value="4">Red</option>
+                            </select>
+                          </td>
+                        </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer"> 
+            <div class="btn-group">           
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+            </div>
+        </div>
+      </div>
+    </div>  
+  </div>    
+</div>
+
+<script>
+  
+</script>
