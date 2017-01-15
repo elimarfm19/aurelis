@@ -76,6 +76,32 @@ function deleteCierre(req,res){
 	})
 }
 
+
+        function proveedorCierre($scope) {
+            $scope.proveedor = {
+                'India': {
+                    'Maharashtra': ['Pune', 'Mumbai', 'Nagpur', 'Akola'],
+                    'Madhya Pradesh': ['Indore', 'Bhopal', 'Jabalpur'],
+                    'Rajasthan': ['Jaipur', 'Ajmer', 'Jodhpur']
+                },
+                'USA': {
+                    'Alabama': ['Montgomery', 'Birmingham'],
+                    'California': ['Sacramento', 'Fremont'],
+                    'Illinois': ['Springfield', 'Chicago']
+                },
+                'Australia': {
+                    'New South Wales': ['Sydney'],
+                    'Victoria': ['Melbourne']
+                }
+            };
+            $scope.GetSelectedCountry = function () {
+                $scope.strCountry = document.getElementById("proveedor").value;
+            };
+            $scope.GetSelectedState = function () {
+                $scope.strState = document.getElementById("cierre").value;
+            };
+        }
+
 module.exports = {
 	getCierre,
 	getCierres,

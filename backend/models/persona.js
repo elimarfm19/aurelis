@@ -16,6 +16,7 @@ const Images = new Schema({
 // ESQUEMA PARA PERSONAS
 const Persona = Schema({
     
+    cod_persona: String,
     nombres: String,
     apellidos: String,
     nacionalidad:{

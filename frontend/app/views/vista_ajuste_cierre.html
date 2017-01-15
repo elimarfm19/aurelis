@@ -6,149 +6,49 @@
 	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Ajuste de Cierre</h3>
             <br>
 	          <form class="col s12">
-              <div class="row ">                            
-                <div class="input-field col s6">                                                
-                  <select class="select">
-                    <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Seleccione un Cliente</option>
-                    <option  value="1" id="c" >Cliente 1</option>
-                    <option  value="2">Cliente 2</option>
-                    <option  value="3">Cliente 3</option>                                    
-                  </select>                                                 
+              <div class="row" ng-controller="ctrl-cliente">                            
+                <div class="input-field col s6" >                                                
+                  <select id="s1" class="select" value="cliente.cod_persona" ng-model="cliente" ng-options="cliente.nombres +' ' +cliente.apellidos for cliente in clientes" ng-required="true"></select>                                                
                 </div>          
-                <div class="input-field col s6">                                                
-                  <select class="select">
-                    <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Seleccione un Cierre</option>
-                    <option  value="1" id="c" > 20-11-16 Resta: 2.000,00</option>
-                    <option  value="2"> 23-11-16 Resta: 1.750,00</option>
-                    <option  value="3"> 29-11-16 Resta: 1.250,00</option>                                    
-                  </select>                                                 
+                <div class="input-field col s6" ng-controller="ctrl-cierre">                                                
+                  <select id="s2" class="select" value="cliente.cod_persona" ng-model="cierre" ng-disabled="!cliente" ng-options="cliente.nombres + cliente.apellidos for cliente in clientes"></select>                                                                                                 
                 </div>                    
               </div>
               <br>                
-            <!--  <div class="row ">
-                <div class="input-field col s6">
-                  <input ng-model="cantidad" id="cantidad" type="text" class="validate" >
-                  <label for="cantidad">Cantidad (g)</label>
-                </div>
-                <div class="input-field col s6">
-                  <input ng-model="precio" id="precio" type="text" class="validate" onkeyup="format(this)" onchange="format(this)">
-                  <label for="precio">Precio * g</label>
-                </div>                                
-              </div>-->
-              <div class="row ">
-                <div class="input-field col s6">
-                  <input disabled value="{{cantidad*precio | currency: 'Bs '}}" id="total_c" type="text" class="validate" > 
-                  <label for="total_c">Total entrega</label>
-                </div>
-                <div class="input-field col s6">
-                   <input disabled value="" id="total_p" type="text" class="validate">
-                   <label for="total_p">Diferencia Cierre</label>
-                   <select multiple ng-model="selectedValues">
-                              <option value="1">Blue</option>
-                              <option value="2">Green</option>
-                              <option value="3">Yellow</option>
-                              <option value="4">Red</option>
-                  </select>
-                </div>                               
-              </div>
-              <div style="text-align:center">
+              <div style="text-align:center">                
               <!-- Trigger the modal with a button -->
-                <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#pagosModal">Piezas
-                  <i class="zmdi zmdi-puzzle-piece"></i>
+                <button type="button" class="btn waves-effect waves-light btn-danger waves-teal btn-flat" data-toggle="modal" data-target="#pagosModal"> Eliminar
+                  <i class="zmdi zmdi-close"></i>
                 </button>
               </div> 
               <br>  
-              <div style="text-align:center">                        
-                <button class="waves-effect waves-light waves-teal btn-flat btn-primary">Guardar  
-                  <i class="zmdi zmdi-mail-send center-align zmdi-hc-3x" href="pago_cliente.html"></i>
-                </button>
-              </div>
               <br>                                                                       
 	        </form>           
 	      </div>
 	    </div>
      </div>
-     <br>
-
-<div class="container">
-    <!-- Modal -->
+</div>
+<!-- Modal -->
+<div class="container">    
   <div class="modal fade" id="pagosModal" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content" ng-controller="ctrlModalPagos">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title center-align" style="color:black; font-weight:600; font-family: 'Tahoma';">Piezas Dispónibles</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>         
         </div>
         <div class="modal-body">
-          <div class="row">
-            <!--<div class="btn-group col-md-2 col-md-offset-9" >
-              <button type="button" class="btn btn-primary" ng-click="agregar()">
-                <span class="glyphicon glyphicon-plus" style="font-weight: 600; font-family: 'Tahoma';"> Nuevo</span>
-              </button>
-            </div>-->
+          <div class="row">    
+             <h4 class="modal-title center-align" style="color:black; font-weight:600; font-family: 'Tahoma';">¿Seguro que quiere eliminar este cierre?</h4>
           </div>
-          <br>
-          <div class="row">
-            <div class="table-responsive">
-                <table class="tablem table-hover table-striped">
-                    <thead>
-                        <tr class="active">
-                          <th class="center-align">Proveedor </th>
-                          <th class="center-align">Id</th>
-                          <th class="center-align">Peso Bruto</th>
-                          <th class="center-align">Ley</th>
-                          <th class="center-align">Puro</th>
-                          <th class="center-align">Peso Entrega</th>
-                          <th class="center-align">Edtatus</th>
-                          <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-pagination="item in personas" ng-pagination-size="10">
-                          <td class="center-align" editable-td field="proveedor">
-                            {{item.proveedor}}
-                          </td>
-                          <td class="center-align" editable-td row="{{item}}" field="cod_pieza">
-                            {{item.cod_pieza}}
-                          </td>
-                          <td class="center-align" editable-td row="{{item}}" field="peso_bruto">
-                            {{item.peso_bruto}}
-                          </td>
-                          <td class="center-align" editable-td row="{{item}}" field="ley">
-                            {{item.ley}}
-                          </td>
-                          <td class="center-align" editable-td row="{{item}}" field="puro">
-                            {{item.puro}}
-                          </td>
-                          <td class="center-align" editable-td row="{{item}}" field="peso_entrega">
-                            {{item.peso_entrega}}
-                          </td>
-                          <td class="center-align">
-                           <!-- <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />-->                      
-                             <select multiple ng-model="selectedValues">
-                              <option value="1">Blue</option>
-                              <option value="2">Green</option>
-                              <option value="3">Yellow</option>
-                              <option value="4">Red</option>
-                            </select>
-                          </td>
-                        </tr>
-                    </tbody>
-                  </table>
-                </div>
-            </div>
+          <br>          
         </div>
         <div class="modal-footer"> 
             <div class="btn-group">           
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Confirmar</button> 
             </div>
         </div>
       </div>
     </div>  
   </div>    
 </div>
-
-<script>
-  
-</script>
