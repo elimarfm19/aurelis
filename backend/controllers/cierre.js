@@ -26,6 +26,20 @@ function getCierres(req,res){
 
  	})
 }
+function getCierresCliente(req,res){
+
+	let ClienteId = req.params.id
+
+	Cierre.find({cliente:ClienteId},(err,cierres)=>{
+ 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+ 	if(cierres == "") return res.status(404).send({message:'No hay registros de Cierres'})
+ 	
+ 	Cliente.populate(cierres, {path: "cliente"},function(err, cierres){
+            res.status(200).send(cierres);
+        }); 
+
+ 	})
+}
 
 function storeCierre(req,res){
 	console.log(req.body)
@@ -83,6 +97,7 @@ function deleteCierre(req,res){
 module.exports = {
 	getCierre,
 	getCierres,
+	getCierresCliente,
 	storeCierre,
 	updateCierre,
 	deleteCierre

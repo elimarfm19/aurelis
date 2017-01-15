@@ -156,7 +156,10 @@ api.delete('/detEntregas/:id',cors(),detEntregaController.deletedetEntrega)
 // CIERRE--------------------------------------------------------------------------
 api.options('/cierres/:id', cors())
 api.options('/cierres/', cors())
+api.options('/cierres/cliente/:id', cors())
 api.get('/cierres',cors(),cierreController.getCierres)
+
+api.get('/cierres/cliente/:id',cors(),cierreController.getCierresCliente)
 
 api.get('/cierres/:id',cors(),cierreController.getCierre)
 
