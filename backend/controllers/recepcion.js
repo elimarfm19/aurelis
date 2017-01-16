@@ -1,6 +1,10 @@
 'use strict'
 
 const Recepcion = require('../models/recepcion')
+const Cierre_p = require('../models/cierre_p')
+const Pieza = require('../models/pieza')
+const Proveedor = require('../models/proveedor')
+
  
  function getRecepcion(req,res){
 
@@ -15,21 +19,52 @@ const Recepcion = require('../models/recepcion')
 }
 
 function getRecepciones(req,res){
-	Recepcion.find({},(err,recepcion)=>{
+	Recepcion.find({},(err,recepciones)=>{
  	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
- 	if(recepcion == "") return res.status(404).send({message:'No hay registros de recepcion'})
+ 	if(recepciones == "") return res.status(404).send({message:'No hay registros de recepcion'})
  	
  	res.status(200).send(recepcion)
  	})
 }
+
+function getCierresProveedor(req,res){
+
+	let ProveedorId = req.params.id
+
+	Cierre_p.find({proveedor:ProveedorId},(err,cierres_p)=>{
+ 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+ 	if(cierres_p == "") return res.status(404).send({message:'No hay registros de Cierres'})
+ 	
+ 	Proveedor.populate(cierres_p, {path: "proveedor"},function(err, cierres_p){
+            res.status(200).send(cierres_p);
+        }); 
+
+ 	})
+}
+
+function getCierresPieza(req,res){
+
+	let PiezaId = req.params.id
+
+	Cierre_p.find({pieza:PiezaId},(err,cierres_p)=>{
+ 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+ 	if(cierres_p == "") return res.status(404).send({message:'No hay registros de Cierres'})
+ 	
+ 	Pieza.populate(cierres_p, {path: "pieza"},function(err, cierres_p){
+            res.status(200).send(cierres_p);
+        }); 
+
+ 	})
+}
+
 
 function storeRecepcion(req,res){
 	console.log(req.body)
 	//res.status(200).send({message:'el producto se ha recibido'})
 	let recepcion = new Recepcion()
 
-    recepcion.cod_proveedor = req.body.cod_proveedor
-    recepcion.fecha = req.body.fecha
+    recepcion.cod_recepcion = req.body.cod_proveedor
+    recepcion.fecha_recepcion = new Date
     recepcion.cantidad = req.body.cantidad
 
 	recepcion.save((err,recepcionStored)=>{
@@ -73,6 +108,8 @@ function deleteRecepcion(req,res){
 module.exports = {
 	getRecepcion,
 	getRecepciones,
+	getCierresProveedor,
+	getCierresPieza,
 	storeRecepcion,
 	updateRecepcion,
 	deleteRecepcion

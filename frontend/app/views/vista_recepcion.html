@@ -3,13 +3,17 @@
 			  <div class="container col-md-6 col-md-offset-3" style="margin-top:100px; ">
 	        <div class="row" style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
 				    <br>
-	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nueva Recepcion de Proveedores</h3>
+	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nueva Recepcion de Proveedor</h3>
+            <h2 style="color:black; text-align: right; font-weight:600; font-size: 15px; font-family: 'Tahoma'; margin-right: 5%;">Cod. Recepción: {{recepcion._id}}</h2>            
             <br>
 	          <form class="col s12">
               <div class="row " ng-controller="ctrl-cierre_p" >                            
-                <div class="input-field col s6" >   
-                  <select id="s1" class="select" value="cierre_p.proveedor._id" ng-model="cierre_p.proveedor" ng-options="cierre_p.proveedor.nombres +' '+ cierre.proveedor.apellidos for cierre in cierres"></select>
-                </div> 
+                <div class="input-field col-md-6 " ng-controller="ctrl-proveedor"> 
+                  <select class="select" ng-model="cierre_p.proveedor">
+                    <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Seleccione un Proveedor</option>
+                    <option ng-repeat="proveedor in proveedores" value="{{ proveedor._id }}" id="p" >{{ proveedor.nombres }}  {{ proveedor.apellidos }}</option>                                   
+                  </select>   
+                </div>  
                 <div class="input-field col s6">   
                   <select id="s2" class="select" value="cierre._id"  ng-model="cierre" ng-options="cierre.fecha_entrega +' '+ cierre.cantidad+' (g)' for cierre in cierres" ></select>
                 </div>
