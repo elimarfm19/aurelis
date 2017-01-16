@@ -14,6 +14,7 @@ const detEntregaController = require('../controllers/detEntrega')
 const cierreController = require('../controllers/cierre')
 const cierreControllerProveedor = require('../controllers/cierre_p')
 const ajusteController = require('../controllers/ajusteCierre')
+const detRecepcionController = require('../controllers/detRecepcion')
 
 var cors = require('cors')
 const api = express.Router()

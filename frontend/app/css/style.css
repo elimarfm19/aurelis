@@ -742,6 +742,7 @@ input:not([type]):disabled, input:not([type])[readonly="readonly"], input[type=t
 
 .modal-content{
     margin-top: 15%;
+    width: 125%;
 }
 
 
