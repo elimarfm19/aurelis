@@ -2,8 +2,10 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+var autoIncrement = require('mongoose-auto-increment');
 var Cliente = require('../models/cliente');
+
+autoIncrement.initialize(mongoose);
 
 // ESQUEMA PARA CIERRES
 var Cierre = new Schema({
@@ -19,5 +21,7 @@ var Cierre = new Schema({
     },
     cliente: { type: Schema.ObjectId, ref: "Cliente" }
 });
+
+Cierre.plugin(autoIncrement.plugin, 'Cierre');
 
 module.exports = mongoose.model('Cierre', Cierre);
