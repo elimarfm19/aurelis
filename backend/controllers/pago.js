@@ -50,12 +50,15 @@ function getPagosCierre(req,res){
 }
 
 function storePago(req,res){
-	console.log(req.body)
+	//console.log(req.body)
 	//res.status(200).send({message:'el producto se ha recibido'})
 	let pago = new Pago()
 
-    pago.cod_cierre = req.body.cod_cierre
+    pago.cierre = req.body.cierre
     pago.fecha = req.body.fecha
+    pago.referencia = req.body.referencia
+    pago.titular = req.body.titular
+    pago.banco = req.body.banco
     pago.monto_pagado = req.body.monto_pagado
 
 	pago.save((err,pagoStored)=>{

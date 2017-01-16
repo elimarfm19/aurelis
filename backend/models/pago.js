@@ -8,6 +8,9 @@ var Cierre = require('../models/cierre');
 // ESQUEMA PARA PAGOS
 var Pago = new Schema({
     fecha: Date,
+    referencia: String,
+    banco: String,
+    titular: String,
     monto_pagado: Number,
     cierre: { type: Schema.ObjectId, ref: "Cierre" }
 });

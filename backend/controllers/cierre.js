@@ -46,13 +46,13 @@ function storeCierre(req,res){
 	//res.status(200).send({message:'el producto se ha recibido'})
 	let cierre = new Cierre()
     cierre.cliente = req.body.cliente
-    cierre.fecha_cierre = req.body.fecha_cierre
+    cierre.fecha_cierre = new Date();
     cierre.fecha_entrega = req.body.fecha_entrega
     cierre.cantidad = req.body.cantidad
     cierre.precio = req.body.precio
     cierre.total = req.body.cantidad * req.body.precio
     cierre.monto_pagado = req.body.monto_pagado
-    cierre.status = req.body.status
+    cierre.status = 'Abierto'
 
 	cierre.save((err,cierreStored)=>{
 

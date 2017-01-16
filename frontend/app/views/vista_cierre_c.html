@@ -8,15 +8,18 @@
             <br>
 	          <form name="Codenx" novalidate class="col s12">
               <div class="row ">                            
-                <div class="input-field col-md-6 col-md-offset-3"> 
+                <div class="input-field col-md-6"> 
                 <select class="select" ng-controller="ctrl-cliente" ng-model="cierre.cliente">
                     <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Seleccione un Cliente</option>
                     <option ng-repeat="cliente in clientes" value="{{ cliente._id }}" id="c" >{{ cliente.nombres }}  {{ cliente.apellidos }}</option>                                   
-                  </select>                                                                             
+                  </select>                                                                        
+                </div> 
+                <div class="input-field col-md-6"> 
+                    <input ng-required="true" ng-model="cierre.fecha_entrega" id="fecha_entrega" type="text" class="validate" >
+                  <label for="fecha_entrega">Fecha Entrega</label>                                                                    
                 </div>                            
               </div>
               <br>    
-
               <div class="row ">
                 <div class="input-field col s6">
                   <input ng-required="true" ng-model="cierre.cantidad" id="cantidad" type="text" class="validate" >
@@ -60,52 +63,88 @@
   <div class="modal fade" id="pagosModal" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
-      <div class="modal-content" ng-controller="ctrlModalPagos">
+      <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title center-align" style="color:black; font-weight:600; font-family: 'Tahoma';">Registro de Pagos</h4>
         </div>
         <div class="modal-body">
-          <div class="row">
+          <!-- <div class="row">
             <div class="btn-group col-md-2 col-md-offset-9" >
               <button type="button" class="btn btn-primary" ng-click="agregar()">
                 <span class="glyphicon glyphicon-plus" style="font-weight: 600; font-family: 'Tahoma';"> Nuevo</span>
               </button>
             </div>
-          </div>
+          </div> -->
           <br>
-          <div class="row">
-            <div class="table-responsive">
+          <div class="row" ng-controller="ctrl-pago">
+            <div class="table-responsive" >
+             <form name="Codenx" novalidate>
                 <table class="tablem table-hover table-striped">
                     <thead>
                         <tr class="active" style="background-color: #337ab7; border-radius: 400px 4px 0 0;">
-                          <th class="center-align" style="color: #ffffff;">Ref.</th>
-                          <th class="center-align" style="color: #ffffff;">Banco</th>
+                          <th class="center-align" style="color: #ffffff;">Fecha</th>
+                          <th class="center-align" style="color: #ffffff;">Referencia</th>
                           <th class="center-align" style="color: #ffffff;">Titular</th>
-                          <th class="center-align" style="color: #ffffff;">Monto</th>
+                          <th class="center-align" style="color: #ffffff;">Banco</th>
+                          <th class="center-align" style="color: #ffffff;">Monto Pagado</th>
                           <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-pagination="item in personas" ng-pagination-size="10">
-                          <td class="center-align" editable-td field="ref">
-                            {{item.ref}}
-                          </td>
-                          <td class="center-align" editable-td row="{{item}}" field="banco">
-                            {{item.banco}}
-                          </td>
-                          <td class="center-align" editable-td row="{{item}}" field="titular">
-                            {{item.titular}}
-                          </td>
-                          <td class="center-align" editable-td row="{{item}}" field="monto">
-                            {{item.monto | currency: 'Bs '}}
+                      <tr>
+                        <td>
+                        <input hidden type="text" ng-model="cierre._id">
+                        <input hidden value="{{cierre._id}}" id="cierre_id">
+                          <input type="date" class="form-control" ng-model="pago.fecha" required="" placeholder="Pago Fecha">
+                        </td>
+                        <td>
+                          <input class="form-control" ng-model="pago.referencia" placeholder="Referencia">
+                        </td>
+                        <td>
+                          <input class="form-control" ng-model="pago.titular" placeholder="Titular">
+                        </td>
+                        <td>
+                          <input class="form-control" ng-model="pago.banco" placeholder="Banco">
+                        </td>
+                        <td>
+                          <input class="form-control" ng-model="pago.monto_pagado" placeholder="Monto Pagado">
+                        </td>
+                        <td>
+                        <button class="btn btn-primary" ng-click="add(pago)" ng-if="!pago._id" type="submit" ng-disabled="!Codenx.$valid">Add Pago</button>
+
+                            <button class="btn btn-info" ng-click="update(pago)" ng-if="pago._id" type="submit">Update</button>
+                            <button class="btn" ng-click="deselect()" ng-if="pago._id">Clear</button>
+                          </div>
+                        </td>
+        </tr>
+                        <tr ng-repeat="pago in pagos | filter: cierre._id" >
+                          <td class="center-align">
+                            {{pago.fecha |  date:'MM/dd/yyyy' : shortDate}}
+                           </td>
+                           <td class="center-align">
+                            {{pago.referencia}}
                           </td>
                           <td class="center-align">
-                            <span class="glyphicon glyphicon-trash" style="cursor: pointer;" ng-click='eliminar($item)'/>
+                            {{pago.banco}}
+                          </td>
+                          <td class="center-align">
+                            {{pago.titular}}
+                          </td>
+                          <td class="center-align">
+                            {{pago.monto_pagado}}
+                          </td>
+
+                          <td class="center-align">
+                          <div class="btn-group">
+                          <span class="glyphicon glyphicon-pencil" style="cursor: pointer;" ng-click=edit(pago._id)/>
+                            <span class="glyphicon glyphicon-trash" style="cursor: pointer;" ng-click='remove(pago)'/>
+                          </div>
                           </td>
                         </tr>
                     </tbody>
                   </table>
+                  </form>
                 </div>
             </div>
         </div>
