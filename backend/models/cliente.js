@@ -3,6 +3,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
 /* IMAGEN PARA PERSONAS
 const Images = new Schema({
     kind: {
@@ -33,5 +34,4 @@ const Cliente = Schema({
     direccion: String,
     email: String  
 });
-
 module.exports = mongoose.model('Cliente', Cliente);
