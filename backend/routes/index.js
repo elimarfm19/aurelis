@@ -13,6 +13,7 @@ const detRecepcionController = require('../controllers/detRecepcion')
 const detPagoController = require('../controllers/detPago')
 const detEntregaController = require('../controllers/detEntrega')
 const cierreController = require('../controllers/cierre')
+const cierreControllerProveedor = require('../controllers/cierre_p')
 const ajusteController = require('../controllers/ajusteCierre')
 
 var cors = require('cors')
@@ -168,6 +169,17 @@ api.post('/cierres',cors(),cierreController.storeCierre)
 api.put('/cierres/:id',cors(),cierreController.updateCierre)
 
 api.delete('/cierres/:id',cors(),cierreController.deleteCierre)
+
+// CIERRE PROVEEDOR-----------------------------------------------------------------
+api.options('/cierresProveedor/:id', cors())
+api.options('/cierresProveedor/', cors())
+api.options('/cierresProveedor/proveedor/:id', cors())
+api.get('/cierresProveedor',cors(),cierreControllerProveedor.getCierresP)
+api.get('/cierresProveedor/proveedor/:id',cors(),cierreControllerProveedor.getCierresProveedor)
+api.get('/cierresProveedor/:id',cors(),cierreControllerProveedor.getCierreP)
+api.post('/cierresProveedor',cors(),cierreControllerProveedor.storeCierreP)
+api.put('/cierresProveedor/:id',cors(),cierreControllerProveedor.updateCierreP)
+api.delete('/cierresProveedor/:id',cors(),cierreControllerProveedor.deleteCierreP)
 
 // AJUSTE--------------------------------------------------------------------------
 api.options('/ajustes/:id', cors())

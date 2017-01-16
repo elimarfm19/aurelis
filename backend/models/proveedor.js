@@ -13,10 +13,10 @@ const Images = new Schema({
     url: { type: String, required: true }
 });
 */
-// ESQUEMA PARA PERSONAS
-const Persona = Schema({
+// ESQUEMA PARA PROVEEDORES
+const Proveedor = Schema({
     
-    cod_persona: String,
+    cod_proveedor: String,
     nombres: String,
     apellidos: String,
     nacionalidad:{
@@ -29,4 +29,4 @@ const Persona = Schema({
     email: String  
 });
 
-module.exports = mongoose.model('Persona', Persona);
+module.exports = mongoose.model('Proveedor', Proveedor);
