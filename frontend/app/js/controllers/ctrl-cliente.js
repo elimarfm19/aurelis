@@ -1,11 +1,14 @@
 'use strict';
 
-app.controller('ctrl-cliente', function($scope,Cliente,ngProgress) {
+app.controller('ctrl-cliente', function($scope,Cliente,Cierre,ngProgress) {
 
 $scope.cliente = new Cliente();
+$scope.cierre = new Cierre();
 
 var refresh = function() {
   $scope.clientes = Cliente.query(); 
+  $scope.cierres = Cierre.query();
+  $scope.cierrescliente = [];
   $scope.cliente ="";
 }
 refresh();
@@ -52,4 +55,19 @@ $scope.verifyDuplicate = function() {
         }
         });
     };
+
+  // $scope que acciona el ng-change
+  $scope.mostrarCierres = function() { 
+          // $scope.selCategorias NOS TRAE EL VALOR DEL SELECT DE CATEGORIAS
+         //console.log( $scope.cliente);
+    //$scope.isvalid = false;
+        //console.log( $scope.cierres[0].cliente._id);
+        $scope.cierrescliente = [];
+        for (var i=0; i <$scope.cierres.length; i++){
+          if ($scope.cierres[i].cliente._id == ''+$scope.cliente) {
+           $scope.cierrescliente.push($scope.cierres[i]);
+          } 
+        }
+     
+  };
 })

@@ -68,7 +68,7 @@ function storeCierre(req,res){
 function updateCierre(req,res){
 	let cierreId = req.params.id
 	let update = req.body
-	  	update.total = update.cantidad * update.precio
+	  	//update.total = update.cantidad * update.precio
 	  	update.cliente = update.cliente
 
 	  	Cierre.findByIdAndUpdate(cierreId,update,{new: true},(err,cierreUpdated)=>{
