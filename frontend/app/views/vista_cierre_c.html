@@ -39,8 +39,8 @@
                   <input disabled value="{{cierre.cantidad * cierre.precio | currency:'Bs '}}" id="total_c" type="text" class="validate" style="text-align: right;">
                   <label for="total_c">Total Cierre</label>
                 </div>
-                <div class="input-field col s6">
-                   <input disabled value="{{cantidad*precio | currency: 'Bs '}}" ng-model="cierre.monto_pagado" type="text" class="validate" style="text-align: right;">
+                <div class="input-field col s6" ng-controller="ctrl-pago">
+                   <input disabled ng-model="scopeRaiz" type="text" class="validate" style="text-align: right;" id="monto_pagado">
                    <label for="total_p">Total Pagado</label>
                 </div>                               
               </div>
@@ -83,6 +83,7 @@
           <br>
           <div class="row" ng-controller="ctrl-pago">
             <div class="table-responsive" >
+             <span class="label label-info">Total de Pagos: {{ monto_pagado() }}{{ scopeRaiz }} </span>
              <form name="Codenx" novalidate>
                 <table class="tablem table-hover table-striped">
                     <thead>
