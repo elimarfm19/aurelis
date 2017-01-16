@@ -6,20 +6,17 @@
 	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nueva Entrega a Cliente</h3>
             <br>
 	          <form class="col s12">
-              <div class="row ">                            
+              <div class="row " ng-controller="ctrl-cliente">                            
                 <div class="input-field col s6">                                                
-                  <select class="select" ng-controller="ctrl-cliente">
-                    <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Seleccione un Cliente</option>
-                    <option ng-repeat="cliente in clientes" value="{{ cliente._id }}" id="c" >{{ cliente.nombres }}  {{ cliente.apellidos }}</option>                                   
+                  <select class="select" ng-model="cliente"  ng-change="mostrarCierres()" ng-options="cliente._id as cliente.nombres for cliente in clientes" >
+                                   
                   </select>                                               
                 </div>          
-                <div class="input-field col s6">                                                
-                  <select class="select">
-                    <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Seleccione un Cierre</option>
-                    <option  value="1" id="c" > 20-11-16 Resta: 2.000,00</option>
-                    <option  value="2"> 23-11-16 Resta: 1.750,00</option>
-                    <option  value="3"> 29-11-16 Resta: 1.250,00</option>                                    
-                  </select>                                                 
+                <div class="input-field col s6">
+                <select class="select" ng-model="cierre"  ng-options="cierre._id as cierre.total for cierre in cierrescliente" >
+                                   
+                  </select>                                                
+                  <!-- <select ng-model="cierre" ng-options="val for val in cliente.cierres"></select>                                              -->
                 </div>                    
               </div>
               <br>                
