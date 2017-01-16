@@ -8,7 +8,7 @@
 	          <form class="col s12">
               <div class="row " ng-controller="ctrl-cierre_p" >                            
                 <div class="input-field col s6" >   
-                  <select id="s1" class="select" value="cierre.cliente.cod_persona" ng-model="cierre.cliente" ng-options="cierre.cliente.nombres +' '+ cierre.cliente.apellidos for cierre in cierres"></select>
+                  <select id="s1" class="select" value="cierre_p.proveedor._id" ng-model="cierre_p.proveedor" ng-options="cierre_p.cliente.nombres +' '+ cierre.cliente.apellidos for cierre in cierres"></select>
                 </div> 
                 <div class="input-field col s6">   
                   <select id="s2" class="select" value="cierre._id"  ng-model="cierre" ng-options="cierre.fecha_entrega +' '+ cierre.cantidad+' (g)' for cierre in cierres" ></select>
