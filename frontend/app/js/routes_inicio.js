@@ -40,8 +40,8 @@ var app = angular.module('aurelisApp', ['ngResource','ngAnimate','ngProgress',
       })
       .when('/cierre_proveedor', {
         templateUrl: '/views/vista_cierre_p.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        controller: 'ctrl-cierre_p',
+        controllerAs: 'cierreP'
       })
       .when('/entrega', {
         templateUrl: '/views/vista_entrega.html',
@@ -104,7 +104,14 @@ app.factory('Cierre', function($resource) {
 });
 // Create a resource factory to access proveedores table from database 
 app.factory('Pago', function($resource) {
-  return $resource('http://localhost:3001/pagos/:id', { id: '@_id' }, {
+  return $resource('http://localhost:3001/pagos/:id', { id: '@_id' }, 
+    update: { // We need to define this method manually as it is not provided with ng-resource
+      method: 'PUT'
+    }
+});
+// Create a resource factory to access cierresProveedor table from database 
+app.factory('CierreProveedor', function($resource) {
+  return $resource('http://localhost:3001/cierresProveedor/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }

@@ -1,6 +1,6 @@
 'use strict'
 
-const Proveedor = require('../models/persona')
+const Proveedor = require('../models/proveedor')
  
  function getProveedor(req,res){
 
@@ -27,7 +27,7 @@ function storeProveedor(req,res){
 	console.log(req.body)
 	//res.status(200).send({message:'el producto se ha recibido'})
 	let proveedor = new Proveedor()
-	proveedor.cod_persona = req.body.cod_persona
+	proveedor.cod_proveedor = req.body.cod_proveedor
     proveedor.nombres = req.body.nombres
     proveedor.apellidos = req.body.apellidos
 	proveedor.nacionalidad = req.body.nacionalidad
