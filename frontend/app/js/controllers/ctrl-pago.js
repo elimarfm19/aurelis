@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ctrl-pago', function($scope,$filter,Pago,ngProgress) {
+app.controller('ctrl-pago', function($scope,$rootScope,Pago,ngProgress) {
 
 $scope.pago = new Pago();
 
@@ -37,5 +37,15 @@ $scope.edit = function(id) {
 
 $scope.deselect = function() {
   $scope.pago = "";
+}
+$scope.monto_pagado=function(){
+var cierre_id = document.getElementById('cierre_id').value;
+var total=0;
+for (var i=0; i <$scope.pagos.length; i++){
+    if ($scope.pagos[i].cierre._id == cierre_id) {
+      total += $scope.pagos[i].monto_pagado;
+    } 
+}
+ $rootScope.scopeRaiz = total;
 }
 })

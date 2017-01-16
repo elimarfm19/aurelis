@@ -19,6 +19,8 @@ $scope.add = function(cierre) {
   });
 };
 $scope.update = function(cierre) {
+
+  cierre.monto_pagado = document.getElementById('monto_pagado').value;
   $scope.cierre.$update(function(cierreUpdated){
   	
   	refresh();
