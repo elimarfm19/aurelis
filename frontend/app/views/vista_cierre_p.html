@@ -2,10 +2,10 @@
     <div class="container"> 
       <div class="tamanno">
 			  <div class="container col-md-6 col-md-offset-2" style="margin-top:100px; ">
-	        <div class="row" style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;" ng-controller="ctrl-cierre_p">
+	        <div class="row" style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;" >
 				    <br>
             <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nuevo Cierre Proveedor</h3>          
-            <h2 style="color:black; text-align: right; font-weight:600; font-size: 15px; font-family: 'Tahoma'; margin-right: 5%;">Cod. Cierre: {{cierre_p._id}}</h2>            
+            <h2 style="color:black; text-align: right; font-weight:600; font-size: 15px; font-family: 'Tahoma'; margin-right: 5%;">Cod. Cierre: {{cierre_p.Cierre_pId}}</h2>            
             <br>
 	          <form name="Codenx" novalidate class="col s12">
               <div class="row ">                            
@@ -39,14 +39,14 @@
                   <input disabled value="{{cierre_p.cantidad * cierre_p.precio | currency:'Bs '}}" id="total_c" type="text" class="validate" style="text-align: right;">
                   <label for="total_c">Total Cierre</label>
                 </div>
-                <div class="input-field col s6">
-                   <input disabled value="" id="total_p" type="text" class="validate" style="text-align: right;">
-                   <label for="total_p">Total Pagado</label>
-                </div>                               
+                <div class="input-field col s6" ng-controller="ctrl-pago_p">
+                   <input disabled ng-model="scopeRaiz" type="text" class="validate" style="text-align: right;" id="monto_pagado">
+                   <label for="total_p">Total Pagado</label> 
+                </div>                                
               </div>
               <div style="text-align:center">
               <!-- Trigger the modal with a button -->
-                <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#pagosModal">Pagos
+                <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#pagosModal" ng-disabled="cierre_p.Cierre_pId">Pagos
                   <i class="zmdi zmdi-money"></i>
                 </button>
               </div> 
@@ -61,64 +61,102 @@
 	    </div>
      </div>
      <br>
-     <div class="container">
+
+<div class="container">
     <!-- Modal -->
   <div class="modal fade" id="pagosModal" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
-      <div class="modal-content" ng-controller="ctrlModalPagos">
+      <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title center-align" style="color:black; font-weight:600; font-family: 'Tahoma';">Registro de Pagos</h4>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="btn-group col-md-2 col-md-offset-9" >
-              <button type="button" class="btn btn-primary" ng-click="agregar()">
-                <span class="glyphicon glyphicon-plus" style="font-weight: 600; font-family: 'Tahoma';"> Nuevo</span>
-              </button>
+          <div class="row" ng-controller="ctrl-pago_p">
+            <div class="table-responsive">
+              <form name="Codenx" novalidate>
+                <div class="row" style="text-align: right; margin-right: 0%;">
+                  <button class="btn btn-primary" ng-click="add(pago_p)" ng-if="!pago_p._id" type="submit" ng-disabled="!Codenx.$valid">Añadir</button>
+                  <button class="btn btn-info" ng-click="update(pago_p)" ng-if="pago_p._id" type="submit">Actualizar</button>
+                </div>
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr class="active">
+                      <th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 400px 4px 0 0;">Fecha</th>
+                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Referencia</th>
+                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Titular</th>
+                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Banco</th>
+                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Monto Pagado</th>
+                      <th style="background: #337ab7; border-radius: 0 400px 4px 0;"></th>
+                    </tr>
+                  </thead>
+                   <tbody>
+                    <tr>
+                      <td>
+                        <input hidden type="text" ng-model="cierre_p._id">
+                        <input hidden value="{{cierre_p._id}}" id="cierre_p_id">
+                        <input type="date" class="form-control center-align" ng-model="pago_p.fecha" required="" placeholder="Pago Fecha">
+                      </td>
+                      <td>
+                        <input class="form-control center-align" ng-model="pago_p.referencia" required="" placeholder="0102030405">
+                      </td>
+                      <td style="width: 20%;">
+                        <input class="form-control center-align" ng-model="pago_p.titular" required="" placeholder="NombreApellido">
+                      </td>
+                      <td style="width: 20%;">
+                        <input class="form-control center-align" ng-model="pago_p.banco" required="" placeholder="Nombre Banco">
+                      </td>
+                      <td>
+                        <input class="form-control center-align" ng-model="pago_p.monto_pagado" required="" placeholder="25.000.000.000">
+                      </td>
+                    </tr>
+                    <tr ng-repeat="pago_p in pagos_p | filter: cierre_p._id" >
+                      <td class="center-align">
+                        {{pago_p.fecha |  date:'dd/MM/yyyy' : shortDate}}
+                      </td>
+                      <td class="center-align">
+                        {{pago_p.referencia}}
+                      </td>
+                      <td class="center-align">
+                        {{pago_p.titular}}
+                      </td>
+                      <td class="center-align">
+                        {{pago_p.banco}}
+                      </td>
+                      <td class="center-align">
+                        {{pago_p.monto_pagado}}
+                      </td>
+                      <td class="" style="width: 7%">
+                          <span class="glyphicon glyphicon-pencil" style="cursor: pointer;" ng-click=edit(pago_p._id)/>
+                          <span class="glyphicon glyphicon-trash" style="cursor: pointer;" ng-click='remove(pago_p)'/>
+                      </td>
+                    </tr>
+                      <tr>
+                        <td colspan="5" style="text-align: right;">  
+                          <span class="label label-primary" style="font-size: 12px;">Total de Pagos: {{ monto_pagado_p() }} {{ scopeRaiz | currency: 'Bs '}} </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="5" style="text-align: right;">  
+                          <span class="label label-primary" style="font-size: 12px;">Total de Cierre: {{ cierre_p.total | currency: 'Bs '}} </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="5" style="text-align: right;">  
+                          <span class="label label-danger" style="font-size: 12px;">Diferencia: {{ cierre_p.total - scopeRaiz | currency: 'Bs '}} </span>
+                        </td>
+                      </tr>
+                  </tbody>
+                </table>
+             </form>
             </div>
           </div>
-          <br>
-          <div class="row">
-            <div class="table-responsive">
-                <table class="tablem table-hover table-striped">
-                    <thead>
-                        <tr class="active" style="background-color: #337ab7; border-radius: 400px 4px 0 0;">
-                          <th class="center-align" style="color: #ffffff;">Ref.</th>
-                          <th class="center-align" style="color: #ffffff;">Banco</th>
-                          <th class="center-align" style="color: #ffffff;">Titular</th>
-                          <th class="center-align" style="color: #ffffff;">Monto</th>
-                          <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-pagination="item in personas" ng-pagination-size="10">
-                          <td class="center-align" editable-td field="ref">
-                            {{item.ref}}
-                          </td>
-                          <td class="center-align" editable-td row="{{item}}" field="banco">
-                            {{item.banco}}
-                          </td>
-                          <td class="center-align" editable-td row="{{item}}" field="titular">
-                            {{item.titular}}
-                          </td>
-                          <td class="center-align" editable-td row="{{item}}" field="monto">
-                            {{item.monto | currency: 'Bs '}}
-                          </td>
-                          <td class="center-align">
-                            <span class="glyphicon glyphicon-trash" style="cursor: pointer;" ng-click='eliminar($item)'/>
-                          </td>
-                        </tr>
-                    </tbody>
-                  </table>
-                </div>
-            </div>
         </div>
         <div class="modal-footer"> 
-            <div class="btn-group">           
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-            </div>
+          <div class="btn-group">           
+            <button type="button" class="btn btn-default" ng-click="update(cierre)" data-dismiss="modal">Close</button> 
+          </div>
         </div>
       </div>
     </div>  

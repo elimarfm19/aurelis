@@ -8,6 +8,7 @@ const proveedorController = require('../controllers/proveedor')
 const piezaController = require('../controllers/pieza')
 const recepcionController = require('../controllers/recepcion')
 const pagoController = require('../controllers/pago')
+const pagoControllerP = require('../controllers/pago_p')
 const entregaController = require('../controllers/entrega')
 const detPagoController = require('../controllers/detPago')
 const detEntregaController = require('../controllers/detEntrega')
@@ -94,13 +95,24 @@ api.get('/pagos/cierre/:id',cors(),pagoController.getPagosCierre)
 
 api.get('/pagos/:id',cors(),pagoController.getPago)
 
-
-
 api.post('/pagos',cors(),pagoController.storePago)
 
 api.put('/pagos/:id',cors(),pagoController.updatePago)
 
 api.delete('/pagos/:id',cors(),pagoController.deletePago)
+
+
+// PAGO PROVEEDOR--------------------------------------------------------------------------
+api.options('/pagosProveedor/:id', cors())
+api.options('/pagosProveedor/', cors())
+api.options('/pagosProveedor/cierre/:id', cors())
+
+api.get('/pagosProveedor',cors(),pagoControllerP.getPagosP)
+api.get('/pagosProveedor/cierre/:id',cors(),pagoControllerP.getPagosCierreP)
+api.get('/pagosProveedor/:id',cors(),pagoControllerP.getPagoP)
+api.post('/pagosProveedor',cors(),pagoControllerP.storePagoP)
+api.put('/pagosProveedor/:id',cors(),pagoControllerP.updatePagoP)
+api.delete('/pagosProveedor/:id',cors(),pagoControllerP.deletePagoP)
 
 // ENTREGA--------------------------------------------------------------------------
 api.options('/entregas/:id', cors())
@@ -127,19 +139,6 @@ api.post('/detRecepciones',cors(),detRecepcionController.storedetRecepcion)
 api.put('/detRecepciones/:id',cors(),detRecepcionController.updatedetRecepcion)
 
 api.delete('/detRecepciones/:id',cors(),detRecepcionController.deletedetRecepcion)
-
-// DETALLE DE PAGO--------------------------------------------------------------------------
-api.options('/detPagos/:id', cors())
-api.options('/detPagos/', cors())
-api.get('/detPagos',cors(),detPagoController.getdetPagos)
-
-api.get('/detPagos/:id',cors(),detPagoController.getdetPago)
-
-api.post('/detPagos',cors(),detPagoController.storedetPago)
-
-api.put('/detPagos/:id',cors(),detPagoController.updatedetPago)
-
-api.delete('/detPagos/:id',cors(),detPagoController.deletedetPago)
 
 // DETALLE DE ENTREGA--------------------------------------------------------------------------
 api.options('/detEntregas/:id', cors())

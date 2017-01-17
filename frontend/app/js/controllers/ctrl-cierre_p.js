@@ -19,7 +19,9 @@ $scope.add = function(cierre_p) {
   });
 };
 $scope.update = function(cierre_p) {
-  $scope.cierre_p.$update(function(cierreUpdated){
+
+  cierre_p.monto_pagado = document.getElementById('monto_pagado').value;
+  $scope.cierre_p.$update(function(cierre_pUpdated){
   	
   	refresh();
   });

@@ -102,9 +102,17 @@ app.factory('Cierre', function($resource) {
     }
   });
 });
-// Create a resource factory to access proveedores table from database 
+// Create a resource factory to access pagos table from database 
 app.factory('Pago', function($resource) {
   return $resource('http://localhost:3001/pagos/:id', { id: '@_id' }, {
+    update: { // We need to define this method manually as it is not provided with ng-resource
+      method: 'PUT'
+    }
+  });
+});
+// Create a resource factory to access pagoProveedor table from database 
+app.factory('PagoProveedor', function($resource) {
+  return $resource('http://localhost:3001/pagosProveedor/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }

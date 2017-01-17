@@ -2,11 +2,14 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var autoIncrement = require('mongoose-auto-increment');
 
+autoIncrement.initialize(mongoose);
 var Proveedor = require('../models/proveedor');
 
-// ESQUEMA PARA CIERRES
-var Cierre_p = new Schema({
+// ESQUEMA PARA CIERRES PROVEEDOR
+var CierreProveedor = new Schema({
+    Cierre_pId:Number,
     fecha_cierre: Date,
     fecha_entrega: Date,
     cantidad: Number,
@@ -20,4 +23,6 @@ var Cierre_p = new Schema({
     proveedor: { type: Schema.ObjectId, ref: "Proveedor" }
 });
 
-module.exports = mongoose.model('Cierre_p', Cierre_p);
+CierreProveedor.plugin(autoIncrement.plugin, { model: 'CierreProveedor', field: 'Cierre_pId' });
+
+module.exports = mongoose.model('CierreProveedor', CierreProveedor);

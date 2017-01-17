@@ -1,6 +1,6 @@
 <div class="container"> 
       <div class="tamanno">
-			  <div class="container col-md-6 col-md-offset-3" style="margin-top:100px; ">
+			  <div class="container col-md-6 col-md-offset-2" style="margin-top:100px; ">
 	        <div class="row" style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
 				    <br>
 	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nueva Recepcion de Proveedor</h3>
@@ -19,16 +19,6 @@
                 </div>        
               </div>
               <br>                
-              <div class="row ">
-                <div class="input-field col s6">
-                  <input disabled value="{{cantidad*precio | currency: 'Bs '}}" id="total_c" type="text" class="validate" > 
-                  <label for="total_c">Total entrega</label>
-                </div>
-                <div class="input-field col s6">
-                   <input disabled value="" id="total_p" type="text" class="validate">
-                   <label for="total_p">Diferencia Cierre</label>                   
-                </div>                               
-              </div>
               <div style="text-align:center">
               <!-- Trigger the modal with a button -->
                 <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#pagosModal">Piezas
@@ -53,80 +43,98 @@
   <div class="modal fade" id="pagosModal" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
-      <div class="modal-content" ng-controller="ctrlModalPagos">
+      <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title center-align" style="color:black; font-weight:600; font-family: 'Tahoma';">Piezas Dispónibles</h4>
+          <h4 class="modal-title center-align" style="color:black; font-weight:600; font-family: 'Tahoma';">Detalle de Piezas</h4>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <!--<div class="btn-group col-md-2 col-md-offset-9" >
-              <button type="button" class="btn btn-primary" ng-click="agregar()">
-                <span class="glyphicon glyphicon-plus" style="font-weight: 600; font-family: 'Tahoma';"> Nuevo</span>
-              </button>
-            </div>-->
-          </div>
-          <br>
-          <div class="row">
+          <div class="row" ng-controller="ctrl-pieza">
             <div class="table-responsive">
-                <table class="tablem table-hover table-striped">
-                    <thead>
-                        <tr class="active">
-                          <th class="center-align">Proveedor </th>
-                          <th class="center-align">Id</th>
-                          <th class="center-align">Peso Bruto</th>
-                          <th class="center-align">Ley</th>
-                          <th class="center-align">Puro</th>
-                          <th class="center-align">Peso Entrega</th>
-                          <th class="center-align">Edtatus</th>
-                          <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-pagination="item in personas" ng-pagination-size="10">
-                          <td class="center-align" editable-td field="proveedor">
-                            {{item.proveedor}}
-                          </td>
-                          <td class="center-align" editable-td row="{{item}}" field="cod_pieza">
-                            {{item.cod_pieza}}
-                          </td>
-                          <td class="center-align" editable-td row="{{item}}" field="peso_bruto">
-                            {{item.peso_bruto}}
-                          </td>
-                          <td class="center-align" editable-td row="{{item}}" field="ley">
-                            {{item.ley}}
-                          </td>
-                          <td class="center-align" editable-td row="{{item}}" field="puro">
-                            {{item.puro}}
-                          </td>
-                          <td class="center-align" editable-td row="{{item}}" field="peso_entrega">
-                            {{item.peso_entrega}}
-                          </td>
-                          <td class="center-align">
-                           <!-- <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />-->                      
-                             <select multiple ng-model="selectedValues">
-                              <option value="1">Blue</option>
-                              <option value="2">Green</option>
-                              <option value="3">Yellow</option>
-                              <option value="4">Red</option>
-                            </select>
-                          </td>
-                        </tr>
-                    </tbody>
-                  </table>
+              <form name="Codenx" novalidate>
+                <div class="row" style="text-align: right; margin-right: 0%;">
+                  <button class="btn btn-primary" ng-click="add(pieza)" ng-if="!pieza._id" type="submit" ng-disabled="!Codenx.$valid">Añadir</button>
+                  <button class="btn btn-info" ng-click="update(pieza)" ng-if="pieza._id" type="submit">Actualizar</button>
                 </div>
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr class="active">
+                      <th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 400px 4px 0 0;">Cod. Pieza</th>
+                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Peso Bruto</th>
+                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Ley</th>
+                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Puro</th>
+                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Peso Entrega</th>
+                      <th style="background: #337ab7; border-radius: 0 400px 4px 0;"></th>
+                    </tr>
+                  </thead>
+                   <tbody>
+                    <tr>
+                      <td>
+                        <input hidden type="text" ng-model="cierre_p._id">
+                        <input hidden value="{{cierre_p._id}}" id="cierre_p_id">
+                        <input type="text" class="form-control center-align" ng-model="pieza.cod_pieza" required="" disabled placeholder="">
+                      </td>
+                      <td>
+                        <input class="form-control center-align" ng-model="pieza.peso_bruto" required="" placeholder="145.7">
+                      </td>
+                      <td style="width: 20%;">
+                        <input class="form-control center-align" ng-model="pieza.ley" required="" placeholder="930">
+                      </td>
+                      <td style="width: 20%;">
+                        <input class="form-control center-align" required="" placeholder="135.5">
+                      </td>
+                      <td>
+                        <input class="form-control center-align" ng-model="pieza.peso_entrega" required="" placeholder="146">
+                      </td>
+                    </tr>
+                    <tr ng-repeat="pieza in piezas | filter: cierre_p._id" >
+                      <td class="center-align">
+                        {{pieza.cod_pieza}}
+                      </td>
+                      <td class="center-align">
+                        {{pieza.peso_bruto}}
+                      </td>
+                      <td class="center-align">
+                        {{pieza.ley}}
+                      </td>
+                      <td class="center-align">
+                        {{pieza.peso_bruto * (pieza.ley/1000)}}
+                      </td>
+                      <td class="center-align">
+                        {{pieza.peso_entrega}}
+                      </td>
+                      <td class="" style="width: 7%">
+                          <span class="glyphicon glyphicon-pencil" style="cursor: pointer;" ng-click=edit(pieza._id)/>
+                          <span class="glyphicon glyphicon-trash" style="cursor: pointer;" ng-click='remove(pieza)'/>
+                      </td>
+                    </tr>
+                      <tr>
+                        <td colspan="5" style="text-align: right;">  
+                          <span class="label label-primary" style="font-size: 12px;">Total de Recepción: {{ monto_pagado_p() }} {{ scopeRaiz | currency: 'Bs '}} </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="5" style="text-align: right;">  
+                          <span class="label label-primary" style="font-size: 12px;">Total de Cierre: {{ cierre_p.total | currency: 'Bs '}} </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="5" style="text-align: right;">  
+                          <span class="label label-danger" style="font-size: 12px;">Diferencia: {{ cierre_p.total - scopeRaiz | currency: 'Bs '}} </span>
+                        </td>
+                      </tr>
+                  </tbody>
+                </table>
+             </form>
             </div>
+          </div>
         </div>
         <div class="modal-footer"> 
-            <div class="btn-group">           
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-            </div>
+          <div class="btn-group">           
+            <button type="button" class="btn btn-default" ng-click="update(cierre)" data-dismiss="modal">Close</button> 
+          </div>
         </div>
       </div>
     </div>  
   </div>    
 </div>
-
-<script>
-  
-</script>
