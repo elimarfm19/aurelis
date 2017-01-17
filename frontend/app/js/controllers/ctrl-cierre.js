@@ -1,17 +1,19 @@
 'use strict';
 
-app.controller('ctrl-cierre', function($scope,Cierre,ngProgress) {
+app.controller('ctrl-cierre', function($scope,Cierre,Cliente,ngProgress) {
 
 $scope.cierre = new Cierre();
-
+$scope.cliente = new Cliente();
 var refresh = function() {
-  $scope.cierres = Cierre.query(); 
+  $scope.cierres = Cierre.query();
+  $scope.clientes = Cliente.query(); 
   //$scope.cierre ="";
 }
 refresh();
 
 $scope.add = function(cierre) {
-  console.log(cierre);
+  console.log(cierre.cliente);
+
   Cierre.save(cierre,function(cierre){
   	
    //refresh();
@@ -19,7 +21,7 @@ $scope.add = function(cierre) {
   });
 };
 $scope.update = function(cierre) {
-
+  console.log(cierre);
   cierre.monto_pagado = document.getElementById('monto_pagado').value;
   $scope.cierre.$update(function(cierreUpdated){
   	

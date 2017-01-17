@@ -1,8 +1,8 @@
 
     <div class="container"> 
       <div class="tamanno">
-			  <div class="container col-md-6 col-md-offset-3" style="margin-top:100px; ">
-	        <div class="row" style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
+			  <div class="container col-md-6 col-md-offset-3" style="margin-top:100px; "  >
+	        <div class="row" style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;" >
 				    <br>
 	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nuevo Cierre de Cliente</h3>
             <h2 style="color:black; text-align: right; font-weight:600; font-size: 15px; font-family: 'Tahoma'; margin-right: 5%;">Cod. Cierre: {{cierre.CierreId}}</h2>            
@@ -10,16 +10,16 @@
 	          <form name="Codenx" novalidate class="col s12">
               <div class="row ">                            
                 <div class="input-field col-md-6"> 
-                <select class="select" ng-controller="ctrl-cliente" ng-model="cierre.cliente">
+                <select class="select" ng-model="cierre.cliente">
                     <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Seleccione un Cliente</option>
-                    <option ng-repeat="cliente in clientes" value="{{ cliente._id }}" id="c" >{{ cliente.nombres }}  {{ cliente.apellidos }}</option>                                   
+                    <option ng-repeat="cliente in clientes" value="{{ cliente._id }}" >{{ cliente.nombres }}  {{ cliente.apellidos }}</option>                                   
                   </select>                                                                        
                 </div> 
                 <div class=" col s3">
                     <h2 style="color:black; font-weight:600; font-size: 12px; font-family: 'Tahoma';">Fecha entrega:</h2>  
                 </div> 
                 <div class="input-field col s3" > 
-                    <input style="margin-right: 20%;" type="date" id="fecha_entrega" ng-model="string"  ng-min="" required /> 
+                    <input style="margin-right: 20%;" type="date" id="fecha_entrega" ng-model="cierre.fecha_entrega" required /> 
                     <label for="fecha_entrega"></label>                                   
                 </div>                           
               </div>
