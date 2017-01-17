@@ -23,6 +23,10 @@ var Cierre = new Schema({
     cliente: { type: Schema.ObjectId, ref: "Cliente" }
 });
 
-Cierre.plugin(autoIncrement.plugin, { model: 'Cierre', field: 'CierreId' });
+Cierre.plugin(autoIncrement.plugin, {
+    model: 'Cierre',
+    field: 'CierreId',
+    startAt: 1
+});
 
 module.exports = mongoose.model('Cierre', Cierre);

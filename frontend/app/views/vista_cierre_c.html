@@ -99,16 +99,16 @@
                         <input type="date" class="form-control center-align" ng-model="pago.fecha" required="" placeholder="Pago Fecha">
                       </td>
                       <td>
-                        <input class="form-control center-align" ng-model="pago.referencia" placeholder="0102030405">
+                        <input class="form-control center-align" ng-model="pago.referencia" required="" placeholder="0102030405">
                       </td>
                       <td style="width: 20%;">
-                        <input class="form-control center-align" ng-model="pago.titular" placeholder="NombreApellido">
+                        <input class="form-control center-align" ng-model="pago.titular" required="" placeholder="NombreApellido">
                       </td>
                       <td style="width: 20%;">
-                        <input class="form-control center-align" ng-model="pago.banco" placeholder="Nombre Banco">
+                        <input class="form-control center-align" ng-model="pago.banco" required="" placeholder="Nombre Banco">
                       </td>
                       <td>
-                        <input class="form-control center-align" ng-model="pago.monto_pagado" placeholder="25.000.000.000">
+                        <input class="form-control center-align" ng-model="pago.monto_pagado" required="" placeholder="25.000.000.000">
                       </td>
                     </tr>
                     <tr ng-repeat="pago in pagos | filter: cierre._id" >

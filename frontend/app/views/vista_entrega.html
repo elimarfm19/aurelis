@@ -13,39 +13,10 @@
                   </select>                                               
                 </div>          
                 <div class="input-field col s6">
-                <select class="select" ng-model="cierre"  ng-options="cierre._id as cierre.total for cierre in cierrescliente" >
-                                   
-                  </select>                                                
-                  <!-- <select ng-model="cierre" ng-options="val for val in cliente.cierres"></select>                                              -->
+                <select class="select" ng-model="cierre"  ng-options="cierre._id as cierre.total for cierre in cierrescliente" ></select>
                 </div>                    
               </div>
               <br>                
-            <!--  <div class="row ">
-                <div class="input-field col s6">
-                  <input ng-model="cantidad" id="cantidad" type="text" class="validate" >
-                  <label for="cantidad">Cantidad (g)</label>
-                </div>
-                <div class="input-field col s6">
-                  <input ng-model="precio" id="precio" type="text" class="validate" onkeyup="format(this)" onchange="format(this)">
-                  <label for="precio">Precio * g</label>
-                </div>                                
-              </div>-->
-              <div class="row ">
-                <div class="input-field col s6">
-                  <input disabled value="{{cantidad*precio | currency: 'Bs '}}" id="total_c" type="text" class="validate" > 
-                  <label for="total_c">Total entrega</label>
-                </div>
-                <div class="input-field col s6">
-                   <input disabled value="" id="total_p" type="text" class="validate">
-                   <label for="total_p">Diferencia Cierre</label>
-                   <select multiple ng-model="selectedValues">
-                              <option value="1">Blue</option>
-                              <option value="2">Green</option>
-                              <option value="3">Yellow</option>
-                              <option value="4">Red</option>
-                  </select>
-                </div>                               
-              </div>
               <div style="text-align:center">
               <!-- Trigger the modal with a button -->
                 <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#pagosModal">Piezas

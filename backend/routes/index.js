@@ -74,10 +74,11 @@ api.delete('/piezas/:id',cors(),piezaController.deletePieza)
 // RECEPCION--------------------------------------------------------------------------
 api.options('/recepciones/:id', cors())
 api.options('/recepciones/', cors())
-api.get('/recepciones',cors(),recepcionController.getRecepciones)
+api.get('/recepciones',cors(),recepcionController.getRecepcion)
 
-api.get('/recepciones/:id',cors(),recepcionController.getRecepcion)
-
+api.get('/recepciones/:id',cors(),recepcionController.getRecepciones)
+api.get('/recepciones/cierres',cors(),recepcionController.getCierresProveedor)
+api.get('/recepciones/',cors(),recepcionController.getRecepciones)
 api.post('/recepciones',cors(),recepcionController.storeRecepcion)
 
 api.put('/recepciones/:id',cors(),recepcionController.updateRecepcion)

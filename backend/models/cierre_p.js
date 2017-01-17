@@ -23,6 +23,10 @@ var CierreProveedor = new Schema({
     proveedor: { type: Schema.ObjectId, ref: "Proveedor" }
 });
 
-CierreProveedor.plugin(autoIncrement.plugin, { model: 'CierreProveedor', field: 'Cierre_pId' });
+CierreProveedor.plugin(autoIncrement.plugin, {
+    model: 'CierreProveedor',
+    field: 'Cierre_pId',
+    startAt: 1
+});
 
 module.exports = mongoose.model('CierreProveedor', CierreProveedor);

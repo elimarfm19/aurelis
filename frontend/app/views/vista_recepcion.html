@@ -6,16 +6,19 @@
 	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nueva Recepcion de Proveedor</h3>
             <h2 style="color:black; text-align: right; font-weight:600; font-size: 15px; font-family: 'Tahoma'; margin-right: 5%;">Cod. Recepción: {{recepcion._id}}</h2>            
             <br>
-	          <form class="col s12">
-              <div class="row " ng-controller="ctrl-cierre_p" >                            
-                <div class="input-field col-md-6 " ng-controller="ctrl-proveedor"> 
-                  <select class="select" ng-model="cierre_p.proveedor">
-                    <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Seleccione un Proveedor</option>
-                    <option ng-repeat="proveedor in proveedores" value="{{ proveedor._id }}" id="p" >{{ proveedor.nombres }}  {{ proveedor.apellidos }}</option>                                   
-                  </select>   
-                </div>  
-                <div class="input-field col s6">   
-                  <select id="s2" class="select" value="cierre_p._id" ng-model="cierre_p._id" ng-options="cierre_p.fecha_entrega +' '+ cierre_p.cantidad+' (g)' for cierre_p in cierre_p" ></select>
+	          <form name="Codenx" novalidate class="col s12">
+              <div class="row" ng-controller="ctrl-proveedor">                            
+                <div class="input-field col-md-6 "> 
+                  <select id="s1" class="select" ng-model="proveedor" ng-change="mostrarCierres()" required>
+                    <option value="">Seleccione Proveedor</option>
+                    <option ng-repeat="proveedor in proveedores" value="{{proveedor._id}}">{{proveedor.nombres}} {{proveedor.apellidos}}</option> 
+                  </select>
+                </div>
+                <div class="input-field col s6">  
+                  <select class="select" ng-model="cierre_p" required ng-disabled="!proveedor">
+                    <option value="">Seleccione Cierre</option>
+                    <option ng-repeat="cierre_p in cierresproveedor" value="{{cierre_p._id}}">{{cierre_p.fecha_entrega |  date:'dd/MM/yyyy' : shortDate }} - {{cierre_p.cantidad | currency :' '}} (g)</option>
+                  </select> 
                 </div>        
               </div>
               <br>                
@@ -27,9 +30,8 @@
               </div> 
               <br>  
               <div style="text-align:center">                        
-                <button class="waves-effect waves-light waves-teal btn-flat btn-primary">Guardar  
-                  <i class="zmdi zmdi-mail-send center-align zmdi-hc-3x" href="#"></i>
-                </button>
+                <button class="btn btn-primary" ng-click="add(recepcion)" ng-if="!recepcion._id" type="submit" ng-disabled="!Codenx.$valid">AÑADIR</button>
+                <button class="btn btn-info" ng-click="update(recepcion)" ng-if="recepcion._id" type="submit">ACTUALIZAR</button>
               </div>
               <br>                                                                       
 	        </form>           
