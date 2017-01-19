@@ -87,45 +87,24 @@ function updateCierreP(req,res){
 	  	update.total = update.cantidad * update.precio
 	  	update.proveedor = update.proveedor
 	  	update.cantidad = req.body.cantidad
-	  	Cierre_p.findById(cierreId,function(err,cierre){
-
-		console.log('cantidad anterior'+cierre.cantidad);
-		
-    	Proveedor.findById(req.body.proveedor,function(err,proveedor){
-	  		
-			proveedor.cerrado -= cierre.cantidad;
-		    
-			proveedor.save();
-
-    		proveedor.cerrado += parseFloat(req.body.cantidad);
-
-    		proveedor.save();
-
-    		cierre.cantidad = req.body.cantidad
-
-    		cierre.save();
-    		
-    		Cierre_p.findByIdAndUpdate(cierreId,update,{new: true},(err,cierreUpdated)=>{
-			if(err) return res.status(500).send({message:`Error al actualizar el cierre: ${ err }`})
-			
-			res.status(200).send(cierreUpdated)
-			
-
-
-    		});
-
-
-    
+	  	Cierre_p.findById(cierreId,function(err,cierre){	  		
+			console.log('cantidad anterior'+cierre.cantidad);		
+    		Proveedor.findById(req.body.proveedor,function(err,proveedor){	  		
+				proveedor.cerrado -= cierre.cantidad;		    
+				proveedor.save();
+    			proveedor.cerrado += parseFloat(req.body.cantidad);
+    			proveedor.save();
+    			cierre.cantidad = req.body.cantidad
+    			cierre.precio = req.body.precio
+    			cierre.total = req.body.precio * req.body.cantidad
+    			cierre.save();     		
+    			Cierre_p.findByIdAndUpdate(cierreId,update,{new: true},(err,cierreUpdated)=>{
+					if(err) return res.status(500).send({message:`Error al actualizar el cierre: ${ err }`})
+					res.status(200).send(cierreUpdated)
+    			});
 		})
-
-    	});
+});
     	console.log('cantidad nueva'+req.body.cantidad);
-    	
-
-
-	  	
-		
-	 
 }
 
 function deleteCierreP(req,res){
