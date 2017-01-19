@@ -7,15 +7,15 @@
             <h2 style="color:black; text-align: right; font-weight:600; font-size: 15px; font-family: 'Tahoma'; margin-right: 5%;">Cod. Recepción: {{recepcion._id}}</h2>            
             <br>
 	          <form name="Codenx" novalidate class="col s12">
-              <div class="row" ng-controller="ctrl-proveedor">                            
+              <div class="row">                            
                 <div class="input-field col-md-6 "> 
-                  <select id="s1" class="select" ng-model="proveedor" ng-change="mostrarCierres()" required>
+                  <select class="select" ng-model="recepcion.proveedor" ng-change="mostrarCierres()"   required>
                     <option value="">Seleccione Proveedor</option>
                     <option ng-repeat="proveedor in proveedores" value="{{proveedor._id}}">{{proveedor.nombres}} {{proveedor.apellidos}}</option> 
                   </select>
                 </div>
                 <div class="input-field col s6">  
-                  <select class="select" ng-model="cierre_p" required ng-disabled="!proveedor">
+                  <select class="select" ng-model="recepcion.cierre_p" required ng-disabled="!recepcion.proveedor">
                     <option value="">Seleccione Cierre</option>
                     <option ng-repeat="cierre_p in cierresproveedor" value="{{cierre_p._id}}">{{cierre_p.fecha_entrega |  date:'dd/MM/yyyy' : shortDate }} - {{cierre_p.cantidad | currency :' '}} (g)</option>
                   </select> 
@@ -24,7 +24,7 @@
               <br>                
               <div style="text-align:center">
               <!-- Trigger the modal with a button -->
-                <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#pagosModal">Piezas
+                <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#piezasModal">Piezas
                   <i class="zmdi zmdi-puzzle-piece"></i>
                 </button>
               </div> 
@@ -42,7 +42,7 @@
 
 <div class="container">
     <!-- Modal -->
-  <div class="modal fade" id="pagosModal" role="dialog">
+  <div class="modal fade" id="piezasModal" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
@@ -72,9 +72,8 @@
                    <tbody>
                     <tr>
                       <td>
-                        <input hidden type="text" ng-model="cierre_p._id">
-                        <input hidden value="{{cierre_p._id}}" id="cierre_p_id">
-                        <input type="text" class="form-control center-align" ng-model="pieza.cod_pieza" required="" disabled placeholder="">
+                        <input hidden type="text" ng-model="recepcion._id">
+                        <input hidden value="{{recepcion._id}}" id="recepcion_id">
                       </td>
                       <td>
                         <input class="form-control center-align" ng-model="pieza.peso_bruto" required="" placeholder="145.7">
@@ -83,13 +82,13 @@
                         <input class="form-control center-align" ng-model="pieza.ley" required="" placeholder="930">
                       </td>
                       <td style="width: 20%;">
-                        <input class="form-control center-align" required="" placeholder="135.5">
+                        <input class="form-control center-align" required="" disabled type="text" class="validate" value="{{(pieza.peso_bruto * (pieza.ley/1000)) | currency:''}} ">
                       </td>
                       <td>
                         <input class="form-control center-align" ng-model="pieza.peso_entrega" required="" placeholder="146">
                       </td>
                     </tr>
-                    <tr ng-repeat="pieza in piezas | filter: cierre_p._id" >
+                    <tr ng-repeat="pieza in piezas | filter: recepcion._id" >
                       <td class="center-align">
                         {{pieza.cod_pieza}}
                       </td>
@@ -112,17 +111,17 @@
                     </tr>
                       <tr>
                         <td colspan="5" style="text-align: right;">  
-                          <span class="label label-primary" style="font-size: 12px;">Total de Recepción: {{ monto_pagado_p() }} {{ scopeRaiz | currency: 'Bs '}} </span>
+                          <span class="label label-primary" style="font-size: 12px;">Total de Recepción: {{ suma_puro() }} {{ sumaPuro | currency: 'Bs '}} </span>
                         </td>
                       </tr>
                       <tr>
                         <td colspan="5" style="text-align: right;">  
-                          <span class="label label-primary" style="font-size: 12px;">Total de Cierre: {{ cierre_p.total | currency: 'Bs '}} </span>
+                          <span class="label label-primary" style="font-size: 12px;">Total de Cierre: {{ total_cierre()}} {{ totalCierre | currency: 'Bs '}} </span>
                         </td>
                       </tr>
                       <tr>
                         <td colspan="5" style="text-align: right;">  
-                          <span class="label label-danger" style="font-size: 12px;">Diferencia: {{ cierre_p.total - scopeRaiz | currency: 'Bs '}} </span>
+                          <span class="label label-danger" style="font-size: 12px;">Diferencia: {{ totalCierre - sumaPuro | currency: 'Bs '}} </span>
                         </td>
                       </tr>
                   </tbody>

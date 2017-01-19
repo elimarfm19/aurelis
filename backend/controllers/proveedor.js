@@ -35,6 +35,8 @@ function storeProveedor(req,res){
     proveedor.tlf = req.body.tlf
     proveedor.direccion = req.body.direccion
     proveedor.email = req.body.email
+    proveedor.cerrado = 0
+    proveedor.entregado = 0
 
 	proveedor.save((err,proveedorStored)=>{
 

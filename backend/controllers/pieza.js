@@ -1,7 +1,9 @@
 'use strict'
 
 const Pieza = require('../models/pieza')
- 
+const Recepcion = require('../models/recepcion')
+const Proveedor = require('../models/proveedor')
+
  function getPieza(req,res){
 
 	let piezaId = req.params.id
@@ -15,12 +17,24 @@ const Pieza = require('../models/pieza')
 }
 
 function getPiezas(req,res){
-	Pieza.find({},(err,pieza)=>{
- 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
- 	if(pieza == "") return res.status(404).send({message:'No hay registros de piezas'})
- 	
- 	res.status(200).send(pieza)
- 	})
+	Pieza.find({})
+	.populate({
+		path: 'recepcion',
+		model: 'Recepcion',
+		populate: {
+
+			path: 'cierre_p proveedor',
+			//model: 'CierreProveedor Proveedor',
+			populate: {
+			path: 'proveedor',
+			model: 'Proveedor'
+			}
+		}
+	}).exec(function(err,piezas){
+		if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+			if(piezas == "") return res.status(404).send({message:'No hay registros de piezas'})
+				res.status(200).send(piezas);
+		});
 }
 
 function storePieza(req,res){
@@ -36,7 +50,7 @@ function storePieza(req,res){
 	pieza.puro = req.body.peso_bruto * (req.body.ley / 1000)
     pieza.peso_entrega = req.body.peso_entrega
     pieza.ajuste = req.body.ajuste
-
+    pieza.recepcion = req.body.recepcion
 	pieza.save((err,piezaStored)=>{
 
 		if (err) res.status(500).send({message:`Error al guardar en la base de datos: ${ err }`})

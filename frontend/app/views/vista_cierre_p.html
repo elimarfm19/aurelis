@@ -40,13 +40,13 @@
                   <label for="total_c">Total Cierre</label>
                 </div>
                 <div class="input-field col s6" ng-controller="ctrl-pago_p">
-                   <input disabled ng-model="scopeRaiz" type="text" class="validate" style="text-align: right;" id="monto_pagado">
+                   <input disabled value="{{scopeRaiz | currency:'Bs '}}" type="text" class="validate" style="text-align: right;" id="monto_pagado">
                    <label for="total_p">Total Pagado</label> 
                 </div>                                
               </div>
               <div style="text-align:center">
               <!-- Trigger the modal with a button -->
-                <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#pagosModal" ng-disabled="!cierre_p.Cierre_pId">Pagos
+                <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#pagosModal" ng-if="cierre_p.Cierre_pId" ng-disabled="cierre_p.total <= scopeRaiz">Pagos
                   <i class="zmdi zmdi-money"></i>
                 </button>
               </div> 
@@ -54,6 +54,7 @@
               <div style="text-align:center">                        
                 <button class="btn btn-primary" ng-click="add(cierre_p)" ng-if="!cierre_p._id" type="submit" ng-disabled="!Codenx.$valid">AÑADIR</button>
                 <button class="btn btn-info" ng-click="update(cierre_p)" ng-if="cierre_p._id" type="submit">ACTUALIZAR</button>
+               <!-- <button class="btn" ng-click="deselect()" ng-if="(cierre_p._id && (cierre_p.total == scopeRaiz))">LIMPIAR</button>-->
               </div>
               <br>                                                                       
 	        </form>           

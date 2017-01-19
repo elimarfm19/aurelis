@@ -10,21 +10,33 @@ const Proveedor = require('../models/proveedor')
 
 	let recepcionId = req.params.id
 
+
 	Recepcion.findById(recepcionId,(err,recepcion)=>{
 	 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
-	 	if(!recepcion) return res.status(404).send({message:'La recepcion no existe'})
+	 	if(!recepcion) return res.status(404).send({message:'la recepcion no existe'})
 	 	
 	 	res.status(200).send(recepcion)
 	})
 }
 
 function getRecepciones(req,res){
-	Recepcion.find({},(err,recepciones)=>{
- 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
- 	if(recepciones == "") return res.status(404).send({message:'No hay registros de recepcion'})
- 	
- 	res.status(200).send(recepcion)
- 	})
+	Recepcion.find({})
+	.populate({
+		path: 'cierre_p',
+		model: 'CierreProveedor',
+		populate: {
+			path: 'proveedor',
+			model: 'Proveedor'
+		}
+	})
+	.populate({
+		path: 'proveedor',
+		model: 'Proveedor'
+	}).exec(function(err,recepciones){
+		if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+			if(recepciones == "") return res.status(404).send({message:'No hay registros de recepciones'})
+				res.status(200).send(recepciones);
+		});
 }
 
 function getCierresProveedor(req,res){
@@ -63,9 +75,10 @@ function storeRecepcion(req,res){
 	//res.status(200).send({message:'el producto se ha recibido'})
 	let recepcion = new Recepcion()
 
-    recepcion.cod_recepcion = req.body.cod_proveedor
-    recepcion.fecha_recepcion = new Date
+    recepcion.fecha_recepcion = new Date()
     recepcion.cantidad = req.body.cantidad
+    recepcion.proveedor = req.body.proveedor
+    recepcion.cierre_p = req.body.cierre_p
 
 	recepcion.save((err,recepcionStored)=>{
 
@@ -85,7 +98,7 @@ function updateRecepcion(req,res){
 		Recepcion.findByIdAndUpdate(recepcionId,update,(err,recepcionUpdated)=>{
 			if(err) return res.status(500).send({message:`Error al actualizar la recepcion: ${ err }`})
 			
-			res.status(200).send({recepcion:recepcionUpdated})
+			res.status(200).send(recepcionUpdated)
 			
 		})
 

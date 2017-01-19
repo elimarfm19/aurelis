@@ -26,7 +26,9 @@ const Proveedor = Schema({
     ced_rif: String,
     tlf: String,
     direccion: String,
-    email: String  
+    email: String,
+    cerrado:Number,
+    entregado:Number  
 });
 
 module.exports = mongoose.model('Proveedor', Proveedor);

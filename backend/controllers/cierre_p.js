@@ -45,6 +45,7 @@ function storeCierreP(req,res){
 	console.log(req.body)
 	//res.status(200).send({message:'el producto se ha recibido'})
 	let cierre = new Cierre_p()
+	let proveedor = new Proveedor()
     cierre.proveedor = req.body.proveedor
     cierre.fecha_cierre = new Date, 'dd/MM/yyyy'
     cierre.fecha_entrega = req.body.fecha_entrega
@@ -53,6 +54,20 @@ function storeCierreP(req,res){
     cierre.total = req.body.cantidad * req.body.precio
     cierre.monto_pagado = req.body.monto_pagado
     cierre.status = 'Abierto'
+
+
+    
+
+    Proveedor.findById(req.body.proveedor,function(err,proveedor){
+
+    	proveedor.cerrado += parseFloat(req.body.cantidad);
+
+    	proveedor.save();
+    });
+
+    
+
+  
 
 	cierre.save((err,cierreStored)=>{
 
@@ -66,18 +81,51 @@ function storeCierreP(req,res){
 }
 
 function updateCierreP(req,res){
+
 	let cierreId = req.params.id
 	let update = req.body
 	  	update.total = update.cantidad * update.precio
 	  	update.proveedor = update.proveedor
+	  	update.cantidad = req.body.cantidad
+	  	Cierre_p.findById(cierreId,function(err,cierre){
 
-	  	Cierre_p.findByIdAndUpdate(cierreId,update,{new: true},(err,cierreUpdated)=>{
+		console.log('cantidad anterior'+cierre.cantidad);
+		
+    	Proveedor.findById(req.body.proveedor,function(err,proveedor){
+	  		
+			proveedor.cerrado -= cierre.cantidad;
+		    
+			proveedor.save();
+
+    		proveedor.cerrado += parseFloat(req.body.cantidad);
+
+    		proveedor.save();
+
+    		cierre.cantidad = req.body.cantidad
+
+    		cierre.save();
+    		
+    		Cierre_p.findByIdAndUpdate(cierreId,update,{new: true},(err,cierreUpdated)=>{
 			if(err) return res.status(500).send({message:`Error al actualizar el cierre: ${ err }`})
 			
 			res.status(200).send(cierreUpdated)
 			
+
+
+    		});
+
+
+    
 		})
 
+    	});
+    	console.log('cantidad nueva'+req.body.cantidad);
+    	
+
+
+	  	
+		
+	 
 }
 
 function deleteCierreP(req,res){

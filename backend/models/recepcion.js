@@ -15,7 +15,7 @@ var Recepcion = new Schema({
     fecha_recepcion: Date,
     cantidad: Number,
     proveedor: { type: Schema.ObjectId, ref: "Proveedor" },
-    cierre_p: { type: Schema.ObjectId, ref: "Cierre_p" } 
+    cierre_p: { type: Schema.ObjectId, ref: "CierreProveedor" } 
 });
 
 Recepcion.plugin(autoIncrement.plugin, {

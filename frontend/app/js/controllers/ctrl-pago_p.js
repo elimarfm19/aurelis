@@ -40,7 +40,7 @@ $scope.deselect = function() {
 }
 $scope.monto_pagado_p = function(){
 var cierre_p_id = document.getElementById('cierre_p_id').value;
-console.log(cierre_p_id);
+//console.log(cierre_p_id);
 var total=0;
 for (var i=0; i <$scope.pagos_p.length; i++){
     if ($scope.pagos_p[i].cierre_p._id == cierre_p_id) {

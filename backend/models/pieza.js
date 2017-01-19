@@ -2,11 +2,10 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+var Recepcion = require('../models/recepcion');
 // ESQUEMA PARA PIEZA
 var Pieza = new Schema({
-    cod_pieza: String,
-    cod_proveedor: String,
+    
     status: {
         type:String,
         enum: ['Disponible', 'Entregado']
@@ -18,7 +17,8 @@ var Pieza = new Schema({
     ajuste: {
         type:String,
         enum: ['Si', 'No']
-    }
+    },
+    recepcion: { type: Schema.ObjectId, ref: "Recepcion" }
 });
 
 module.exports = mongoose.model('Pieza', Pieza);

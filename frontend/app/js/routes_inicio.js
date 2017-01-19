@@ -50,8 +50,8 @@ var app = angular.module('aurelisApp', ['ngResource','ngAnimate','ngProgress',
       })
       .when('/recepcion', {
         templateUrl: '/views/vista_recepcion.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        controller: 'ctrl-recepcion',
+        controllerAs: 'cre'
       })
       .when('/ajusteCierre', {
         templateUrl: '/views/vista_ajuste_cierre.html',
@@ -129,6 +129,15 @@ app.factory('CierreProveedor', function($resource) {
 // Create a resource factory to access inventario table from database 
 app.factory('Pieza', function($resource) {
   return $resource('http://localhost:3001/piezas/:id', { id: '@_id' }, {
+    update: { // We need to define this method manually as it is not provided with ng-resource
+      method: 'PUT'
+    }
+  });
+});
+
+  // Create a resource factory to access clientes table from database 
+app.factory('Recepcion', function($resource) {
+  return $resource('http://localhost:3001/recepciones/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }
