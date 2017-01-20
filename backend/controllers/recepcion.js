@@ -39,16 +39,16 @@ function getRecepciones(req,res){
 		});
 }
 
-function getCierresProveedor(req,res){
+function getRecepcionesProveedor(req,res){
 
 	let ProveedorId = req.params.id
 
-	Cierre_p.find({proveedor:ProveedorId},(err,cierres_p)=>{
+	Recepcion.find({proveedor:ProveedorId},(err,recepciones)=>{
  	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
- 	if(cierres_p == "") return res.status(404).send({message:'No hay registros de Cierres'})
+ 	if(recepciones== "") return res.status(404).send({message:'No hay registros de recepciones para este proveedor'})
  	
- 	Proveedor.populate(cierres_p, {path: "proveedor"},function(err, cierres_p){
-            res.status(200).send(cierres_p);
+ 	Proveedor.populate(recepciones, {path: "proveedor"},function(err, recepciones){
+            res.status(200).send(recepciones);
         }); 
 
  	})
@@ -75,10 +75,9 @@ function storeRecepcion(req,res){
 	//res.status(200).send({message:'el producto se ha recibido'})
 	let recepcion = new Recepcion()
 
-    recepcion.fecha_recepcion = new Date()
+    recepcion.fecha_recepcion = new Date, 'dd/MM/yyyy'
     recepcion.cantidad = req.body.cantidad
     recepcion.proveedor = req.body.proveedor
-    recepcion.cierre_p = req.body.cierre_p
 
 	recepcion.save((err,recepcionStored)=>{
 
@@ -95,12 +94,17 @@ function updateRecepcion(req,res){
 	let recepcionId = req.params.id
 	let update = req.body
 
+		Proveedor.findById(req.body.proveedor,function(err,proveedor){
+			proveedor.entregado += parseFloat(req.body.cantidad);
+	    	proveedor.save();
+
 		Recepcion.findByIdAndUpdate(recepcionId,update,(err,recepcionUpdated)=>{
 			if(err) return res.status(500).send({message:`Error al actualizar la recepcion: ${ err }`})
 			
 			res.status(200).send(recepcionUpdated)
 			
 		})
+	})
 
 }
 
@@ -121,7 +125,7 @@ function deleteRecepcion(req,res){
 module.exports = {
 	getRecepcion,
 	getRecepciones,
-	getCierresProveedor,
+	getRecepcionesProveedor,
 	getCierresPieza,
 	storeRecepcion,
 	updateRecepcion,

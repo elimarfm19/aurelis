@@ -38,6 +38,7 @@ $scope.edit = function(id) {
 $scope.deselect = function() {
   $scope.pago_p = "";
 }
+
 $scope.monto_pagado_p = function(){
 var cierre_p_id = document.getElementById('cierre_p_id').value;
 //console.log(cierre_p_id);

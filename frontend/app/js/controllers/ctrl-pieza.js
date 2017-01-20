@@ -39,29 +39,17 @@ $scope.deselect = function() {
   $scope.pieza = "";
 }
 
-$scope.suma_puro=function(){
-var recepcion_id = document.getElementById('recepcion_id').value;
-var total=0;
-for (var i=0; i <$scope.piezas.length; i++){
-    if ($scope.piezas[i].recepcion._id == recepcion_id) {
-      total += $scope.piezas[i].puro;
-    } 
-}
+$scope.suma_puro = function(){
+  var recepcion_id = document.getElementById('recepcion_id').value;
+   //console.log(recepcion_id);
+  var total=0;
+  for (var i=0; i <$scope.piezas.length; i++){
+      if ($scope.piezas[i].recepcion._id == recepcion_id) {
+        total += $scope.piezas[i].puro;
+      } 
+  }
  $rootScope.sumaPuro = total;
-}
-
-$scope.total_cierre=function(){
-var recepcion_id = document.getElementById('recepcion_id').value;
-
-
-
-var total=0;
-for (var i=0; i <$scope.recepciones.length; i++){
-    if ($scope.recepciones[i]._id == recepcion_id) {
-      total = $scope.recepciones[i].cierre_p.cantidad;
-    } 
-}
- $rootScope.totalCierre = total;
+ console.log($rootScope.sumaPuro);
 }
 
 })

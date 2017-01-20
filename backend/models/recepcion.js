@@ -7,7 +7,6 @@ autoIncrement.initialize(mongoose);
 
 var Proveedor = require('../models/proveedor');
 var Pieza = require('../models/pieza');
-var Cierre = require('../models/cierre_p');
 
 // ESQUEMA PARA RECEPCIONES
 var Recepcion = new Schema({
@@ -15,7 +14,6 @@ var Recepcion = new Schema({
     fecha_recepcion: Date,
     cantidad: Number,
     proveedor: { type: Schema.ObjectId, ref: "Proveedor" },
-    cierre_p: { type: Schema.ObjectId, ref: "CierreProveedor" } 
 });
 
 Recepcion.plugin(autoIncrement.plugin, {

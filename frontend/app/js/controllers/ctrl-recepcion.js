@@ -24,11 +24,13 @@ $scope.add = function(recepcion) {
     //refresh();
   });
 };
-$scope.update = function(recepcion) {
-  $scope.recepcion.$update(function(recepcionUpdated){
 
-   
-    //refresh();
+$scope.update = function(recepcion) {
+
+  recepcion.cantidad = document.getElementById('cantidad').value;
+  console.log(recepcion.cantidad);
+  $scope.recepcion.$update(function(recepcionUpdated){
+  refresh();
   });
 };
 
@@ -48,7 +50,7 @@ $scope.deselect = function() {
   // $scope que acciona el ng-change
   $scope.mostrarCierres = function() { 
           // $scope.selCategorias NOS TRAE EL VALOR DEL SELECT DE CATEGORIAS
-         console.log( $scope.cierres);
+        console.log( $scope.cierres);
         console.log( $scope.recepcion.proveedor);
     //$scope.isvalid = false;
         //console.log( $scope.cierres[0].cliente._id);
@@ -60,4 +62,5 @@ $scope.deselect = function() {
         }
      
   };
+
 })

@@ -4,34 +4,30 @@
 	        <div class="row" style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
 				    <br>
 	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nueva Recepcion de Proveedor</h3>
-            <h2 style="color:black; text-align: right; font-weight:600; font-size: 15px; font-family: 'Tahoma'; margin-right: 5%;">Cod. Recepción: {{recepcion._id}}</h2>            
+            <h2 style="color:black; text-align: right; font-weight:600; font-size: 15px; font-family: 'Tahoma'; margin-right: 5%;">Cod. Recepción: {{recepcion.RecepcionId}}</h2>            
             <br>
 	          <form name="Codenx" novalidate class="col s12">
-              <div class="row">                            
-                <div class="input-field col-md-6 "> 
-                  <select class="select" ng-model="recepcion.proveedor" ng-change="mostrarCierres()"   required>
+              <div class="row col-md-12">                            
+                <div class="" ng-controller="ctrl-proveedor"> 
+                  <select class="select col-md-6" ng-model="recepcion.proveedor" ng-change="buscarProveedor(recepcion.proveedor)"   required>
                     <option value="">Seleccione Proveedor</option>
                     <option ng-repeat="proveedor in proveedores" value="{{proveedor._id}}">{{proveedor.nombres}} {{proveedor.apellidos}}</option> 
                   </select>
-                </div>
-                <div class="input-field col s6">  
-                  <select class="select" ng-model="recepcion.cierre_p" required ng-disabled="!recepcion.proveedor">
-                    <option value="">Seleccione Cierre</option>
-                    <option ng-repeat="cierre_p in cierresproveedor" value="{{cierre_p._id}}">{{cierre_p.fecha_entrega |  date:'dd/MM/yyyy' : shortDate }} - {{cierre_p.cantidad | currency :' '}} (g)</option>
-                  </select> 
-                </div>        
+                  <div class="col-md-6">
+                    <input disabled="true" value="Restante: {{proveedor.cerrado - proveedor.entregado  | currency: ' '}} (g)" style="color:black; font-weight:600; font-size: 15px; font-family: 'Tahoma'; text-align: right;"></input> 
+                  </div>
+                </div>      
               </div>
               <br>                
               <div style="text-align:center">
               <!-- Trigger the modal with a button -->
-                <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#piezasModal">Piezas
+                <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#piezasModal" ng-if="recepcion.RecepcionId">Piezas
                   <i class="zmdi zmdi-puzzle-piece"></i>
                 </button>
               </div> 
               <br>  
               <div style="text-align:center">                        
                 <button class="btn btn-primary" ng-click="add(recepcion)" ng-if="!recepcion._id" type="submit" ng-disabled="!Codenx.$valid">AÑADIR</button>
-                <button class="btn btn-info" ng-click="update(recepcion)" ng-if="recepcion._id" type="submit">ACTUALIZAR</button>
               </div>
               <br>                                                                       
 	        </form>           
@@ -71,9 +67,12 @@
                   </thead>
                    <tbody>
                     <tr>
-                      <td>
+                      <td ng-controller="ctrl-proveedor">
                         <input hidden type="text" ng-model="recepcion._id">
-                        <input hidden value="{{recepcion._id}}" id="recepcion_id">
+                        <input  value="{{recepcion._id}}" id="recepcion_id">
+                        <input type="text" value="proveedor" ng-model="recepcion.proveedor">
+                          {{buscarProveedor(recepcion._id)}}
+                        
                       </td>
                       <td>
                         <input class="form-control center-align" ng-model="pieza.peso_bruto" required="" placeholder="145.7">
@@ -90,7 +89,7 @@
                     </tr>
                     <tr ng-repeat="pieza in piezas | filter: recepcion._id" >
                       <td class="center-align">
-                        {{pieza.cod_pieza}}
+                        {{pieza.piezaId}}
                       </td>
                       <td class="center-align">
                         {{pieza.peso_bruto}}
@@ -111,17 +110,17 @@
                     </tr>
                       <tr>
                         <td colspan="5" style="text-align: right;">  
-                          <span class="label label-primary" style="font-size: 12px;">Total de Recepción: {{ suma_puro() }} {{ sumaPuro | currency: 'Bs '}} </span>
+                          <input hidden ng-model="sumaPuro" id="cantidad">
+                          <span class="label label-primary" style="font-size: 12px;" >Total de Recepción: {{ suma_puro() }} {{ sumaPuro | currency: ' '}} (g)</span>
+                      </tr>
+                      <tr>
+                        <td colspan="5" style="text-align: right;" ng-controller="ctrl-proveedor">  
+                          <span class="label label-primary" style="font-size: 12px;" >Total de Cierres:  {{proveedor.cerrado - proveedor.entregado  | currency: ' '}} (g) </span>
                         </td>
                       </tr>
                       <tr>
                         <td colspan="5" style="text-align: right;">  
-                          <span class="label label-primary" style="font-size: 12px;">Total de Cierre: {{ total_cierre()}} {{ totalCierre | currency: 'Bs '}} </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td colspan="5" style="text-align: right;">  
-                          <span class="label label-danger" style="font-size: 12px;">Diferencia: {{ totalCierre - sumaPuro | currency: 'Bs '}} </span>
+                          <span class="label label-danger" style="font-size: 12px;">Diferencia: {{ totalCierre - sumaPuro | currency: ' '}} (g)</span>
                         </td>
                       </tr>
                   </tbody>
@@ -132,7 +131,7 @@
         </div>
         <div class="modal-footer"> 
           <div class="btn-group">           
-            <button type="button" class="btn btn-default" ng-click="update(cierre)" data-dismiss="modal">Close</button> 
+            <button type="button" class="btn btn-default" ng-click="update(recepcion)" data-dismiss="modal">Close</button> 
           </div>
         </div>
       </div>

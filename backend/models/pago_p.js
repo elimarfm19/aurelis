@@ -15,5 +15,4 @@ var PagoProveedor = new Schema({
     cierre_p: { type: Schema.ObjectId, ref: "CierreProveedor" }
 });
 
-
 module.exports = mongoose.model('PagoProveedor', PagoProveedor);

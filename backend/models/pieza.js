@@ -3,6 +3,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Recepcion = require('../models/recepcion');
+var autoIncrement = require('mongoose-auto-increment');
+autoIncrement.initialize(mongoose);
+
 // ESQUEMA PARA PIEZA
 var Pieza = new Schema({
     
@@ -10,6 +13,7 @@ var Pieza = new Schema({
         type:String,
         enum: ['Disponible', 'Entregado']
     },
+    piezaId: Number,
     peso_bruto: Number,
     ley: Number,
     puro: Number,
@@ -19,6 +23,12 @@ var Pieza = new Schema({
         enum: ['Si', 'No']
     },
     recepcion: { type: Schema.ObjectId, ref: "Recepcion" }
+});
+
+Pieza.plugin(autoIncrement.plugin, {
+    model: 'Pieza',
+    field: 'piezaId',
+    startAt: 1
 });
 
 module.exports = mongoose.model('Pieza', Pieza);

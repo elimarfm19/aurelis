@@ -78,7 +78,7 @@ api.options('/recepciones/cierres/:id', cors())
 api.get('/recepciones',cors(),recepcionController.getRecepciones)
 
 api.get('/recepciones/:id',cors(),recepcionController.getRecepcion)
-api.get('/recepciones/cierres/:id',cors(),recepcionController.getCierresProveedor)
+api.get('/recepciones/proveedor/:id',cors(),recepcionController.getRecepcionesProveedor)
 api.post('/recepciones',cors(),recepcionController.storeRecepcion)
 
 api.put('/recepciones/:id',cors(),recepcionController.updateRecepcion)

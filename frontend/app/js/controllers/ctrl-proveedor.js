@@ -71,4 +71,11 @@ $scope.verifyDuplicate = function() {
         }
      
   };
+
+    $scope.buscarProveedor = function(id) { 
+      //console.log(id);
+      $scope.proveedor = Proveedor.get({ id: id });
+      console.log($scope.proveedor);
+     
+  };
 })
