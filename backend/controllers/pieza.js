@@ -44,13 +44,13 @@ function storePieza(req,res){
 
     pieza.cod_pieza = req.body.cod_pieza
 	pieza.cod_proveedor = req.body.cod_proveedor
-    pieza.status = req.body.status
+    pieza.status = 'Disponible'
     pieza.peso_bruto = req.body.peso_bruto
     pieza.ley = req.body.ley
 	pieza.puro = req.body.peso_bruto * (req.body.ley / 1000)
     pieza.peso_entrega = req.body.peso_entrega
     pieza.ajuste = req.body.ajuste
-    pieza.recepcion = req.body.recepcion
+    pieza.recepcion = req.body.recepcion    
 	pieza.save((err,piezaStored)=>{
 
 		if (err) res.status(500).send({message:`Error al guardar en la base de datos: ${ err }`})

@@ -96,6 +96,7 @@ function updateRecepcion(req,res){
 
 		Proveedor.findById(req.body.proveedor,function(err,proveedor){
 			proveedor.entregado += parseFloat(req.body.cantidad);
+			proveedor.ultima_entrega = new Date, 'dd/MM/yyyy';
 	    	proveedor.save();
 
 		Recepcion.findByIdAndUpdate(recepcionId,update,(err,recepcionUpdated)=>{

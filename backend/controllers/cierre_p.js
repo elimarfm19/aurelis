@@ -57,8 +57,7 @@ function storeCierreP(req,res){
 
     Proveedor.findById(req.body.proveedor,function(err,proveedor){
 
-    	proveedor.cerrado += parseFloat(req.body.cantidad);
-
+    	proveedor.cerrado += parseFloat(req.body.cantidad);  
     	proveedor.save();
     });
 

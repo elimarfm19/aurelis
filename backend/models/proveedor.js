@@ -28,7 +28,8 @@ const Proveedor = Schema({
     direccion: String,
     email: String,
     cerrado:Number,
-    entregado:Number  
+    entregado:Number,
+    ultima_entrega: Date  
 });
 
 module.exports = mongoose.model('Proveedor', Proveedor);
