@@ -1,36 +1,36 @@
 <div class="container"> 
       <div class="tamanno">
 			  <div class="container col-md-6 col-md-offset-2" style="margin-top:100px; ">
-	        <div class="row" style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
-				    <br>
-	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nueva Entrega a Cliente</h3>
+	        <div class="row" ng-controller="ctrl-cliente" style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
             <br>
-	          <form class="col s12">
-              <div class="row " ng-controller="ctrl-cliente">                            
-                <div class="input-field col s6">                                                
-                  <select class="select" ng-model="cliente"  ng-change="mostrarCierres()" ng-options="cliente._id as cliente.nombres for cliente in clientes" >
-                                   
-                  </select>                                               
-                </div>          
-                <div class="input-field col s6">
-                <select class="select" ng-model="cierre"  ng-options="cierre._id as cierre.total for cierre in cierrescliente" ></select>
-                </div>                    
+            <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nueva Entrega a Cliente</h3>
+            <h2 style="color:black; text-align: right; font-weight:600; font-size: 15px; font-family: 'Tahoma'; margin-right: 5%;">Cod. Recepción: {{entrega.EntregaId}}</h2>            
+            <br>
+	          <form name="Codenx" novalidate class="col s12">
+              <div class="row col-md-12">                            
+                <div class="" > 
+                  <select class="select col-md-6" ng-model="entrega.cliente" ng-change="buscarCliente(entrega.cliente)"   required>
+                    <option value="">Seleccione un Cliente</option>
+                    <option ng-repeat="cliente in clientes" value="{{cliente._id}}">{{cliente.nombres}} {{cliente.apellidos}}</option> 
+                  </select>
+                  <div class="col-md-6">
+                    <input disabled="true" value="Restante: {{cliente.cerrado - cliente.entregado  | currency: ' '}} (g)" style="color:black; font-weight:600; font-size: 15px; font-family: 'Tahoma'; text-align: right;"></input> 
+                  </div>
+                </div>      
               </div>
               <br>                
               <div style="text-align:center">
               <!-- Trigger the modal with a button -->
-                <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#pagosModal">Piezas
+                <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#piezasModal" ng-if="recepcion.RecepcionId">Piezas
                   <i class="zmdi zmdi-puzzle-piece"></i>
                 </button>
               </div> 
               <br>  
               <div style="text-align:center">                        
-                <button class="waves-effect waves-light waves-teal btn-flat btn-primary">Guardar  
-                  <i class="zmdi zmdi-mail-send center-align zmdi-hc-3x" href="pago_cliente.html"></i>
-                </button>
+                <button class="btn btn-primary" ng-click="add(recepcion)" ng-if="!recepcion._id" type="submit" ng-disabled="!Codenx.$valid">AÑADIR</button>
               </div>
               <br>                                                                       
-	        </form>           
+          </form>        
 	      </div>
 	    </div>
      </div>

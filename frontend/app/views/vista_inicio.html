@@ -63,49 +63,42 @@
               <input type="text" placeholder="Buscar" style="font-weight: 600; font-family: 'Tahoma';" ng-pagination-search="personas">
             </div>
             <br>
-            <div class="col-md-12">
-              <div class="table-responsive">
+            <div class="col-md-12" ng-controller="ctrl-cierre">
+              <div class="table-responsive" ng-controller="ctrl-cliente">
                 <table class="table table-hover">
                     <thead>
-                        <tr class="active">
-                          <th class="center-align">Cod. Cierre</th>
+                        <tr class="active">                          
                           <th class="center-align">Cliente</th>
                           <th class="center-align">Cierre (g)</th>
                           <th class="center-align">Entregado (g)</th>
-                          <th class="center-align">Por Cerrar (g)</th>
-                          <th class="center-align">Precio</th>
-                          <th class="center-align">Fecha de Entrega</th>
+                          <th class="center-align">Por Cerrar (g)</th>                          
+                          <th class="center-align">Ultima Entrega</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr >
-                          <td class="center-align" style="cursor: not-allowed;" field="orden">
-                            {{item.orden}}
+                        <tr ng-repeat="cliente in clientes " ng-if="!cliente.cerrado== 0">
+                          <td class="center-align" >
+                            {{cliente.nombres}} {{cliente.apellidos}}
                           </td>
-                          <td class="center-align" field="cliente">
-                            {{item.cliente}}
+                          <td class="center-align" >
+                            {{cliente.cerrado |currency: ''}} 
                           </td>
-                          <td class="center-align" field="cierre">
-                            {{item.cierre | currency: ''}}
-                          </td>
-                          <td class="center-align" field="entregado">
-                             <a data-toggle="modal" data-target="#entregaClienteModal">{{item.entregado | currency: ''}}</a>
+                          <td class="center-align" >
+                            <a data-toggle="modal" data-target="#entregaClienteModal">
+                            {{cliente.entregado  |currency: ''}}</a>
                           </td>
                           <td class="center-align" field="por_cerrar">
-                            {{item.cierre - item.entregado | currency: ''}}
+                            {{(cliente.cerrado - cliente.entregado) | currency: ''}}
                           </td>
-                          <td class="center-align" field="precio">
-                            {{item.precio | currency: ''}}
-                          </td>
-                          <td class="center-align" field="fecha_entrega">
-                            {{item.fecha_entrega}}
+                          <td class="center-align" field="fecha_entrega">                          
+                            {{cliente.ultima_entrega | date:'dd/MM/yyyy' : shortDate}}
                           </td>
                         </tr>
                     </tbody>
                   </table>
                 </div>
                 
-              </div>                
+              </div>                  
         </div>
 </div>
 

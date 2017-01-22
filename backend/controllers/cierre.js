@@ -45,14 +45,21 @@ function storeCierre(req,res){
 	console.log(req.body)
 	//res.status(200).send({message:'el producto se ha recibido'})
 	let cierre = new Cierre()
+	let cliente = new Cliente()
     cierre.cliente = req.body.cliente
-    cierre.fecha_cierre = new Date();
+    cierre.fecha_cierre = new Date, 'dd/MM/yyyy'
     cierre.fecha_entrega = req.body.fecha_entrega
     cierre.cantidad = req.body.cantidad
     cierre.precio = req.body.precio
     cierre.total = req.body.cantidad * req.body.precio
     cierre.monto_pagado = req.body.monto_pagado
     cierre.status = 'Abierto'
+
+    Cliente.findById(req.body.cliente,function(err,cliente){
+
+    	cliente.cerrado += parseFloat(req.body.cantidad);  
+    	cliente.save();
+    });
 
 	cierre.save((err,cierreStored)=>{
 
@@ -66,18 +73,46 @@ function storeCierre(req,res){
 }
 
 function updateCierre(req,res){
+
 	let cierreId = req.params.id
 	let update = req.body
 	  	update.total = update.cantidad * update.precio
 	  	update.cliente = update.cliente
+	  	update.cantidad = req.body.cantidad
+	  	Cierre.findById(cierreId,function(err,cierre){	  		
+			console.log('cantidad anterior'+cierre.cantidad);		
+    		Cliente.findById(req.body.cliente,function(err,cliente){	  		
+				cliente.cerrado -= cierre.cantidad;		    
+				cliente.save();
+    			cliente.cerrado += parseFloat(req.body.cantidad);
+    			cliente.save();
+    			cierre.cantidad = req.body.cantidad
+    			cierre.precio = req.body.precio
+    			cierre.total = req.body.precio * req.body.cantidad
+    			cierre.save();
+    			console.log('Cliente nuevo'+cliente);
+    			console.log('Cliente viejo'+cierre.cliente);
 
-	  	Cierre.findByIdAndUpdate(cierreId,update,{new: true},(err,cierreUpdated)=>{
-			if(err) return res.status(500).send({message:`Error al actualizar el cierre: ${ err }`})
-			
-			res.status(200).send(cierreUpdated)
-			
+    			if (req.body.cliente._id != cierre.cliente){
+    				cierre.cliente.cerrado -= cierre.cantidad;
+    				Cliente.findById(cierre.cliente,function(err,cliente){
+    					console.log('Cliente viejo'+cliente);
+    					cliente.cerrado -= cierre.cantidad;		    
+						cliente.save();
+    				});	    
+					//cierre.cliente.save();
+					cierre.cliente =cliente._id;
+					cliente.cerrado += parseFloat(req.body.cantidad);
+    				cliente.save();    				
+    			}
+
+    			Cierre.findByIdAndUpdate(cierreId,update,{new: true},(err,cierreUpdated)=>{
+					if(err) return res.status(500).send({message:`Error al actualizar el cierre: ${ err }`})
+					res.status(200).send(cierreUpdated)
+    			});
 		})
-
+});
+    	console.log('cantidad nueva'+req.body.cantidad);
 }
 
 function deleteCierre(req,res){

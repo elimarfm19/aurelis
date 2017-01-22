@@ -59,11 +59,7 @@ function storeCierreP(req,res){
 
     	proveedor.cerrado += parseFloat(req.body.cantidad);  
     	proveedor.save();
-    });
-
-    
-
-  
+    }); 
 
 	cierre.save((err,cierreStored)=>{
 

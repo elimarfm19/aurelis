@@ -35,7 +35,9 @@ function storeCliente(req,res){
     cliente.tlf = req.body.tlf
     cliente.direccion = req.body.direccion
     cliente.email = req.body.email
-
+    cliente.cerrado = 0
+    cliente.entregado = 0
+    
 	cliente.save((err,clienteStored)=>{
 
 		if (err) res.status(500).send({message:`Error al guardar en la base de datos: ${ err }`})
