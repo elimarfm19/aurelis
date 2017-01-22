@@ -1,14 +1,14 @@
 <div class="container"> 
       <div class="tamanno">
 			  <div class="container col-md-6 col-md-offset-2" style="margin-top:100px; ">
-	        <div class="row" style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
+	        <div class="row" ng-controller="ctrl-proveedor" style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
 				    <br>
 	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nueva Recepcion de Proveedor</h3>
             <h2 style="color:black; text-align: right; font-weight:600; font-size: 15px; font-family: 'Tahoma'; margin-right: 5%;">Cod. Recepción: {{recepcion.RecepcionId}}</h2>            
             <br>
 	          <form name="Codenx" novalidate class="col s12">
               <div class="row col-md-12">                            
-                <div class="" ng-controller="ctrl-proveedor"> 
+                <div class="" > 
                   <select class="select col-md-6" ng-model="recepcion.proveedor" ng-change="buscarProveedor(recepcion.proveedor)"   required>
                     <option value="">Seleccione Proveedor</option>
                     <option ng-repeat="proveedor in proveedores" value="{{proveedor._id}}">{{proveedor.nombres}} {{proveedor.apellidos}}</option> 

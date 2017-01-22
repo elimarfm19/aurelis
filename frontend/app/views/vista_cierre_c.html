@@ -46,7 +46,7 @@
               </div>
               <div style="text-align:center">
               <!-- Trigger the modal with a button -->
-                <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#pagosModal" ng-disabled="!cierre.CierreId">Pagos 
+                <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#pagosModal" ng-if="cierre.CierreId" ng-disabled="cierre.total <= scopeRaiz">Pagos
                   <i class="zmdi zmdi-money"></i>
                 </button>
               </div> 
