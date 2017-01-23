@@ -1,6 +1,9 @@
 'use strict'
 
 const Entrega = require('../models/entrega')
+const Cierre = require('../models/cierre')
+const Pieza = require('../models/pieza')
+const Cliente = require('../models/cliente')
  
  function getEntrega(req,res){
 
@@ -15,30 +18,70 @@ const Entrega = require('../models/entrega')
 }
 
 function getEntregas(req,res){
-	Entrega.find({},(err,entrega)=>{
+	Entrega.find({})
+	.populate({
+		path: 'cierre',
+		model: 'Cierres',
+		populate: {
+			path: 'cliente',
+			model: 'Cliente'
+		}
+	})
+	.populate({
+		path: 'cliente',
+		model: 'Cliente'
+	}).exec(function(err,entregas){
+		if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+			if(entregas == "") return res.status(404).send({message:'No hay registros de entregas'})
+				res.status(200).send(entregas);
+		});
+}
+
+function getEntregasCliente(req,res){
+
+	let ClienteId = req.params.id
+
+	Entrega.find({cliente:ClienteId},(err,entregas)=>{
  	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
- 	if(entrega == "") return res.status(404).send({message:'No hay registros de Entrega'})
+ 	if(entregas== "") return res.status(404).send({message:'No hay registros de entregas para este cliente'})
  	
- 	res.status(200).send(entrega)
+ 	Cliente.populate(entregas, {path: "cliente"},function(err, entregas){
+            res.status(200).send(entregas);
+        }); 
+
+ 	})
+}
+
+function getCierresPieza(req,res){
+
+	let PiezaId = req.params.id
+
+	Cierre.find({pieza:PiezaId},(err,cierre)=>{
+ 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+ 	if(cierre == "") return res.status(404).send({message:'No hay registros de Cierres'})
+ 	
+ 	Pieza.populate(cierre, {path: "pieza"},function(err, cierre){
+            res.status(200).send(cierre);
+        }); 
+
  	})
 }
 
 function storeEntrega(req,res){
 	console.log(req.body)
-	//res.status(200).send({message:'el producto se ha recibido'})
+	res.status(200).send({message:'el producto se ha recibido'})
 	let entrega = new Entrega()
 
-    entrega.cod_cierre = req.body.cod_cierre
-    entrega.fecha = req.body.fecha
+    entrega.fecha_entrega = new Date, 'dd/MM/yyyy'
     entrega.cantidad = req.body.cantidad
-    entrega.status = req.body.status
+    entrega.cliente = req.body.cliente
 
 	entrega.save((err,entregaStored)=>{
 
 		if (err) res.status(500).send({message:`Error al guardar en la base de datos: ${ err }`})
 		
 		
-		res.status(200).send(entregaStored)		
+		res.status(200).send(entregaStored)	
 
 	})
 
@@ -74,7 +117,10 @@ function deleteEntrega(req,res){
 module.exports = {
 	getEntrega,
 	getEntregas,
+	getEntregasCliente,
+	getCierresPieza,
 	storeEntrega,
 	updateEntrega,
-	deleteEntrega
+	deleteEntrega	
+	
 }

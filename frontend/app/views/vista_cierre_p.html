@@ -52,7 +52,7 @@
               </div> 
               <br>  
               <div style="text-align:center">                        
-                <button class="btn btn-primary" ng-click="add(cierre_p)" ng-if="!cierre_p._id" type="submit" ng-disabled="!Codenx.$valid">AÑADIR</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#pagosModal" ng-click="add(cierre_p)" ng-if="!cierre_p._id" type="submit" ng-disabled="!Codenx.$valid">AÑADIR</button>
                 <button class="btn btn-info" ng-click="update(cierre_p)" ng-if="cierre_p._id" type="submit">ACTUALIZAR</button>
                <!-- <button class="btn" ng-click="deselect()" ng-if="(cierre_p._id && (cierre_p.total == scopeRaiz))">LIMPIAR</button>-->
               </div>
@@ -156,7 +156,7 @@
         </div>
         <div class="modal-footer"> 
           <div class="btn-group">           
-            <button type="button" class="btn btn-default" ng-click="update(cierre)" data-dismiss="modal">Close</button> 
+            <button type="button" class="btn btn-default" ng-click="update(cierre_p)" data-dismiss="modal">Close</button> 
           </div>
         </div>
       </div>

@@ -71,6 +71,20 @@ api.put('/piezas/:id',cors(),piezaController.updatePieza)
 
 api.delete('/piezas/:id',cors(),piezaController.deletePieza)
 
+// ENTREGA--------------------------------------------------------------------------
+api.options('/entregas/:id', cors())
+api.options('/entregas/', cors())
+api.options('/entregas/cierres/:id', cors())
+api.get('/entregas',cors(),entregaController.getEntregas)
+
+api.get('/entregas/:id',cors(),entregaController.getEntrega)
+api.get('/entregas/cliente/:id',cors(),entregaController.getEntregasCliente)
+api.post('/entregas',cors(),entregaController.storeEntrega)
+
+api.put('/entregas/:id',cors(),entregaController.updateEntrega)
+
+api.delete('/entregas/:id',cors(),entregaController.deleteEntrega)
+
 // RECEPCION--------------------------------------------------------------------------
 api.options('/recepciones/:id', cors())
 api.options('/recepciones/', cors())
@@ -114,19 +128,6 @@ api.get('/pagosProveedor/:id',cors(),pagoControllerP.getPagoP)
 api.post('/pagosProveedor',cors(),pagoControllerP.storePagoP)
 api.put('/pagosProveedor/:id',cors(),pagoControllerP.updatePagoP)
 api.delete('/pagosProveedor/:id',cors(),pagoControllerP.deletePagoP)
-
-// ENTREGA--------------------------------------------------------------------------
-api.options('/entregas/:id', cors())
-api.options('/entregas/', cors())
-api.get('/entregas',cors(),entregaController.getEntregas)
-
-api.get('/entregas/:id',cors(),entregaController.getEntrega)
-
-api.post('/entregas',cors(),entregaController.storeEntrega)
-
-api.put('/entregas/:id',cors(),entregaController.updateEntrega)
-
-api.delete('/entregas/:id',cors(),entregaController.deleteEntrega)
 
 // DETALLE DE RECEPCION--------------------------------------------------------------------------
 api.options('/detRecepciones/:id', cors())

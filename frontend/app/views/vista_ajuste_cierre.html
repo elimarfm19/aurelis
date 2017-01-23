@@ -6,12 +6,12 @@
 	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Ajuste de Cierre</h3>
             <br>
 	          <form class="col s12">
-              <div class="row" ng-controller="ctrl-cliente">                            
+              <div class="row" ng-controller="ctrl-cierre">                            
                 <div class="input-field col s6" >                                                
-                  <select id="s1" class="select" value="cliente.cod_persona" ng-model="cliente" ng-options="cliente.nombres +' ' +cliente.apellidos for cliente in clientes" ng-required="true"></select>                                                
+                  <select id="s1" class="select" value="cierre.cliente._id" ng-model="cierre" ng-options="cierre.cliente.nombres +' ' + cierre.cliente.apellidos for cierre in cierres" ng-required="true"><option value="" disabled="">Seleccione un Cliente</option></select>                                                
                 </div>          
                 <div class="input-field col s6" ng-controller="ctrl-cierre">                                                
-                  <select id="s2" class="select" value="cliente.cod_persona" ng-model="cierre" ng-disabled="!cliente" ng-options="cliente.nombres + cliente.apellidos for cliente in clientes"></select>                                                                                                 
+                  <select id="s2" class="select" value="cierre._id"  ng-model="cierre" ng-options="cierre.fecha_entrega +' '+ cierre.cantidad+' (g)' for cierre in cierres" ><option value="" disabled="">Seleccione un Cierre</option></select>                                                                                             
                 </div>                    
               </div>
               <br>                

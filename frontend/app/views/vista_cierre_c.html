@@ -40,7 +40,7 @@
                   <label for="total_c">Total Cierre</label>
                 </div>
                 <div class="input-field col s6" ng-controller="ctrl-pago">
-                   <input disabled ng-model="scopeRaiz" type="text" class="validate" style="text-align: right;" id="monto_pagado">
+                   <input disabled value="{{scopeRaiz }}" type="text" class="validate" style="text-align: right;" id="monto_pagado">
                    <label for="total_p">Total Pagado</label> 
                 </div>                               
               </div>
@@ -52,7 +52,7 @@
               </div> 
               <br>  
               <div style="text-align:center">                        
-                <button class="btn btn-primary" ng-click="add(cierre)" ng-if="!cierre._id" type="submit" ng-disabled="!Codenx.$valid">AÑADIR</button>
+                <button class="btn btn-primary"data-toggle="modal" data-target="#pagosModal" ng-click="add(cierre)" ng-if="!cierre._id" type="submit" ng-disabled="!Codenx.$valid">AÑADIR</button>
                 <button class="btn btn-info" ng-click="update(cierre)" ng-if="cierre._id" type="submit">ACTUALIZAR</button>
               </div>
               <br>                                                                       

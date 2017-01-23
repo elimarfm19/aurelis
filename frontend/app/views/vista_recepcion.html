@@ -1,17 +1,17 @@
 <div class="container"> 
       <div class="tamanno">
 			  <div class="container col-md-6 col-md-offset-2" style="margin-top:100px; ">
-	        <div class="row" ng-controller="ctrl-proveedor" style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
+	        <div class="row"  style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
 				    <br>
 	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nueva Recepcion de Proveedor</h3>
             <h2 style="color:black; text-align: right; font-weight:600; font-size: 15px; font-family: 'Tahoma'; margin-right: 5%;">Cod. Recepción: {{recepcion.RecepcionId}}</h2>            
             <br>
 	          <form name="Codenx" novalidate class="col s12">
               <div class="row col-md-12">                            
-                <div class="" > 
-                  <select class="select col-md-6" ng-model="recepcion.proveedor" ng-change="buscarProveedor(recepcion.proveedor)"   required>
+                <div class="" ng-controller="ctrl-proveedor" > 
+                  <select class="select col-md-6" ng-model="recepcion.proveedor" ng-change="buscarProveedor(recepcion.proveedor)"  required>
                     <option value="">Seleccione Proveedor</option>
-                    <option ng-repeat="proveedor in proveedores" value="{{proveedor._id}}">{{proveedor.nombres}} {{proveedor.apellidos}}</option> 
+                    <option ng-repeat="proveedor in proveedores" ng-if="(proveedor.cerrado - proveedor.entregado) > 0" value="{{proveedor._id}}">{{proveedor.nombres}} {{proveedor.apellidos}}</option> 
                   </select>
                   <div class="col-md-6">
                     <input disabled="true" value="Restante: {{proveedor.cerrado - proveedor.entregado  | currency: ' '}} (g)" style="color:black; font-weight:600; font-size: 15px; font-family: 'Tahoma'; text-align: right;"></input> 
@@ -27,7 +27,7 @@
               </div> 
               <br>  
               <div style="text-align:center">                        
-                <button class="btn btn-primary" ng-click="add(recepcion)" ng-if="!recepcion._id" type="submit" ng-disabled="!Codenx.$valid">AÑADIR</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#piezasModal" ng-click="add(recepcion)" ng-if="!recepcion._id" type="submit" ng-disabled="!Codenx.$valid">AÑADIR</button>
               </div>
               <br>                                                                       
 	        </form>           
@@ -69,10 +69,7 @@
                     <tr>
                       <td ng-controller="ctrl-proveedor">
                         <input hidden type="text" ng-model="recepcion._id">
-                        <input  value="{{recepcion._id}}" id="recepcion_id">
-                        <input type="text" value="proveedor" ng-model="recepcion.proveedor">
-                          <!--{{buscarProveedor(recepcion._id)}}-->
-                        
+                        <input hidden value="{{recepcion._id}}" id="recepcion_id">                       
                       </td>
                       <td>
                         <input class="form-control center-align" ng-model="pieza.peso_bruto" required="" placeholder="145.7">

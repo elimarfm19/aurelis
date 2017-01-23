@@ -45,8 +45,8 @@ var app = angular.module('aurelisApp', ['ngResource','ngAnimate','ngProgress',
       })
       .when('/entrega', {
         templateUrl: '/views/vista_entrega.html',
-        controller: 'ctrl-cliente',
-        controllerAs: 'cie'
+        controller: 'ctrl-entrega',
+        controllerAs: 'ent'
       })
       .when('/recepcion', {
         templateUrl: '/views/vista_recepcion.html',
@@ -144,3 +144,10 @@ app.factory('Recepcion', function($resource) {
   });
 });
 
+app.factory('Entrega', function($resource) {
+  return $resource('http://localhost:3001/entregas/:id', { id: '@_id' }, {
+    update: { // We need to define this method manually as it is not provided with ng-resource
+      method: 'PUT'
+    }
+  });
+});

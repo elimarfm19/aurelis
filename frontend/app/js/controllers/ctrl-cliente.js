@@ -14,7 +14,7 @@ var refresh = function() {
 refresh();
 
 $scope.add = function(cliente) {
-  console.log(cliente);
+  //console.log(cliente);
   Cliente.save(cliente,function(cliente){
     refresh();
   });
@@ -70,4 +70,12 @@ $scope.verifyDuplicate = function() {
         }
      
   };
+
+$scope.buscarCliente = function(id) { 
+      //console.log(id);
+      $scope.cliente = Cliente.get({ id: id });
+      console.log($scope.cliente);
+     
+  };
+
 })

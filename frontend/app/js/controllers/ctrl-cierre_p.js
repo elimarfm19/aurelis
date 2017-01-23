@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ctrl-cierre_p', function($scope,CierreProveedor,ngProgress) {
+app.controller('ctrl-cierre_p', function($scope,$rootScope,CierreProveedor,ngProgress) {
 
 $scope.cierre_p = new CierreProveedor();
 
@@ -19,8 +19,10 @@ $scope.add = function(cierre_p) {
   });
 };
 $scope.update = function(cierre_p) {
-
-  cierre_p.monto_pagado = document.getElementById('monto_pagado').value;
+console.log(cierre_p);
+console.log("Valor Raiz "+$rootScope.scopeRaiz);
+  //cierre_p.monto_pagado = document.getElementById('monto_pagado').value;
+  cierre_p.monto_pagado = $rootScope.scopeRaiz;
   $scope.cierre_p.$update(function(cierre_pUpdated){
   	
   	refresh();
@@ -42,62 +44,3 @@ $scope.deselect = function() {
 }
 
 })
-
-
-
-
-
-	app.controller('ctrlModalPagos', function($scope){
-		$scope.personas=[{
-		ref: '1234',
-		banco: 'Bancaribe',
-		titular: 'Juana',
-		monto: 15000
-	}, {
-		ref: 'V-20.153.333',
-		banco: 'Juana Magallanes',
-		titular: '+58 0414-8897458',
-		monto: 'una casa, al lado de una referencia zona tal urb tal'
-	}, {
-		ref: 'V-20',
-		banco: 'Joao Da Silva',
-		titular: '+58 0414-8897458',
-		monto: 'una casa, al lado de una referencia zona tal urb tal'
-	}, {
-		ref: 'V-20.153.333',
-		banco: 'Pedro Perez',
-		titular: '+58 0414-8897458',
-		monto: 'una casa, al lado de una referencia zona tal urb tal'
-	}, {
-		ref: 'V-20.153.333',
-		banco: 'Maria Clavento',
-		titular: '+58 0414-8897458',
-		monto: 'una casa, al lado de una referencia zona tal urb tal'
-	}, {
-		ref: 'V-20.153.333',
-		banco: 'Juan',
-		titular: '+58 0414-8897458',
-		monto: 'una casa, al lado de una referencia zona tal urb tal'
-	}, {
-		ref: 'V-20.153.333',
-		banco: 'Luis Fonsi',
-		titular: '+58 0414-8897458',
-		monto: 'una casa, al lado de una referencia zona tal urb tal'
-	}];
-
-	$scope.eliminar = function(row) {
-		if (confirm("¿Seguro que desea eliminar?")) {
-		$scope.personas.splice(row, 1);
-		}
-  	};
-
-  	$scope.agregar = function() {
-		$scope.personas.push({
-		ref: '',
-		banco: '',
-		titular: '',
-		monto: ''
-		})
-  	};
-});
-
