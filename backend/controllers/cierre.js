@@ -75,55 +75,70 @@ function storeCierre(req,res){
 function updateCierre(req,res){
 
 	let cierreId = req.params.id
-	let update = req.body
-	  	update.total = update.cantidad * update.precio
-	  	update.cliente = update.cliente
-	  	update.cantidad = req.body.cantidad
+	// let update = req.body
+	//   	update.total = update.cantidad * update.precio
+	//   	update.cliente = req.body.cliente
+	//   	update.cantidad = req.body.cantidad
 	  	Cierre.findById(cierreId,function(err,cierre){
 
-
-    if (req.body.cliente._id != cierre.cliente){
-    	console.log("cambiaste al cliente");
-    				//cierre.proveedor.cerrado -= cierre.cantidad;
-    				Cliente.findById(cierre.cliente,function(err,cliente){
-    					//console.log('cliente viejo'+cliente);
-    					cliente.cerrado -= cierre.cantidad;		    
+	  		//console.log('cliente recibido por parametro'+req.body.cliente);
+	  		//console.log('cliente del cierre'+cierre.cliente);
+			if (req.body.cliente != cierre.cliente){
+			 	//console.log("cambiaste al cliente");
+							//cierre.proveedor.cerrado -= cierre.cantidad;
+					Cliente.findById(cierre.cliente,function(err,cliente){
+								//console.log('cliente viejo'+cliente);
+			  			cliente.cerrado -= cierre.cantidad;		    
 						cliente.save();
-    				});
-    				Cliente.findById(req.body.cliente,function(err,cliente){
-    					//console.log('cliente viejo'+cliente);
-    					cliente.cerrado += cierre.cantidad;		    
-						cliente.save();
-    				});
-  				
-    }else{
-    	
+			  		});
+			  		Cliente.findById(req.body.cliente,function(err,cliente2){
+			  				//console.log('cliente viejo'+cliente);
+			  			cliente2.cerrado += cierre.cantidad;		    
+						cliente2.save();
+			  		});
 
-
-
-			console.log('cantidad anterior'+cierre.cantidad);		
-    		Cliente.findById(req.body.cliente,function(err,cliente){	  		
-				cliente.cerrado -= cierre.cantidad;		    
-				cliente.save();
-    			cliente.cerrado += parseFloat(req.body.cantidad);
-    			cliente.save();
+			  	cierre.cliente = req.body.cliente
+			  	cierre.fecha_entrega = req.body.fecha_entrega
     			cierre.cantidad = req.body.cantidad
     			cierre.precio = req.body.precio
     			cierre.total = req.body.precio * req.body.cantidad
     			cierre.save();
-    			//console.log('Cliente nuevo'+cliente);
-    			//console.log('Cliente viejo'+cierre.cliente);
 
+				// Cierre.findByIdAndUpdate(cierreId,update,{new: true},(err,cierreUpdated)=>{
+				// 	if(err) return res.status(500).send({message:`Error al actualizar el cierre: ${ err }`})
+				// 	res.status(200).send(cierreUpdated)
+			 // 	});
+							
+			}else{
+    	
+
+     	//console.log("se mantiene el cliente");
+
+		// 	// console.log('cantidad anterior'+cierre.cantidad);		
+  		Cliente.findById(req.body.cliente,function(err,cliente){	  		
+			cliente.cerrado -= cierre.cantidad;		    
+			cliente.save();
+    		cliente.cerrado += parseFloat(req.body.cantidad);
+    		cliente.save();
+    			cierre.fecha_entrega = req.body.fecha_entrega
+    			cierre.cliente = req.body.cliente
+    			cierre.cantidad = req.body.cantidad
+    			cierre.precio = req.body.precio
+    			cierre.total = req.body.precio * req.body.cantidad
+    			cierre.save();
+  // //   			//console.log('Cliente nuevo'+cliente);
+  // //   			//console.log('Cliente viejo'+cierre.cliente);
+    			// Cierre.findByIdAndUpdate(cierreId,update,{new: true},(err,cierreUpdated)=>{
+					// if(err) return res.status(500).send({message:`Error al actualizar el cierre: ${ err }`})
+					// res.status(200).send(cierreUpdated)
+    			// });
     			
 		})
 	
     }
-   Cierre.findByIdAndUpdate(cierreId,update,{new: true},(err,cierreUpdated)=>{
-					if(err) return res.status(500).send({message:`Error al actualizar el cierre: ${ err }`})
-					res.status(200).send(cierreUpdated)
-    			}); 
+    
 });
-    	console.log('cantidad nueva'+req.body.cantidad);
+    	//console.log('cantidad nueva'+req.body.cantidad);
 }
 
 function deleteCierre(req,res){
