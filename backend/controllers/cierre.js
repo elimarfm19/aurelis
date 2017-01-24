@@ -128,6 +128,7 @@ function updateCierre(req,res){
 
 function deleteCierre(req,res){
 	let cierreId = req.params.id
+	console.log(cierreId);
 
 	Cierre.findById(cierreId,(err,cierre)=>{
 		if(err) return res.status(500).send({message:`Error al borrar el cierre: ${ err }`})

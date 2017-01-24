@@ -30,7 +30,8 @@ $scope.update = function(cierre) {
 };
 
 $scope.remove = function(cierre) {
- cierre.$remove(function(){
+  console.log(cierre);
+  cierre.$remove(function(){
     refresh();
   });
 };

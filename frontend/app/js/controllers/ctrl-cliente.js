@@ -57,14 +57,15 @@ $scope.verifyDuplicate = function() {
     };
 
   // $scope que acciona el ng-change
-  $scope.mostrarCierres = function() { 
+  $scope.mostrarCierres = function(id) { 
           // $scope.selCategorias NOS TRAE EL VALOR DEL SELECT DE CATEGORIAS
-         //console.log( $scope.cliente);
+        console.log( id);
     //$scope.isvalid = false;
-        //console.log( $scope.cierres[0].cliente._id);
+       // console.log( $scope.cierres[0].cliente._id);
+        //console.log( 'hola');
         $scope.cierrescliente = [];
         for (var i=0; i <$scope.cierres.length; i++){
-          if ($scope.cierres[i].cliente._id == ''+$scope.cliente) {
+          if ($scope.cierres[i].cliente._id == id) {
            $scope.cierrescliente.push($scope.cierres[i]);
           } 
         }

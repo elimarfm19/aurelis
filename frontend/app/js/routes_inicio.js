@@ -55,8 +55,8 @@ var app = angular.module('aurelisApp', ['ngResource','ngAnimate','ngProgress',
       })
       .when('/ajusteCierre', {
         templateUrl: '/views/vista_ajuste_cierre.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        controller: 'ctrl-cierre',
+        controllerAs: 'cie'
       })
       .when('/ajustePieza', {
         templateUrl: '/views/vista_ajuste_pieza.html',

@@ -1,24 +1,33 @@
-<div class="container"> 
-      <div class="tamanno">
+<div class="container"  ng-controller="ctrl-cierre"> 
+      <div class="tamanno" ng-controller="ctrl-cliente">
 			  <div class="container col-md-6 col-md-offset-2" style="margin-top:100px; ">
 	        <div class="row" style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
 				    <br>
 	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Ajuste de Cierre</h3>
             <br>
 	          <form class="col s12">
-              <div class="row" ng-controller="ctrl-cierre">                            
-                <div class="input-field col s6" >                                                
-                  <select id="s1" class="select" value="cierre.cliente._id" ng-model="cierre" ng-options="cierre.cliente.nombres +' ' + cierre.cliente.apellidos for cierre in cierres" ng-required="true"><option value="" disabled="">Seleccione un Cliente</option></select>                                                
-                </div>          
-                <div class="input-field col s6" ng-controller="ctrl-cierre">                                                
-                  <select id="s2" class="select" value="cierre._id"  ng-model="cierre" ng-options="cierre.fecha_entrega +' '+ cierre.cantidad+' (g)' for cierre in cierres" ><option value="" disabled="">Seleccione un Cierre</option></select>                                                                                             
-                </div>                    
+              <div class="row" >  
+                <div class="col-md-6 col-md-offset-3" >
+                  <select class="select"  ng-model="cliente._id" required="true" ng-change="mostrarCierres(cliente._id)">   
+                    <option value="" disabled="">Seleccione un Cliente</option>         
+                    <option ng-repeat="cliente in clientes" value="{{cliente._id}}">{{cliente.nombres}} {{cliente.apellidos}}</option>
+                  </select> 
+                </div>
+                <br>
+                <br>
+                <div class="col-md-8 col-md-offset-2">                
+                  <select class="select" ng-model="cierre._id" required="true">
+                    <option value="" disabled="" selected="true">Seleccione un Cierre</option>    
+                    <option ng-repeat="cierre in cierrescliente" value="{{cierre._id}}">Cod.Cierre: {{cierre.CierreId}} Cantidad:{{cierre.cantidad| currency: ''}}(g)</option> 
+                  </select>
+                  <input hidden ng-model="cierre._id" value="{{cierre._id}}" type="text" name="">
+                </div>                   
               </div>
               <br>                
               <div style="text-align:center">                
               <!-- Trigger the modal with a button -->
-                <button type="button" class="btn waves-effect waves-light btn-danger waves-teal btn-flat" data-toggle="modal" data-target="#pagosModal"> Eliminar
-                  <i class="zmdi zmdi-close"></i>
+                <button ng-model="cierre._id" type="button" class="btn waves-effect waves-light btn-danger waves-teal btn-flat" ng-click="remove(cierre)"> Eliminar 
+                  <i class="zmdi zmdi-close"></i> 
                 </button>
               </div> 
               <br>  
@@ -44,8 +53,8 @@
           <br>          
         </div>
         <div class="modal-footer"> 
-            <div class="btn-group">           
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Confirmar</button> 
+            <div class="btn-group" ng-controller="ctrl-cierre">           
+                <button type="button" class="btn btn-primary" ng-click="remove(cierre._id)" data-dismiss="modal">Confirmar</button> 
             </div>
         </div>
       </div>
