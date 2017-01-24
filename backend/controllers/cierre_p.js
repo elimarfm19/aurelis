@@ -119,11 +119,18 @@ function updateCierreP(req,res){
 }
 
 function deleteCierreP(req,res){
-	let cierreId = req.params.id
+	let cierre_pId = req.params.id
+	let proveedor = req.params.id
 
-	Cierre_p.findById(cierreId,(err,cierre)=>{
+	Cierre_p.findById(cierre_pId,(err,cierre_p)=>{
+
+		Proveedor.findById(cierre_p.proveedor,function(err,proveedor){
+			proveedor.cerrado -= cierre_p.cantidad;
+			proveedor.save();
+		})
+
 		if(err) return res.status(500).send({message:`Error al borrar el cierre: ${ err }`})
-		if(!cierre) return res.status(404).send({message:'el cierre no existe'})
+		if(!cierre_p) return res.status(404).send({message:'el cierre no existe'})
 
 		Cierre_p.remove(err => {
 			if(err) return res.status(500).send({message:`Error al borrar el cierre: ${ err }`})

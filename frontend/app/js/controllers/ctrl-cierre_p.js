@@ -32,7 +32,8 @@ console.log("Valor Raiz "+$rootScope.scopeRaiz);
 };
 
 $scope.remove = function(cierre_p) {
- CierreProveedor.$remove(function(){
+  console.log('aqui');
+  cierre_p.$remove(function(){
     refresh();
   });
 };

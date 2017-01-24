@@ -10,11 +10,10 @@
 	          <form name="Codenx" novalidate class="col s12">
               <div class="row ">                            
                 <div class="input-field col-md-6 " ng-controller="ctrl-proveedor"> 
-                  <select class="select" ng-model="cierre_p.proveedor" ng-disabled="cierre_p.CierreId">
+                  <select class="select" ng-model="cierre_p.proveedor" ng-disabled="cierre_p.Cierre_pId">
                     <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Seleccione un Proveedor</option>
                     <option ng-repeat="proveedor in proveedores" value="{{ proveedor._id }}" id="p" >{{ proveedor.nombres }}  {{ proveedor.apellidos }}</option>                                   
                   </select>   
-                  <input ng-model="cierre_p.proveedor" value="{{proveedor._id}}" type="" name="">
                 </div>          
                 <div class=" col s3">
                   <h2 style="color:black; font-weight:600; font-size: 12px; font-family: 'Tahoma';">Fecha entrega:</h2>  

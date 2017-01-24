@@ -1,0 +1,64 @@
+<div class="container"  ng-controller="ctrl-cierre_p"> 
+      <div class="tamanno" ng-controller="ctrl-proveedor">
+			  <div class="container col-md-6 col-md-offset-2" style="margin-top:100px; ">
+	        <div class="row" style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
+				    <br>
+	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Ajuste de Cierre Proveedor</h3>
+            <br>
+	          <form class="col s12">
+              <div class="row" >  
+                <div class="col-md-6 col-md-offset-3" >
+                  <select class="select"  ng-model="proveedor._id" required="true" ng-change="mostrarCierres(proveedor._id)">   
+                    <option value="" disabled="">Seleccione un Proveedor</option>         
+                    <option ng-repeat="proveedor in proveedores" value="{{proveedor._id}}">{{proveedor.nombres}} {{proveedor.apellidos}}</option>
+                  </select> 
+                  <input  ng-model="proveedor._id" value="{{proveedor._id}}" type="text" name="">
+                </div>
+                <br>
+                <br>
+                <div class="col-md-8 col-md-offset-2">                
+                  <select class="select" ng-model="cierre_p._id" required="true">
+                    <option value="" disabled="" selected="true">Seleccione un Cierre</option>    
+                    <option ng-repeat="cierre_p in cierresproveedor" value="{{cierre_p._id}}">Cod.Cierre: {{cierre_p.Cierre_pId}} Cantidad:{{cierre_p.cantidad| currency: ''}}(g)</option> 
+                  </select>
+                  <input  ng-model="cierre_p._id" value="{{cierre_p._id}}" type="text" name="">
+                </div>                   
+              </div>
+              <br>                
+              <div style="text-align:center">                
+              <!-- Trigger the modal with a button -->
+                <button ng-model="cierre_p._id" type="button" class="btn waves-effect waves-light btn-danger waves-teal btn-flat" ng-click="remove(cierre_p)"> Eliminar 
+                  <i class="zmdi zmdi-close"></i> 
+                </button>
+              </div> 
+              <br>  
+              <br>                                                                       
+	        </form>           
+	      </div>
+	    </div>
+     </div>
+</div>
+<!-- Modal -->
+<div class="container">    
+  <div class="modal fade" id="pagosModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>         
+        </div>
+        <div class="modal-body">
+          <div class="row">    
+             <h4 class="modal-title center-align" style="color:black; font-weight:600; font-family: 'Tahoma';">¿Seguro que quiere eliminar este cierre?</h4>
+          </div>
+          <br>          
+        </div>
+        <div class="modal-footer"> 
+            <div class="btn-group" ng-controller="ctrl-cierre">           
+                <button type="button" class="btn btn-primary" ng-click="remove(cierre._id)" data-dismiss="modal">Confirmar</button> 
+            </div>
+        </div>
+      </div>
+    </div>  
+  </div>    
+</div>
