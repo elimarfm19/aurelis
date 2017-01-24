@@ -11,7 +11,7 @@ var Cliente = require('../models/cliente');
 var Cierre = new Schema({
     CierreId:Number,
     fecha_cierre: Date,
-    fecha_entrega: Date,
+    fecha_entrega:  { type : Date, required : true },
     cantidad: Number,
     precio: Number,
     total: Number,

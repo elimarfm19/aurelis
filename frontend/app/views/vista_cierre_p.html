@@ -10,17 +10,18 @@
 	          <form name="Codenx" novalidate class="col s12">
               <div class="row ">                            
                 <div class="input-field col-md-6 " ng-controller="ctrl-proveedor"> 
-                  <select class="select" ng-model="cierre_p.proveedor">
+                  <select class="select" ng-model="cierre_p.proveedor" ng-disabled="cierre_p.CierreId">
                     <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Seleccione un Proveedor</option>
                     <option ng-repeat="proveedor in proveedores" value="{{ proveedor._id }}" id="p" >{{ proveedor.nombres }}  {{ proveedor.apellidos }}</option>                                   
                   </select>   
+                  <input ng-model="cierre_p.proveedor" value="{{proveedor._id}}" type="" name="">
                 </div>          
                 <div class=" col s3">
                   <h2 style="color:black; font-weight:600; font-size: 12px; font-family: 'Tahoma';">Fecha entrega:</h2>  
                 </div> 
                 <div class="input-field col s3" > 
-                  <input style="margin-right: 20%;" type="date" id="fecha_entrega" ng-model="cierre_p.fecha_entrega" required /> 
-                  <label for="fecha_entrega"></label>                                   
+                    <input style="margin-right: 20%;"  type="text" id="fecha_entrega" ng-model="date" value="{{ date() }}" /> 
+                    <label for="fecha_entrega"></label>                                   
                 </div>  
               </div>
               <br>                
@@ -54,7 +55,7 @@
               <div style="text-align:center">                        
                 <button class="btn btn-primary" data-toggle="modal" data-target="#pagosModal" ng-click="add(cierre_p)" ng-if="!cierre_p._id" type="submit" ng-disabled="!Codenx.$valid">AÑADIR</button>
                 <button class="btn btn-info" ng-click="update(cierre_p)" ng-if="cierre_p._id" type="submit">ACTUALIZAR</button>
-               <!-- <button class="btn" ng-click="deselect()" ng-if="(cierre_p._id && (cierre_p.total == scopeRaiz))">LIMPIAR</button>-->
+                <button class="btn" ng-click="deselect()" ng-if="cierre_p._id">LIMPIAR</button>
               </div>
               <br>                                                                       
 	        </form>           
@@ -163,3 +164,10 @@
     </div>  
   </div>    
 </div>
+
+<script type="text/javascript">
+  $('#fecha_entrega').datepicker({
+    language: "es",
+    format:"yyyy-mm-dd"
+});
+</script>

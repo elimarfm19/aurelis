@@ -10,7 +10,7 @@
 	          <form name="Codenx" novalidate class="col s12">
               <div class="row ">                            
                 <div class="input-field col-md-6"> 
-                <select class="select" ng-model="cierre.cliente">
+                <select class="select" ng-model="cierre.cliente" ng-disabled="cierre.CierreId">
                     <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Seleccione un Cliente</option>
                     <option ng-repeat="cliente in clientes" value="{{ cliente._id }}" >{{ cliente.nombres }}  {{ cliente.apellidos }}</option>                                   
                   </select>                                                                        
@@ -19,7 +19,7 @@
                     <h2 style="color:black; font-weight:600; font-size: 12px; font-family: 'Tahoma';">Fecha entrega:</h2>  
                 </div> 
                 <div class="input-field col s3" > 
-                    <input style="margin-right: 20%;" type="date" id="fecha_entrega" ng-model="cierre.fecha_entrega" required /> 
+                    <input style="margin-right: 20%;"  type="text" id="fecha_entrega" ng-model="date" value="{{ date() }}" /> 
                     <label for="fecha_entrega"></label>                                   
                 </div>                           
               </div>
@@ -40,7 +40,7 @@
                   <label for="total_c">Total Cierre</label>
                 </div>
                 <div class="input-field col s6" ng-controller="ctrl-pago">
-                   <input disabled value="{{scopeRaiz }}" type="text" class="validate" style="text-align: right;" id="monto_pagado">
+                   <input disabled value="{{scopeRaiz | currency:'Bs ' }}" type="text" class="validate" style="text-align: right;" id="monto_pagado">
                    <label for="total_p">Total Pagado</label> 
                 </div>                               
               </div>
@@ -54,6 +54,7 @@
               <div style="text-align:center">                        
                 <button class="btn btn-primary"data-toggle="modal" data-target="#pagosModal" ng-click="add(cierre)" ng-if="!cierre._id" type="submit" ng-disabled="!Codenx.$valid">AÑADIR</button>
                 <button class="btn btn-info" ng-click="update(cierre)" ng-if="cierre._id" type="submit">ACTUALIZAR</button>
+                <button class="btn" ng-click="deselect()" ng-if="cierre._id">LIMPIAR</button>
               </div>
               <br>                                                                       
 	        </form>           
@@ -162,3 +163,10 @@
     </div>
   </div>  
 </div>    
+
+<script type="text/javascript">
+  $('#fecha_entrega').datepicker({
+    language: "es",
+    format:"yyyy-mm-dd"
+});
+</script>

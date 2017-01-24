@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ctrl-cierre', function($scope,Cierre,Cliente,ngProgress) {
+app.controller('ctrl-cierre', function($scope,$rootScope,$filter,Cierre,Cliente,ngProgress,$window) {
 
 $scope.cierre = new Cierre();
 $scope.cliente = new Cliente();
@@ -13,7 +13,7 @@ refresh();
 
 $scope.add = function(cierre) {
   console.log(cierre.cliente);
-
+  cierre.fecha_entrega =document.getElementById('fecha_entrega').value;
   Cierre.save(cierre,function(cierre){
   	
    //refresh();
@@ -22,7 +22,9 @@ $scope.add = function(cierre) {
 };
 $scope.update = function(cierre) {
   console.log(cierre);
-  cierre.monto_pagado = document.getElementById('monto_pagado').value;
+  cierre.fecha_entrega =document.getElementById('fecha_entrega').value;
+  //cierre.monto_pagado = document.getElementById('monto_pagado').value;
+  cierre.monto_pagado = $rootScope.scopeRaiz;
   $scope.cierre.$update(function(cierreUpdated){
   	
   	refresh();
@@ -41,7 +43,12 @@ $scope.edit = function(id) {
 };  
 
 $scope.deselect = function() {
-  $scope.cierre = "";
+  $window.location.reload();
 }
+
+$scope.date = function() {
+  $scope.date = $filter('date')($scope.cierre.fecha_entrega, "yyyy-MM-dd");;
+}
+
 
 })
