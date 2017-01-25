@@ -3,7 +3,7 @@
 			  <div class="container col-md-6 col-md-offset-2" style="margin-top:100px; ">
 	        <div class="row"  style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
 				    <br>
-	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nueva Recepcion de Proveedor</h3>
+	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nueva Recepción de Proveedor</h3>
             <h2 style="color:black; text-align: right; font-weight:600; font-size: 15px; font-family: 'Tahoma'; margin-right: 5%;">Cod. Recepción: {{recepcion.RecepcionId}}</h2>            
             <br>
 	          <form name="Codenx" novalidate class="col s12">
@@ -59,9 +59,9 @@
                     <tr class="active">
                       <th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 400px 4px 0 0;">Cod. Pieza</th>
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Peso Bruto</th>
-                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Ley</th>
-                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Puro</th>
+                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Ley</th>                      
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Peso Entrega</th>
+                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Puro</th>
                       <th style="background: #337ab7; border-radius: 0 400px 4px 0;"></th>
                     </tr>
                   </thead>
@@ -76,12 +76,12 @@
                       </td>
                       <td style="width: 20%;">
                         <input class="form-control center-align" ng-model="pieza.ley" required="" placeholder="930">
-                      </td>
-                      <td style="width: 20%;">
-                        <input class="form-control center-align" required="" disabled type="text" class="validate" value="{{(pieza.peso_bruto * (pieza.ley/1000)) | currency:''}} ">
-                      </td>
+                      </td>                      
                       <td>
                         <input class="form-control center-align" ng-model="pieza.peso_entrega" required="" placeholder="146">
+                      </td>
+                      <td style="width: 20%;">
+                        <input class="form-control center-align" required="" disabled type="text" class="validate" value="{{(pieza.peso_entrega * (pieza.ley/1000)) | currency:''}} ">
                       </td>
                     </tr>
                     <tr ng-repeat="pieza in piezas | filter: recepcion._id" >
@@ -93,12 +93,12 @@
                       </td>
                       <td class="center-align">
                         {{pieza.ley}}
-                      </td>
-                      <td class="center-align">
-                        {{pieza.peso_bruto * (pieza.ley/1000)}}
-                      </td>
+                      </td>                      
                       <td class="center-align">
                         {{pieza.peso_entrega}}
+                      </td>
+                      <td class="center-align">
+                        {{pieza.peso_entrega * (pieza.ley/1000)}}
                       </td>
                       <td class="" style="width: 7%">
                           <span class="glyphicon glyphicon-pencil" style="cursor: pointer;" ng-click=edit(pieza._id)/>

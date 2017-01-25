@@ -47,7 +47,7 @@ function storePieza(req,res){
     pieza.status = 'Disponible'
     pieza.peso_bruto = req.body.peso_bruto
     pieza.ley = req.body.ley
-	pieza.puro = req.body.peso_bruto * (req.body.ley / 1000)
+	pieza.puro = req.body.peso_entrega * (req.body.ley / 1000)
     pieza.peso_entrega = req.body.peso_entrega
     pieza.ajuste = req.body.ajuste
     pieza.recepcion = req.body.recepcion    
