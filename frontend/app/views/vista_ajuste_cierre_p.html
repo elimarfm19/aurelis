@@ -1,13 +1,13 @@
-<div class="container"  ng-controller="ctrl-cierre_p"> 
-      <div class="tamanno" ng-controller="ctrl-proveedor">
+<div class="container"> 
+      <div class="tamanno" >
 			  <div class="container col-md-6 col-md-offset-2" style="margin-top:100px; ">
 	        <div class="row" style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
 				    <br>
 	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Ajuste de Cierre Proveedor</h3>
             <br>
 	          <form class="col s12">
-              <div class="row" >  
-                <div class="col-md-6 col-md-offset-3" >
+              <div class="row"  ng-controller="ctrl-proveedor">  
+                <div class="col-md-6 col-md-offset-3">
                   <select class="select"  ng-model="proveedor._id" required="true" ng-change="mostrarCierres(proveedor._id)">   
                     <option value="" disabled="">Seleccione un Proveedor</option>         
                     <option ng-repeat="proveedor in proveedores" value="{{proveedor._id}}">{{proveedor.nombres}} {{proveedor.apellidos}}</option>

@@ -32,9 +32,10 @@ console.log("Valor Raiz "+$rootScope.scopeRaiz);
 };
 
 $scope.remove = function(cierre_p) {
-  console.log('aqui');
+  console.log(cierre_p);
   cierre_p.$remove(function(){
-    refresh();
+    //refresh();
+    $window.location.reload();
   });
 };
 
