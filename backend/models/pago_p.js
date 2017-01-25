@@ -7,7 +7,7 @@ var CierreProveedor = require('../models/cierre_p');
 
 // ESQUEMA PARA PAGOS
 var PagoProveedor = new Schema({
-    fecha: Date,
+    //fecha: Date,
     referencia: String,
     banco: String,
     titular: String,

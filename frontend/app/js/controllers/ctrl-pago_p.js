@@ -18,7 +18,7 @@ $scope.add = function(pago_p) {
   });
 };
 $scope.update = function(pago_p) {
-  pago_p.fecha = new Date(pago_p.fecha);
+  //pago_p.fecha = new Date(pago_p.fecha);
   $scope.pago_p.$update(function(){
     refresh();
   });
