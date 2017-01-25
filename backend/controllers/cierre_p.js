@@ -132,7 +132,7 @@ function deleteCierreP(req,res){
 		if(err) return res.status(500).send({message:`Error al borrar el cierre: ${ err }`})
 		if(!cierre_p) return res.status(404).send({message:'el cierre no existe'})
 
-		Cierre_p.remove(err => {
+		cierre_p.remove(err => {
 			if(err) return res.status(500).send({message:`Error al borrar el cierre: ${ err }`})
 			res.status(200).send({message:'el cierre ha sido eliminado'})
 		})
