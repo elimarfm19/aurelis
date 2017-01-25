@@ -11,17 +11,13 @@ var Pieza = new Schema({
     
     status: {
         type:String,
-        enum: ['Disponible', 'Entregado']
+        enum: ['Disponible', 'Entregado','Ajuste','Verificado']
     },
     piezaId: Number,
     peso_bruto: Number,
     ley: Number,
     puro: Number,
     peso_entrega: Number,
-    ajuste: {
-        type:String,
-        enum: ['Si', 'No']
-    },
     recepcion: { type: Schema.ObjectId, ref: "Recepcion" }
 });
 

@@ -20,6 +20,7 @@
                   <th class="center-align">Ley</th>                          
                   <th class="center-align">Puro (g)</th>                          
                   <th class="center-align">Peso Entrega (g)</th>
+                  <th class="center-align">Verificar</th>
                   <th class="center-align"></th>                          
                 </tr>
               </thead>
@@ -45,6 +46,9 @@
                   </td>                        
                   <td class="center-align">
                     {{pieza.peso_entrega}}
+                  </td>
+                  <td class="center-align">
+                    <!--aqui va el checkboxes-->
                   </td>
                   <td class="center-align">                                  
                     <button class="btn btn-warning glyphicon glyphicon-pencil btn-xs" ng-click="edit(pieza._id)" data-toggle="modal" data-target="#myModal"></button>
