@@ -14,6 +14,7 @@
               <thead>
                 <tr class="active">                        
                   <th class="center-align">Proveedor</th>
+                  <th class="center-align">Cliente</th>
                   <th class="center-align">Cod. Pieza</th>
                   <th class="center-align">Peso Bruto (g)</th>
                   <th class="center-align">Ley</th>                          
@@ -25,10 +26,13 @@
               <tbody>
                 <tr ng-repeat="pieza in piezas" ng-if="pieza.status == 'Entregado'">
                   <td class="center-align">
-                    {{pieza.cod_proveedor}}
+                    {{pieza.recepcion.proveedor.nombres}} {{pieza.recepcion.proveedor.apellidos}}
                   </td>
                   <td class="center-align">
-                    {{pieza.cod_pieza}}
+                    {{pieza.entrega.cliente.nombres}} {{pieza.entrega.cliente.apellidos}}
+                  </td>
+                  <td class="center-align">
+                    {{pieza.piezaId}}
                   </td>
                   <td class="center-align">
                     {{pieza.peso_bruto}}
@@ -71,21 +75,21 @@
 	          <form name="Codenx" novalidate class="col s12">
               <div class="row">
                 <div class="input-field col s6">
-                  <input ng-required="true" id="peso_bruto" type="text" class="validate" ng-model="pieza.peso_bruto">
+                  <input ng-required="true" id="peso_bruto" type="text" style="text-align: right" class="validate" ng-model="pieza.peso_bruto">
                   <label for="peso_bruto">Peso Bruto</label>
                 </div>
                 <div class="input-field col s6">
-                  <input ng-required="true" id="ley" type="text" class="validate" ng-model="pieza.ley">
+                  <input ng-required="true" id="ley" type="text" style="text-align: right" class="validate" ng-model="pieza.ley">
                   <label for="ley">Ley</label>
                 </div>
               </div>
               <div class="row">  
                 <div class="input-field col s6">                 
-                   <input ng-required="true" id="peso_entrega" type="text" class="validate" ng-model="pieza.peso_entrega">
+                   <input ng-required="true" id="peso_entrega" type="text" style="text-align: right" class="validate" ng-model="pieza.peso_entrega">
                    <label for="peso_entrega">Peso Entrega</label>
                 </div>
                 <div class="input-field col s6">
-                  <input disable id="puro" type="text" class="validate" value="{{pieza.peso_bruto * (pieza.ley / 1000)}}">
+                  <input ng-disabled="true" id="puro" type="text" style="text-align: right" class="validate" value="{{pieza.peso_entrega * (pieza.ley / 1000)}}">
                   <label for="puro">Puro</label>
                 </div>
               </div>
