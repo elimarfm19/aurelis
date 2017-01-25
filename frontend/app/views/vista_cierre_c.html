@@ -84,7 +84,8 @@
                 <table class="table table-hover table-striped">
                   <thead>
                     <tr class="active">
-                      <th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 400px 4px 0 0;">Fecha</th>
+                      <th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 400px 4px 0 0;"></th>
+                      <!--<th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 400px 4px 0 0;">Fecha</th>-->
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Referencia</th>
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Titular</th>
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Banco</th>
@@ -97,7 +98,7 @@
                       <td>
                         <input hidden type="text" ng-model="cierre._id">
                         <input hidden value="{{cierre._id}}" id="cierre_id">
-                        <input type="date" class="form-control center-align" ng-model="pago.fecha" required="" placeholder="Pago Fecha">
+                       <!-- <input type="date" class="form-control center-align" ng-model="pago.fecha" required="" placeholder="Pago Fecha">-->
                       </td>
                       <td>
                         <input class="form-control center-align" ng-model="pago.referencia" required="" placeholder="0102030405">
@@ -114,7 +115,7 @@
                     </tr>
                     <tr ng-repeat="pago in pagos | filter: cierre._id" >
                       <td class="center-align">
-                        {{pago.fecha |  date:'dd/MM/yyyy' : shortDate}}
+                        <!--{{pago.fecha |  date:'dd/MM/yyyy' : shortDate}}-->
                       </td>
                       <td class="center-align">
                         {{pago.referencia}}

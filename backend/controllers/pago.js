@@ -55,7 +55,7 @@ function storePago(req,res){
 	let pago = new Pago()
 
     pago.cierre = req.body.cierre
-    pago.fecha = req.body.fecha
+    //pago.fecha = req.body.fecha
     pago.referencia = req.body.referencia
     pago.titular = req.body.titular
     pago.banco = req.body.banco
