@@ -62,11 +62,11 @@
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Ley</th>
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Puro</th>
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Peso Entrega</th>
-                      <th style="background: #337ab7; border-radius: 0 400px 4px 0;">Actions</th>
+                      <th class="center-align" style="background: #337ab7; border-radius: 0 400px 4px 0; color: #ffffff;">Actions</th>
                     </tr>
                   </thead>
                    <tbody>
-                    <tr ng-repeat="pieza in piezas | filter:{ status:'Disponible'}" >
+                    <tr ng-repeat="pieza in piezas | filter:{ status:'Disponible' }" >
                       <td class="center-align">
                         {{pieza.piezaId}}
                       </td>
@@ -87,7 +87,7 @@
                           <span class="glyphicon glyphicon-trash" style="cursor: pointer;" ng-click='remove(pieza)'/>
                       </td> -->
                       <td>  
-                        <input type="checkbox">
+                        <input type="checkbox" ng-true-value="'Entregado'" ng-false-value="'Disponible'">
                       </td>
                     </tr>
                      <!--  <tr>

@@ -745,4 +745,8 @@ input:not([type]):disabled, input:not([type])[readonly="readonly"], input[type=t
     width: 125%;
 }
 
-
+[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+    position: absolute !important;
+    left: 91% !important; 
+    visibility: inherit !important;
+}
