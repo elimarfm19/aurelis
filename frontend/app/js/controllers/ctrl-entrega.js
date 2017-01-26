@@ -1,16 +1,16 @@
 'use strict';
 
-app.controller('ctrl-entrega', function($scope,Entrega,Cliente,Cierre,ngProgress) {
+app.controller('ctrl-entrega', function($scope,Entrega,ngProgress) {
 
 $scope.entrega = new Entrega();
-$scope.cliente = new Cliente();
-$scope.cierre = new Cierre();
+//$scope.cliente = new Cliente();
+//$scope.cierre = new Cierre();
 
 var refresh = function() {
   $scope.entregas = Entrega.query(); 
-  $scope.clientes = Cliente.query();
-  $scope.cierres = Cierre.query();
-  $scope.cierrescliente = [];  //cierresproveedor
+  //$scope.clientes = Cliente.query();
+  //$scope.cierres = Cierre.query();
+  //$scope.cierrescliente = [];  //cierresproveedor
 }
 refresh();
 
@@ -18,7 +18,7 @@ $scope.add = function(entrega) {
   console.log(entrega);
   Entrega.save(entrega,function(entrega){
        $scope.entrega = Entrega.get({ id: entrega._id });
-    refresh();
+    //refresh();
   });
 };
 

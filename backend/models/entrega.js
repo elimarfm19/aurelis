@@ -6,7 +6,6 @@ var autoIncrement = require('mongoose-auto-increment');
 autoIncrement.initialize(mongoose);
 
 var Cliente = require('../models/cliente');
-var Pieza = require('../models/pieza');
 
 // ESQUEMA PARA ENTREGA
 var Entrega = new Schema({

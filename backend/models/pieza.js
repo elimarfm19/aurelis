@@ -3,6 +3,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Recepcion = require('../models/recepcion');
+var Entrega = require('../models/entrega');
 var autoIncrement = require('mongoose-auto-increment');
 autoIncrement.initialize(mongoose);
 
@@ -18,7 +19,8 @@ var Pieza = new Schema({
     ley: Number,
     puro: Number,
     peso_entrega: Number,
-    recepcion: { type: Schema.ObjectId, ref: "Recepcion" }
+    recepcion: { type: Schema.ObjectId, ref: "Recepcion" },
+    entrega: { type: Schema.ObjectId, ref: "Entrega" }
 });
 
 Pieza.plugin(autoIncrement.plugin, {
