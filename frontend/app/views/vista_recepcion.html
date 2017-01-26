@@ -57,12 +57,12 @@
                 <table class="table table-hover table-striped">
                   <thead>
                     <tr class="active">
-                      <th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 400px 4px 0 0;">Cod. Pieza</th>
+                      <th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 400px 4px 0 0; width: 15%">Cod. Pieza</th>
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Peso Bruto</th>
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Ley</th>                      
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Peso Entrega</th>
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Puro</th>
-                      <th style="background: #337ab7; border-radius: 0 400px 4px 0;"></th>
+                      <th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 0 400px 4px 0; width: 14%;">Opciones</th>
                     </tr>
                   </thead>
                    <tbody>
@@ -100,9 +100,9 @@
                       <td class="center-align">
                         {{pieza.peso_entrega * (pieza.ley/1000)}}
                       </td>
-                      <td class="" style="width: 7%">
-                          <span class="glyphicon glyphicon-pencil" style="cursor: pointer;" ng-click=edit(pieza._id)/>
-                          <span class="glyphicon glyphicon-trash" style="cursor: pointer;" ng-click='remove(pieza)'/>
+                      <td class="center-align" style="width: 14%">
+                          <span class="zmdi zmdi-edit zmdi-hc-2x" style="cursor: pointer;" ng-click=edit(pieza._id)/>
+                          <span class="zmdi zmdi-delete zmdi-hc-2x" style="cursor: pointer;" ng-click='remove(pieza)'/>
                       </td>
                     </tr>
                       <tr>

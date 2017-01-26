@@ -12,7 +12,7 @@
                     <option value="" disabled="">Seleccione un Proveedor</option>         
                     <option ng-repeat="proveedor in proveedores" value="{{proveedor._id}}">{{proveedor.nombres}} {{proveedor.apellidos}}</option>
                   </select> 
-                  <input  ng-model="proveedor._id" value="{{proveedor._id}}" type="text" name="">
+                  <!--<input  ng-model="proveedor._id" value="{{proveedor._id}}" type="text" name="">-->
                 </div>
                 <br>
                 <br>
@@ -21,7 +21,7 @@
                     <option value="" disabled="" selected="true">Seleccione un Cierre</option>    
                     <option ng-repeat="cierre_p in cierresproveedor" value="{{cierre_p._id}}">Cod.Cierre: {{cierre_p.Cierre_pId}} Cantidad:{{cierre_p.cantidad| currency: ''}}(g)</option> 
                   </select>
-                  <input  ng-model="cierre_p._id" value="{{cierre_p._id}}" type="text" name="">
+                  <!--<input  ng-model="cierre_p._id" value="{{cierre_p._id}}" type="text" name="">-->
                 </div>                   
               </div>
               <br>                

@@ -21,12 +21,12 @@
                     <table class="table table-hover">
                         <thead>
                             <tr class="active">
-                              <th class="center-align">C.I. / Rif</th>
+                              <th class="center-align" style="border-radius: 400px 4px 0 0;">C.I. / Rif</th>
                               <th class="center-align">Cliente</th>
                               <th class="center-align">Teléfono</th>
                               <th class="center-align">Dirección</th>
                               <th class="center-align">Email</th>
-                              <th class="center-align"></th>
+                              <th class="center-align" style="border-radius: 0 400px 4px 0;">Edición</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,7 +49,7 @@
                               </td>
                               <td class="center-align">                                  
                                 <!--<button class="btn btn-danger glyphicon glyphicon-trash btn-xs" ng-click="remove(cliente)"></button>-->
-                                <button class="btn btn-warning glyphicon glyphicon-pencil btn-xs" ng-click="edit(cliente._id)" data-toggle="modal" data-target="#myModal"></button>
+                                <button class="btn btn-warning zmdi zmdi-edit zmdi-hc-2x" ng-click="edit(cliente._id)" data-toggle="modal" data-target="#myModal"></button>
                               </td>
                             </tr>
                         </tbody>
@@ -77,11 +77,11 @@
 	          <form name="Codenx" novalidate class="col s12">
               <div class="row">
                 <div class="input-field col s6">
-                  <input ng-required="true" id="nombre" type="text" class="validate" ng-model="cliente.nombres">
+                  <input ng-required="true" id="nombre" type="text" class="validate" ng-model="cliente.nombres" style="text-align: right;">
                   <label for="nombre">Nombre(s)</label>
                 </div>
                 <div class="input-field col s6">
-                  <input ng-required="true" id="apellido" type="text" class="validate" ng-model="cliente.apellidos">
+                  <input ng-required="true" id="apellido" type="text" class="validate" ng-model="cliente.apellidos" style="text-align: right;">
                   <label for="apellido">Apellidos</label>
                 </div>
               </div>
@@ -94,25 +94,25 @@
                   </select>
                 </div>  
                 <div class="input-field col s4">                 
-                   <input ng-required="true" id="ced_rif" type="text" class="validate" ng-model="cliente.ced_rif" ng-change="verifyDuplicate()">
+                   <input ng-required="true" id="ced_rif" type="text" class="validate" ng-model="cliente.ced_rif" ng-change="verifyDuplicate()" style="text-align: right;">
                    <label for="ced_rif">C.I. / RIF</label>
                    <div class="card-panel red lighten-2"  ng-show="isvalid" ng-model="isvalid" style="color:white">                   Cédula Existe 
                    </div>
                 </div>
                 <div class="input-field col s6">
-                   <input ng-required="true" id="tlf" type="tel" class="validate" ng-model="cliente.tlf">
+                   <input ng-required="true" id="tlf" type="tel" class="validate" ng-model="cliente.tlf" style="text-align: right;">
                    <label for="tlf">Teléfono</label>
                 </div>
              </div>
              <div class="row">
                 <div class="input-field col s12">
-                   <input ng-required="true" id="email" type="email" class="validate" ng-model="cliente.email">
+                   <input ng-required="true" id="email" type="email" class="validate" ng-model="cliente.email" style="text-align: center;">
                    <label for="email">Email</label>
                 </div>
              </div>
              <div class="row">
                 <div class="input-field col s12">
-                   <input ng-required="true" id="direccion" type="text" class="validate" ng-model="cliente.direccion">
+                   <input ng-required="true" id="direccion" type="text" class="validate" ng-model="cliente.direccion" style="text-align: center;">
                    <label for="direccion">Dirección</label>
                 </div>
              </div>

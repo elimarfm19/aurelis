@@ -86,10 +86,11 @@
                     <tr class="active">
                       <th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 400px 4px 0 0;"></th>
                       <!--<th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 400px 4px 0 0;">Fecha</th>-->
-                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Referencia</th>
-                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Titular</th>
+                      <th class="center-align" style="background: #337ab7; color: #ffffff; width: 15%">Referencia</th>
+                      <th class="center-align" style="background: #337ab7; color: #ffffff; width: 30%">Titular</th>
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Banco</th>
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Monto Pagado</th>
+                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Opciones</th>
                       <th style="background: #337ab7; border-radius: 0 400px 4px 0;"></th>
                     </tr>
                   </thead>
@@ -129,9 +130,9 @@
                       <td class="center-align">
                         {{pago.monto_pagado}}
                       </td>
-                      <td class="" style="width: 7%">
-                          <span class="glyphicon glyphicon-pencil" style="cursor: pointer;" ng-click=edit(pago._id)/>
-                          <span class="glyphicon glyphicon-trash" style="cursor: pointer;" ng-click='remove(pago)'/>
+                      <td class="center-align" style="width: 14%">
+                          <span class="zmdi zmdi-edit zmdi-hc-2x" style="cursor: pointer;" ng-click=edit(pago._id)/>
+                          <span class="zmdi zmdi-delete zmdi-hc-2x" style="cursor: pointer;" ng-click='remove(pago)'/>
                       </td>
                     </tr>
                       <tr>
