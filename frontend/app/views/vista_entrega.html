@@ -14,7 +14,7 @@
                     <option ng-repeat="cliente in clientes" ng-if="(cliente.cerrado - cliente.entregado) > 0" value="{{cliente._id}}">{{cliente.nombres}} {{cliente.apellidos}}</option> 
                   </select>
                   <div class="col-md-6">
-                    <input disabled="true" value="Restante: {{cliente.cerrado - cliente.entregado  | currency: ' '}} (g)" style="color:black; font-weight:600; font-size: 15px; font-family: 'Tahoma'; text-align: right;"></input> 
+                    <input disabled="true" id="restante" value="Restante: {{cliente.cerrado - cliente.entregado  | currency: ' '}} (g)" style="color:black; font-weight:600; font-size: 15px; font-family: 'Tahoma'; text-align: right;"></input> 
                   </div>
                 </div>      
               </div>
@@ -81,7 +81,7 @@
                         {{pieza.ley}}
                       </td>
                       <td class="center-align">
-                        {{pieza.peso_bruto * (pieza.ley/1000)}}
+                        {{pieza.puro}}
                       </td>
                       <td class="center-align">
                         {{pieza.peso_entrega}}
@@ -101,12 +101,12 @@
                       </tr>
                       <tr>
                         <td colspan="5" style="text-align: right;" >  
-                          <span class="label label-primary" style="font-size: 12px;" >Total de Restantes:  {{ entrega.cliente.cerrado | currency: ''}} (g) </span>
+                          <span class="label label-primary" style="font-size: 12px;" >Total de Restantes:  {{ restante | currency: '' }} (g)</span>
                         </td>
                       </tr>
                       <tr>
                         <td colspan="5" style="text-align: right;">  
-                          <span class="label label-danger" style="font-size: 12px;">Diferencia: {{ (entrega.cliente.cerrado - entrega.cliente.entregado) - sumaPuroe | currency: ' '}} (g)</span>
+                          <span class="label label-danger" style="font-size: 12px;">Diferencia: {{ restante - sumaPuroe | currency: ' '}} (g)</span>
                         </td>
                       </tr>
                   </tbody>

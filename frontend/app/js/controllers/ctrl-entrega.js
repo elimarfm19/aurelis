@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ctrl-entrega', function($scope,Entrega,ngProgress) {
+app.controller('ctrl-entrega', function($scope,Entrega,$http,Cliente,ngProgress) {
 
 $scope.entrega = new Entrega();
 //$scope.cliente = new Cliente();
@@ -15,9 +15,24 @@ var refresh = function() {
 refresh();
 
 $scope.add = function(entrega) {
-  console.log(entrega);
+  
+
+
+ // console.log(entrega.cliente);
+
+  $http.get("http://localhost:3001/clientes/"+entrega.cliente)
+            .success(function(cliente){
+                //console.log(respuesta);
+        $scope.restante = cliente.cerrado - cliente.entregado;
+                //refresh();
+   });
+
   Entrega.save(entrega,function(entrega){
+
+
        $scope.entrega = Entrega.get({ id: entrega._id });
+     
+       
        //$scope.cliente = Cliente.get({ id: entrega.cliente._id });
     //refresh();
   });

@@ -78,16 +78,18 @@ $scope.editE = function(pieza,cliente) {
   //console.log(idCliente);
   //pieza.puro = parseFloat(pieza.puro)
   //console.log(idCliente);
-  if(check){  
+  if(check){ 
+   console.log(pieza.puro);
     pieza.entrega =document.getElementById('entrega_id').value
     pieza.status = 'Entregado'
-    cliente.entregado += parseFloat(pieza.puro)
+    cliente.entregado += pieza.puro
   }
   
   else{ 
+    console.log(pieza.puro);
     pieza.entrega = null
     pieza.status = 'Disponible'
-    cliente.entregado -= parseFloat(pieza.puro)
+    cliente.entregado -= pieza.puro
   }
  
   //console.log(pieza.entrega);
@@ -95,7 +97,7 @@ $scope.editE = function(pieza,cliente) {
   $http.put("http://localhost:3001/piezas/"+pieza._id, pieza)
             .success(function(respuesta){
                 console.log(respuesta);
-                //refresh();
+                refresh();
    });
    $http.put("http://localhost:3001/clientes/"+cliente._id, cliente)
             .success(function(respuesta){
@@ -142,14 +144,13 @@ $scope.suma_puroe = function(){
       } 
     } 
   }
- $rootScope.sumaPuroe = total;
+ $rootScope.sumaPuroe = parseFloat(total).toFixed(2);
  //console.log($rootScope.sumaPuroE);
 }
 $scope.showPiezas = function(piezas){
     return piezas.status === 'Disponible' || 
         piezas.entrega._id === document.getElementById('entrega_id').value; 
 };
-
 
 })
 

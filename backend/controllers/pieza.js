@@ -57,7 +57,7 @@ function storePieza(req,res){
     pieza.status = 'Disponible'
     pieza.peso_bruto = req.body.peso_bruto
     pieza.ley = req.body.ley
-	pieza.puro = req.body.peso_entrega * (req.body.ley / 1000)
+	pieza.puro = parseFloat(req.body.peso_entrega * (req.body.ley / 1000)).toFixed(2)
     pieza.peso_entrega = req.body.peso_entrega
 	pieza.observacion = req.body.observacion
     pieza.ajuste = req.body.ajuste
@@ -79,7 +79,7 @@ function updatePieza(req,res){
 	let update = req.body
 	//console.log(document.getElementById('entrega_id').value);
 		//update.entrega = req.body.entrega
-		update.puro = update.peso_bruto * (update.ley/1000)
+		update.puro = parseFloat(update.peso_entrega * (update.ley/1000)).toFixed(2);
 
 
 		Pieza.findByIdAndUpdate(piezaId,update,(err,piezaUpdated)=>{
