@@ -81,13 +81,13 @@ $scope.editE = function(pieza,cliente) {
   if(check){  
     pieza.entrega =document.getElementById('entrega_id').value
     pieza.status = 'Entregado'
-    cliente.entregado += pieza.puro
+    cliente.entregado += parseFloat(pieza.puro)
   }
   
   else{ 
     pieza.entrega = null
     pieza.status = 'Disponible'
-    cliente.entregado -= pieza.puro
+    cliente.entregado -= parseFloat(pieza.puro)
   }
  
   //console.log(pieza.entrega);

@@ -3,12 +3,12 @@
 app.controller('ctrl-recepcion', function($scope,Recepcion,Proveedor,CierreProveedor,ngProgress) {
 
 $scope.recepcion = new Recepcion();
-$scope.proveedor = new Proveedor();
+//$scope.proveedor = new Proveedor();
 $scope.cierre_p = new CierreProveedor();
 
 var refresh = function() {
   $scope.recepciones = Recepcion.query(); 
-  $scope.proveedores = Proveedor.query();
+  //$scope.proveedores = Proveedor.query();
   $scope.cierres = CierreProveedor.query();
   $scope.cierresproveedor = []; 
   //$scope.recepcion ="";

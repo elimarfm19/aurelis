@@ -15,7 +15,12 @@ const Proveedor = require('../models/proveedor')
 	 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
 	 	if(!recepcion) return res.status(404).send({message:'la recepcion no existe'})
 	 	
-	 	res.status(200).send(recepcion)
+	 	
+	 	Proveedor.populate(recepcion, {path: "proveedor"},function(err, recepcion){
+            res.status(200).send(recepcion)
+        }); 
+
+ 		
 	})
 }
 

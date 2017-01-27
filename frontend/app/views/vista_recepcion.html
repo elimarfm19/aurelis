@@ -111,13 +111,14 @@
                           <span class="label label-primary" style="font-size: 12px;" >Total de Recepción: {{ suma_puro() }} {{ sumaPuro | currency: ' '}} (g)</span>
                       </tr>
                       <tr>
-                        <td colspan="5" style="text-align: right;" ng-controller="ctrl-proveedor">  
-                          <span class="label label-primary" style="font-size: 12px;" >Total de Cierres:  {{proveedor.cerrado - proveedor.entregado  | currency: ' '}} (g) </span>
+                        <td colspan="5" style="text-align: right;">  
+                          <span class="label label-primary" style="font-size: 12px;" >Total de Cierres:  {{recepcion.proveedor.cerrado - recepcion.proveedor.entregado  | currency: ' '}} (g) </span>
                         </td>
                       </tr>
                       <tr>
                         <td colspan="5" style="text-align: right;">  
-                          <span class="label label-danger" style="font-size: 12px;">Diferencia: {{ totalCierre - sumaPuro | currency: ' '}} (g)</span>
+                          <span class="label label-danger" style="font-size: 12px;">Diferencia: {{
+                          (recepcion.proveedor.cerrado - recepcion.proveedor.entregado) - sumaPuro | currency: ' '}} (g) </span>
                         </td>
                       </tr>
                   </tbody>
