@@ -18,6 +18,7 @@ $scope.add = function(entrega) {
   console.log(entrega);
   Entrega.save(entrega,function(entrega){
        $scope.entrega = Entrega.get({ id: entrega._id });
+       //$scope.cliente = Cliente.get({ id: entrega.cliente._id });
     //refresh();
   });
 };

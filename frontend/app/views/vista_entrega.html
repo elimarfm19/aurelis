@@ -9,7 +9,7 @@
 	          <form name="Codenx" novalidate class="col s12">
               <div class="row col-md-12">                            
                 <div class="" ng-controller="ctrl-cliente"> 
-                  <select class="select col-md-6" ng-model="entrega.cliente" ng-change="buscarCliente(entrega.cliente)"   required>
+                  <select id="cliente" class="select col-md-6" ng-model="entrega.cliente" ng-change="buscarCliente(entrega.cliente)"   required>
                     <option value="">Seleccione un Cliente</option>
                     <option ng-repeat="cliente in clientes" ng-if="(cliente.cerrado - cliente.entregado) > 0" value="{{cliente._id}}">{{cliente.nombres}} {{cliente.apellidos}}</option> 
                   </select>
@@ -50,10 +50,13 @@
           <div class="row" ng-controller="ctrl-pieza">
             <div class="table-responsive">
               <form name="Codenx" novalidate>
+                <input hidden type="text" ng-model="entrega._id">
+                <input hidden value="{{entrega._id}}" id="entrega_id">
                 <!-- <div class="row" style="text-align: right; margin-right: 0%;">
                   <button class="btn btn-primary" ng-click="add(pieza)" ng-if="!pieza._id" type="submit" ng-disabled="!Codenx.$valid">Añadir</button>
-                  <button class="btn btn-info" ng-click="update(pieza)" ng-if="pieza._id" type="submit">Actualizar</button>
+                  
                 </div> -->
+               <!-- <button class="btn btn-info" ng-click="update(pieza)" ng-show="pieza._id" type="submit" id="actualizar">Actualizar</button> -->
                 <table class="table table-hover table-striped">
                   <thead>
                     <tr class="active">
@@ -66,7 +69,8 @@
                     </tr>
                   </thead>
                    <tbody>
-                    <tr ng-repeat="pieza in piezas | filter:{ status:'Disponible' }" >
+                    <tr ng-repeat="pieza in piezas | filter: showPiezas" >
+
                       <td class="center-align">
                         {{pieza.piezaId}}
                       </td>
@@ -87,24 +91,24 @@
                           <span class="glyphicon glyphicon-trash" style="cursor: pointer;" ng-click='remove(pieza)'/>
                       </td> -->
                       <td>  
-                        <input type="checkbox" ng-true-value="'Entregado'" ng-false-value="'Disponible'">
+                        <input type="checkbox" id="check{{pieza._id}}" ng-click="editE(pieza,entrega.cliente)" ng-model="check" ng-checked="pieza.entrega._id == entrega._id"> 
                       </td>
                     </tr>
-                     <!--  <tr>
+                      <tr>
                         <td colspan="5" style="text-align: right;">  
-                          <input hidden ng-model="sumaPuro" id="cantidad">
-                          <span class="label label-primary" style="font-size: 12px;" >Total de Entrega: {{ suma_puroE() }} {{ sumaPuroE | currency: ' '}} (g)</span>
+                          <input hidden ng-model="sumaPuroe" id="cantidade">
+                          <span class="label label-primary" style="font-size: 12px;" >Total de Entrega: {{ suma_puroe() }} {{ sumaPuroe | currency: ''}} (g)</span>
                       </tr>
                       <tr>
-                        <td colspan="5" style="text-align: right;" ng-controller="ctrl-cliente">  
-                          <span class="label label-primary" style="font-size: 12px;" >Total de Restantes:  {{cliente.cerrado - cliente.entregado  | currency: ' '}} (g) </span>
+                        <td colspan="5" style="text-align: right;" >  
+                          <span class="label label-primary" style="font-size: 12px;" >Total de Restantes:  {{ entrega.cliente.cerrado | currency: ''}} (g) </span>
                         </td>
                       </tr>
                       <tr>
                         <td colspan="5" style="text-align: right;">  
-                          <span class="label label-danger" style="font-size: 12px;">Diferencia: {{ sumaPuroE | currency: ' '}} (g)</span>
+                          <span class="label label-danger" style="font-size: 12px;">Diferencia: {{ (entrega.cliente.cerrado - entrega.cliente.entregado) - sumaPuroe | currency: ' '}} (g)</span>
                         </td>
-                      </tr> -->
+                      </tr>
                   </tbody>
                 </table>
              </form>

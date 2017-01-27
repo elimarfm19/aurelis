@@ -2,6 +2,7 @@
 
 const Pieza = require('../models/pieza')
 const Recepcion = require('../models/recepcion')
+const Entrega = require('../models/entrega')
 const Proveedor = require('../models/proveedor')
 
  function getPieza(req,res){
@@ -30,7 +31,16 @@ function getPiezas(req,res){
 			model: 'Proveedor'
 			}
 		}
-	}).exec(function(err,piezas){
+	}).populate({
+		path: 'entrega',
+		model: 'Entrega',
+		populate: {
+
+			path: 'cliente',
+			model: 'Cliente'
+		}
+	})
+	.exec(function(err,piezas){
 		if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
 			if(piezas == "") return res.status(404).send({message:'No hay registros de piezas'})
 				res.status(200).send(piezas);
@@ -50,7 +60,8 @@ function storePieza(req,res){
 	pieza.puro = req.body.peso_entrega * (req.body.ley / 1000)
     pieza.peso_entrega = req.body.peso_entrega
     pieza.ajuste = req.body.ajuste
-    pieza.recepcion = req.body.recepcion    
+    pieza.recepcion = req.body.recepcion 
+    pieza.entrega = null;  
 	pieza.save((err,piezaStored)=>{
 
 		if (err) res.status(500).send({message:`Error al guardar en la base de datos: ${ err }`})
@@ -65,8 +76,11 @@ function storePieza(req,res){
 function updatePieza(req,res){
 	let piezaId = req.params.id
 	let update = req.body
-		
+	//console.log(document.getElementById('entrega_id').value);
+		//update.entrega = req.body.entrega
+		if(update.puro <= 0)
 		update.puro = update.peso_bruto * (update.ley/1000)
+
 
 		Pieza.findByIdAndUpdate(piezaId,update,(err,piezaUpdated)=>{
 			if(err) return res.status(500).send({message:`Error al actualizar la pieza: ${ err }`})

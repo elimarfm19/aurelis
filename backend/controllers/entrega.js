@@ -13,7 +13,9 @@ const Cliente = require('../models/cliente')
 	 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
 	 	if(!entrega) return res.status(404).send({message:'La entrega no existe'})
 	 	
-	 	res.status(200).send(entrega)
+	 	Cliente.populate(entrega, {path: "cliente"},function(err, entrega){
+            res.status(200).send(entrega);
+        }); 
 	})
 }
 

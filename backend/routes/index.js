@@ -20,6 +20,8 @@ const detRecepcionController = require('../controllers/detRecepcion')
 var cors = require('cors')
 const api = express.Router()
 
+api.put('http://localhost:9000/', cors())
+
 api.options('/products/:id', cors())
 api.options('/products/', cors())
 api.get('/products',cors(),ProductController.getProducts)
