@@ -32,7 +32,24 @@ $scope.update = function(pieza) {
  //    $scope.pieza.entrega = null;
  //  }
   //console.log(pieza);
-   $scope.pieza.$update(function(){
+ 
+  $scope.pieza.$update(function(){
+    // pieza.status = 'Verificado'
+      console.log(pieza)
+    refresh();
+  });
+};
+
+$scope.verificar = function(pieza) {
+  pieza.status = 'Verificado'
+  $scope.pieza.$update(function(){
+    refresh();
+  });
+};
+
+$scope.ajuste = function(pieza) {
+  pieza.status = 'Ajuste'
+  $scope.pieza.$update(function(){
     refresh();
   });
 };
@@ -132,6 +149,7 @@ $scope.showPiezas = function(piezas){
     return piezas.status === 'Disponible' || 
         piezas.entrega._id === document.getElementById('entrega_id').value; 
 };
+
 
 })
 

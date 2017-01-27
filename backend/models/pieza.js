@@ -19,6 +19,7 @@ var Pieza = new Schema({
     ley: Number,
     puro: Number,
     peso_entrega: Number,
+    observacion: String,
     recepcion: { type: Schema.ObjectId, ref: "Recepcion" },
     entrega: { type: Schema.ObjectId, ref: "Entrega" }
 });
