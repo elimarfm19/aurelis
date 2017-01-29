@@ -12,8 +12,37 @@
                   <input id="Password" type="password" class="validate">
                   <label for="Password"><i class="zmdi zmdi-lock"></i>&nbsp; Contraseña</label>
               </div>
-              <button class="waves-effect waves-teal btn-flat">Ingresar &nbsp; <i class="zmdi zmdi-mail-send" href="views/inicio.html"></i><a ></a></button>
-          </form>
-          <div class="divider" style="margin: 20px 0;"></div>
-          <a ng-href="aurelis.html">Crear cuenta</a>
-        </div>
+              
+
+             
+          </form><button class="waves-effect waves-teal btn-flat"> 
+          <a id="login" onclick="login()" href="aurelis.html" >Ingresar &nbsp; <i class="zmdi zmdi-mail-send"></i></a>
+          </button>
+          <!-- <div class="divider" style="margin: 20px 0;"></div>
+          <a id="login" onclick="login()" href="aurelis.html">Crear cuenta</a>
+        </div> -->
+
+        <script type="text/javascript">
+          
+
+          function login(){
+
+               var username = document.getElementById("UserName").value;
+               var password = document.getElementById("Password").value;
+
+
+              document.getElementById("login").addEventListener("click", function(event){
+                if (username != "admin" && password!="1234"  ) {
+                      event.preventDefault();
+                }else{
+                  console.log("estoy aqui");
+                   document.getElementById("login").click();
+                }
+                    
+            });
+         
+            //$window.location.href = '/aurelis.html';
+          console.log(username+" / "+password)
+          }
+
+        </script>
