@@ -69,7 +69,7 @@ function storeEntrega(req,res){
 	let entrega = new Entrega()
 
     entrega.fecha_entrega = new Date, 'dd/MM/yyyy'
-    entrega.cantidad = 0
+    entrega.cantidad = req.body.cantidade
     entrega.cliente = req.body.cliente
 
 	entrega.save((err,entregaStored)=>{
@@ -86,12 +86,10 @@ function storeEntrega(req,res){
 function updateEntrega(req,res){
 	let entregaId = req.params.id
 	let update = req.body
-
+		
 		Entrega.findByIdAndUpdate(entregaId,update,(err,entregaUpdated)=>{
-			if(err) return res.status(500).send({message:`Error al actualizar la entrega: ${ err }`})
-			
-			res.status(200).send(entregaUpdated)
-			
+			if(err) return res.status(500).send({message:`Error al actualizar la entrega: ${ err }`})			
+			res.status(200).send(entregaUpdated)			
 		})
 
 }

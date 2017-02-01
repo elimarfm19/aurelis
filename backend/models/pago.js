@@ -8,7 +8,7 @@ var Cierre = require('../models/cierre');
 // ESQUEMA PARA PAGOS
 var Pago = new Schema({
    // fecha: Date,
-    referencia: String,
+    ci: String,
     banco: String,
     titular: String,
     monto_pagado: Number,

@@ -52,11 +52,6 @@
               <form name="Codenx" novalidate>
                 <input hidden type="text" ng-model="entrega._id">
                 <input hidden value="{{entrega._id}}" id="entrega_id">
-                <!-- <div class="row" style="text-align: right; margin-right: 0%;">
-                  <button class="btn btn-primary" ng-click="add(pieza)" ng-if="!pieza._id" type="submit" ng-disabled="!Codenx.$valid">Añadir</button>
-                  
-                </div> -->
-               <!-- <button class="btn btn-info" ng-click="update(pieza)" ng-show="pieza._id" type="submit" id="actualizar">Actualizar</button> -->
                 <table class="table table-hover table-striped">
                   <thead>
                     <tr class="active">
@@ -81,15 +76,11 @@
                         {{pieza.ley}}
                       </td>
                       <td class="center-align">
-                        {{pieza.puro}}
+                        {{pieza.puro_c}}
                       </td>
                       <td class="center-align">
                         {{pieza.peso_entrega}}
                       </td>
-                     <!--  <td class="" style="width: 7%">
-                          <span class="glyphicon glyphicon-pencil" style="cursor: pointer;" ng-click=edit(pieza._id)/>
-                          <span class="glyphicon glyphicon-trash" style="cursor: pointer;" ng-click='remove(pieza)'/>
-                      </td> -->
                       <td>  
                         <input type="checkbox" id="check{{pieza._id}}" ng-click="editE(pieza,entrega.cliente)" ng-model="check" ng-checked="pieza.entrega._id == entrega._id"> 
                       </td>
@@ -117,7 +108,7 @@
         </div>
         <div class="modal-footer"> 
           <div class="btn-group">           
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+            <button type="button" class="btn btn-default" ng-click="update(entrega)" data-dismiss="modal">Close</button> 
           </div>
         </div>
       </div>

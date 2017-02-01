@@ -40,8 +40,8 @@ $scope.add = function(entrega) {
 
 $scope.update = function(entrega) {
 
-  entrega.cantidad = document.getElementById('cantidad').value;
-  console.log(entrega.cantidad);
+  entrega.cantidad = document.getElementById('cantidade').value;
+  // console.log(entrega.cantidad);
   $scope.entrega.$update(function(entregaUpdated){
   refresh();
   });

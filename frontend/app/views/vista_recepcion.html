@@ -9,7 +9,7 @@
 	          <form name="Codenx" novalidate class="col s12">
               <div class="row col-md-12">                            
                 <div class="" ng-controller="ctrl-proveedor" > 
-                  <select class="select col-md-6" ng-model="recepcion.proveedor" ng-change="buscarProveedor(recepcion.proveedor)"  required>
+                  <select class="select col-md-6" ng-model="recepcion.proveedor" ng-change="buscarProveedor(recepcion.proveedor)" ng-disabled="recepcion.RecepcionId" required>
                     <option value="">Seleccione Proveedor</option>
                     <option ng-repeat="proveedor in proveedores" ng-if="(proveedor.cerrado - proveedor.entregado) > 0" value="{{proveedor._id}}">{{proveedor.nombres}} {{proveedor.apellidos}}</option> 
                   </select>
@@ -81,7 +81,7 @@
                         <input class="form-control center-align" ng-model="pieza.peso_entrega" required="" placeholder="146">
                       </td>
                       <td style="width: 20%;">
-                        <input class="form-control center-align" required="" disabled type="text" class="validate" value="{{(pieza.peso_entrega * (pieza.ley/1000)) | currency:''}} ">
+                        <input class="form-control center-align" required="" disabled type="text" class="validate" value="{{(pieza.peso_bruto * (pieza.ley/1000)) | currency:''}} ">
                       </td>
                     </tr>
                     <tr ng-repeat="pieza in piezas | filter: recepcion._id" >
@@ -98,7 +98,7 @@
                         {{pieza.peso_entrega}}
                       </td>
                       <td class="center-align">
-                        {{pieza.peso_entrega * (pieza.ley/1000)}}
+                        {{pieza.peso_bruto * (pieza.ley/1000)}}
                       </td>
                       <td class="center-align" style="width: 14%">
                           <span class="zmdi zmdi-edit zmdi-hc-2x" style="cursor: pointer;" ng-click=edit(pieza._id)/>

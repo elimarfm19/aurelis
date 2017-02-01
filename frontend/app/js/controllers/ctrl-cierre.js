@@ -14,6 +14,7 @@ refresh();
 $scope.add = function(cierre) {
   console.log(cierre.cliente);
   cierre.fecha_entrega =document.getElementById('fecha_entrega').value;
+  cierre.fecha_cierre =document.getElementById('fecha_cierre').value;
   Cierre.save(cierre,function(cierre){
   	
    //refresh();
@@ -23,6 +24,7 @@ $scope.add = function(cierre) {
 $scope.update = function(cierre) {
   console.log(cierre);
   cierre.fecha_entrega =document.getElementById('fecha_entrega').value;
+  cierre.fecha_cierre =document.getElementById('fecha_cierre').value;
   //cierre.monto_pagado = document.getElementById('monto_pagado').value;
   cierre.monto_pagado = $rootScope.scopeRaiz;
   $scope.cierre.$update(function(cierreUpdated){
@@ -48,6 +50,10 @@ $scope.deselect = function() {
 
 $scope.date = function() {
   $scope.date = $filter('date')($scope.cierre.fecha_entrega, "yyyy-MM-dd");;
+}
+
+$scope.date_c = function() {
+  $scope.date_c = $filter('date')($scope.cierre.fecha_cierre, "yyyy-MM-dd");;
 }
 
 

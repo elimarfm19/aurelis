@@ -47,7 +47,7 @@ function storeCierre(req,res){
 	let cierre = new Cierre()
 	let cliente = new Cliente()
     cierre.cliente = req.body.cliente
-    cierre.fecha_cierre = new Date, 'dd/MM/yyyy'
+    cierre.fecha_cierre = req.body.fecha_cierre
     cierre.fecha_entrega = req.body.fecha_entrega
     cierre.cantidad = req.body.cantidad
     cierre.precio = req.body.precio
@@ -80,6 +80,7 @@ function updateCierre(req,res){
 	  	update.cantidad = req.body.cantidad
 	  	update.precio = req.body.precio
 	  	update.fecha_entrega = req.body.fecha_entrega
+	  	update.fecha_cierre = req.body.fecha_cierre
 	  	Cierre.findById(cierreId,function(err,cierre){
 	  		Cliente.findById(req.body.cliente,function(err,cliente){	  		
 				cliente.cerrado -= cierre.cantidad;		    

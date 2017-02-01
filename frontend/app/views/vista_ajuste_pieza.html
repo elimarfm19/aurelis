@@ -41,7 +41,7 @@
                     {{pieza.ley}}
                   </td>
                   <td class="center-align">
-                    {{pieza.puro}}
+                    {{pieza.puro_c}}
                   </td>                        
                   <td class="center-align">
                     {{pieza.peso_entrega}}
@@ -75,7 +75,7 @@
 	          <form name="Codenx" novalidate class="col s12">
               <div class="row">
                 <div class="input-field col s6">
-                  <input ng-required="true" id="peso_bruto" type="text" style="text-align: right" class="validate" ng-model="pieza.peso_bruto">
+                  <input ng-disabled="true" id="peso_bruto" type="text" style="text-align: right" class="validate" ng-model="pieza.peso_bruto">
                   <label for="peso_bruto">Peso Bruto</label>
                 </div>
                 <div class="input-field col s6">
@@ -99,10 +99,6 @@
                    <label for="direccion">Observación</label>
                 </div>
              </div>
-             <!--<div style="text-align:center">
-                 <button class="btn btn-info" ng-click="update(pieza)" ng-if="pieza._id" type="submit" data-dismiss="modal">ACTUALIZAR</button>
-                 <button class="btn" ng-click="deselect()" ng-if="pieza._id">LIMPIAR</button>
-             </div>-->
               <div class="modal-footer"> 
                 <div class="row">
                   <div class="col-md-3">

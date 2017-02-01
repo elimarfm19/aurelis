@@ -57,7 +57,8 @@ function storePieza(req,res){
     pieza.status = 'Disponible'
     pieza.peso_bruto = req.body.peso_bruto
     pieza.ley = req.body.ley
-	pieza.puro = parseFloat(req.body.peso_entrega * (req.body.ley / 1000)).toFixed(2)
+	pieza.puro_p = parseFloat(req.body.peso_bruto * (req.body.ley / 1000)).toFixed(2)
+	pieza.puro_c = parseFloat(req.body.peso_entrega * (req.body.ley / 1000)).toFixed(2)
     pieza.peso_entrega = req.body.peso_entrega
 	pieza.observacion = req.body.observacion
     pieza.ajuste = req.body.ajuste
@@ -76,20 +77,31 @@ function storePieza(req,res){
 
 function updatePieza(req,res){
 	let piezaId = req.params.id
+	let puroViejoP;
 	let update = req.body
-	//console.log(document.getElementById('entrega_id').value);
-		//update.entrega = req.body.entrega
-		update.puro = parseFloat(update.peso_entrega * (update.ley/1000)).toFixed(2);
 
+		Pieza.findById(piezaId,(err,pieza)=>{
 
+			if (pieza.ley!=update.ley){				
+				pieza.recepcion.proveedor.entregado-= pieza.puro_p;
+				pieza.entrega.cliente.entregado-=pieza.puro_c;				
+				pieza.puro_p = parseFloat(pieza.peso_bruto*(update.ley/1000)).toFixed(2);
+				pieza.puro_c =	parseFloat(pieza.peso_entrega*(update.ley/1000)).toFixed(2);		
+				pieza.recepcion.proveedor.entregado+= pieza.puro_p;
+				pieza.entrega.cliente.entregado+=pieza.puro_c;				
+			}
+			if (pieza.peso_entrega!=update.peso_entrega){
+				pieza.entrega.cliente.entregado-= pieza.puro_c;				
+				pieza.puro_p= parseFloat(update.peso_entrega*(pieza.ley/1000)).toFixed(2);
+				pieza.entrega.cliente.entregado+= pieza.puro_c;
+			}
+		})
+
+		//update.puro = parseFloat(update.peso_entrega * (update.ley/1000)).toFixed(2);
 		Pieza.findByIdAndUpdate(piezaId,update,(err,piezaUpdated)=>{
 			if(err) return res.status(500).send({message:`Error al actualizar la pieza: ${ err }`})
-
-			res.status(200).send(piezaUpdated)
-			
-		})
-		
-
+			res.status(200).send(piezaUpdated)	
+		})		
 }
 
 
