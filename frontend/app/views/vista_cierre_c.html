@@ -6,16 +6,15 @@
 				    <br>
             <div class="row col-md-5" style="border-right: 1px solid black;">
               <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nuevo Cierre de Cliente</h3>    
-              <br>
               <form name="Codenx" novalidate class="col s12">
-                <div class="row ">                            
-                  <div class="input-field col-md-6"> 
+                <div class="row input-field">                            
+                  <h2 style="color:black; text-align: right; font-weight:600; font-size: 15px; font-family: 'Tahoma'; margin-right: 5%;">Cod. Cierre: {{cierre.CierreId}}</h2>                                        
+                </div>
+                <div class="row col-md-8">
                   <select class="select" ng-model="cierre.cliente" ng-disabled="cierre.CierreId">
                       <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Seleccione un Cliente</option>
                       <option ng-repeat="cliente in clientes" value="{{ cliente._id }}" >{{ cliente.nombres }}  {{ cliente.apellidos }}</option>                    
-                    </select>                                                                    
-                  </div> 
-                  <h2 style="color:black; text-align: right; font-weight:600; font-size: 15px; font-family: 'Tahoma'; margin-right: 5%;">Cod. Cierre: {{cierre.CierreId}}</h2>
+                    </select>
                 </div>
                 <div class="row">
                   <div class="col-md-6">
