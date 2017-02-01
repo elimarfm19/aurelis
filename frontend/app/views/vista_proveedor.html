@@ -11,7 +11,7 @@
 
             <div class="row">
                 <div class="btn-group col-md-2 col-md-offset-10">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="deselect()">
+                  <button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#myModal" ng-click="deselect()">
                     <span class="glyphicon glyphicon-plus" style="font-weight: 600; font-family: 'Tahoma';"> Nuevo</span>
                   </button>
                 </div>
@@ -52,7 +52,7 @@
                               </td>
                               <td class="center-align">                                  
                                 <!--<button class="btn btn-danger glyphicon glyphicon-trash btn-xs" ng-click="remove(proveedor)"></button>-->
-                                <button class="btn btn-warning zmdi zmdi-edit zmdi-hc-2x" ng-click="edit(proveedor._id)" data-toggle="modal" data-target="#myModal"></button>
+                                <button class="btn btn-warning zmdi zmdi-edit zmdi-hc-2x waves-effect waves-light" ng-click="edit(proveedor._id)" data-toggle="modal" data-target="#myModal"></button>
                               </td>
                             </tr>
                         </tbody>
@@ -120,9 +120,9 @@
                 </div>
              </div>
              <div style="text-align:center">
-                 <button class="btn btn-primary" ng-click="add(proveedor)" ng-if="!proveedor._id" type="submit" ng-disabled="!Codenx.$valid" data-dismiss="modal">AÑADIR</button>
-                 <button class="btn btn-info" ng-click="update(proveedor)" ng-if="proveedor._id" type="submit" ng-change="verifyDuplicate()" data-dismiss="modal">ACTUALIZAR</button>
-                 <button class="btn" ng-click="deselect()" ng-if="proveedor._id">LIMPIAR</button>
+                 <button class="btn btn-primary waves-effect waves-light" ng-click="add(proveedor)" ng-if="!proveedor._id" type="submit" ng-disabled="!Codenx.$valid" data-dismiss="modal">AÑADIR</button>
+                 <button class="btn btn-info waves-effect waves-light" ng-click="update(proveedor)" ng-if="proveedor._id" type="submit" ng-change="verifyDuplicate()" data-dismiss="modal">ACTUALIZAR</button>
+                 <button class="btn waves-effect waves-light" ng-click="deselect()" ng-if="proveedor._id">LIMPIAR</button>
              </div>
              <br>                                                
 	         </form>
