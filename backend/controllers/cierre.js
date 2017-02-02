@@ -11,6 +11,8 @@ const Cliente = require('../models/cliente')
 	 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
 	 	if(!cierre) return res.status(404).send({message:'El cierre no existe'})
 	 	
+	 	
+	 			//cierre.fecha_cierre = '145';
 	 	res.status(200).send(cierre)
 	})
 }

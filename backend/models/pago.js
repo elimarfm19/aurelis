@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var Cierre = require('../models/cierre');
+var CierreProveedor = require('../models/cierre_p');
 
 
 // ESQUEMA PARA PAGOS
@@ -12,7 +12,7 @@ var Pago = new Schema({
     banco: String,
     titular: String,
     monto_pagado: Number,
-    cierre: { type: Schema.ObjectId, ref: "Cierre" }
+    cierre_p: { type: Schema.ObjectId, ref: "CierreProveedor" }
 });
 
 

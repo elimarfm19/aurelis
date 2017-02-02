@@ -60,6 +60,7 @@ function storePago(req,res){
     pago.titular = req.body.titular
     pago.banco = req.body.banco
     pago.monto_pagado = req.body.monto_pagado
+    pago.cierre_p = req.body.cierre_p
 
 	pago.save((err,pagoStored)=>{
 

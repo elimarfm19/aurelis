@@ -19,11 +19,11 @@
                 <div class="row">
                   <div class="col-md-6">
                     <h2 style="color:black; font-weight:600; font-size: 12px; font-family: 'Tahoma'; text-align: center;">Fecha de cierre:</h2>
-                    <input type="text" id="fecha_cierre" ng-model="date_c" value="{{ date_c() }}" />
+                    <input type="text" id="fecha_cierre" ng-model="cierre.fecha_cierre" />
                   </div>
                   <div class="col-md-6">
                     <h2 style="color:black; font-weight:600; font-size: 12px; font-family: 'Tahoma'; text-align: center;">Fecha de entrega:</h2>
-                    <input type="text" id="fecha_entrega" ng-model="date" value="{{ date() }}" /> 
+                    <input type="text" id="fecha_entrega" ng-model="cierre.fecha_entrega"/> 
                   </div>
                 </div>
                 <div class="row ">
@@ -41,20 +41,14 @@
                     <input disabled value="{{cierre.cantidad * cierre.precio | currency:'Bs '}}" id="total_c" type="text" class="validate" style="text-align: right;">
                     <label for="total_c">Total Cierre</label>
                   </div>
-                  <div class="input-field col s6" ng-controller="ctrl-pago">
+                  <!-- <div class="input-field col s6" ng-controller="ctrl-pago">
                      <input disabled value="{{scopeRaiz | currency:'Bs ' }}" type="text" class="validate" style="text-align: right;" id="monto_pagado">
                      <label for="total_p">Total Pagado</label> 
-                  </div>                               
+                  </div>   -->                             
                 </div>
-                <div style="text-align:center">
-                <!-- Trigger the modal with a button -->
-                  <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#pagosModal" ng-if="cierre.CierreId" ng-disabled="cierre.total <= scopeRaiz">Pagos
-                    <i class="zmdi zmdi-money"></i>
-                  </button>
-                </div> 
                 <br>  
                 <div style="text-align:center">                        
-                  <button class="btn btn-primary waves-effect waves-light"data-toggle="modal" data-target="#pagosModal" ng-click="add(cierre)" ng-if="!cierre._id" type="submit" ng-disabled="!Codenx.$valid">CREAR</button>
+                  <button class="btn btn-primary waves-effect waves-light" ng-click="add(cierre)" ng-if="!cierre._id" type="submit">CREAR</button>
                   <button class="btn btn-info waves-effect waves-light" ng-click="update(cierre)" ng-if="cierre._id" type="submit">ACTUALIZAR</button>
                   <button class="btn waves-effect waves-light" ng-click="deselect()" ng-if="cierre._id">LIMPIAR</button>
                 </div>
@@ -78,7 +72,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td style="width: 30%;" ng-controller="ctrl-proveedor">
+                      <td style="width: 30%;">
                         <div class="input-field">
                           <select class="select" ng-model="cierre_p.proveedor" ng-disabled="cierre_p.Cierre_pId">
                             <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Proveedor</option>
@@ -88,42 +82,47 @@
                       </td>
                       <td style="width: 20%;">
                         <div class="input-field">
-                          <input class="form-control center-align" ng-model="pago.titular" required="" placeholder="">
+                          <input class="form-control center-align" ng-model="cierre_p.cantidad" required="" placeholder="">
                         </div>
                       </td>
                       <td style="width: 20%;">
                         <div class="input-field">
-                          <input class="form-control center-align" ng-model="pago.banco" required="" placeholder="">
+                          <input class="form-control center-align" ng-model="cierre_p.precio" required="" placeholder="">
                         </div>
                       </td>
                       <td style="width: 30%;">
                         <div class="input-field">
-                          <input class="form-control center-align" ng-model="pago.monto_pagado" required="" placeholder="">
+                          <input class="form-control center-align" ng-model="cierre_p.total" required="" placeholder="">
                         </div>
                       </td>
                       <td class="center-align">
-                        <button class="btn btn-primary waves-effect waves-light"><i class="zmdi zmdi-check"></i></button>
+                        <button class="btn btn-primary waves-effect waves-light"><i class="zmdi zmdi-check" ng-click="addCierreProveedor(cierre._id)"></i></button>
                       </td>
                     </tr>
-                      <tr ng-repeat="pago in pagos | filter: cierre._id" >
+                      <tr ng-repeat="cierre_p in cierreproveedores | filter: cierre._id" ng-if="cierre._id">
                         <td class="center-align">
-                          <!--{{pago.fecha |  date:'dd/MM/yyyy' : shortDate}}-->
+                          {{cierre_p.proveedor.nombres}} {{cierre_p.proveedor.apellidos}}
                         </td>
                         <td class="center-align">
-                          {{pago.ci}}
+                          {{cierre_p.cantidad}}
                         </td>
                         <td class="center-align">
-                          {{pago.titular}}
+                          {{cierre_p.precio}}
                         </td>
                         <td class="center-align">
-                          {{pago.banco}}
+                          {{cierre_p.total}}
                         </td>
-                        <td class="center-align">
-                          {{pago.monto_pagado}}
-                        </td>
+                        <!-- <td class="center-align">
+                          {{cierre_p.monto_pagado}}
+                        </td> -->
                         <td class="center-align" style="width: 14%">
                             <span class="zmdi zmdi-edit zmdi-hc-2x waves-effect waves-light" style="cursor: pointer;" ng-click=edit(pago._id)/>
                             <span class="zmdi zmdi-delete zmdi-hc-2x waves-effect waves-light" style="cursor: pointer;" ng-click='remove(pago)'/>
+
+              
+                  <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#pagosModal" ng-click="openPagosProveedor(cierre_p._id)">Pagos
+                    <i class="zmdi zmdi-money"></i>
+                  </button>
                         </td>
                       </tr>
                         <tr>
@@ -149,9 +148,8 @@
         </div>
       </div>
     </div>
-     <br>
 
-<div class="container">
+ <div class="container">
     <!-- Modal -->
   <div class="modal fade" id="pagosModal" role="dialog">
     <div class="modal-dialog">
@@ -162,11 +160,11 @@
           <h4 class="modal-title center-align" style="color:black; font-weight:600; font-family: 'Tahoma';">Registro de Pagos</h4>
         </div>
         <div class="modal-body">
-          <div class="row" ng-controller="ctrl-pago">
+          <div class="row">
             <div class="table-responsive" >
               <form name="Codenx" novalidate>
                 <div class="row" style="text-align: right; margin-right: 0%;">
-                  <button class="btn btn-primary" ng-click="add(pago)" ng-if="!pago._id" type="submit" ng-disabled="!Codenx.$valid">Añadir</button>
+                  <button class="btn btn-primary" ng-click="addPagosProveedor(pago)" ng-if="!pago._id" type="submit" ng-disabled="!Codenx.$valid">Añadir</button>
                   <button class="btn btn-info" ng-click="update(pago)" ng-if="pago._id" type="submit">Actualizar</button>
                 </div>
                 <table class="table table-hover table-striped">
@@ -185,8 +183,8 @@
                   <tbody>
                     <tr>
                       <td>
-                        <input hidden type="text" ng-model="cierre._id">
-                        <input hidden value="{{cierre._id}}" id="cierre_id">
+                        <input hidden type="text" ng-model="cierre_p._id">
+                        <input hidden value="" id="cierre_pId" ng-model="cierre_pId">
                        <!-- <input type="date" class="form-control center-align" ng-model="pago.fecha" required="" placeholder="Pago Fecha">-->
                       </td>
                       <td>
@@ -202,10 +200,10 @@
                         <input class="form-control center-align" ng-model="pago.monto_pagado" required="" placeholder="25.000.000.000">
                       </td>
                     </tr>
-                    <tr ng-repeat="pago in pagos | filter: cierre._id" >
-                      <td class="center-align">
-                        <!--{{pago.fecha |  date:'dd/MM/yyyy' : shortDate}}-->
-                      </td>
+                    <tr ng-repeat="pago in pagos | filter: {cierre_p: cierre_pId}" >
+                      <!-- <td class="center-align">
+                        {{pago.fecha |  date:'dd/MM/yyyy' : shortDate}}
+                      </td> -->
                       <td class="center-align">
                         {{pago.ci}}
                       </td>
@@ -246,13 +244,14 @@
         </div>
         <div class="modal-footer"> 
           <div class="btn-group">           
-            <button type="button" class="btn btn-default" ng-click="update(cierre)" data-dismiss="modal">Close</button> 
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
           </div>
         </div>
       </div>
     </div>
   </div>  
 </div>    
+
 
 <script type="text/javascript">
   $('#fecha_entrega').datepicker({

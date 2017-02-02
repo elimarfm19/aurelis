@@ -39,6 +39,7 @@
     "test": "grunt test"
   },
   "dependencies": {
+    "moment": "^2.17.1",
     "mongodb-autoincrement": "^1.0.1"
   }
 }

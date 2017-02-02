@@ -53,6 +53,7 @@ function storeCierreP(req,res){
     cierre.precio = req.body.precio
     cierre.total = req.body.cantidad * req.body.precio
     cierre.monto_pagado = req.body.monto_pagado
+    cierre.cierre = req.body.cierre
     cierre.status = 'Abierto'
 
     Proveedor.findById(req.body.proveedor,function(err,proveedor){

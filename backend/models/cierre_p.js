@@ -6,6 +6,7 @@ var autoIncrement = require('mongoose-auto-increment');
 
 autoIncrement.initialize(mongoose);
 var Proveedor = require('../models/proveedor');
+var Cierre = require('../models/cierre');
 
 // ESQUEMA PARA CIERRES PROVEEDOR
 var CierreProveedor = new Schema({
@@ -20,7 +21,8 @@ var CierreProveedor = new Schema({
         type: String,
         enum: ['Abierto','Cerrado','Eliminado']
     },
-    proveedor: { type: Schema.ObjectId, ref: "Proveedor" }
+    proveedor: { type: Schema.ObjectId, ref: "Proveedor" },
+    cierre: { type: Schema.ObjectId, ref: "Cierre" } 
 });
 
 CierreProveedor.plugin(autoIncrement.plugin, {

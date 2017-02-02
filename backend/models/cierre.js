@@ -3,15 +3,15 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var autoIncrement = require('mongoose-auto-increment');
- 
+
 autoIncrement.initialize(mongoose);
 var Cliente = require('../models/cliente');
 
 // ESQUEMA PARA CIERRES
 var Cierre = new Schema({
     CierreId: Number,
-    fecha_cierre: { type : Date, required : true },
-    fecha_entrega:  { type : Date, required : true },
+    fecha_cierre: {type: String, required: true},
+    fecha_entrega:  {type: String, required: true},
     cantidad: Number,
     precio: Number,
     total: Number,
