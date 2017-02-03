@@ -54,7 +54,7 @@ function storeCierre(req,res){
     cierre.cantidad = req.body.cantidad
     cierre.precio = req.body.precio
     cierre.total = req.body.cantidad * req.body.precio
-    cierre.monto_pagado = req.body.monto_pagado
+    cierre.ganancia = req.body.ganancia
     cierre.status = 'Abierto'
 
     Cliente.findById(req.body.cliente,function(err,cliente){
@@ -83,20 +83,28 @@ function updateCierre(req,res){
 	  	update.precio = req.body.precio
 	  	update.fecha_entrega = req.body.fecha_entrega
 	  	update.fecha_cierre = req.body.fecha_cierre
-	  	Cierre.findById(cierreId,function(err,cierre){
-	  		Cliente.findById(req.body.cliente,function(err,cliente){	  		
-				cliente.cerrado -= cierre.cantidad;		    
-				cliente.save();
-	    		cliente.cerrado += parseFloat(req.body.cantidad);
-	    		cliente.save();
-	    			Cierre.findByIdAndUpdate(cierreId,update,{new: true},(err,cierreUpdated)=>{
+	  	update.ganancia = req.body.ganancia
+
+
+	  //	console.log(update.precio);
+	  // 	Cierre.findById(cierreId,function(err,cierre){
+	  // 		Cliente.findById(cierre.cliente._id,function(err,cliente){	  		
+			// 	cliente.cerrado -= cierre.cantidad;		    
+			// 	cliente.save();
+	  //   		cliente.cerrado += parseFloat(req.body.cantidad);
+	  //   		cliente.save();
+	  //   			Cierre.findByIdAndUpdate(cierreId,update,{new: true},(err,cierreUpdated)=>{
+			// 			if(err) return res.status(500).send({message:`Error al actualizar el cierre: ${ err }`})
+			// 			res.status(200).send(cierreUpdated)
+	  //   			});
+	    			
+			// })
+
+// });
+Cierre.findByIdAndUpdate(cierreId,update,{new: true},(err,cierreUpdated)=>{
 						if(err) return res.status(500).send({message:`Error al actualizar el cierre: ${ err }`})
 						res.status(200).send(cierreUpdated)
 	    			});
-	    			
-			})
-
-});
     	//console.log('cantidad nueva'+req.body.cantidad);
 }
 

@@ -6,12 +6,13 @@
 				    <br>
             <div class="row col-md-5" style="border-right: 1px solid black;">
               <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nuevo Cierre de Cliente</h3>    
-              <form name="Codenx" novalidate class="col s12">
+              <form name="Codenx1" novalidate class="col s12">
+               <input hidden id="cierre_id" type="text" ng-model="cierre._id">
                 <div class="row input-field">                            
                   <h2 style="color:black; text-align: right; font-weight:600; font-size: 15px; font-family: 'Tahoma'; margin-right: 5%;">Cod. Cierre: {{cierre.CierreId}}</h2>                                        
                 </div>
                 <div class="row col-md-8">
-                  <select class="select" ng-model="cierre.cliente" ng-disabled="cierre.CierreId">
+                  <select class="select" ng-required="true" ng-model="cierre.cliente" ng-disabled="cierre.CierreId">
                       <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Seleccione un Cliente</option>
                       <option ng-repeat="cliente in clientes" value="{{ cliente._id }}" >{{ cliente.nombres }}  {{ cliente.apellidos }}</option>                    
                     </select>
@@ -37,18 +38,18 @@
                   </div>                                
                 </div>
                 <div class="row ">
-                  <div class="input-field col s6">
-                    <input disabled value="{{cierre.cantidad * cierre.precio | currency:'Bs '}}" id="total_c" type="text" class="validate" style="text-align: right;">
+                  <div class="input-field col-md-6 col-offset-4">
+                    <input value="{{cierre.cantidad * cierre.precio | currency:'Bs '}}" id="total_c" type="text" class="validate" style="text-align: right;">
                     <label for="total_c">Total Cierre</label>
                   </div>
-                  <!-- <div class="input-field col s6" ng-controller="ctrl-pago">
-                     <input disabled value="{{scopeRaiz | currency:'Bs ' }}" type="text" class="validate" style="text-align: right;" id="monto_pagado">
-                     <label for="total_p">Total Pagado</label> 
-                  </div>   -->                             
+                  <div class="input-field col s6">
+                     <input disabled value="{{ scopeRaiz - gramosp }}" ng-model="cierre.ganancia" type="text" class="validate" style="text-align: right;" id="ganancia">
+                     <label for="total_p">Ganancia</label> 
+                  </div>                               
                 </div>
                 <br>  
                 <div style="text-align:center">                        
-                  <button class="btn btn-primary waves-effect waves-light" ng-click="add(cierre)" ng-if="!cierre._id" type="submit">CREAR</button>
+                  <button class="btn btn-primary waves-effect waves-light" ng-click="add(cierre)" ng-disabled="!Codenx1.$valid" ng-show="!cierre.CierreId" type="submit">CREAR</button>
                   <button class="btn btn-info waves-effect waves-light" ng-click="update(cierre)" ng-if="cierre._id" type="submit">ACTUALIZAR</button>
                   <button class="btn waves-effect waves-light" ng-click="deselect()" ng-if="cierre._id">LIMPIAR</button>
                 </div>
@@ -59,48 +60,51 @@
             <div class="row col-md-7">
               <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Proveedores</h3>
               <br>
-              <div class="col-md-12">
-                <table class="table table-hover table-striped">
-                  <thead>
-                    <tr class="active">
-                      <th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 400px 4px 0 0;">  Proveedor</th>
-                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Cantidad</th>
-                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Precio</th>
-                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Total</th>
-                      <th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 0 400px 4px 0;"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td style="width: 30%;">
-                        <div class="input-field">
-                          <select class="select" ng-model="cierre_p.proveedor" ng-disabled="cierre_p.Cierre_pId">
-                            <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Proveedor</option>
-                            <option ng-repeat="proveedor in proveedores" value="{{ proveedor._id }}" id="p" >{{ proveedor.nombres }}  {{ proveedor.apellidos }}</option> 
-                          </select> 
-                        </div>
-                      </td>
-                      <td style="width: 20%;">
-                        <div class="input-field">
-                          <input class="form-control center-align" ng-model="cierre_p.cantidad" required="" placeholder="">
-                        </div>
-                      </td>
-                      <td style="width: 20%;">
-                        <div class="input-field">
-                          <input class="form-control center-align" ng-model="cierre_p.precio" required="" placeholder="">
-                        </div>
-                      </td>
-                      <td style="width: 30%;">
-                        <div class="input-field">
-                          <input class="form-control center-align" ng-model="cierre_p.total" required="" placeholder="">
-                        </div>
-                      </td>
-                      <td class="center-align">
-                        <button class="btn btn-primary waves-effect waves-light"><i class="zmdi zmdi-check" ng-click="addCierreProveedor(cierre._id)"></i></button>
-                      </td>
-                    </tr>
-                      <tr ng-repeat="cierre_p in cierreproveedores | filter: cierre._id" ng-if="cierre._id">
+              <form name="Codenx2" novalidate class="col s12">
+               <input  id="total_pago" type="text" value="{{ scopeRaiz }}">
+                <input  id="total_gramos" type="text" value="{{ gramosp }}">
+                <div class="col-md-12">
+                  <table class="table table-hover table-striped">
+                    <thead>
+                      <tr class="active">
+                        <th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 400px 4px 0 0;">  Proveedor</th>
+                        <th class="center-align" style="background: #337ab7; color: #ffffff;">Cantidad (g)</th>
+                        <th class="center-align" style="background: #337ab7; color: #ffffff;">Precio * g</th>
+                        <th class="center-align" style="background: #337ab7; color: #ffffff;">Total</th>
+                        <th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 0 400px 4px 0;"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td style="width: 30%;">
+                          <div class="input-field">
+                            <select class="select" ng-required="true" ng-model="cierre_p.proveedor" ng-disabled="!cierre.CierreId">
+                              <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Proveedor</option>
+                              <option ng-repeat="proveedor in proveedores" value="{{ proveedor._id }}" id="p" >{{ proveedor.nombres }}  {{ proveedor.apellidos }}</option> 
+                            </select> 
+                          </div>
+                        </td>
+                        <td style="width: 20%;">
+                          <div class="input-field">
+                            <input class="form-control center-align" ng-model="cierre_p.cantidad" ng-required="true" placeholder="1250" ng-disabled="!cierre.CierreId">
+                          </div>
+                        </td>
+                        <td style="width: 20%;">
+                          <div class="input-field">
+                            <input class="form-control center-align" ng-required="true"ng-model="cierre_p.precio" required="true" placeholder="99000" ng-disabled="!cierre.CierreId">
+                          </div>
+                        </td>
+                        <td style="width: 30%;">
+                          <div class="input-field">
+                            <input disabled value="{{cierre_p.cantidad * cierre_p.precio | currency:'Bs '}}" id="total_p" type="text" class="validate" style="text-align: center;">
+                          </div>
+                        </td>
                         <td class="center-align">
+                          <button class="btn btn-primary waves-effect waves-light" ng-disabled="!Codenx2.$valid" ng-click="addCierreProveedor(cierre._id)"><i class="zmdi zmdi-check" ></i></button>
+                        </td>
+                      </tr>
+                      <tr ng-repeat="cierre_p in cierreproveedores | filter: cierre._id" ng-if="cierre._id">
+                        <td class="center-align" >
                           {{cierre_p.proveedor.nombres}} {{cierre_p.proveedor.apellidos}}
                         </td>
                         <td class="center-align">
@@ -110,39 +114,32 @@
                           {{cierre_p.precio}}
                         </td>
                         <td class="center-align">
-                          {{cierre_p.total}}
+                          {{cierre_p.cantidad*cierre_p.precio}}
                         </td>
                         <!-- <td class="center-align">
                           {{cierre_p.monto_pagado}}
                         </td> -->
-                        <td class="center-align" style="width: 14%">
-                            <span class="zmdi zmdi-edit zmdi-hc-2x waves-effect waves-light" style="cursor: pointer;" ng-click=edit(pago._id)/>
-                            <span class="zmdi zmdi-delete zmdi-hc-2x waves-effect waves-light" style="cursor: pointer;" ng-click='remove(pago)'/>
-
-              
-                  <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#pagosModal" ng-click="openPagosProveedor(cierre_p._id)">Pagos
-                    <i class="zmdi zmdi-money"></i>
-                  </button>
+                        <td class="center-align">
+                          <span class="zmdi zmdi-money-box zmdi-hc-2x waves-effect waves-light" style="cursor: pointer; font-size: 1.5em;" data-toggle="modal" data-target="#pagosModal" ng-click="openPagosProveedor(cierre_p._id)"/>
+                          <span class="zmdi zmdi-delete zmdi-hc-2x waves-effect waves-light" style="font-size: 1.5em;" /> 
                         </td>
                       </tr>
-                        <tr>
-                          <td colspan="5" style="text-align: right;">  
-                            <span class="label label-primary" style="font-size: 12px;">Total de Pagos: {{ monto_pagado() }}{{ scopeRaiz | currency: 'Bs '}} </span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colspan="5" style="text-align: right;">  
-                            <span class="label label-primary" style="font-size: 12px;">Total de Cierre: {{ cierre.total | currency: 'Bs '}} </span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colspan="5" style="text-align: right;">  
-                            <span class="label label-danger" style="font-size: 12px;">Ganancia: {{ cierre.total - scopeRaiz | currency: 'Bs '}} </span>
-                          </td>
-                        </tr>
-                    </tbody>
-                  </table>
-              </div>
+                      </tbody>
+                    </table>
+                    <div class="row">
+                      <div class="col-md-6 text-right">
+                        <span class="label label-info" style="font-size: 12px;">Por cerrar: {{ cierre.cantidad - gramosp | currency: ' '}} (g) </span>
+                      </div>
+                      <div class="col-md-5 text-right">
+                        <span class="label label-primary" style="font-size: 12px;">Total de Pagos: {{ scopeRaiz | currency: 'Bs '}} </span>
+                        <br> <br>
+                        <span class="label label-primary" style="font-size: 12px;">Total de Cierre: {{ cierre.total | currency: 'Bs '}} </span>
+                        <br><br>
+                        <span class="label label-success" style="font-size: 12px;">Ganancia: {{ cierre.total - scopeRaiz | currency: 'Bs '}} </span>
+                      </div>
+                    </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -184,6 +181,7 @@
                     <tr>
                       <td>
                         <input hidden type="text" ng-model="cierre_p._id">
+                       
                         <input hidden value="" id="cierre_pId" ng-model="cierre_pId">
                        <!-- <input type="date" class="form-control center-align" ng-model="pago.fecha" required="" placeholder="Pago Fecha">-->
                       </td>
@@ -201,9 +199,9 @@
                       </td>
                     </tr>
                     <tr ng-repeat="pago in pagos | filter: {cierre_p: cierre_pId}" >
-                      <!-- <td class="center-align">
-                        {{pago.fecha |  date:'dd/MM/yyyy' : shortDate}}
-                      </td> -->
+                      <td class="center-align">
+                        <!-- {{pago.fecha |  date:'dd/MM/yyyy' : shortDate}} -->
+                      </td>
                       <td class="center-align">
                         {{pago.ci}}
                       </td>
@@ -217,13 +215,13 @@
                         {{pago.monto_pagado}}
                       </td>
                       <td class="center-align" style="width: 14%">
-                          <span class="zmdi zmdi-edit zmdi-hc-2x" style="cursor: pointer;" ng-click=edit(pago._id)/>
+                         <!--  <span class="zmdi zmdi-edit zmdi-hc-2x" style="cursor: pointer;" ng-click=edit(pago._id)/> -->
                           <span class="zmdi zmdi-delete zmdi-hc-2x" style="cursor: pointer;" ng-click='remove(pago)'/>
                       </td>
                     </tr>
                       <tr>
                         <td colspan="5" style="text-align: right;">  
-                          <span class="label label-primary" style="font-size: 12px;">Total de Pagos: {{ monto_pagado() }}{{ scopeRaiz | currency: 'Bs '}} </span>
+                          <span class="label label-primary" style="font-size: 12px;">Total de Pagos: {{ scopeRaiz | currency: 'Bs '}} </span>
                         </td>
                       </tr>
                       <tr>

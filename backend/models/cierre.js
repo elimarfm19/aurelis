@@ -15,7 +15,7 @@ var Cierre = new Schema({
     cantidad: Number,
     precio: Number,
     total: Number,
-    monto_pagado: Number,
+    ganancia: Number,
     status: {
         type: String,
         enum: ['Abierto','Cerrado','Eliminado']
