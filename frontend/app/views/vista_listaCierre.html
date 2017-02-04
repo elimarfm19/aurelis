@@ -1,0 +1,59 @@
+
+<div class="container" >
+ </br>
+ <br>
+  <ul class="nav nav-tabs col-md-12" style="margin-left:0.2cm; " >
+    <li class="active"><a style="color:black; font-weight:600; font-family: 'Tahoma';" href="#proveedores_" data-toggle="tab">Cierres</a></li>
+  </ul>
+
+  <div class="tab-content col-md-9" style="margin-left: 1.3cm;">
+    <div class="tab-pane fade in active" id="proveedores_" >
+      <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Cierres </h3>
+      <br>
+      <br>
+      <div class="col-md-12" ng-controller="ctrl-cierre">
+        <div class="table-responsive">
+          <table class="table table-hover">
+              <thead>
+                <tr class="active">                          
+                  <th class="center-align" style="border-radius: 400px 4px 0 0;">Cod. Cierre</th>
+                  <th class="center-align">Cliente</th>
+                  <th class="center-align">Fecha Cierre</th>
+                  <th class="center-align">Cantidad (g)</th>
+                  <th class="center-align">Precio (Bs)</th>
+                  <th class="center-align">Total de Cierre (Bs)</th>                      
+                  <th class="center-align" style="border-radius: 0 400px 4px 0;">Opciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="cierre in cierres">
+                  <td class="center-align" >
+                    {{cierre.CierreId}}
+                  </td>
+                  <td class="center-align" >
+                    {{cierre.cliente.nombres}} {{cierre.cliente.apellidos}}
+                  </td>
+                  <td class="center-align" >                            
+                    {{cierre.fecha_cierre}}
+                  </td>
+                  <td class="center-align" >
+                    {{cierre.cantidad | currency: '' }} (g)
+                  </td>
+                  <td class="center-align" >
+                    {{cierre.precio | currency: 'Bs ' }}
+                  </td>
+                  <td class="center-align" >
+                    {{cierre.total | currency: 'Bs '}}
+                  </td>
+                  <td class="center-align">
+                    <button class="btn btn-warning zmdi zmdi-edit zmdi-hc-2x waves-effect waves-light" ng-click="edit(cierre._id)" data-toggle="modal" data-target="#myModal"></button>
+                    <button class="btn btn-danger zmdi zmdi-delete zmdi-hc-2x waves-effect waves-light" ng-click="delete(cierre._id)" data-toggle="modal" data-target="#myModal"></button>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+      </div>                
+    </div>
+  </div>
+</div>

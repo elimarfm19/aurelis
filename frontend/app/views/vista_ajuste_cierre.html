@@ -1,63 +1,266 @@
-<div class="container"  ng-controller="ctrl-cierre"> 
-      <div class="tamanno" ng-controller="ctrl-cliente">
-			  <div class="container col-md-6 col-md-offset-2" style="margin-top:100px; ">
-	        <div class="row" style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
-				    <br>
-	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Ajuste de Cierre Cliente</h3>
+
+    <div class="container"> 
+      <div class="tamanno">
+        <div class="container col-md-10 col-offset-2" style="margin-top:100px; "  >
+          <div class="row" style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;" >
             <br>
-	          <form class="col s12">
-              <div class="row" >  
-                <div class="col-md-6 col-md-offset-3" >
-                  <select class="select"  ng-model="cliente._id" required="true" ng-change="mostrarCierres(cliente._id)">   
-                    <option value="" disabled="">Seleccione un Cliente</option>         
-                    <option ng-repeat="cliente in clientes" value="{{cliente._id}}">{{cliente.nombres}} {{cliente.apellidos}}</option>
-                  </select> 
+            <div class="row col-md-5" style="border-right: 1px solid black;">
+              <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nuevo Cierre de Cliente</h3>    
+              <form name="Codenx1" novalidate class="col s12">
+               <input hidden id="cierre_id" type="text" ng-model="cierre._id">
+                <div class="row input-field">                            
+                  <h2 style="color:black; text-align: right; font-weight:600; font-size: 15px; font-family: 'Tahoma'; margin-right: 5%;">Cod. Cierre: {{cierre.CierreId}}</h2>                                        
                 </div>
-                <br>
-                <br>
-                <div class="col-md-8 col-md-offset-2">                
-                  <select class="select" ng-model="cierre._id" required="true">
-                    <option value="" disabled="" selected="true">Seleccione un Cierre</option>    
-                    <option ng-repeat="cierre in cierrescliente" value="{{cierre._id}}">Cod.Cierre: {{cierre.CierreId}} Cantidad:{{cierre.cantidad| currency: ''}}(g)</option> 
-                  </select>
-                  <input hidden ng-model="cierre._id" value="{{cierre._id}}" type="text" name="">
-                </div>                   
-              </div>
-              <br>                
-              <div style="text-align:center">                
-              <!-- Trigger the modal with a button -->
-                <button ng-model="cierre._id" type="button" class="btn waves-effect waves-light btn-danger waves-teal btn-flat" ng-click="remove(cierre)"> Eliminar 
-                  <i class="zmdi zmdi-close"></i> 
-                </button>
-              </div> 
-              <br>  
-              <br>                                                                       
-	        </form>           
-	      </div>
-	    </div>
-     </div>
-</div>
-<!-- Modal -->
-<div class="container">    
+                <div class="row col-md-8">
+                  <select class="select" ng-required="true" ng-model="cierre.cliente" ng-disabled="cierre.CierreId">
+                      <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Seleccione un Cliente</option>
+                      <option ng-repeat="cliente in clientes" value="{{ cliente._id }}" >{{ cliente.nombres }}  {{ cliente.apellidos }}</option>                    
+                    </select>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h2 style="color:black; font-weight:600; font-size: 12px; font-family: 'Tahoma'; text-align: center;">Fecha de cierre:</h2>
+                    <input type="text" id="fecha_cierre" ng-model="cierre.fecha_cierre" />
+                  </div>
+                  <div class="col-md-6">
+                    <h2 style="color:black; font-weight:600; font-size: 12px; font-family: 'Tahoma'; text-align: center;">Fecha de entrega:</h2>
+                    <input type="text" id="fecha_entrega" ng-model="cierre.fecha_entrega"/> 
+                  </div>
+                </div>
+                <div class="row ">
+                  <div class="input-field col s6">
+                    <input ng-required="true" ng-model="cierre.cantidad" id="cantidad" type="text" class="validate" >
+                    <label for="cantidad">Cantidad (g)</label>
+                  </div>
+                  <div class="input-field col s6">
+                    <input ng-required="true" ng-model="cierre.precio" id="precio" type="text" class="validate">
+                    <label for="precio">Precio * g</label>
+                  </div>                                
+                </div>
+                <div class="row ">
+                  <div class="input-field col-md-6 col-offset-4">
+                    <input value="{{cierre.cantidad * cierre.precio | currency:'Bs '}}" id="total_c" type="text" class="validate" style="text-align: right;">
+                    <label for="total_c">Total Cierre</label>
+                  </div>
+                  <div class="input-field col s6">
+                     <input disabled value="{{ cierre.ganancia | currency:'Bs '
+                     }}" type="text" class="validate" style="text-align: right;" id="ganancia">
+                     <label for="total_p">Ganancia</label> 
+                  </div>                               
+                </div>
+                <br>  
+                <div style="text-align:center">                        
+                  <button class="btn btn-primary waves-effect waves-light" ng-click="add(cierre)" ng-disabled="!Codenx1.$valid" ng-show="!cierre.CierreId" type="submit">CREAR</button>
+                  <button class="btn btn-info waves-effect waves-light" ng-click="update(cierre)" ng-if="cierre._id" type="submit">ACTUALIZAR</button>
+                  <button class="btn waves-effect waves-light" ng-click="deselect()" ng-if="cierre._id">LIMPIAR</button>
+                </div>
+                <br>                                                                       
+              </form>           
+            </div>
+
+            <div class="row col-md-7">
+              <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Proveedores</h3>
+              <br>
+              <form name="Codenx2" novalidate class="col s12">
+               <input hidden id="total_pago" type="text" value="{{ scopeRaiz }}">
+                <input hidden id="total_gramos" type="text" value="{{ gramosp }}">
+                <div class="col-md-12">
+                  <table class="table table-hover table-striped">
+                    <thead>
+                      <tr class="active">
+                        <th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 400px 4px 0 0;">  Proveedor</th>
+                        <th class="center-align" style="background: #337ab7; color: #ffffff;">Cantidad (g)</th>
+                        <th class="center-align" style="background: #337ab7; color: #ffffff;">Precio * g</th>
+                        <th class="center-align" style="background: #337ab7; color: #ffffff;">Total</th>
+                        <th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 0 400px 4px 0;"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td style="width: 30%;">
+                          <div class="input-field">
+                            <select class="select" ng-required="true" ng-model="cierre_p.proveedor" ng-disabled="!cierre.CierreId">
+                              <option style="font-size: 13px; font-weight: bold;" value="" disabled selected>Proveedor</option>
+                              <option ng-repeat="proveedor in proveedores" value="{{ proveedor._id }}" id="p" >{{ proveedor.nombres }}  {{ proveedor.apellidos }}</option> 
+                            </select> 
+                          </div>
+                        </td>
+                        <td style="width: 20%;">
+                          <div class="input-field">
+                            <input class="form-control center-align" ng-model="cierre_p.cantidad" ng-required="true" placeholder="1250" ng-disabled="!cierre.CierreId">
+                          </div>
+                        </td>
+                        <td style="width: 20%;">
+                          <div class="input-field">
+                            <input class="form-control center-align" ng-required="true"ng-model="cierre_p.precio" required="true" placeholder="99000" ng-disabled="!cierre.CierreId">
+                          </div>
+                        </td>
+                        <td style="width: 30%;">
+                          <div class="input-field">
+                            <input disabled value="{{cierre_p.cantidad * cierre_p.precio | currency:'Bs '}}" id="total_p" type="text" class="validate" style="text-align: center;">
+                          </div>
+                        </td>
+                        <td class="center-align">
+                          <button class="btn btn-primary waves-effect waves-light" ng-disabled="!Codenx2.$valid" ng-click="addCierreProveedor(cierre._id)"><i class="zmdi zmdi-check" ></i></button>
+                        </td>
+                      </tr>
+                      <tr ng-repeat="cierre_p in cierreproveedores | filter: cierre._id" ng-if="cierre._id">
+                        <td class="center-align" >
+                          {{cierre_p.proveedor.nombres}} {{cierre_p.proveedor.apellidos}}
+                        </td>
+                        <td class="center-align">
+                          {{cierre_p.cantidad}}
+                        </td>
+                        <td class="center-align">
+                          {{cierre_p.precio}}
+                        </td>
+                        <td class="center-align">
+                          {{cierre_p.cantidad*cierre_p.precio}}
+                        </td>
+                        <!-- <td class="center-align">
+                          {{cierre_p.monto_pagado}}
+                        </td> -->
+                        <td class="center-align">
+                          <span class="zmdi zmdi-money-box zmdi-hc-2x waves-effect waves-light" style="cursor: pointer; font-size: 1.5em;" data-toggle="modal" data-target="#pagosModal" ng-click="openPagosProveedor(cierre_p._id)"/>
+                          <span ng-click="deleteCierreProveedor(cierre_p._id)" class="zmdi zmdi-delete zmdi-hc-2x waves-effect waves-light" style="font-size: 1.5em;" /> 
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                    <div class="row">
+                      <div class="col-md-6 text-right">
+                        <span class="label label-info" style="font-size: 12px;">Por cerrar: {{ cierre.cantidad - gramosp | currency: ' '}} (g) </span>
+                      </div>
+                      <div class="col-md-5 text-right">
+                        <span class="label label-primary" style="font-size: 12px;">Total de Pagos: {{ scopeRaiz | currency: 'Bs '}} </span>
+                        <br> <br>
+                        <span class="label label-primary" style="font-size: 12px;">Total de Cierre: {{ cierre.total | currency: 'Bs '}} </span>
+                        <br><br>
+                        <span class="label label-success" style="font-size: 12px;">Ganancia: {{ cierre.total - scopeRaiz | currency: 'Bs '}} </span>
+                      </div>
+                    </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+ <div class="container">
+    <!-- Modal -->
   <div class="modal fade" id="pagosModal" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>         
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title center-align" style="color:black; font-weight:600; font-family: 'Tahoma';">Registro de Pagos</h4>
         </div>
         <div class="modal-body">
-          <div class="row">    
-             <h4 class="modal-title center-align" style="color:black; font-weight:600; font-family: 'Tahoma';">¿Seguro que quiere eliminar este cierre?</h4>
+          <div class="row">
+            <div class="table-responsive" >
+              <form name="Codenx" novalidate>
+                <div class="row" style="text-align: right; margin-right: 0%;">
+                  <button class="btn btn-primary" ng-click="addPagosProveedor(pago)" ng-if="!pago._id" type="submit" ng-disabled="!Codenx.$valid">Añadir</button>
+                  <button class="btn btn-info" ng-click="update(pago)" ng-if="pago._id" type="submit">Actualizar</button>
+                </div>
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr class="active">
+                      <th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 400px 4px 0 0;"></th>
+                      <!--<th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 400px 4px 0 0;">Fecha</th>-->
+                      <th class="center-align" style="background: #337ab7; color: #ffffff; width: 15%">C.I.</th>
+                      <th class="center-align" style="background: #337ab7; color: #ffffff; width: 30%">Titular</th>
+                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Banco</th>
+                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Monto Pagado</th>
+                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Opciones</th>
+                      <th style="background: #337ab7; border-radius: 0 400px 4px 0;"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <input hidden type="text" ng-model="cierre_p._id">
+                       
+                        <input hidden value="" id="cierre_pId" ng-model="cierre_pId">
+                       <!-- <input type="date" class="form-control center-align" ng-model="pago.fecha" required="" placeholder="Pago Fecha">-->
+                      </td>
+                      <td>
+                        <input class="form-control center-align" ng-model="pago.ci" required="" placeholder="12345678">
+                      </td>
+                      <td style="width: 20%;">
+                        <input class="form-control center-align" ng-model="pago.titular" required="" placeholder="NombreApellido">
+                      </td>
+                      <td style="width: 20%;">
+                        <input class="form-control center-align" ng-model="pago.banco" required="" placeholder="Nombre Banco">
+                      </td>
+                      <td>
+                        <input class="form-control center-align" ng-model="pago.monto_pagado" required="" placeholder="25.000.000.000">
+                      </td>
+                    </tr>
+                    <tr ng-repeat="pago in pagos | filter: {cierre_p: cierre_pId}" >
+                      <td class="center-align">
+                        <!-- {{pago.fecha |  date:'dd/MM/yyyy' : shortDate}} -->
+                      </td>
+                      <td class="center-align">
+                        {{pago.ci}}
+                      </td>
+                      <td class="center-align">
+                        {{pago.titular}}
+                      </td>
+                      <td class="center-align">
+                        {{pago.banco}}
+                      </td>
+                      <td class="center-align">
+                        {{pago.monto_pagado}}
+                      </td>
+                      <td class="center-align" style="width: 14%">
+                         <!--  <span class="zmdi zmdi-edit zmdi-hc-2x" style="cursor: pointer;" ng-click=edit(pago._id)/> -->
+                          <span class="zmdi zmdi-delete zmdi-hc-2x" style="cursor: pointer;" ng-click='remove(pago)'/>
+                          <span class="zmdi zmdi-delete zmdi-hc-2x" style="cursor: pointer;" ng-click='remove(pago)'/>
+                      </td>
+                    </tr>
+                      <tr>
+                        <td colspan="5" style="text-align: right;">  
+                          <span class="label label-primary" style="font-size: 12px;">Total de Pagos: {{ scopeRaiz | currency: 'Bs '}} </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="5" style="text-align: right;">  
+                          <span class="label label-primary" style="font-size: 12px;">Total de Cierre: {{ cierre.total | currency: 'Bs '}} </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="5" style="text-align: right;">  
+                          <span class="label label-danger" style="font-size: 12px;">Diferencia: {{ cierre.total - scopeRaiz | currency: 'Bs '}} </span>
+                        </td>
+                      </tr>
+                  </tbody>
+                </table>
+             </form>
+            </div>
           </div>
-          <br>          
         </div>
         <div class="modal-footer"> 
-            <div class="btn-group" ng-controller="ctrl-cierre">           
-                <button type="button" class="btn btn-primary" ng-click="remove(cierre._id)" data-dismiss="modal">Confirmar</button> 
-            </div>
+          <div class="btn-group">           
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+          </div>
         </div>
       </div>
-    </div>  
-  </div>    
-</div>
+    </div>
+  </div>  
+</div>    
+
+
+<script type="text/javascript">
+  $('#fecha_entrega').datepicker({
+    language: "es",
+    format:"yyyy-mm-dd"
+  });
+
+    $('#fecha_cierre').datepicker({
+    language: "es",
+    format:"yyyy-mm-dd"
+  });
+</script>

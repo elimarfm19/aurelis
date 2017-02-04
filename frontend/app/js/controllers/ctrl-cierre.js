@@ -49,9 +49,32 @@ $scope.add = function(cierre) {
 };
 
 $scope.update = function(cierre) {
-  console.log(cierre);
+  //console.log(cierre);
   cierre.fecha_entrega =document.getElementById('fecha_entrega').value;
   cierre.fecha_cierre =document.getElementById('fecha_cierre').value;
+
+
+  $http.get("http://localhost:3001/cierres/"+cierre._id)
+    .success(function(cierreViejo){
+
+
+    $http.get("http://localhost:3001/clientes/"+cierreViejo.cliente)
+      .success(function(cliente){
+        //console.log(cliente);
+        cliente.cerrado -= cierreViejo.cantidad;       
+      
+        cliente.cerrado += parseFloat(cierre.cantidad);
+
+      $http.put("http://localhost:3001/clientes/"+cliente._id,cliente)
+        .success(function(cliente2){
+         //console.log(cliente2); 
+   
+      }); 
+   
+    });
+
+  });
+
   $scope.cierre.$update(function(cierreUpdated){
   	
   	refresh();
@@ -92,9 +115,9 @@ $scope.addCierreProveedor = function(idCierre) {
   console.log($scope.cierre_p);
 }; 
 
-$scope.deleteCierreProveedor = function(Cierre) {
+$scope.deleteCierreProveedor = function(cierreProveedorId) {
 
-    $http.delete("http://localhost:3001/cierresProveedor/" + Cierre._id)
+    $http.delete("http://localhost:3001/cierresProveedor/"+cierreProveedorId)
             .success(function(respuesta){
                 //console.log(respuesta);
                  $scope.proveedores = Proveedor.query();  
@@ -176,18 +199,20 @@ $scope.gramos=function(){
 
 $scope.ganancia=function(total_pago,cierre_id){
 
- var cierre=[];//Cierre.get({ id: cierre_id });
+ //var cierre = Cierre.get({ id: cierre_id });
  var total_cierre = $scope.cierre.total;
 
-
- cierre.ganancia = total_cierre - total_pago;
+// cierre.cantidad = $scope.cierre.cantidad;
+ //cierre.precio = $scope.cierre.precio;
+ $scope.cierre.ganancia = total_cierre - total_pago;
  // var total_pago = document.getElementById('total_pago').value;
  // var total_gramos = document.getElementById('total_gramos').value;
-  //console.log(cierre);
+  // console.log($scope.cierre);
+ $rootScope.ganancia = $scope.cierre.ganancia;
 
-  $http.put("http://localhost:3001/cierres/"+cierre_id,cierre)
+  $http.put("http://localhost:3001/cierres/"+cierre_id,$scope.cierre)
     .success(function(respuesta){
-          
+         console.log(respuesta); 
    });
 
  //console.log(total_pago+'/'+total_cierre);

@@ -12,8 +12,8 @@ const Cliente = require('../models/cliente')
 	 	if(!cierre) return res.status(404).send({message:'El cierre no existe'})
 	 	
 	 	
-	 			//cierre.fecha_cierre = '145';
-	 	res.status(200).send(cierre)
+	 		
+	 	res.status(200).send(cierre);
 	})
 }
 
@@ -44,7 +44,7 @@ function getCierresCliente(req,res){
 }
 
 function storeCierre(req,res){
-	console.log(req.body)
+	//console.log(req.body)
 	//res.status(200).send({message:'el producto se ha recibido'})
 	let cierre = new Cierre()
 	let cliente = new Cliente()
@@ -54,7 +54,7 @@ function storeCierre(req,res){
     cierre.cantidad = req.body.cantidad
     cierre.precio = req.body.precio
     cierre.total = req.body.cantidad * req.body.precio
-    cierre.ganancia = req.body.ganancia
+    cierre.ganancia = 0
     cierre.status = 'Abierto'
 
     Cliente.findById(req.body.cliente,function(err,cliente){
@@ -87,18 +87,18 @@ function updateCierre(req,res){
 
 
 	  //	console.log(update.precio);
-	  // 	Cierre.findById(cierreId,function(err,cierre){
-	  // 		Cliente.findById(cierre.cliente._id,function(err,cliente){	  		
-			// 	cliente.cerrado -= cierre.cantidad;		    
-			// 	cliente.save();
-	  //   		cliente.cerrado += parseFloat(req.body.cantidad);
-	  //   		cliente.save();
-	  //   			Cierre.findByIdAndUpdate(cierreId,update,{new: true},(err,cierreUpdated)=>{
-			// 			if(err) return res.status(500).send({message:`Error al actualizar el cierre: ${ err }`})
-			// 			res.status(200).send(cierreUpdated)
-	  //   			});
+// 	  	Cierre.findById(cierreId,function(err,cierre){
+// 	  		Cliente.findById(cierre.cliente._id,function(err,cliente){	  		
+// 				cliente.cerrado -= cierre.cantidad;		    
+// 				cliente.save();
+// 	    		cliente.cerrado += parseFloat(req.body.cantidad);
+// 	    		cliente.save();
+// 	    			Cierre.findByIdAndUpdate(cierreId,update,{new: true},(err,cierreUpdated)=>{
+// 						if(err) return res.status(500).send({message:`Error al actualizar el cierre: ${ err }`})
+// 						res.status(200).send(cierreUpdated)
+// 	    			});
 	    			
-			// })
+// 			})
 
 // });
 Cierre.findByIdAndUpdate(cierreId,update,{new: true},(err,cierreUpdated)=>{

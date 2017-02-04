@@ -1,9 +1,10 @@
 </br>
-          <ul class="nav nav-tabs col-md-12" style="margin-left:0.2cm; ">
-            <li class="active"><a style="color:black; font-weight:600; font-family: 'Tahoma';" href="#proveedores" data-toggle="tab">Proveedores</a></li>
-          </ul>
+<br>
+  <ul class="nav nav-tabs col-md-12" style="margin-left:0.2cm; ">
+    <li class="active"><a style="color:black; font-weight:600; font-family: 'Tahoma';" href="#proveedores" data-toggle="tab">Proveedores</a></li>
+  </ul>
 
-        <div class="tab-content col-md-10 col-md-offset-1">
+        <div class="tab-content col-md-10" style="margin-left: 1cm;">
             <div class="tab-pane fade in active" >
               <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Gestión de Proveedores</h3>
             
@@ -22,45 +23,45 @@
                 <div class="table-responsive">
                   <form name="Codenx" novalidate>
                     <table class="table table-hover">
-                        <thead>
-                            <tr class="active">
-                              <th class="center-align" style="border-radius: 400px 4px 0 0;">C.I. / Rif</th>
-                              <th class="center-align">Proveedor</th>
-                              <th class="center-align">Teléfono</th>
-                              <th class="center-align">Dirección</th>
-                              <th class="center-align">Email</th>
-                              <th class="center-align" style="border-radius: 0 400px 4px 0;">Edición</th>
-                            </tr>
-                        </thead>
+                      <thead>
+                          <tr class="active">
+                            <th class="center-align" style="border-radius: 400px 4px 0 0;">C.I. / Rif</th>
+                            <th class="center-align">Proveedor</th>
+                            <th class="center-align">Teléfono</th>
+                            <th class="center-align">Dirección</th>
+                            <th class="center-align">Email</th>
+                            <th class="center-align" style="border-radius: 0 400px 4px 0;">Edición</th>
+                          </tr>
+                      </thead>
                         <tbody>
-                            <tr ng-repeat="proveedor in proveedores">
-                              <td class="center-align">
-                                {{proveedor.nacionalidad}}{{proveedor.ced_rif}}
-                              </td>
-                              <td class="center-align">
-                                {{proveedor.nombres}} {{proveedor.apellidos}}
-                              </td>
-                              <td class="center-align">
-                                {{proveedor.tlf}}
-                              </td>
-                              <td class="center-align">
-                               <img style="max-width: 20px; height: 20px;" src="../assets/img/eye.png" alt="Paris" data-toggle="modal" data-target="#direccionModal" ng-click="direccion(proveedor._id)">
-                                
-                              </td>
-                              <td class="center-align">
-                                {{proveedor.email}}
-                              </td>
-                              <td class="center-align">                                  
-                                <!--<button class="btn btn-danger glyphicon glyphicon-trash btn-xs" ng-click="remove(proveedor)"></button>-->
-                                <button class="btn btn-warning zmdi zmdi-edit zmdi-hc-2x waves-effect waves-light" ng-click="edit(proveedor._id)" data-toggle="modal" data-target="#myModal"></button>
-                              </td>
-                            </tr>
+                          <tr ng-repeat="proveedor in proveedores">
+                            <td class="center-align">
+                              {{proveedor.nacionalidad}}{{proveedor.ced_rif}}
+                            </td>
+                            <td class="center-align">
+                              {{proveedor.nombres}} {{proveedor.apellidos}}
+                            </td>
+                            <td class="center-align">
+                              {{proveedor.tlf}}
+                            </td>
+                            <td class="center-align">
+                             <img style="max-width: 20px; height: 20px;" src="../assets/img/eye.png" alt="Paris" data-toggle="modal" data-target="#direccionModal" ng-click="direccion(proveedor._id)">
+                              
+                            </td>
+                            <td class="center-align">
+                              {{proveedor.email}}
+                            </td>
+                            <td class="center-align">                                  
+                              <!--<button class="btn btn-danger glyphicon glyphicon-trash btn-xs" ng-click="remove(proveedor)"></button>-->
+                              <button class="btn btn-warning zmdi zmdi-edit zmdi-hc-2x waves-effect waves-light" ng-click="edit(proveedor._id)" data-toggle="modal" data-target="#myModal"></button>
+                            </td>
+                          </tr>
                         </tbody>
-                      </table>
-                    </form>
+                    </table>
+                  </form>
                    
-                  </div>
-                </div>                
+                </div>
+              </div>                
             </div>
         </div>
 
