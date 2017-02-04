@@ -222,5 +222,10 @@ $scope.ganancia=function(total_pago,cierre_id){
 
  //console.log(total_pago+'/'+total_cierre);
 }
+
+$scope.tlf = function(id) {
+  console.log('hola'+id);
+  $scope.proveedor = Proveedor.get({ id: id });
+}; 
 })
 
