@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ctrl-cierre', function($scope,$http,$rootScope,$filter,Cierre,Cliente,Proveedor,CierreProveedor,Pago,ngProgress,$window) {
+app.controller('ctrl-cierre', function($scope,$http,$routeParams,$rootScope,$filter,Cierre,Cliente,Proveedor,CierreProveedor,Pago,ngProgress,$window) {
 
 $scope.cierre = new Cierre();
 $scope.cliente = new Cliente();
@@ -16,8 +16,18 @@ var refresh = function() {
   $scope.cierre_p ="";
   $scope.pago="";
 }
-refresh();
+var refresh2 = function(){
 
+if ($routeParams.cierreId) {
+  $scope.cierre = Cierre.get({ id: $routeParams.cierreId });
+}
+else{
+  console.log('No tengo parametros');
+}
+
+}
+refresh();
+refresh2();
 
 
 $scope.add = function(cierre) {
@@ -91,11 +101,7 @@ $scope.remove = function(cierre) {
 $scope.edit = function(id) {
   console.log('cualquier cosa');
   $scope.cierre = Cierre.get({ id: id });
-
- 
-
-  $rootScope.id = $scope.cierre; 
- // console.log(serveData);
+  $rootScope.cierre = $scope.cierre;  // console.log(serveData);
 };  
 
 $scope.deselect = function() {

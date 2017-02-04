@@ -13,7 +13,7 @@
       <br>
       <div class="col-md-12">
         <div class="table-responsive">
-          <table class="table table-hover">
+          <table datatable="ng" id="tabla_cierres" class="table table-hover">
               <thead>
                 <tr class="active">                          
                   <th class="center-align" style="border-radius: 400px 4px 0 0;">Cod. Cierre</th>
@@ -46,7 +46,7 @@
                     {{cierre.total | currency: 'Bs '}}
                   </td>
                   <td class="center-align">
-                    <a class="btn btn-warning zmdi zmdi-edit zmdi-hc-2x waves-effect waves-light" ng-click="edit(cierre._id)" ng-href="#cierre_cliente"></a>
+                    <a class="btn btn-warning zmdi zmdi-edit zmdi-hc-2x waves-effect waves-light"  ng-href="/aurelis.html#/cierre_cliente/{{cierre._id}}"></a>
                     <button class="btn btn-danger zmdi zmdi-delete zmdi-hc-2x waves-effect waves-light" ng-click="delete(cierre._id)" data-toggle="modal" data-target="#myModal"></button>
                   </td>
                 </tr>

@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-var app = angular.module('aurelisApp', ['ngResource','ngAnimate','ngProgress',
+var app = angular.module('aurelisApp', ['ngResource','ngAnimate','ngProgress','datatables',
     'ngCookies',
     'ngResource',
     'ngRoute',
@@ -29,6 +29,11 @@ var app = angular.module('aurelisApp', ['ngResource','ngAnimate','ngProgress',
         controllerAs: 'cli'
       })
       .when('/cierre_cliente', {
+        templateUrl: '/views/vista_cierre_c.html',
+        controller: 'ctrl-cierre',
+        controllerAs: 'cie'
+      })
+      .when('/cierre_cliente/:cierreId', {
         templateUrl: '/views/vista_cierre_c.html',
         controller: 'ctrl-cierre',
         controllerAs: 'cie'
