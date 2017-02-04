@@ -91,6 +91,11 @@ $scope.remove = function(cierre) {
 $scope.edit = function(id) {
   console.log('cualquier cosa');
   $scope.cierre = Cierre.get({ id: id });
+
+ 
+
+  $rootScope.id = $scope.cierre; 
+ // console.log(serveData);
 };  
 
 $scope.deselect = function() {

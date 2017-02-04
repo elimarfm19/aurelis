@@ -11,7 +11,7 @@
       <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Cierres </h3>
       <br>
       <br>
-      <div class="col-md-12" ng-controller="ctrl-cierre">
+      <div class="col-md-12">
         <div class="table-responsive">
           <table class="table table-hover">
               <thead>
@@ -46,7 +46,7 @@
                     {{cierre.total | currency: 'Bs '}}
                   </td>
                   <td class="center-align">
-                    <button class="btn btn-warning zmdi zmdi-edit zmdi-hc-2x waves-effect waves-light" ng-click="edit(cierre._id)" data-toggle="modal" data-target="#myModal"></button>
+                    <a class="btn btn-warning zmdi zmdi-edit zmdi-hc-2x waves-effect waves-light" ng-click="edit(cierre._id)" ng-href="#cierre_cliente"></a>
                     <button class="btn btn-danger zmdi zmdi-delete zmdi-hc-2x waves-effect waves-light" ng-click="delete(cierre._id)" data-toggle="modal" data-target="#myModal"></button>
                   </td>
                 </tr>
