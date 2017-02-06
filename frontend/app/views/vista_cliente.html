@@ -6,19 +6,15 @@
         <div class="tab-content col-md-10" style="margin-left: 1.2cm;">
             <div class="tab-pane fade in active" >
               <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Gestión de Clientes</h3>
-              <br>
-            <div class="row">
-                <div class="btn-group col-md-2 col-md-offset-10">
-                  <button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#myModal" ng-click="deselect()">
-                    <span class="glyphicon glyphicon-plus" style="font-weight: 600; font-family: 'Tahoma';"> Nuevo</span>
-                  </button>
-                </div>
-              </div>
+              <!--<br>-->
+              <button type="button" class="btn btn-primary waves-effect waves-light col-md-offset-11" data-toggle="modal" data-target="#myModal" ng-click="deselect()">
+                  <span class="glyphicon glyphicon-plus" style="font-weight: 600; font-family: 'Tahoma';"> Nuevo</span>
+              </button>
               <br>
               <div class="col-md-12">
                 <div class="table-responsive">
                   <form name="Codenx" novalidate>
-                    <table class="table table-hover" id="clientes">
+                    <table datatable="ng" id="tabla_clientes" class="table table-hover" data-page-length='3'>
                         <thead>
                             <tr class="active">
                               <th class="center-align" style="border-radius: 400px 4px 0 0;">C.I. / Rif</th>
