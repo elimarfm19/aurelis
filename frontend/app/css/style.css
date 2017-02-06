@@ -94,7 +94,7 @@ body, html{
     padding: 0;
 }
 .NavLateral-Nav ul li a{
-    height: 45px;
+    height: 38px;
     line-height: 45px;
     width: 100%;
     /*font-size: 14px;*/
@@ -602,18 +602,39 @@ body, html{
 @media (min-width: 768px) and (max-width:1366px) {
     .NavLateral{
         width: 20%;
-        height: 92%;
+        height: 91.5%;
+        font-size: 12px;
+    }
+    .NavLateral-title {
+        height: 40px;
+       font-size: 20px;
+    }
+    .ContentPage-Nav {
+        height: 42px;
+    }
+    .ContentPage-Nav ul li figure img {
+        margin-top: -8px;
+    }
+    .ContentPage-Nav ul li a {
+        margin-top: -2px;
     }
     .ContentPage{
         width: 80%;
         height: 100%;
     }
     .tamanno{
-        height: 84%;
+        height: 85.2%;
     }
     thead, tbody{
         font-size: 12px !important;
     }
+}
+
+#ngProgress {
+    height: 0px !important;
+    background-color: firebrick;
+    color: firebrick;
+    width: 0%;
 }
 
 @media (min-width: 1024px) and (max-width:1280px) {
