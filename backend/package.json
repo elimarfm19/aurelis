@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "prestart": "npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Newton Monteiro",
+  "author": "Anthony Filgueira",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.15.2",
