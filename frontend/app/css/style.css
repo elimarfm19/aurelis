@@ -811,3 +811,67 @@ input:not([type]):disabled, input:not([type])[readonly="readonly"], input[type=t
     left: 91% !important; 
     visibility: inherit !important;
 }
+
+.dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_paginate, .dataTables_wrapper .dataTables_processing {
+    color: black !important;
+}
+
+div.dataTables_wrapper div.dataTables_length label {
+    /*font-weight: normal;
+    text-align: left;
+    white-space: nowrap;*/
+    font-size: 10px !important;
+    color: black;
+}
+
+div.dataTables_wrapper div.dataTables_filter label {
+    /*font-weight: normal;
+    white-space: nowrap;
+    text-align: left;*/
+}
+label {
+    /*display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;*/
+}
+label {
+    font-size: 10px;
+    color: black;
+}
+
+table.dataTable, table.dataTable.no-footer {
+    /*margin: 1rem 0;
+    width: 100%!important;*/
+    border-top: 0px !important;
+    /*border-bottom: 1px solid #DDD;*/
+}
+
+table.dataTable {
+    /*clear: both;
+    margin-top: 6px !important;
+    margin-bottom: 6px !important;
+    max-width: none !important;
+    border-collapse: separate !important;*/
+}
+
+div.dataTables_wrapper div.dataTables_info {
+    padding-top: none;
+    white-space: nowrap;
+    font-size: 10px;
+}
+.dataTables_wrapper .dataTables_info {
+    margin-left: 1rem;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    /*padding: .3em .8em;*/
+    color: black;
+    font-size: 10px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: black;
+    /*border: 0;*/
+    background: #696969 !important;
+}
