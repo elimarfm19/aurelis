@@ -67,7 +67,7 @@ body, html{
     opacity: 0;
 }
 .NavLateral-logo{
-    padding: 20px 0;
+    padding: 40px 0;
     color: #fff;
     background-color: rgb(38,50,56);
 }
@@ -603,11 +603,11 @@ body, html{
     .NavLateral{
         width: 20%;
         height: 91.5%;
-        font-size: 12px;
+        font-size: 14px;
     }
     .NavLateral-title {
         height: 40px;
-       font-size: 20px;
+        font-size: 20px;
     }
     .ContentPage-Nav {
         height: 42px;
@@ -687,7 +687,7 @@ body, html{
         height: 100%;
     }
     .tamanno{
-        height: 88.5%;
+        height: 89.3%;
     }
     thead, tbody{
         font-size: 12px !important;
@@ -840,10 +840,11 @@ label {
     color: black;
 }
 
-table.dataTable, table.dataTable.no-footer {
+table.dataTable, table.dataTable.no-footer, tfoot {
     /*margin: 1rem 0;
     width: 100%!important;*/
     border-top: 0px !important;
+    border-bottom: 0px !important;
     /*border-bottom: 1px solid #DDD;*/
 }
 

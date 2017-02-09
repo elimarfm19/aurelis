@@ -27,30 +27,39 @@
                             <th class="center-align" style="border-radius: 0 400px 4px 0;">Edición</th>
                           </tr>
                       </thead>
-                        <tbody>
-                          <tr ng-repeat="proveedor in proveedores">
-                            <td class="center-align">
-                              {{proveedor.nacionalidad}}{{proveedor.ced_rif}}
-                            </td>
-                            <td class="center-align">
-                              {{proveedor.nombres}} {{proveedor.apellidos}}
-                            </td>
-                            <td class="center-align">
-                              {{proveedor.tlf}}
-                            </td>
-                            <td class="center-align">
-                             <img style="max-width: 20px; height: 20px;" src="../assets/img/eye.png" alt="Paris" data-toggle="modal" data-target="#direccionModal" ng-click="direccion(proveedor._id)">
-                              
-                            </td>
-                            <td class="center-align">
-                              {{proveedor.email}}
-                            </td>
-                            <td class="center-align">                                  
-                              <!--<button class="btn btn-danger glyphicon glyphicon-trash btn-xs" ng-click="remove(proveedor)"></button>-->
-                              <button class="btn btn-warning zmdi zmdi-edit zmdi-hc-2x waves-effect waves-light" ng-click="edit(proveedor._id)" data-toggle="modal" data-target="#myModal"></button>
-                            </td>
-                          </tr>
-                        </tbody>
+                      <tfoot>
+                        <tr class="active">
+                            <th class="center-align" style="border-radius: 0 0 4px 400px;"></th>
+                            <th class="center-align"></th>
+                            <th class="center-align"></th>
+                            <th class="center-align"></th>
+                            <th class="center-align"></th>
+                            <th class="center-align" style="border-radius: 0 4px 400px 0;"></th>
+                        </tr>
+                      </tfoot>
+                      <tbody>
+                        <tr ng-repeat="proveedor in proveedores">
+                          <td class="center-align">
+                            {{proveedor.nacionalidad}}{{proveedor.ced_rif}}
+                          </td>
+                          <td class="center-align">
+                            {{proveedor.nombres}} {{proveedor.apellidos}}
+                          </td>
+                          <td class="center-align">
+                            {{proveedor.tlf}}
+                          </td>
+                          <td class="center-align">
+                           <img style="max-width: 20px; height: 20px;" src="../assets/img/eye.png" alt="Paris" data-toggle="modal" data-target="#direccionModal" ng-click="direccion(proveedor._id)">
+                          </td>
+                          <td class="center-align">
+                            {{proveedor.email}}
+                          </td>
+                          <td class="center-align">                                  
+                            <!--<button class="btn btn-danger glyphicon glyphicon-trash btn-xs" ng-click="remove(proveedor)"></button>-->
+                            <button class="btn btn-warning zmdi zmdi-edit zmdi-hc-2x waves-effect waves-light" ng-click="edit(proveedor._id)" data-toggle="modal" data-target="#myModal"></button>
+                          </td>
+                        </tr>
+                      </tbody>
                     </table>
                   </form>
                    
