@@ -3,7 +3,7 @@
   </br>
   </br>
   <ul class="nav nav-tabs col-md-12" style="margin-left:0.2cm; " >
-          <li class="active"><a style="color:black; font-weight:600; font-family: 'Tahoma';" href="" data-toggle="tab">Inventario</a></li>
+          <li class="active"><a class="a" style="color:black; font-weight:600; font-family: 'Tahoma';" href="" data-toggle="tab">Inventario</a></li>
   </ul>
   </br>
   </br>
@@ -14,9 +14,9 @@
 
       <br>
       <div class="col-md-12">
-        <div class="table-responsive">
+        <div class="table-responsive" ng-controller="ctrl-pieza">
           <form name"Codenx" novalidate>
-            <table class="table table-hover" ng-controller="ctrl-pieza">
+            <table class="table table-hover" datatable="ng"  id="tabla_piezas_disponibles" data-page-length='3'>
               <thead>
                 <tr class="active">                        
                   <th class="center-align" style="border-radius: 400px 4px 0 0;">Proveedor</th>
