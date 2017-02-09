@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ctrl-cierre', function($scope,$http,$routeParams,$rootScope,$filter,Cierre,Cliente,Proveedor,CierreProveedor,Pago,ngProgress,$window) {
+app.controller('ctrl-cierre', function($scope,$http,DTOptionsBuilder,$routeParams,$rootScope,$filter,Cierre,Cliente,Proveedor,CierreProveedor,Pago,ngProgress,$window) {
 
 $scope.cierre = new Cierre();
 $scope.cliente = new Cliente();
@@ -232,6 +232,35 @@ $scope.ganancia=function(total_pago,cierre_id){
 $scope.tlf = function(id) {
   console.log('hola'+id);
   $scope.proveedor = Proveedor.get({ id: id });
-}; 
+};
+  var language = {
+        "sEmptyTable":     "Ingen tilgængelige data (prøv en anden søgning)",
+        "sInfo":           "Viser _START_ til _END_ af _TOTAL_ rækker",
+        "sInfoEmpty":      "Viser 0 til 0 af 0 rækker",
+        "sInfoFiltered":   "(filtreret ud af _MAX_ rækker ialt)",
+        "sInfoPostFix":    "",
+        "sInfoThousands":  ",",
+        "sLengthMenu":     "Vis _MENU_ rækker",
+        "sLoadingRecords": "Henter data...",
+        "sProcessing":     "Processing...",
+        "sSearch":         "Filter:",
+        "sZeroRecords":    "Ingen rækker matchede filter",
+        "oPaginate": {
+          "sFirst":    "Første",
+          "sLast":     "Sidste",
+          "sNext":     "Siguiente",
+          "sPrevious": "Anterior"
+        },
+        "oAria": {
+          "sSortAscending":  ": activate to sort column ascending",
+          "sSortDescending": ": activate to sort column descending"
+        }
+      }
+
+$scope.dtOptions = DTOptionsBuilder.newOptions()
+        
+        .withLanguage(language)
+        
+   
 })
 

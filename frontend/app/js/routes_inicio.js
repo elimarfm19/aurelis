@@ -15,6 +15,8 @@ var app = angular.module('aurelisApp', ['ngResource','ngAnimate','ngProgress','d
     'ngSanitize',
     'ngTouch']);
 
+var route = 'http://localhost:8080/';//http://aurelis-backend.herokuapp.com/'; //
+
 
   app.config(function ($routeProvider) {
     $routeProvider
@@ -90,7 +92,7 @@ var app = angular.module('aurelisApp', ['ngResource','ngAnimate','ngProgress','d
   
   // Create a resource factory to access clientes table from database 
 app.factory('Cliente', function($resource) {
-  return $resource('http://localhost:3001/clientes/:id', { id: '@_id' }, {
+  return $resource(route+'clientes/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }
@@ -98,7 +100,7 @@ app.factory('Cliente', function($resource) {
 });
 // Create a resource factory to access proveedores table from database 
 app.factory('Proveedor', function($resource) {
-  return $resource('http://localhost:3001/proveedores/:id', { id: '@_id' }, {
+  return $resource(route+'proveedores/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }
@@ -106,7 +108,7 @@ app.factory('Proveedor', function($resource) {
 });
 // Create a resource factory to access cierres table from database 
 app.factory('Cierre', function($resource) {
-  return $resource('http://localhost:3001/cierres/:id', { id: '@_id' }, {
+  return $resource(route+'cierres/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }
@@ -114,7 +116,7 @@ app.factory('Cierre', function($resource) {
 });
 // Create a resource factory to access pagos table from database 
 app.factory('Pago', function($resource) {
-  return $resource('http://localhost:3001/pagos/:id', { id: '@_id' }, {
+  return $resource(route+'pagos/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }
@@ -122,7 +124,7 @@ app.factory('Pago', function($resource) {
 });
 // Create a resource factory to access pagoProveedor table from database 
 app.factory('PagoProveedor', function($resource) {
-  return $resource('http://localhost:3001/pagosProveedor/:id', { id: '@_id' }, {
+  return $resource(route+'pagosProveedor/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }
@@ -130,7 +132,7 @@ app.factory('PagoProveedor', function($resource) {
 });
 // Create a resource factory to access cierresProveedor table from database 
 app.factory('CierreProveedor', function($resource) {
-  return $resource('http://localhost:3001/cierresProveedor/:id', { id: '@_id' }, {
+  return $resource(route+'cierresProveedor/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }
@@ -138,7 +140,7 @@ app.factory('CierreProveedor', function($resource) {
 });
 // Create a resource factory to access inventario table from database 
 app.factory('Pieza', function($resource) {
-  return $resource('http://localhost:3001/piezas/:id', { id: '@_id' }, {
+  return $resource(route+'piezas/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }
@@ -147,7 +149,7 @@ app.factory('Pieza', function($resource) {
 
   // Create a resource factory to access clientes table from database 
 app.factory('Recepcion', function($resource) {
-  return $resource('http://localhost:3001/recepciones/:id', { id: '@_id' }, {
+  return $resource(route+'recepciones/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }
@@ -155,7 +157,7 @@ app.factory('Recepcion', function($resource) {
 });
 
 app.factory('Entrega', function($resource) {
-  return $resource('http://localhost:3001/entregas/:id', { id: '@_id' }, {
+  return $resource(route+'entregas/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }
