@@ -36,9 +36,13 @@
     "node": ">=0.10.0"
   },
   "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install",
+    "prestart": "npm install",
     "test": "grunt test"
   },
   "dependencies": {
+    "bower": "^1.8.0",
+    "express": "^4.14.1",
     "moment": "^2.17.1",
     "mongodb-autoincrement": "^1.0.1"
   }
