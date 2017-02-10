@@ -14,7 +14,7 @@
               <div class="col-md-12">
                 <div class="table-responsive">
                   <form name="Codenx" novalidate>
-                    <table datatable="ng" id="tabla_clientes" class="table table-hover" data-page-length='5'>
+                    <table datatable="ng" dt-options="dtOptions" id="tabla_clientes" class="table table-hover" data-page-length='5'>
                         <thead>
                             <tr class="active">
                               <th class="center-align" style="border-radius: 400px 4px 0 0;">C.I. / Rif</th>
@@ -92,7 +92,7 @@
               </div>
               <div class="row">
                 <div class="input-field col s2">
-                  <select class="select" name="nacionalidad" id="nacionalidad" ng-model="cliente.nacionalidad" ng-required="true">
+                  <select class="select" name="nacionalidad" id="nacionalidad" ng-model="cliente.nacionalidad" >
                       <option value="V" ng-selected="true">V</option>
                       <option value="E">E</option>
                       <option value="J">J</option>

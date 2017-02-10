@@ -1,6 +1,6 @@
 'use strict'
 
-app.controller('ctrl-pieza', function($scope,$rootScope,$http,Pieza,Recepcion,Cliente,Entrega,ngProgress) {
+app.controller('ctrl-pieza', function($scope,$rootScope,$http,Pieza,Recepcion,Cliente,Entrega,ngProgress,DTOptionsBuilder,$window) {
 
 $scope.pieza = new Pieza();
 $scope.cliente = new Cliente();
@@ -22,7 +22,7 @@ $scope.add = function(pieza) {
 };
 
 $scope.update = function(pieza) {
-  //console.log(pieza);
+  console.log(pieza);
  // let check = document.getElementById('check'+pieza._id).checked
 
  //  if(check)
@@ -33,24 +33,28 @@ $scope.update = function(pieza) {
  //  }
   //console.log(pieza);
  
-  $scope.pieza.$update(function(){
-    // pieza.status = 'Verificado'
-      console.log(pieza)
-    refresh();
-  });
+  // $scope.pieza.$update(function(){
+  //   // pieza.status = 'Verificado'
+  //     console.log(pieza)
+  //   refresh();
+  // });
 };
 
 $scope.verificar = function(pieza) {
   pieza.status = 'Verificado'
   $scope.pieza.$update(function(){
-    refresh();
+    $window.location.reload();
   });
 };
 
 $scope.ajuste = function(pieza) {
-  pieza.status = 'Ajuste'
+  pieza.status = 'Ajuste';
+  pieza.puro_c = parseFloat(pieza.peso_bruto*(pieza.ley/1000)).toFixed(2);
+  pieza.puro_p = parseFloat(pieza.peso_entrega*(pieza.ley/1000)).toFixed(2);
+  //console.log(pieza);
   $scope.pieza.$update(function(){
-    refresh();
+    //refresh();
+    $window.location.reload();
   });
 };
 
@@ -151,6 +155,37 @@ $scope.showPiezas = function(piezas){
     return piezas.status === 'Disponible' || 
         piezas.entrega._id === document.getElementById('entrega_id').value; 
 };
+
+
+  var language = {
+
+    "sProcessing":     "Procesando...",
+    "sLengthMenu":     "Mostrar _MENU_ registros",
+    "sZeroRecords":    "No se encontraron resultados",
+    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix":    "",
+    "sSearch":         "Buscar:",
+    "sUrl":            "",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+    },
+    "oAria": {
+        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    }
+}
+
+  $scope.dtOptions = DTOptionsBuilder.newOptions()
+        
+    .withLanguage(language)
 
 })
 

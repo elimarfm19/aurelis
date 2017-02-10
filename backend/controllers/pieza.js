@@ -80,20 +80,24 @@ function updatePieza(req,res){
 	let puroViejoP;
 	let update = req.body
 
-		Pieza.findById(piezaId,(err,pieza)=>{
+		console.log(update.puro_c);
+		console.log(update.puro_p);
+
+		// Pieza.findById(piezaId,(err,pieza)=>{
 
 			if (pieza.ley!=update.ley){				
-				pieza.recepcion.proveedor.entregado-= pieza.puro_p;
-				pieza.entrega.cliente.entregado-=pieza.puro_c;				
-				pieza.puro_p = parseFloat(pieza.peso_bruto*(update.ley/1000)).toFixed(2);
-				pieza.puro_c =	parseFloat(pieza.peso_entrega*(update.ley/1000)).toFixed(2);		
-				pieza.recepcion.proveedor.entregado+= pieza.puro_p;
-				pieza.entrega.cliente.entregado+=pieza.puro_c;				
+				//pieza.recepcion.proveedor.entregado-= pieza.puro_p;
+				//pieza.entrega.cliente.entregado-=pieza.puro_c;				
+				pieza.puro_p = parseFloat(pieza.peso_bruto*(req.body.ley/1000)).toFixed(2);
+				console.log(req.body.ley);
+				pieza.puro_c = parseFloat(pieza.peso_entrega*(req.body.ley/1000)).toFixed(2);		
+				//pieza.recepcion.proveedor.entregado+= pieza.puro_p;
+				//pieza.entrega.cliente.entregado+=pieza.puro_c;				
 			}
 			if (pieza.peso_entrega!=update.peso_entrega){
-				pieza.entrega.cliente.entregado-= pieza.puro_c;				
+				//pieza.entrega.cliente.entregado-= pieza.puro_c;				
 				pieza.puro_p= parseFloat(update.peso_entrega*(pieza.ley/1000)).toFixed(2);
-				pieza.entrega.cliente.entregado+= pieza.puro_c;
+				//pieza.entrega.cliente.entregado+= pieza.puro_c;
 			}
 		})
 

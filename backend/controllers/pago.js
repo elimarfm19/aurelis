@@ -1,8 +1,8 @@
 'use strict'
 
 const Pago = require('../models/pago')
-const Cierre = require('../models/cierre')
-const Cliente = require('../models/cliente')
+const Cierre = require('../models/cierre_p')
+const Proveedor = require('../models/proveedor')
 
  function getPago(req,res){
 
@@ -19,11 +19,11 @@ const Cliente = require('../models/cliente')
 function getPagos(req,res){
 
 	Pago.find({}).populate({
-		path: 'cierre',
-		model: 'Cierre',
+		path: 'cierre_p',
+		model: 'CierreProveedor',
 		populate: {
-			path: 'cliente',
-			model: 'Cliente'
+			path: 'proveedor',
+			model: 'Proveedor'
 		}
 	}).exec(function(err,pagos){
 		if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
@@ -35,12 +35,12 @@ function getPagosCierre(req,res){
 
 	let CierreId = req.params.id
 
-	Pago.find({cierre:CierreId}).populate({
-		path: 'cierre',
-		model: 'Cierre',
+	Pago.find({cierre_p:CierreId}).populate({
+		path: 'cierre_p',
+		model: 'CierreProveedor',
 		populate: {
-			path: 'cliente',
-			model: 'Cliente'
+			path: 'proveedor',
+			model: 'Proveedor'
 		}
 	}).exec(function(err,pagos){
 		if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})

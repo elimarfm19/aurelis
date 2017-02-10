@@ -9,7 +9,8 @@ const Cliente = Schema({
     apellidos: String,
     nacionalidad:{
         type:String,
-        enum: ['V','E','J']
+        enum: ['V','E','J'],
+        default:'V'
     },
     ced_rif:{
         type: String,

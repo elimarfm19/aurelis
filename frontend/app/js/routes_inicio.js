@@ -15,7 +15,7 @@ var app = angular.module('aurelisApp', ['ngResource','ngAnimate','ngProgress','d
     'ngSanitize',
     'ngTouch']);
 
-var route = 'http://localhost:8080/';//http://aurelis-backend.herokuapp.com/'; //
+var route = 'http://localhost:3001/';//http://aurelis-backend.herokuapp.com/'; //
 
 
   app.config(function ($routeProvider) {

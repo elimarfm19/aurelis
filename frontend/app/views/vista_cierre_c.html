@@ -206,9 +206,9 @@
                         <input class="form-control center-align" ng-model="pago.monto_pagado" required="" placeholder="25.000.000.000">
                       </td>
                     </tr>
-                    <tr ng-repeat="pago in pagos | filter: {cierre_p: cierre_pId}" >
+                    <tr ng-repeat="pago in pagos | filter: pago.cierre_p._id = cierre_pId" >
                       <td class="center-align">
-                        <!-- {{pago.fecha |  date:'dd/MM/yyyy' : shortDate}} -->
+                      <!-- {{pago.fecha |  date:'dd/MM/yyyy' : shortDate}} -->
                       </td>
                       <td class="center-align">
                         {{pago.ci}}
@@ -229,17 +229,17 @@
                     </tr>
                       <tr>
                         <td colspan="5" style="text-align: right;">  
-                          <span class="label label-primary" style="font-size: 12px;">Total de Pagos: {{ scopeRaiz | currency: 'Bs '}} </span>
+                          <span class="label label-primary" style="font-size: 12px;">Total de Pagos: {{ totalPagos | currency: 'Bs '}} </span>
                         </td>
                       </tr>
                       <tr>
                         <td colspan="5" style="text-align: right;">  
-                          <span class="label label-primary" style="font-size: 12px;">Total de Cierre: {{ cierre.total | currency: 'Bs '}} </span>
+                          <span class="label label-primary" style="font-size: 12px;">Total de Cierre: {{ totalCierreProveedor | currency: 'Bs '}} </span>
                         </td>
                       </tr>
                       <tr>
                         <td colspan="5" style="text-align: right;">  
-                          <span class="label label-danger" style="font-size: 12px;">Diferencia: {{ cierre.total - scopeRaiz | currency: 'Bs '}} </span>
+                          <span class="label label-danger" style="font-size: 12px;">Diferencia: {{ totalCierreProveedor - totalPagos | currency: 'Bs '}} </span>
                         </td>
                       </tr>
                   </tbody>

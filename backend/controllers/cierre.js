@@ -111,7 +111,7 @@ Cierre.findByIdAndUpdate(cierreId,update,{new: true},(err,cierreUpdated)=>{
 function deleteCierre(req,res){
 	let cierreId = req.params.id
 	let cliente = req.params.id
-	console.log(cierreId);
+	//console.log(cierreId);
 
 	Cierre.findById(cierreId,(err,cierre)=>{
 

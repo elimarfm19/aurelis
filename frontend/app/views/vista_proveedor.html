@@ -16,7 +16,7 @@
               <div class="col-md-12">
                 <div class="table-responsive">
                   <form name="Codenx" novalidate>
-                    <table datatable="ng" id="tabla_proveedores" class="table table-hover" data-page-length='3'>
+                    <table datatable="ng" id="tabla_proveedores" dt-options="dtOptions" class="table table-hover" data-page-length='3'>
                       <thead>
                           <tr class="active">
                             <th class="center-align" style="border-radius: 400px 4px 0 0;">C.I. / Rif</th>
@@ -24,12 +24,14 @@
                             <th class="center-align">Teléfono</th>
                             <th class="center-align">Dirección</th>
                             <th class="center-align">Email</th>
+                            <th class="center-align">Contacto</th>
                             <th class="center-align" style="border-radius: 0 400px 4px 0;">Edición</th>
                           </tr>
                       </thead>
                       <tfoot>
                         <tr class="active">
                             <th class="center-align" style="border-radius: 0 0 4px 400px;"></th>
+                            <th class="center-align"></th>
                             <th class="center-align"></th>
                             <th class="center-align"></th>
                             <th class="center-align"></th>
@@ -50,9 +52,12 @@
                           </td>
                           <td class="center-align">
                            <img style="max-width: 20px; height: 20px;" src="../assets/img/eye.png" alt="Paris" data-toggle="modal" data-target="#direccionModal" ng-click="direccion(proveedor._id)">
-                          </td>
+                          </td>                          
                           <td class="center-align">
                             {{proveedor.email}}
+                          </td>
+                          <td class="center-align">
+                            <a class="zmdi zmdi-accounts zmdi-hc-2x" data-toggle="modal" data-target="#contactoModal" ng-click="contacto(proveedor._id)" style="color: black;"></a>
                           </td>
                           <td class="center-align">                                  
                             <!--<button class="btn btn-danger glyphicon glyphicon-trash btn-xs" ng-click="remove(proveedor)"></button>-->
@@ -94,7 +99,7 @@
               </div>
               <div class="row">
                 <div class="input-field col s2">
-                  <select class="select" name="nacionalidad" id="nacionalidad" ng-model="proveedor.nacionalidad" ng-required="true">
+                  <select class="select" name="nacionalidad" id="nacionalidad" ng-model="proveedor.nacionalidad">
                       <option value="V" ng-selected="true">V</option>
                       <option value="E">E</option>
                       <option value="J">J</option>
@@ -123,6 +128,12 @@
                    <label for="direccion">Dirección</label>
                 </div>
              </div>
+             <div class="row">
+                <div class="input-field col s12">
+                   <input ng-required="true" id="contacto" type="text" class="validate" ng-model="proveedor.contacto" style="text-align: center;">
+                   <label for="contacto">Contacto</label>
+                </div>
+             </div>
              <div style="text-align:center">
                  <button class="btn btn-primary waves-effect waves-light" ng-click="add(proveedor)" ng-if="!proveedor._id" type="submit" ng-disabled="!Codenx.$valid" data-dismiss="modal">AÑADIR</button>
                  <button class="btn btn-info waves-effect waves-light" ng-click="update(proveedor)" ng-if="proveedor._id" type="submit" ng-change="verifyDuplicate()" data-dismiss="modal">ACTUALIZAR</button>
@@ -148,7 +159,7 @@
 				    <br>
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align modal-title">Dirección del proveedor</h3>                  
+              <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align modal-title">Dirección del Proveedor</h3>                  
             </div>	    
             <br>
 	          <form class="col s12">              
@@ -161,6 +172,34 @@
 	         </form>
 	        </div>
 	      </div>
+      </div>
+    </div>
+  </div>  
+</div>
+
+<div class="container">
+    <!-- Modal -->
+  <div class="modal fade" id="contactoModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="tamanno">
+          <div class="" style="margin-top:100px; ">
+            <div class="row " style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
+            <br>
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align modal-title">Contacto del Proveedor</h3>                  
+            </div>      
+            <br>
+            <form class="col s12">              
+             <div class="row">
+                <div class="center-align">
+                 {{ proveedor.contacto }}                  
+                </div>
+             </div>            
+             <br><br><br>                                                
+           </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>  

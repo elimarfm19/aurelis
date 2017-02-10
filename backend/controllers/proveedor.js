@@ -27,15 +27,16 @@ function storeProveedor(req,res){
 	console.log(req.body)
 	//res.status(200).send({message:'el producto se ha recibido'})
 	let proveedor = new Proveedor()
-    proveedor.nombres = req.body.nombres
-    proveedor.apellidos = req.body.apellidos
-	proveedor.nacionalidad = req.body.nacionalidad
-    proveedor.ced_rif = req.body.ced_rif
-    proveedor.tlf = req.body.tlf
-    proveedor.direccion = req.body.direccion
-    proveedor.email = req.body.email
-    proveedor.cerrado = 0
-    proveedor.entregado = 0
+	    proveedor.nombres = req.body.nombres
+	    proveedor.apellidos = req.body.apellidos
+		proveedor.nacionalidad = req.body.nacionalidad
+	    proveedor.ced_rif = req.body.ced_rif
+	    proveedor.tlf = req.body.tlf
+	    proveedor.direccion = req.body.direccion
+	    proveedor.email = req.body.email
+	    proveedor.cerrado = 0
+	    proveedor.entregado = 0
+	    proveedor.contacto = req.body.contacto
 
 	proveedor.save((err,proveedorStored)=>{
 

@@ -157,6 +157,9 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title center-align" style="color:black; font-weight:600; font-family: 'Tahoma';">Registro de Pagos</h4>
         </div>
+                        <input  type="text" ng-model="cierre_p._id">
+                       
+                        <input value="" id="cierre_pId" ng-model="cierre_pId">
         <div class="modal-body">
           <div class="row">
             <div class="table-responsive" >
@@ -181,9 +184,6 @@
                   <tbody>
                     <tr>
                       <td>
-                        <input hidden type="text" ng-model="cierre_p._id">
-                       
-                        <input hidden value="" id="cierre_pId" ng-model="cierre_pId">
                        <!-- <input type="date" class="form-control center-align" ng-model="pago.fecha" required="" placeholder="Pago Fecha">-->
                       </td>
                       <td>
@@ -199,7 +199,7 @@
                         <input class="form-control center-align" ng-model="pago.monto_pagado" required="" placeholder="25.000.000.000">
                       </td>
                     </tr>
-                    <tr ng-repeat="pago in pagos | filter: {cierre_p: cierre_pId}" >
+                    <tr ng-repeat="pago in pagos" >
                       <td class="center-align">
                         <!-- {{pago.fecha |  date:'dd/MM/yyyy' : shortDate}} -->
                       </td>

@@ -13,22 +13,66 @@ var refresh = function() {
   $scope.proveedores = Proveedor.query();  
   $scope.cierreproveedores = CierreProveedor.query();
   $scope.pagos = Pago.query();
-  $scope.cierre_p ="";
   $scope.pago="";
+  $rootScope.gramosp =0;
+  $rootScope.scopeRaiz =0;
 }
 var refresh2 = function(){
 
 if ($routeParams.cierreId) {
   $scope.cierre = Cierre.get({ id: $routeParams.cierreId });
+  monto_pagado();
+  gramos();
 }
 else{
-  console.log('No tengo parametros');
+  //console.log('No tengo parametros');
 }
 
 }
 refresh();
 refresh2();
 
+function monto_pagado(){
+   //var cierre_id = document.getElementById('cierre_id').value;
+  // console.log();
+  var total=0;
+  //var cierresProveedor;
+  if ($routeParams.cierreId != ''){
+    $http.get("http://localhost:3001/cierresProveedor/")
+    .success(function(cierres){
+      //console.log(cierres);
+       for (var i=0; i < cierres.length; i++){
+        if (cierres[i].cierre == $routeParams.cierreId) {
+          total += cierres[i].total;
+        } 
+      }
+      //console.log(total);
+      $rootScope.scopeRaiz = total;
+      $scope.ganancia(total,$routeParams.cierreId);
+   });
+   
+  }
+}
+
+function gramos(){
+   //var cierre_id = document.getElementById('cierre_id').value;
+  var total=0;
+  //var cierresProveedor;
+  if ($routeParams.cierreId != ''){
+    $http.get("http://localhost:3001/cierresProveedor/")
+    .success(function(cierres){
+      //console.log(cierres);
+       for (var i=0; i < cierres.length; i++){
+        if (cierres[i].cierre == $routeParams.cierreId) {
+          total += cierres[i].cantidad;
+        } 
+      }
+     //console.log(total);
+      $rootScope.gramosp = total;
+   });
+   
+  }
+}
 
 $scope.add = function(cierre) {
   var fecha_cierre = document.getElementById('fecha_cierre').value;
@@ -92,19 +136,21 @@ $scope.update = function(cierre) {
 };
 
 $scope.remove = function(cierre) {
-  console.log(cierre);
+  //console.log(cierre);
   cierre.$remove(function(){
-    refresh();
+    //refresh();
+     $window.location.reload();
   });
 };
 
 $scope.edit = function(id) {
-  console.log('cualquier cosa');
+  //console.log('cualquier cosa');
   $scope.cierre = Cierre.get({ id: id });
   $rootScope.cierre = $scope.cierre;  // console.log(serveData);
 };  
 
 $scope.deselect = function() {
+
   $window.location.reload();
 }
 
@@ -131,11 +177,12 @@ $scope.deleteCierreProveedor = function(cierreProveedorId) {
     $http.delete("http://localhost:3001/cierresProveedor/"+cierreProveedorId)
             .success(function(respuesta){
                 //console.log(respuesta);
-                 $scope.proveedores = Proveedor.query();  
-                $scope.cierreproveedores = CierreProveedor.query();
-                $scope.cierre_p ="";
-                $scope.monto_pagado();
-                $scope.gramos();
+                //$scope.proveedores = Proveedor.query();  
+               // $scope.cierreproveedores = CierreProveedor.query();
+              //  $scope.cierre_p ="";
+              // monto_pagado();
+              //gramos();
+               $window.location.reload();
 
    });
 };
@@ -145,6 +192,39 @@ $scope.openPagosProveedor = function(idCierreProveedor) {
   document.getElementById('cierre_pId').value = idCierreProveedor;
 
   $scope.cierre_pId= idCierreProveedor;
+
+  var cierre_p_id = idCierreProveedor;
+  var total=0;
+  //var cierresProveedor;
+  if (cierre_p_id != ''){
+    $http.get("http://localhost:3001/pagos/cierre/"+cierre_p_id)
+    .success(function(pagos){
+     
+       for (var i=0; i < pagos.length; i++){
+        if (pagos[i].cierre_p._id == cierre_p_id) {
+          total += pagos[i].monto_pagado;
+        
+           $rootScope.totalCierreProveedor = pagos[i].cierre_p.total;
+        } 
+        
+      }
+     // console.log(total);
+      $rootScope.totalPagos = total;
+      
+      //$scope.ganancia(total,cierre_id);
+   })
+    .error(function(error){
+      //console.log('Error'+error);
+      $rootScope.totalCierreProveedor = 0;
+      $rootScope.totalPagos = 0;
+
+    });
+   
+  }
+
+  //monto_pagado_cierre();
+  //console.log($scope.cierre_pId);
+  //$scope.pagos = Pago.query();
 };
 
 $scope.addPagosProveedor = function(pago) {
@@ -155,6 +235,7 @@ $scope.addPagosProveedor = function(pago) {
     .success(function(respuesta){
           $scope.pagos = Pago.query();
           $scope.pago="";
+          $scope.monto_pagado_cierre_p();
    });
 
 };  
@@ -183,6 +264,34 @@ $scope.monto_pagado=function(){
  
  // console.log(cierre_id);
 }
+$scope.monto_pagado_cierre_p=function(){
+  var cierre_p_id = document.getElementById('cierre_pId').value;
+  var total=0;
+  //var cierresProveedor;
+  if (cierre_p_id != ''){
+    $http.get("http://localhost:3001/pagos/")
+    .success(function(pagos){
+      //console.log(cierres);
+       for (var i=0; i < pagos.length; i++){
+        if (pagos[i].cierre_p._id == cierre_p_id) {
+          total += pagos[i].monto_pagado;
+        
+           $rootScope.totalCierreProveedor = pagos[i].cierre_p.total;
+        } 
+        
+      }
+     // console.log(total);
+      $rootScope.totalPagos = total;
+      //$scope.ganancia(total,cierre_id);
+   });
+   
+  }
+
+
+ 
+ // console.log(cierre_id);
+}
+
 
 $scope.gramos=function(){
   var cierre_id = document.getElementById('cierre_id').value;
@@ -230,32 +339,35 @@ $scope.ganancia=function(total_pago,cierre_id){
 }
 
 $scope.tlf = function(id) {
-  console.log('hola'+id);
+  //console.log('hola'+id);
   $scope.proveedor = Proveedor.get({ id: id });
 };
-  var language = {
-        "sEmptyTable":     "Ingen tilgængelige data (prøv en anden søgning)",
-        "sInfo":           "Viser _START_ til _END_ af _TOTAL_ rækker",
-        "sInfoEmpty":      "Viser 0 til 0 af 0 rækker",
-        "sInfoFiltered":   "(filtreret ud af _MAX_ rækker ialt)",
-        "sInfoPostFix":    "",
-        "sInfoThousands":  ",",
-        "sLengthMenu":     "Vis _MENU_ rækker",
-        "sLoadingRecords": "Henter data...",
-        "sProcessing":     "Processing...",
-        "sSearch":         "Filter:",
-        "sZeroRecords":    "Ingen rækker matchede filter",
-        "oPaginate": {
-          "sFirst":    "Første",
-          "sLast":     "Sidste",
-          "sNext":     "Siguiente",
-          "sPrevious": "Anterior"
-        },
-        "oAria": {
-          "sSortAscending":  ": activate to sort column ascending",
-          "sSortDescending": ": activate to sort column descending"
-        }
-      }
+
+var language = {
+
+    "sProcessing":     "Procesando...",
+    "sLengthMenu":     "Mostrar _MENU_ registros",
+    "sZeroRecords":    "No se encontraron resultados",
+    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix":    "",
+    "sSearch":         "Buscar:",
+    "sUrl":            "",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+    },
+    "oAria": {
+        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    }
+}
 
 $scope.dtOptions = DTOptionsBuilder.newOptions()
         

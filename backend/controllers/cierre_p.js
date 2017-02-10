@@ -11,7 +11,9 @@ const Proveedor = require('../models/proveedor')
 	 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
 	 	if(!cierre_p) return res.status(404).send({message:'El cierre no existe'})
 	 	
-	 	res.status(200).send(cierre_p)
+	 	Proveedor.populate(cierre_p, {path: "proveedor"},function(err, cierre_p){
+            res.status(200).send(cierre_p);
+        }); 
 	})
 }
 
