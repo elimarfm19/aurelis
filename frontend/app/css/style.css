@@ -876,3 +876,7 @@ div.dataTables_wrapper div.dataTables_info {
     /*border: 0;*/
     background: #696969 !important;
 }
+
+/*.dataTables_length {
+    margin: -1.8rem 0px -0.2rem 1rem !important ;
+}*/

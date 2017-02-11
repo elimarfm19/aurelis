@@ -22,7 +22,7 @@ $scope.add = function(pieza) {
 };
 
 $scope.update = function(pieza) {
-  console.log(pieza);
+  //console.log(pieza);
  // let check = document.getElementById('check'+pieza._id).checked
 
  //  if(check)
@@ -33,11 +33,11 @@ $scope.update = function(pieza) {
  //  }
   //console.log(pieza);
  
-  // $scope.pieza.$update(function(){
-  //   // pieza.status = 'Verificado'
-  //     console.log(pieza)
-  //   refresh();
-  // });
+  $scope.pieza.$update(function(){
+    // pieza.status = 'Verificado'
+      //console.log(pieza)
+    refresh();
+  });
 };
 
 $scope.verificar = function(pieza) {
@@ -47,15 +47,91 @@ $scope.verificar = function(pieza) {
   });
 };
 
-$scope.ajuste = function(pieza) {
-  pieza.status = 'Ajuste';
-  pieza.puro_c = parseFloat(pieza.peso_bruto*(pieza.ley/1000)).toFixed(2);
-  pieza.puro_p = parseFloat(pieza.peso_entrega*(pieza.ley/1000)).toFixed(2);
+$scope.ajuste = function(piezaNueva) {
+
+  piezaNueva.status = 'Ajuste';
+  piezaNueva.puro_c = parseFloat(piezaNueva.peso_entrega*(piezaNueva.ley/1000)).toFixed(2);
+  piezaNueva.puro_p = parseFloat(piezaNueva.peso_bruto*(piezaNueva.ley/1000)).toFixed(2);
+
+   $http.get("http://localhost:3001/piezas/"+piezaNueva._id)
+    .success(function(piezaVieja){
+
+        if (piezaVieja.ley!=piezaNueva.ley){ 
+          // console.log(piezaVieja[0].recepcion.proveedor._id);
+          //console.log(piezaVieja.recepcion.proveedor._id);
+
+          $http.get("http://localhost:3001/proveedores/"+piezaVieja[0].recepcion.proveedor._id)
+          .success(function(proveedor){
+            // console.log(Number(piezaNueva.puro_p).toFixed(2));
+            //console.log('Proveedor '+proveedor.entregado);
+            // console.log(piezaVieja[0].puro_p);
+
+              proveedor.entregado -= parseFloat(piezaVieja[0].puro_p).toFixed(2);
+              // console.log('Proveedor '+proveedor.entregado);
+              proveedor.entregado += Number(piezaNueva.puro_p); 
+
+             //console.log('Proveedor '+proveedor.entregado);
+            $http.put("http://localhost:3001/proveedores/"+proveedor._id,proveedor)
+              .success(function(proveedorNuevo){ 
+               // console.log('Actualizando proveedor');
+                //console.log(proveedorNuevo);
+            });
+
+
+          });
+
+          $http.get("http://localhost:3001/clientes/"+piezaVieja[0].entrega.cliente._id)
+          .success(function(cliente){
+              // console.log('Cliente '+cliente.entregado);
+              cliente.entregado -= parseFloat(piezaVieja[0].puro_c).toFixed(2);
+              //console.log('Cliente '+cliente.entregado);
+              cliente.entregado += Number(piezaNueva.puro_c); 
+            //   console.log('Cliente '+cliente.entregado);
+            $http.put("http://localhost:3001/clientes/"+cliente._id,cliente)
+              .success(function(clienteNuevo){ 
+                //console.log('Actualizando cliente');
+               // console.log(clienteNuevo);
+            });
+
+
+          });
+
+        }
+
+        if (piezaVieja.peso_entrega!=piezaNueva.peso_entrega){
+          //console.log('modifica el peso_entrega');
+          $http.get("http://localhost:3001/clientes/"+piezaVieja[0].entrega.cliente._id)
+          .success(function(cliente){
+              // console.log('Cliente '+cliente.entregado);
+              cliente.entregado -= parseFloat(piezaVieja[0].puro_c).toFixed(2);
+              //console.log('Cliente '+cliente.entregado);
+              cliente.entregado += Number(piezaNueva.puro_c); 
+            //   console.log('Cliente '+cliente.entregado);
+            $http.put("http://localhost:3001/clientes/"+cliente._id,cliente)
+              .success(function(clienteNuevo){ 
+                //console.log('Actualizando cliente');
+                //console.log(clienteNuevo);
+            });
+
+
+          });
+        }
+
+
+   });
+
+  // $http.put("http://localhost:3001/piezas/"+piezaNueva._id,piezaNueva)
+  //             .success(function(piezaActualizada){ 
+  //               console.log('Actualizando Pieza');
+  //               console.log(piezaActualizada);
+  // });
+
+  
   //console.log(pieza);
-  $scope.pieza.$update(function(){
-    //refresh();
-    $window.location.reload();
-  });
+  // $scope.pieza.$update(function(){
+  //   //refresh();
+  //   $window.location.reload();
+  // });
 };
 
 $scope.remove = function(pieza) {
@@ -65,7 +141,22 @@ $scope.remove = function(pieza) {
 };
 
 $scope.edit = function(id) {
-  $scope.pieza = Pieza.get({ id: id });
+
+  $http.get("http://localhost:3001/piezas/"+id)
+              .success(function(pieza){ 
+
+                $scope.pieza = new Pieza();//Pieza.get({ id: pieza._id });
+                //console.log('Actualizando Pieza');
+                //console.log($scope.pieza);
+                // $scope.pieza._id = pieza[0]._id;
+                // $scope.pieza.piezaId = pieza[0].piezaId;
+                // $scope.pieza.ley = pieza[0].ley;
+
+                $scope.pieza=pieza[0];
+                //console.log(pieza[0]._id);
+
+  });
+
 
  //var update = document.getElementById("actualizar");
 

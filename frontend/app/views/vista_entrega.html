@@ -14,7 +14,7 @@
                     <option ng-repeat="cliente in clientes" ng-if="(cliente.cerrado - cliente.entregado) > 0" value="{{cliente._id}}">{{cliente.nombres}} {{cliente.apellidos}}</option> 
                   </select>
                   <div class="col-md-6">
-                    <input disabled="true" id="restante" value="Restante: {{cliente.cerrado - cliente.entregado  | currency: ' '}} (g)" style="color:black; font-weight:600; font-size: 15px; font-family: 'Tahoma'; text-align: right;"></input> 
+                    <input disabled="true" id="restante" value="Restante: {{cliente.cerrado - cliente.entregado  | currency: ' '}} (g)" style="color:black; font-weight:600; font-size: 15px; font-family: 'Tahoma'; text-align: center;"></input> 
                   </div>
                 </div>      
               </div>
@@ -38,12 +38,12 @@
 
 <div class="container">
     <!-- Modal -->
-  <div class="modal fade" id="piezasModal" role="dialog">
+  <div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" id="piezasModal" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button type="button" class="close" data-dismiss="modal" ng-click="update(entrega)">&times;</button>
           <h4 class="modal-title center-align" style="color:black; font-weight:600; font-family: 'Tahoma';">Detalle de Piezas Disponibles</h4>
         </div>
         <div class="modal-body">
@@ -60,7 +60,7 @@
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Ley</th>
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Puro</th>
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Peso Entrega</th>
-                      <th class="center-align" style="background: #337ab7; border-radius: 0 400px 4px 0; color: #ffffff;">Actions</th>
+                      <th class="center-align" style="background: #337ab7; border-radius: 0 400px 4px 0; color: #ffffff;">Opciones</th>
                     </tr>
                   </thead>
                    <tbody>

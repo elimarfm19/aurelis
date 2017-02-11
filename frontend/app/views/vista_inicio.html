@@ -23,6 +23,15 @@
                     <th class="center-align" style="border-radius: 0 400px 4px 0;">Ultima Entrega</th>
                   </tr>
               </thead>
+              <tfoot>
+                <tr class="active">
+                    <th class="center-align" style="border-radius: 0 0 4px 400px;"></th>
+                    <th class="center-align"></th>
+                    <th class="center-align"></th>
+                    <th class="center-align"></th>
+                    <th class="center-align" style="border-radius: 0 4px 400px 0;"></th>
+                </tr>
+              </tfoot>
               <tbody>
                   <tr ng-repeat="proveedor in proveedores " ng-if="!proveedor.cerrado== 0">
                     <td class="center-align" >
@@ -35,7 +44,8 @@
                       {{proveedor.entregado  |currency: ''}}
                     </td>
                     <td class="center-align" field="por_cerrar">
-                      {{(proveedor.entregado - proveedor.cerrado) | currency: '-'}}
+                      {{(proveedor.entregado - proveedor.cerrado) }}
+                      {{ parseFloat(17.58-20).toFixed(2)}}
                     </td>
                     <td class="center-align" field="fecha_entrega">
                     <!-- aqui va la ultmima recepcion de este personaje-->
@@ -64,6 +74,15 @@
                   <th class="center-align" style="border-radius: 0 400px 4px 0;">Ultima Entrega</th>
                 </tr>
             </thead>
+            <tfoot>
+              <tr class="active">
+                  <th class="center-align" style="border-radius: 0 0 4px 400px;"></th>
+                  <th class="center-align"></th>
+                  <th class="center-align"></th>
+                  <th class="center-align"></th>
+                  <th class="center-align" style="border-radius: 0 4px 400px 0;"></th>
+              </tr>
+            </tfoot>
             <tbody>
               <tr ng-repeat="cliente in clientes " ng-if="!cliente.cerrado== 0">
                 <td class="center-align" >
@@ -76,7 +95,7 @@
                   {{cliente.entregado  | currency: ''}}
                 </td>
                 <td class="center-align" field="por_cerrar">
-                  {{(cliente.entregado - cliente.cerrado ) | currency: ''}}
+                  {{(cliente.entregado - cliente.cerrado )}}
                 </td>
                 <td class="center-align" field="fecha_entrega">                          
                   {{cliente.ultima_entrega | date:'dd/MM/yyyy' : shortDate}}

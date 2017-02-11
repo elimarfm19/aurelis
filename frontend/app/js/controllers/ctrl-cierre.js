@@ -138,8 +138,8 @@ $scope.update = function(cierre) {
 $scope.remove = function(cierre) {
   //console.log(cierre);
   cierre.$remove(function(){
-    //refresh();
-     $window.location.reload();
+    refresh();
+     //$window.location.reload();
   });
 };
 
@@ -166,10 +166,10 @@ $scope.addCierreProveedor = function(idCierre) {
                 $scope.cierre_p ="";
                 $scope.monto_pagado();
                 $scope.gramos();
-               
+              // $window.location.reload();
                 //refresh();
    });        
-  console.log($scope.cierre_p);
+  
 }; 
 
 $scope.deleteCierreProveedor = function(cierreProveedorId) {
@@ -237,6 +237,7 @@ $scope.addPagosProveedor = function(pago) {
           $scope.pago="";
           $scope.monto_pagado_cierre_p();
    });
+    $window.location.reload();
 
 };  
 
@@ -367,12 +368,14 @@ var language = {
         "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
     }
+    // "ordering": false,
+    // "info":     false,
 }
 
 $scope.dtOptions = DTOptionsBuilder.newOptions()
         
         .withLanguage(language)
-        
+        .withOption('info', false); 
    
 })
 

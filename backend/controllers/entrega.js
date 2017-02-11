@@ -87,9 +87,16 @@ function updateEntrega(req,res){
 	let entregaId = req.params.id
 	let update = req.body
 		
-		Entrega.findByIdAndUpdate(entregaId,update,(err,entregaUpdated)=>{
-			if(err) return res.status(500).send({message:`Error al actualizar la entrega: ${ err }`})			
-			res.status(200).send(entregaUpdated)			
+		Cliente.findById(req.body.cliente,function(err,cliente){
+			//cliente.entregado += parseFloat(req.body.cantidad);
+			cliente.ultima_entrega = new Date, 'dd/MM/yyyy';
+	    	cliente.save();
+
+			Entrega.findByIdAndUpdate(entregaId,update,(err,entregaUpdated)=>{
+				if(err) return res.status(500).send({message:`Error al actualizar la entrega: ${ err }`})			
+				res.status(200).send(entregaUpdated)			
+			})
+
 		})
 
 }

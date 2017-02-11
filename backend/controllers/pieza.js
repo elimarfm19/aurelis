@@ -9,12 +9,33 @@ const Proveedor = require('../models/proveedor')
 
 	let piezaId = req.params.id
 
-	Pieza.findById(piezaId,(err,pieza)=>{
-	 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
-	 	if(!pieza) return res.status(404).send({message:'La pieza no existe'})
-	 	
-	 	res.status(200).send(pieza)
+	Pieza.find({ _id: piezaId})
+	.populate({
+		path: 'recepcion',
+		model: 'Recepcion',
+		populate: {
+
+			path: 'cierre_p proveedor',
+			//model: 'CierreProveedor Proveedor',
+			populate: {
+			path: 'proveedor',
+			model: 'Proveedor'
+			}
+		}
+	}).populate({
+		path: 'entrega',
+		model: 'Entrega',
+		populate: {
+
+			path: 'cliente',
+			model: 'Cliente'
+		}
 	})
+	.exec(function(err,pieza){
+		if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+			if(pieza == "") return res.status(404).send({message:'La Pieza no Existe'})
+				res.status(200).send(pieza);
+		});
 }
 
 function getPiezas(req,res){
@@ -77,29 +98,29 @@ function storePieza(req,res){
 
 function updatePieza(req,res){
 	let piezaId = req.params.id
-	let puroViejoP;
+	//let puroViejoP;
 	let update = req.body
 
-		console.log(update.puro_c);
-		console.log(update.puro_p);
+	//	console.log(update.puro_c);
+	//	console.log(update.puro_p);
 
 		// Pieza.findById(piezaId,(err,pieza)=>{
 
-			if (pieza.ley!=update.ley){				
-				//pieza.recepcion.proveedor.entregado-= pieza.puro_p;
-				//pieza.entrega.cliente.entregado-=pieza.puro_c;				
-				pieza.puro_p = parseFloat(pieza.peso_bruto*(req.body.ley/1000)).toFixed(2);
-				console.log(req.body.ley);
-				pieza.puro_c = parseFloat(pieza.peso_entrega*(req.body.ley/1000)).toFixed(2);		
-				//pieza.recepcion.proveedor.entregado+= pieza.puro_p;
-				//pieza.entrega.cliente.entregado+=pieza.puro_c;				
-			}
-			if (pieza.peso_entrega!=update.peso_entrega){
-				//pieza.entrega.cliente.entregado-= pieza.puro_c;				
-				pieza.puro_p= parseFloat(update.peso_entrega*(pieza.ley/1000)).toFixed(2);
-				//pieza.entrega.cliente.entregado+= pieza.puro_c;
-			}
-		})
+			// if (pieza.ley!=update.ley){				
+			// 	//pieza.recepcion.proveedor.entregado-= pieza.puro_p;
+			// 	//pieza.entrega.cliente.entregado-=pieza.puro_c;				
+			// 	pieza.puro_p = parseFloat(pieza.peso_bruto*(req.body.ley/1000)).toFixed(2);
+			// 	console.log(req.body.ley);
+			// 	pieza.puro_c = parseFloat(pieza.peso_entrega*(req.body.ley/1000)).toFixed(2);		
+			// 	//pieza.recepcion.proveedor.entregado+= pieza.puro_p;
+			// 	//pieza.entrega.cliente.entregado+=pieza.puro_c;				
+			// }
+			// if (pieza.peso_entrega!=update.peso_entrega){
+			// 	//pieza.entrega.cliente.entregado-= pieza.puro_c;				
+			// 	pieza.puro_p= parseFloat(update.peso_entrega*(pieza.ley/1000)).toFixed(2);
+			// 	//pieza.entrega.cliente.entregado+= pieza.puro_c;
+			// }
+		//})
 
 		//update.puro = parseFloat(update.peso_entrega * (update.ley/1000)).toFixed(2);
 		Pieza.findByIdAndUpdate(piezaId,update,(err,piezaUpdated)=>{

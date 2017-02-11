@@ -64,8 +64,8 @@
               <form name="Codenx2" novalidate class="col s12">
                <input hidden id="total_pago" type="text" value="{{ scopeRaiz }}">
                 <input hidden id="total_gramos" type="text" value="{{ gramosp }}">
-                <div class="col-md-12">
-                  <table class="table table-hover table-striped">
+                <div class="col-md-12 ">
+                  <table class="table table-hover table-striped " id="tabla_cierreProveedor" data-page-length='5'>
                     <thead>
                       <tr class="active">
                         <th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 400px 4px 0 0;">  Proveedor</th>
@@ -116,13 +116,13 @@
                         </td>
                         <td></td>
                         <td class="center-align">
-                          {{cierre_p.cantidad}}
+                          {{cierre_p.cantidad  | currency: ''}}
                         </td>
                         <td class="center-align">
-                          {{cierre_p.precio}}
+                          {{cierre_p.precio  | currency: 'Bs '}}
                         </td>
                         <td class="center-align">
-                          {{cierre_p.cantidad*cierre_p.precio}}
+                          {{cierre_p.cantidad*cierre_p.precio | currency: 'Bs '}}
                         </td>
                         <!-- <td class="center-align">
                           {{cierre_p.monto_pagado}}
@@ -156,7 +156,7 @@
 
  <div class="container">
     <!-- Modal -->
-  <div class="modal fade" id="pagosModal" role="dialog">
+  <div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" id="pagosModal" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
@@ -172,7 +172,7 @@
                   <button class="btn btn-primary" ng-click="addPagosProveedor(pago)" ng-if="!pago._id" type="submit" ng-disabled="!Codenx.$valid">Añadir</button>
                   <button class="btn btn-info" ng-click="update(pago)" ng-if="pago._id" type="submit">Actualizar</button>
                 </div>
-                <table class="table table-hover table-striped">
+                <table class="table table-hover table-striped" datatable="ng" id="tabla_pagosP" data-page-length='5'>
                   <thead>
                     <tr class="active">
                       <th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 400px 4px 0 0;"></th>
@@ -181,7 +181,7 @@
                       <th class="center-align" style="background: #337ab7; color: #ffffff; width: 30%">Titular</th>
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Banco</th>
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Monto Pagado</th>
-                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Opciones</th>
+                      <th class="center-align" style="background: #337ab7; color: #ffffff;"></th>
                       <th style="background: #337ab7; border-radius: 0 400px 4px 0;"></th>
                     </tr>
                   </thead>
@@ -220,28 +220,28 @@
                         {{pago.banco}}
                       </td>
                       <td class="center-align">
-                        {{pago.monto_pagado}}
+                        {{pago.monto_pagado | currency: 'Bs '}}
                       </td>
-                      <td class="center-align" style="width: 14%">
+                      <td class="center-align" style="width: 5%">
                          <!--  <span class="zmdi zmdi-edit zmdi-hc-2x" style="cursor: pointer;" ng-click=edit(pago._id)/> -->
                           <span class="zmdi zmdi-delete zmdi-hc-2x" style="cursor: pointer;" ng-click='remove(pago)'/>
                       </td>
                     </tr>
-                      <tr>
-                        <td colspan="5" style="text-align: right;">  
-                          <span class="label label-primary" style="font-size: 12px;">Total de Pagos: {{ totalPagos | currency: 'Bs '}} </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td colspan="5" style="text-align: right;">  
-                          <span class="label label-primary" style="font-size: 12px;">Total de Cierre: {{ totalCierreProveedor | currency: 'Bs '}} </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td colspan="5" style="text-align: right;">  
-                          <span class="label label-danger" style="font-size: 12px;">Diferencia: {{ totalCierreProveedor - totalPagos | currency: 'Bs '}} </span>
-                        </td>
-                      </tr>
+                    <tr>
+                      <td colspan="5" style="text-align: right;">  
+                        <span class="label label-primary" style="font-size: 12px;">Total de Pagos: {{ totalPagos | currency: 'Bs '}} </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" style="text-align: right;">  
+                        <span class="label label-primary" style="font-size: 12px;">Total de Cierre: {{ totalCierreProveedor | currency: 'Bs '}} </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" style="text-align: right;">  
+                        <span class="label label-danger" style="font-size: 12px;">Diferencia: {{ totalCierreProveedor - totalPagos | currency: 'Bs '}} </span>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
              </form>
@@ -297,3 +297,9 @@
     format:"yyyy-mm-dd"
   });
 </script>
+
+<!-- <script type="text/javascript">
+$(function(){
+    $("#tabla_pagosP").dataTable();
+  })
+</script> -->
