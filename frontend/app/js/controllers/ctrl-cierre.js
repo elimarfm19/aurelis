@@ -14,8 +14,10 @@ var refresh = function() {
   $scope.cierreproveedores = CierreProveedor.query();
   $scope.pagos = Pago.query();
   $scope.pago="";
-  $rootScope.gramosp =0;
-  $rootScope.scopeRaiz =0;
+  monto_pagado();
+  gramos();
+  //$rootScope.gramosp =0;
+ // $rootScope.scopeRaiz =0;
 }
 var refresh2 = function(){
 
@@ -97,6 +99,9 @@ $scope.add = function(cierre) {
     cierre.fecha_entrega = fecha_entrega;
   }
 
+ // console.log(cierre.precio);
+ //// console.log(cierre.total);
+  //console.log(cierre.cantidad);
   Cierre.save(cierre,function(cierre){
     $scope.cierre = Cierre.get({ id: cierre._id });
   });
@@ -174,15 +179,20 @@ $scope.addCierreProveedor = function(idCierre) {
 
 $scope.deleteCierreProveedor = function(cierreProveedorId) {
 
+  var total= 0;
     $http.delete("http://localhost:3001/cierresProveedor/"+cierreProveedorId)
             .success(function(respuesta){
-                //console.log(respuesta);
-                //$scope.proveedores = Proveedor.query();  
-               // $scope.cierreproveedores = CierreProveedor.query();
+
+              $scope.proveedores = Proveedor.query();  
+                $scope.cierreproveedores = CierreProveedor.query();
+                $scope.cierre_p ="";
+                $scope.monto_pagado();
+                $scope.gramos();
               //  $scope.cierre_p ="";
               // monto_pagado();
               //gramos();
-               $window.location.reload();
+              // $window.location.reload();
+             // refresh();
 
    });
 };
@@ -237,9 +247,22 @@ $scope.addPagosProveedor = function(pago) {
           $scope.pago="";
           $scope.monto_pagado_cierre_p();
    });
-    $window.location.reload();
+    //$window.location.reload();
 
-};  
+};
+$scope.deletePagosProveedor = function(idPago) {
+
+  //pago.cierre_p =  document.getElementById('cierre_pId').value;
+
+  $http.delete("http://localhost:3001/pagos/"+idPago)
+    .success(function(respuesta){
+          $scope.pagos = Pago.query();
+          $scope.pago="";
+          $scope.monto_pagado_cierre_p();
+   });
+    //$window.location.reload();
+
+};    
 
 $scope.monto_pagado=function(){
   var cierre_id = document.getElementById('cierre_id').value;
@@ -267,10 +290,12 @@ $scope.monto_pagado=function(){
 }
 $scope.monto_pagado_cierre_p=function(){
   var cierre_p_id = document.getElementById('cierre_pId').value;
+
+  console.log(cierre_p_id);
   var total=0;
   //var cierresProveedor;
   if (cierre_p_id != ''){
-    $http.get("http://localhost:3001/pagos/")
+    $http.get("http://localhost:3001/pagos/cierre/"+cierre_p_id)
     .success(function(pagos){
       //console.log(cierres);
        for (var i=0; i < pagos.length; i++){
@@ -343,6 +368,50 @@ $scope.tlf = function(id) {
   //console.log('hola'+id);
   $scope.proveedor = Proveedor.get({ id: id });
 };
+
+$scope.calcularCantidad = function(){
+
+
+
+//var total = document.getElementById('total_c').value;
+
+  //$scope.cierre.cantidad =parseFloat(total / $scope.cierre.precio).toFixed(2);
+
+//document.getElementById('total_c').value = $filter('currency')(document.getElementById('total_c').value);
+ //$scope.cierre.total = total;
+ // if ($scope.total > 0) {
+
+      $scope.cierre.cantidad = parseFloat($scope.cierre.total / $scope.cierre.precio).toFixed(2);
+
+ // }
+
+ // else if($scope.cantidad > 0){
+
+     
+ // }
+ // else{
+
+ //  console.log("no hago unb cono");
+
+ // }
+  // console.log($scope.cierre.total);
+  // console.log($scope.cierre.precio);
+  
+ 
+
+  // console.log($scope.cierre.cantidad);
+
+  //$scope.cierre.cantidad = $filter('currency')($scope.cierre.cantidad);
+  //$scope.cierre.precio = $filter('currency')($scope.cierre.precio);
+}
+
+$scope.calcularTotal = function(){
+
+  $scope.cierre.total = $scope.cierre.cantidad * $scope.cierre.precio;
+
+
+}
+
 
 var language = {
 

@@ -90,6 +90,54 @@ var route = 'http://localhost:3001/';//http://aurelis-backend.herokuapp.com/'; /
       });
   });
   
+
+app.directive('format', ['$filter', function ($filter) {
+    return {
+        require: '?ngModel',
+        
+
+        link: function (scope, elem, attrs, ctrl) {
+            if (!ctrl) return;
+
+            var symbol ="Bs "; // dummy usage
+            
+            ctrl.$formatters.unshift(function (a) {
+             // console.log(a);
+                return symbol + $filter(attrs.format)(ctrl.$modelValue) ;
+            });
+
+            ctrl.$parsers.unshift(function (viewValue) {
+                var plainNumber = viewValue.replace(/[^\d|\-+|\.+]/g, '');
+                elem.val(symbol + $filter('number')(plainNumber));
+                return plainNumber;
+            });
+        }
+    };
+}]);
+app.directive('gramos', ['$filter', function ($filter) {
+    return {
+        require: '?ngModel',
+        
+
+        link: function (scope, elem, attrs, ctrl) {
+            if (!ctrl) return;
+
+            var symbol =" "; // dummy usage
+            
+            ctrl.$formatters.unshift(function (a) {
+             // console.log(a);
+                return  $filter(attrs.gramos)(ctrl.$modelValue) + symbol ;
+            });
+
+            ctrl.$parsers.unshift(function (viewValue) {
+                var plainNumber = viewValue.replace(/[^\d|\-+|\.+]/g, '');
+                elem.val(symbol + $filter('number')(plainNumber));
+                return plainNumber;
+            });
+        }
+    };
+}]);
+
   // Create a resource factory to access clientes table from database 
 app.factory('Cliente', function($resource) {
   return $resource(route+'clientes/:id', { id: '@_id' }, {

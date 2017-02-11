@@ -29,17 +29,17 @@
                 </div>
                 <div class="row ">
                   <div class="input-field col s6">
-                    <input ng-required="true" ng-model="cierre.cantidad" id="cantidad" type="text" class="validate" >
-                    <label for="cantidad">Cantidad (g)</label>
-                  </div>
-                  <div class="input-field col s6">
-                    <input ng-required="true" ng-model="cierre.precio" id="precio" type="text" class="validate">
+                    <input ng-required="true" ng-model="cierre.precio" id="precio" format="number" ng-init="cierre.precio = 0" type="text" class="validate" style="text-align: right;">
                     <label for="precio">Precio * g</label>
-                  </div>                                
+                  </div> 
+                  <div class="input-field col s6">
+                    <input ng-required="true" ng-model="cierre.cantidad" gramos="number" g="true" id="cantidad" ng-init="cierre.cantidad = 0" type="text"  style="text-align: right;" class="validate" ng-keyup="calcularTotal()">
+                    <label for="cantidad">Cantidad (g)</label>
+                  </div>                                                
                 </div>
                 <div class="row ">
                   <div class="input-field col s6">
-                    <input value="{{cierre.cantidad * cierre.precio | currency:'Bs '}}" id="total_c" type="text" class="validate" style="text-align: right;">
+                    <input ng-model="cierre.total" id="total_c" type="text" format="number" g="false" class="validate" style="text-align: right;" ng-keyup="calcularCantidad()" ng-init="cierre.total = 0">
                     <label for="total_c">Total Cierre</label>
                   </div>
                   <div class="input-field col s6">
@@ -172,7 +172,7 @@
                   <button class="btn btn-primary" ng-click="addPagosProveedor(pago)" ng-if="!pago._id" type="submit" ng-disabled="!Codenx.$valid">Añadir</button>
                   <button class="btn btn-info" ng-click="update(pago)" ng-if="pago._id" type="submit">Actualizar</button>
                 </div>
-                <table class="table table-hover table-striped" datatable="ng" id="tabla_pagosP" data-page-length='5'>
+                <table class="table table-hover table-striped">
                   <thead>
                     <tr class="active">
                       <th class="center-align" style="background: #337ab7; color: #ffffff; border-radius: 400px 4px 0 0;"></th>
@@ -224,7 +224,7 @@
                       </td>
                       <td class="center-align" style="width: 5%">
                          <!--  <span class="zmdi zmdi-edit zmdi-hc-2x" style="cursor: pointer;" ng-click=edit(pago._id)/> -->
-                          <span class="zmdi zmdi-delete zmdi-hc-2x" style="cursor: pointer;" ng-click='remove(pago)'/>
+                          <span class="zmdi zmdi-delete zmdi-hc-2x" style="cursor: pointer;" ng-click='deletePagosProveedor(pago._id)'/>
                       </td>
                     </tr>
                     <tr>
