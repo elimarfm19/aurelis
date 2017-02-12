@@ -85,16 +85,26 @@ var route = 'http://localhost:3001/';//http://aurelis-backend.herokuapp.com/'; /
         controller: 'ctrl-proveedor',
         controllerAs: 'pro'
       })
+      .when('/reporteRecepcionPro', {
+        templateUrl: '/views/vista_reporteRecepcionP.html',
+        controller: 'ctrl-proveedor',
+        controllerAs: 'pro'
+      })
       .when('/reporteEntrega', {
         templateUrl: '/views/vista_reporteEntrega.html',
         controller: 'ctrl-cliente',
         controllerAs: 'cli'
       })
-      .when('/generarPDF', {
-        templateUrl: '/views/vista_generarPDF.html',
+      .when('/reporteEntregaC', {
+        templateUrl: '/views/vista_reporteEntregaC.html',
         controller: 'ctrl-cliente',
         controllerAs: 'cli'
       })
+      // .when('/generarPDF', {
+      //   templateUrl: '/views/vista_generarPDF.html',
+      //   controller: 'ctrl-cliente',
+      //   controllerAs: 'cli'
+      // })
       .when('/about', {
         templateUrl: '/views/views/about.html',
         controller: 'AboutCtrl',
@@ -226,3 +236,11 @@ app.factory('Entrega', function($resource) {
     }
   });
 });
+
+// app.factory('Entrega', function($resource) {
+//   return $resource(route+'entregas/cliente/:id', { id: '@_id' }, {
+//     update: { // We need to define this method manually as it is not provided with ng-resource
+//       method: 'PUT'
+//     }
+//   });
+// });

@@ -1,10 +1,10 @@
 'use strict';
 
-app.controller('ctrl-proveedor', function($scope,Proveedor,CierreProveedor,ngProgress,DTOptionsBuilder,$window) {
+app.controller('ctrl-proveedor', function($scope,Proveedor,CierreProveedor,ngProgress,DTOptionsBuilder,$window,$http) {
 
 $scope.proveedor = new Proveedor();
-
 $scope.cierres_p = new CierreProveedor();
+$scope.reporteP = true;
 
 var refresh = function() {
   $scope.proveedores = Proveedor.query(); 
@@ -121,5 +121,189 @@ $scope.dtOptions = DTOptionsBuilder.newOptions()
         
         .withLanguage(language)
         .withOption('info', false); 
+
+
+$scope.generarpqt= function(recepcion) {
+
+
+  var base64Img = null;
+
   
+    // Returns a new array each time to avoid pointer issues
+    var getColumns = function () {
+        return [
+            {title: "Id", dataKey: "id"},
+            {title: "Fecha Entrega", dataKey: "fecha"},
+            {title: "Cantidad", dataKey: "cantidad"}
+        ];
+    };
+
+    function imgToBase64(url, callback) {
+      if (!window.FileReader) {
+          callback(null);
+          return;
+      }
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+      xhr.onload = function() {
+          var reader = new FileReader();
+          reader.onloadend = function() {
+              callback(reader.result.replace('text/xml', 'image/jpeg'));
+          };
+          reader.readAsDataURL(xhr.response);
+      };
+      xhr.open('GET', url);
+      xhr.send();
+    }
+
+    imgToBase64('document.jpg', function(base64) {
+        base64Img = base64;
+    }); 
+       
+    $http.get("http://localhost:3001/recepciones/"+recepcion)
+                .success(function(recepciones){
+                  console.log(recepciones);
+                 var data = []; 
+                  //for (var i = 0; i < recepciones.length; i++) {
+                      data.push({
+                          id: recepciones.RecepcionId,
+                          fecha: moment(recepciones.fecha_entrega).format('DD-MM-YYYY'),
+                          cantidad: recepciones.cantidad
+                      });
+                //  }
+  
+       var doc = new jsPDF('p','pt');
+       var totalPagesExp = "{total_pages_count_string}";
+
+       var pageContent = function (data) {
+        // HEADER
+        doc.setFontSize(20);
+        doc.setTextColor(40);
+        doc.setFontStyle('normal');
+        // if (base64Img) {
+        //     doc.addImage(base64Img, 'JPEG', data.settings.margin.left, 15, 10, 10);
+        // }
+        doc.text("Report", data.settings.margin.left + 15, 22);
+
+        // FOOTER
+        var str = "Page " + data.pageCount;
+        // Total page number plugin only available in jspdf v1.0+
+        if (typeof doc.putTotalPages === 'function') {
+            str = str + " of " + totalPagesExp;
+        }
+        doc.setFontSize(10);
+        doc.text(str, data.settings.margin.left, doc.internal.pageSize.height - 10);
+    };
+
+    doc.autoTable(getColumns(), data, {
+        addPageContent: pageContent,
+        margin: {top: 30}
+    });
+
+    // Total page number plugin only available in jspdf v1.0+
+    if (typeof doc.putTotalPages === 'function') {
+        doc.putTotalPages(totalPagesExp);
+    } 
+
+
+      
+       doc.save('table.pdf');
+
+    
+
+    });
+             
+}
+
+$scope.generarpqtP= function() {
+
+
+  var base64Img = null;
+
+  
+    // Returns a new array each time to avoid pointer issues
+    var getColumns = function () {
+        return [
+            {title: "Id", dataKey: "id"},
+            {title: "Fecha Entrega", dataKey: "fecha"},
+            {title: "Cantidad", dataKey: "cantidad"}
+        ];
+    };
+
+    function imgToBase64(url, callback) {
+      if (!window.FileReader) {
+          callback(null);
+          return;
+      }
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+      xhr.onload = function() {
+          var reader = new FileReader();
+          reader.onloadend = function() {
+              callback(reader.result.replace('text/xml', 'image/jpeg'));
+          };
+          reader.readAsDataURL(xhr.response);
+      };
+      xhr.open('GET', url);
+      xhr.send();
+    }
+
+    imgToBase64('document.jpg', function(base64) {
+        base64Img = base64;
+    }); 
+       
+    $http.get("http://localhost:3001/recepciones/proveedor/"+$scope.proveedor._id)
+                .success(function(recepciones){
+                  console.log(recepciones);
+                 var data = []; 
+                  for (var i = 0; i < recepciones.length; i++) {
+                      data.push({
+                          id: recepciones[i].RecepcionId,
+                          fecha: moment(recepciones[i].fecha_entrega).format('DD-MM-YYYY'),
+                          cantidad: recepciones[i].cantidad
+                      });
+                 }
+  
+       var doc = new jsPDF('p','pt');
+       var totalPagesExp = "{total_pages_count_string}";
+
+       var pageContent = function (data) {
+        // HEADER
+        doc.setFontSize(20);
+        doc.setTextColor(40);
+        doc.setFontStyle('normal');
+        // if (base64Img) {
+        //     doc.addImage(base64Img, 'JPEG', data.settings.margin.left, 15, 10, 10);
+        // }
+        // doc.text("Report", data.settings.margin.left + 15, 22);
+
+        // FOOTER
+        var str = "Page " + data.pageCount;
+        // Total page number plugin only available in jspdf v1.0+
+        if (typeof doc.putTotalPages === 'function') {
+            str = str + " of " + totalPagesExp;
+        }
+        doc.setFontSize(10);
+        doc.text(str, data.settings.margin.left, doc.internal.pageSize.height - 10);
+    };
+
+    doc.autoTable(getColumns(), data, {
+        addPageContent: pageContent,
+        margin: {top: 30}
+    });
+
+    // Total page number plugin only available in jspdf v1.0+
+    if (typeof doc.putTotalPages === 'function') {
+        doc.putTotalPages(totalPagesExp);
+    } 
+
+
+      
+       doc.save('table.pdf');
+
+    
+
+    });
+             
+}  
 })

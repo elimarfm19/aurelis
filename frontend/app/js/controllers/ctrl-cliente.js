@@ -113,7 +113,7 @@ $scope.dtOptions = DTOptionsBuilder.newOptions()
         .withLanguage(language)
         .withOption('info', false); 
 
-$scope.generarReporte = function() { 
+$scope.generarReporte = function(cliente) { 
       //console.log(id);
       //$scope.cliente = Cliente.get({ id: id });
       $scope.reporte = false;
@@ -123,7 +123,99 @@ $scope.generarReporte = function() {
   
 };
 
-$scope.generarpqt= function() {
+$scope.generarpqt= function(entrega) {
+
+
+  var base64Img = null;
+
+  
+    // Returns a new array each time to avoid pointer issues
+    var getColumns = function () {
+        return [
+            {title: "Id", dataKey: "id"},
+            {title: "Fecha Entrega", dataKey: "fecha"},
+            {title: "Cantidad", dataKey: "cantidad"}
+        ];
+    };
+
+    function imgToBase64(url, callback) {
+      if (!window.FileReader) {
+          callback(null);
+          return;
+      }
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+      xhr.onload = function() {
+          var reader = new FileReader();
+          reader.onloadend = function() {
+              callback(reader.result.replace('text/xml', 'image/jpeg'));
+          };
+          reader.readAsDataURL(xhr.response);
+      };
+      xhr.open('GET', url);
+      xhr.send();
+    }
+
+    imgToBase64('document.jpg', function(base64) {
+        base64Img = base64;
+    }); 
+       
+    $http.get("http://localhost:3001/entregas/"+entrega)
+                .success(function(entregas){
+                  console.log(entregas);
+                 var data = []; 
+                  //for (var i = 0; i < entregas.length; i++) {
+                      data.push({
+                          id: entregas.EntregaId,
+                          fecha: moment(entregas.fecha_entrega).format('DD-MM-YYYY'),
+                          cantidad: entregas.cantidad
+                      });
+                //  }
+  
+       var doc = new jsPDF('p','pt');
+       var totalPagesExp = "{total_pages_count_string}";
+
+       var pageContent = function (data) {
+        // HEADER
+        doc.setFontSize(20);
+        doc.setTextColor(40);
+        doc.setFontStyle('normal');
+        if (base64Img) {
+            doc.addImage(base64Img, 'JPEG', data.settings.margin.left, 15, 10, 10);
+        }
+        doc.text("Report", data.settings.margin.left + 15, 22);
+
+        // FOOTER
+        var str = "Page " + data.pageCount;
+        // Total page number plugin only available in jspdf v1.0+
+        if (typeof doc.putTotalPages === 'function') {
+            str = str + " of " + totalPagesExp;
+        }
+        doc.setFontSize(10);
+        doc.text(str, data.settings.margin.left, doc.internal.pageSize.height - 10);
+    };
+
+    doc.autoTable(getColumns(), data, {
+        addPageContent: pageContent,
+        margin: {top: 30}
+    });
+
+    // Total page number plugin only available in jspdf v1.0+
+    if (typeof doc.putTotalPages === 'function') {
+        doc.putTotalPages(totalPagesExp);
+    } 
+
+
+      
+       doc.save('table.pdf');
+
+    
+
+    });
+             
+}
+
+$scope.generarpqtC= function() {
 
 
   var base64Img = null;
@@ -162,15 +254,15 @@ $scope.generarpqt= function() {
        
     $http.get("http://localhost:3001/entregas/cliente/"+$scope.cliente._id)
                 .success(function(entregas){
-                  //console.log(entregas);
+                  console.log(entregas);
                  var data = []; 
                   for (var i = 0; i < entregas.length; i++) {
                       data.push({
                           id: entregas[i].EntregaId,
-                          fecha: moment(entregas[i].fecha_entrega).format('YYYY-MM-DD'),
+                          fecha: moment(entregas[i].fecha_entrega).format('DD-MM-YYYY'),
                           cantidad: entregas[i].cantidad
                       });
-                  }
+                 }
   
        var doc = new jsPDF('p','pt');
        var totalPagesExp = "{total_pages_count_string}";
@@ -180,10 +272,10 @@ $scope.generarpqt= function() {
         doc.setFontSize(20);
         doc.setTextColor(40);
         doc.setFontStyle('normal');
-        if (base64Img) {
-            doc.addImage(base64Img, 'JPEG', data.settings.margin.left, 15, 10, 10);
-        }
-        doc.text("Report", data.settings.margin.left + 15, 22);
+        // if (base64Img) {
+        //     doc.addImage(base64Img, 'JPEG', data.settings.margin.left, 15, 10, 10);
+        // }
+        // doc.text("Report", data.settings.margin.left + 15, 22);
 
         // FOOTER
         var str = "Page " + data.pageCount;

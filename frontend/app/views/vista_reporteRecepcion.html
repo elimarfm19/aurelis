@@ -1,54 +1,56 @@
-<div class="container"> 
-      <div class="tamanno">
-      <br><br>
-      <ul class="nav nav-tabs col-md-12" style="margin-left:0.2cm; " >
-        <li class="active"><a class="a" style="color:black; font-weight:600; font-family: 'Tahoma';" href="#proveedores_" data-toggle="tab">Reporte de Recepción</a></li>
-      </ul>
 
-			  <div class="container col-md-6 col-md-offset-2" style="margin-top:100px; ">
-	        <div class="row"  style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
-				    <br>
-	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Proveedores</h3>
-            <br>
-	          <form name="Codenx" novalidate class="col s12">
-              <div class="row "> 
-                <div class="col-md-12" style="margin-left: 3cm;"> 
-                  <select class="select col-md-6" ng-model="proveedor._id">
-                    <option value="">Seleccione Proveedor</option>
-                    <option ng-repeat="proveedor in proveedores" value="{{proveedor._id}}">{{proveedor.nombres}} {{proveedor.apellidos}}</option> 
-                  </select>
-                </div>
-              </div> 
-               <div class="row">
-               <br>
-                <div class="col-md-6">
-                  <h2 style="color:black; font-weight:600; font-size: 12px; font-family: 'Tahoma'; text-align: left;">Fecha de Inicio:</h2>
-                  <input type="text" id="fecha_inicio" ng-model="fecha_inicio" style="text-align: center;"/>
-                </div>
-                <div class="col-md-6">
-                  <h2 style="color:black; font-weight:600; font-size: 12px; font-family: 'Tahoma'; text-align: left;">Fecha de Fin:</h2>
-                  <input type="text" id="fecha_fin" ng-model="fecha_fin" style="text-align: center;" /> 
-                </div>
-              </div>                       
-              <br>                              
-              <div style="text-align:center">                        
-                <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#piezasModal" ng-click="" ng-disabled="!(fecha_inicio && fecha_fin) && !(proveedor)" type="submit" >GENERAR REPORTE</button>
-              </div>
-              <br>                                                                       
-	        </form>           
-	      </div>
-	    </div>
-     </div>
-     <br>
+<div class="container">
+ </br><br>
+  <ul class="nav nav-tabs col-md-12" style="margin-left:0.2cm; " >
+    <li class="active"><a class="a" style="color:black; font-weight:600; font-family: 'Tahoma';" href="#entrega" data-toggle="tab">Reporte de Recepciones</a></li>
+  </ul>
 
-<script type="text/javascript">
-  $('#fecha_inicio').datepicker({
-    language: "es",
-    format:"yyyy-mm-dd"
-  });
-
-    $('#fecha_fin').datepicker({
-    language: "es",
-    format:"yyyy-mm-dd"
-  });
-</script>
+  <div class="tab-pane col-md-9" style="margin-left: 1.5cm;" id="entrega" >
+    <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Recepciones de Proveedores </h3>
+      <!--<br>
+      <br>-->
+    <div class="">
+      <div class="table-responsive" ng-controller="ctrl-recepcion">
+        <table class="table table-hover" datatable="ng" dt-options="dtOptions" id="tabla_reporte" data-page-length='5'>
+          <thead>
+            <tr class="active">                          
+              <th class="center-align" style="border-radius: 400px 4px 0 0;">ID Recepción</th>
+              <th class="center-align">Proveedor</th>
+              <th class="center-align">Cantidad (g)</th>
+              <th class="center-align">Fecha Entrega</th>                          
+              <th class="center-align" style="border-radius: 0 400px 4px 0;"></th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr class="active">
+                <th class="center-align" style="border-radius: 0 0 4px 400px;"></th>
+                <th class="center-align"></th>
+                <th class="center-align"></th>
+                <th class="center-align"></th>
+                <th class="center-align" style="border-radius: 0 4px 400px 0; width: 3%"></th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <tr ng-repeat="recepcion in recepciones">
+              <td class="center-align" >
+                {{recepcion.RecepcionId}}
+              </td>
+              <td class="center-align" >
+                {{recepcion.proveedor.nombres}} {{recepcion.proveedor.apellidos}} 
+              </td>
+              <td class="center-align" >
+                {{recepcion.cantidad  | currency: ''}}
+              </td>
+              <td class="center-align" field="por_cerrar">
+                {{recepcion.fecha_recepcion | date:'dd/MM/yyyy' : shortDate}}
+              </td>
+              <td>
+                <a href="" style="color: black;"><span ng-click="generarpqt(recepcion._id)" class="zmdi zmdi-collection-pdf zmdi-hc-2x" ></span></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>          
+    </div>                  
+  </div>
+</div>
