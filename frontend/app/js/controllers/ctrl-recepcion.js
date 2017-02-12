@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ctrl-recepcion', function($scope,Recepcion,Proveedor,CierreProveedor,ngProgress) {
+app.controller('ctrl-recepcion', function($scope,Recepcion,Proveedor,CierreProveedor,ngProgress,$window) {
 
 $scope.recepcion = new Recepcion();
 //$scope.proveedor = new Proveedor();
@@ -30,7 +30,7 @@ $scope.update = function(recepcion) {
   recepcion.cantidad = document.getElementById('cantidad').value;
   console.log(recepcion.cantidad);
   $scope.recepcion.$update(function(recepcionUpdated){
-  refresh();
+    $window.location.reload();
   });
 };
 

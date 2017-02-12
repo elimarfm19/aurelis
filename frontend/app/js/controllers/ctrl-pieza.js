@@ -243,8 +243,7 @@ $scope.suma_puroe = function(){
  //console.log($rootScope.sumaPuroE);
 }
 $scope.showPiezas = function(piezas){
-    return piezas.status === 'Disponible' || 
-        piezas.entrega._id === document.getElementById('entrega_id').value; 
+    return piezas.status === 'Disponible'
 };
 
 
@@ -274,9 +273,11 @@ $scope.showPiezas = function(piezas){
     }
 }
 
-  $scope.dtOptions = DTOptionsBuilder.newOptions()
+$scope.dtOptions = DTOptionsBuilder.newOptions()
         
-    .withLanguage(language)
+        .withLanguage(language)
+        .withOption('info', false); 
+  
 
 })
 

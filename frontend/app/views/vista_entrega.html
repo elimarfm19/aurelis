@@ -14,7 +14,7 @@
                     <option ng-repeat="cliente in clientes" ng-if="(cliente.cerrado - cliente.entregado) > 0" value="{{cliente._id}}">{{cliente.nombres}} {{cliente.apellidos}}</option> 
                   </select>
                   <div class="col-md-6">
-                    <input disabled="true" id="restante" value="Restante: {{cliente.cerrado - cliente.entregado  | currency: ' '}} (g)" style="color:black; font-weight:600; font-size: 15px; font-family: 'Tahoma'; text-align: center;"></input> 
+                    <input disabled="true" id="restante" value="Restante: {{ cliente.entregado - cliente.cerrado | number}} (g)" style="color:black; font-weight:600; font-size: 15px; font-family: 'Tahoma'; text-align: center;"></input> 
                   </div>
                 </div>      
               </div>

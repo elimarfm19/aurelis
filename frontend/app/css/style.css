@@ -304,6 +304,7 @@ body, html{
     left: 50%;
     transform: translate(-50%,-50%);
     color: #333;
+    height: 39%;
 }
 .container-login label{
     color: #333;
@@ -820,11 +821,12 @@ div.dataTables_wrapper div.dataTables_length label {
     /*font-weight: normal;
     text-align: left;
     white-space: nowrap;*/
-    font-size: 10px !important;
+    font-size: 13px !important;
     color: black;
 }
 
 div.dataTables_wrapper div.dataTables_filter label {
+    font-size: 13px !important;
     /*font-weight: normal;
     white-space: nowrap;
     text-align: left;*/
@@ -868,7 +870,7 @@ div.dataTables_wrapper div.dataTables_info {
 .dataTables_wrapper .dataTables_paginate .paginate_button {
     /*padding: .3em .8em;*/
     color: black;
-    font-size: 10px;
+    font-size: 13px;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {

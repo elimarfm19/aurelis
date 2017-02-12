@@ -80,6 +80,21 @@ var route = 'http://localhost:3001/';//http://aurelis-backend.herokuapp.com/'; /
         controller: 'ctrl-pieza',
         controllerAs: 'inv'
       })
+      .when('/reporteRecepcion', {
+        templateUrl: '/views/vista_reporteRecepcion.html',
+        controller: 'ctrl-proveedor',
+        controllerAs: 'pro'
+      })
+      .when('/reporteEntrega', {
+        templateUrl: '/views/vista_reporteEntrega.html',
+        controller: 'ctrl-cliente',
+        controllerAs: 'cli'
+      })
+      .when('/generarPDF', {
+        templateUrl: '/views/vista_generarPDF.html',
+        controller: 'ctrl-cliente',
+        controllerAs: 'cli'
+      })
       .when('/about', {
         templateUrl: '/views/views/about.html',
         controller: 'AboutCtrl',

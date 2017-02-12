@@ -38,14 +38,13 @@
                       {{proveedor.nombres}} {{proveedor.apellidos}}
                     </td>
                     <td class="center-align" >
-                      {{proveedor.cerrado |currency: ''}} 
+                      {{proveedor.cerrado | currency: ''}} 
                     </td>
                     <td class="center-align" >                            
-                      {{proveedor.entregado  |currency: ''}}
+                      {{proveedor.entregado  | currency: ''}}
                     </td>
                     <td class="center-align" field="por_cerrar">
-                      {{(proveedor.entregado - proveedor.cerrado) }}
-                      {{ parseFloat(17.58-20).toFixed(2)}}
+                      {{(proveedor.entregado - proveedor.cerrado) | number}}
                     </td>
                     <td class="center-align" field="fecha_entrega">
                     <!-- aqui va la ultmima recepcion de este personaje-->
@@ -95,7 +94,7 @@
                   {{cliente.entregado  | currency: ''}}
                 </td>
                 <td class="center-align" field="por_cerrar">
-                  {{(cliente.entregado - cliente.cerrado )}}
+                  {{(cliente.entregado - cliente.cerrado ) | number}}
                 </td>
                 <td class="center-align" field="fecha_entrega">                          
                   {{cliente.ultima_entrega | date:'dd/MM/yyyy' : shortDate}}

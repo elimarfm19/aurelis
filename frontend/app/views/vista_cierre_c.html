@@ -48,6 +48,12 @@
                      <label for="total_p">Ganancia</label> 
                   </div>                               
                 </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                     <input type="text" class="validate" style="text-align: center;" id="observacion" ng-model="cierre.observacion">
+                     <label for="obsevacion">Observación</label> 
+                  </div>
+                </div>
                 <br>  
                 <div style="text-align:center">                        
                   <button class="btn btn-primary waves-effect waves-light" ng-click="add(cierre)" ng-disabled="!Codenx1.$valid" ng-show="!cierre.CierreId" type="submit">CREAR</button>
@@ -93,17 +99,17 @@
                         </td>
                         <td style="width: 20%;">
                           <div class="input-field">
-                            <input class="form-control center-align" ng-model="cierre_p.cantidad" ng-required="true" placeholder="1250" ng-disabled="!cierre.CierreId">
+                            <input class="form-control center-align" ng-model="cierre_p.cantidad"  ng-required="true" placeholder="1250" ng-disabled="!cierre.CierreId" gramos="number" ng-init="cierre_p.cantidad = 0">
                           </div>
                         </td>
                         <td style="width: 20%;">
                           <div class="input-field">
-                            <input class="form-control center-align" ng-required="true"ng-model="cierre_p.precio" required="true" placeholder="99000" ng-disabled="!cierre.CierreId">
+                            <input class="form-control center-align" ng-required="true" ng-keyup="calcularTotalP()" ng-model="cierre_p.precio" placeholder="99000" ng-disabled="!cierre.CierreId" format="number" ng-init="cierre_p.precio = 0">
                           </div>
                         </td>
                         <td style="width: 30%;">
                           <div class="input-field">
-                            <input disabled value="{{cierre_p.cantidad * cierre_p.precio | currency:'Bs '}}" id="total_p" type="text" class="validate" style="text-align: center;">
+                            <input ng-model="cierre_p.total" id="total_p" type="text" class="form-control center-align" ng-keyup="calcularCantidadP()" ng-disabled="!cierre.CierreId"  ng-required="true" format="number" ng-init="cierre_p.total = 0">
                           </div>
                         </td>
                         <td class="center-align">

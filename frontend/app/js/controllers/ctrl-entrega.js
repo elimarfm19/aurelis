@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ctrl-entrega', function($scope,Entrega,$http,Cliente,ngProgress) {
+app.controller('ctrl-entrega', function($scope,Entrega,$http,Cliente,ngProgress,$window) {
 
 $scope.entrega = new Entrega();
 //$scope.cliente = new Cliente();
@@ -8,8 +8,8 @@ $scope.entrega = new Entrega();
 
 var refresh = function() {
   $scope.entregas = Entrega.query(); 
-  //$scope.clientes = Cliente.query();
-  //$scope.cierres = Cierre.query();
+  
+
   //$scope.cierrescliente = [];  //cierresproveedor
 }
 refresh();
@@ -43,7 +43,7 @@ $scope.update = function(entrega) {
   entrega.cantidad = document.getElementById('cantidade').value;
   // console.log(entrega.cantidad);
   $scope.entrega.$update(function(entregaUpdated){
-  refresh();
+    $window.location.reload();
   });
 };
 

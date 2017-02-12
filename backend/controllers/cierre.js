@@ -54,6 +54,7 @@ function storeCierre(req,res){
     cierre.cantidad = req.body.cantidad
     cierre.precio = req.body.precio
     cierre.total = req.body.cantidad * req.body.precio
+    cierre.observacion = req.body.observacion
     cierre.ganancia = 0
     cierre.status = 'Abierto'
 
@@ -84,6 +85,7 @@ function updateCierre(req,res){
 	  	update.fecha_entrega = req.body.fecha_entrega
 	  	update.fecha_cierre = req.body.fecha_cierre
 	  	update.ganancia = req.body.ganancia
+	  	update.observacion = req.body.observacion
 
 
 	  //	console.log(update.precio);

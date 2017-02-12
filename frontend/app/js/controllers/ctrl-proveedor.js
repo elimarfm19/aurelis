@@ -117,7 +117,9 @@ $scope.verifyDuplicate = function() {
     }
 }
 
-  $scope.dtOptions = DTOptionsBuilder.newOptions()
+$scope.dtOptions = DTOptionsBuilder.newOptions()
         
-    .withLanguage(language)
+        .withLanguage(language)
+        .withOption('info', false); 
+  
 })

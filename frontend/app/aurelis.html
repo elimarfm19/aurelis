@@ -163,7 +163,11 @@
                 <a ng-href="#" class="NavLateral-DropDown  waves-effect waves-light"><i class="zmdi zmdi-collection-text zmdi-hc-fw"></i> <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i>Reportes</a>
                 <ul class="full-width">
                   <li>
-                    <a ng-href="template.html" class="waves-effect waves-light ">Blank Page</a>
+                    <a ng-href="#reporteRecepcion" class="waves-effect waves-light ">Recepciones</a>
+                  </li>
+                  <li class="NavLateralDivider"></li>
+                  <li>
+                    <a ng-href="#reporteEntrega" class="waves-effect waves-light ">Entregas</a>
                   </li>
                 </ul>
               </li>
@@ -216,6 +220,14 @@
     <!-- bower:js -->
      <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- <script src="../js/jspdf.min.js"></script> -->
+     <script src="../js/jspdf.debug.js"></script>
+     <script src="../js/faker.min.js"></script>
+     <!-- <script src="../js/addimage.js"></script> -->
+     <script src="../js/jspdf.plugin.autotable.js"></script>
+     <!-- <script src="../js/examples-legacy.js"></script> -->
+     <!-- <script src="../js/html2canvas.js"></script> -->
+
     <!-- <script type="text/javascript" src="../js/jquery.js"></script> -->
     <!-- <script src="../bower_components/jquery/dist/jquery.js"></script> -->
     <script src="js/nuevo/angular.min.js"></script>
@@ -231,7 +243,9 @@
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    
+ 
+
+
     <script src="../js/routes_inicio.js"></script>
     <script src="../js/controllers/main.js"></script>
     
