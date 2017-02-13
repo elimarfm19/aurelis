@@ -600,7 +600,7 @@ body, html{
 }
 
 
-@media (min-width: 768px) and (max-width:768px) {
+@media (min-width: 768px) and (max-width:1152px) {
     .NavLateral{
         width: 20%;
         height: 91.5%;
@@ -670,7 +670,7 @@ body, html{
         transition: .2s ease-out;*/
     }
     .container-login{
-/*        margin: 0;
+        margin: 0;
         padding: 10px;
         width: 350px;
         background-color: rgba(255,255,255,.87);
@@ -679,7 +679,7 @@ body, html{
         top: 50%;
         left: 50%;
         transform: translate(-50%,-50%);
-        color: #333;*/
+        color: #333;
         height: 53%;
     }
 
