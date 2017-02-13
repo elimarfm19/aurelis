@@ -64,7 +64,11 @@ api.delete('/proveedores/:id',cors(),proveedorController.deleteProveedor)
 // PIEZA--------------------------------------------------------------------------
 api.options('/piezas/:id', cors())
 api.options('/piezas/', cors())
+api.options('/piezas/entrega/:id', cors())
+
 api.get('/piezas',cors(),piezaController.getPiezas)
+
+api.get('/piezas/entrega/:id',cors(),piezaController.getPiezasEntrega)
 
 api.get('/piezas/:id',cors(),piezaController.getPieza)
 

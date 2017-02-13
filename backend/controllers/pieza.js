@@ -67,6 +67,38 @@ function getPiezas(req,res){
 				res.status(200).send(piezas);
 		});
 }
+function getPiezasEntrega(req,res){
+
+	let EntregaId = req.params.id
+
+	Pieza.find({entrega: EntregaId})
+	.populate({
+		path: 'recepcion',
+		model: 'Recepcion',
+		populate: {
+
+			path: 'cierre_p proveedor',
+			//model: 'CierreProveedor Proveedor',
+			populate: {
+			path: 'proveedor',
+			model: 'Proveedor'
+			}
+		}
+	}).populate({
+		path: 'entrega',
+		model: 'Entrega',
+		populate: {
+
+			path: 'cliente',
+			model: 'Cliente'
+		}
+	})
+	.exec(function(err,piezas){
+		if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+			if(piezas == "") return res.status(404).send({message:'No hay registros de piezas'})
+				res.status(200).send(piezas);
+		});
+}
 
 function storePieza(req,res){
 	console.log(req.body)
@@ -147,6 +179,7 @@ function deletePieza(req,res){
 module.exports = {
 	getPieza,
 	getPiezas,
+	getPiezasEntrega,
 	storePieza,
 	updatePieza,
 	deletePieza
