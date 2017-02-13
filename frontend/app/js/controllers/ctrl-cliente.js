@@ -204,7 +204,7 @@ $scope.generarpqt= function(entrega) {
                   doc.addImage(base64Img, 'JPEG', data.settings.margin.left,5, 30, 30);
               }
               //doc.text("Cliente", data.settings.margin.left + 35, 22);
-              doc.text(entregas.cliente.nombres+' '+entregas.cliente.apellidos, data.settings.margin.left + 135, 30);
+              doc.text(entregas.cliente.nombres+' '+entregas.cliente.apellidos, data.settings.margin.left + 100, 30);
 
               doc.text("Datos de la Entrega", 14,45);
               // FOOTER
