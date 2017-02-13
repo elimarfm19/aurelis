@@ -44,7 +44,7 @@
                                 {{cliente.nombres}} {{cliente.apellidos}}
                               </td>
                               <td class="center-align">
-                                {{cliente.tlf}}
+                                <a class="zmdi zmdi-phone zmdi-hc-2x" data-toggle="modal" data-target="#tlfModal" ng-click="tlf(cliente._id)" style="color: black;"></a>
                               </td>
                               <td class="center-align">
                                <img style="max-width: 20px; height: 20px;" src="../assets/img/eye.png" alt="Paris" data-toggle="modal" data-target="#direccionModal" ng-click="direccion(cliente._id)">
@@ -159,6 +159,34 @@
 	         </form>
 	        </div>
 	      </div>
+      </div>
+    </div>
+  </div>  
+</div>
+
+<div class="container">
+    <!-- Modal -->
+  <div class="modal fade" id="tlfModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="tamanno">
+          <div class="" style="margin-top:100px; ">
+            <div class="row " style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
+            <br>
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align modal-title">Teléfono del Cliente</h3>                  
+            </div>      
+            <br>
+            <form class="col s12">              
+             <div class="row">
+                <div class="center-align">
+                 {{ cliente.tlf }}                  
+                </div>
+             </div>            
+             <br><br><br>                                                
+           </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>  

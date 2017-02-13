@@ -48,7 +48,7 @@
                             {{proveedor.nombres}} {{proveedor.apellidos}}
                           </td>
                           <td class="center-align">
-                            {{proveedor.tlf}}
+                            <a class="zmdi zmdi-phone zmdi-hc-2x" data-toggle="modal" data-target="#tlfModal" ng-click="tlf(proveedor._id)" style="color: black;"></a>
                           </td>
                           <td class="center-align">
                            <img style="max-width: 20px; height: 20px;" src="../assets/img/eye.png" alt="Paris" data-toggle="modal" data-target="#direccionModal" ng-click="direccion(proveedor._id)">

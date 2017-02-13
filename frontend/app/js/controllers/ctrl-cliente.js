@@ -23,7 +23,8 @@ $scope.add = function(cliente) {
 };
 $scope.update = function(cliente) {
   $scope.cliente.$update(function(){
-    refresh();
+    //refresh();
+    $window.location.reload();
   });
 };
 
@@ -42,7 +43,12 @@ $scope.deselect = function() {
 }
 $scope.direccion = function(id) {
   $scope.cliente = Cliente.get({ id: id });
+};
+
+$scope.tlf = function(id) {
+  $scope.cliente = Cliente.get({ id: id });
 }; 
+
 
 $scope.verifyDuplicate = function() {
 

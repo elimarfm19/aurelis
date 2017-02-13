@@ -26,7 +26,8 @@ $scope.add = function(proveedor) {
 };
 $scope.update = function(proveedor) {
   $scope.proveedor.$update(function(){
-    refresh();
+    //refresh();
+    $window.location.reload();
   });
 };
 
@@ -49,6 +50,12 @@ $scope.direccion = function(id) {
 };
 
 $scope.contacto = function(id) {
+  //  console.log($scope.contacto);
+  $scope.proveedor = Proveedor.get({ id: id });
+ 
+};
+
+$scope.tlf = function(id) {
   //  console.log($scope.contacto);
   $scope.proveedor = Proveedor.get({ id: id });
  
