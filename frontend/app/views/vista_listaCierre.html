@@ -21,7 +21,7 @@
                   <th class="center-align" style="width: 90px;">Fecha Cierre</th>
                   <th class="center-align" style="width: 90px;">Cantidad (g)</th>
                   <th class="center-align" style="width: 90px;">Precio (Bs)</th>
-                  <!-- <th class="center-align" style="width: 120px;">Total de Cierre (Bs)</th> -->                      
+                  <th class="center-align" style="width: 120px;">Total de Cierre (Bs)</th>                      
                   <th class="center-align" style="border-radius: 0 400px 4px 0; width: 73px;">Opciones</th>
                 </tr>
               </thead>
@@ -32,7 +32,7 @@
                     <th class="center-align"></th>
                     <th class="center-align"></th>
                     <th class="center-align"></th>
-                    <!-- <th class="center-align"></th> -->
+                    <th class="center-align"></th>
                     <th class="center-align" style="border-radius: 0 4px 400px 0;"></th>
                 </tr>
               </tfoot>
@@ -53,9 +53,9 @@
                   <td class="center-align" >
                     {{cierre.precio | currency: 'Bs ' }}
                   </td>
-                  <!-- <td class="center-align" >
+                  <td class="center-align" >
                     {{cierre.total | currency: 'Bs '}}
-                  </td> -->
+                  </td>
                   <td class="center-align">
                     <a class="btn btn-warning zmdi zmdi-edit zmdi-hc-2x waves-effect waves-light"  ng-href="/aurelis.html#/cierre_cliente/{{cierre._id}}"></a>
                     <button class="btn btn-danger zmdi zmdi-delete zmdi-hc-2x waves-effect waves-light" ng-click="remove(cierre)" data-toggle="modal" data-target="#myModal"></button>

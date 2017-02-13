@@ -16,13 +16,12 @@
             <table datatable="ng" id="tabla_piezas" dt-options="dtOptions" class="table table-hover" data-page-length='5'>
               <thead>
                 <tr class="active">                        
-                  <th class="center-align" style="border-radius: 400px 4px 0 0;">Proveedor</th>
+                  <th class="center-align" style="border-radius: 400px 4px 0 0;">Cod. Pieza</th>
+                  <th class="center-align">Proveedor</th>
                   <th class="center-align">Cliente</th>
-                  <th class="center-align">Cod. Pieza</th>
                   <th class="center-align">Peso Bruto (g)</th>
                   <th class="center-align">Ley</th>                          
                   <th class="center-align">Puro (g)</th>                          
-                  <th class="center-align">Peso Entrega (g)</th>
                   <th class="center-align" style="border-radius: 0 400px 4px 0;">Edición</th>   
                 </tr>
               </thead>
@@ -33,24 +32,23 @@
                     <th class="center-align"></th>
                     <th class="center-align"></th>
                     <th class="center-align"></th>
-                    <th class="center-align"></th>
-                    <th class="center-align"></th>
+                    <th class="center-align"></th>                    
                     <th class="center-align" style="border-radius: 0 4px 400px 0;"></th>
                 </tr>
               </tfoot>
               <tbody>
                 <tr ng-repeat="pieza in piezas" ng-if="pieza.status == 'Entregado'">
                   <td class="center-align">
-                    {{pieza.recepcion.proveedor.nombres}} {{pieza.recepcion.proveedor.apellidos}}
-                  </td>
-                  <td class="center-align">
-                    {{pieza.entrega.cliente.nombres}} {{pieza.entrega.cliente.apellidos}}
-                  </td>
-                  <td class="center-align">
                     {{pieza.piezaId}}
                   </td>
                   <td class="center-align">
-                    {{pieza.peso_bruto}}
+                    {{pieza.recepcion.proveedor.nombres}} {{pieza.recepcion.proveedor.apellidos}}                    
+                  </td>
+                  <td class="center-align">
+                    {{pieza.entrega.cliente.nombres}} {{pieza.entrega.cliente.apellidos}}                    
+                  </td>
+                  <td class="center-align">
+                    {{pieza.peso_entrega}}
                   </td>
                   <td class="center-align">
                     {{pieza.ley}}
@@ -58,9 +56,6 @@
                   <td class="center-align">
                     {{pieza.puro_c}}
                   </td>                        
-                  <td class="center-align">
-                    {{pieza.peso_entrega}}
-                  </td>
                   <td class="center-align">                                  
                     <button class="btn btn-warning zmdi zmdi-edit zmdi-hc-2x waves-effect waves-light" ng-click="edit(pieza._id)" data-toggle="modal" data-target="#myModal"></button>
                   </td>

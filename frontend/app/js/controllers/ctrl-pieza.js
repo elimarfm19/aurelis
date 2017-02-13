@@ -120,14 +120,16 @@ $scope.ajuste = function(piezaNueva) {
 
    });
 
-  // $http.put("http://localhost:3001/piezas/"+piezaNueva._id,piezaNueva)
-  //             .success(function(piezaActualizada){ 
-  //               console.log('Actualizando Pieza');
-  //               console.log(piezaActualizada);
-  // });
+  $http.put("http://localhost:3001/piezas/"+piezaNueva._id,piezaNueva)
+              .success(function(piezaActualizada){ 
+                console.log('Actualizando Pieza');
+                console.log(piezaActualizada);
+                $window.location.reload();
+  });
+
 
   
-  //console.log(pieza);
+  // console.log(pieza);
   // $scope.pieza.$update(function(){
   //   //refresh();
   //   $window.location.reload();
