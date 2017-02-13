@@ -132,9 +132,9 @@ $scope.generarpqt= function(entrega) {
     // Returns a new array each time to avoid pointer issues
     var getColumns = function () {
         return [
-            {title: "Id", dataKey: "id"},
+            {title: "Cod. Entrega", dataKey: "id"},
             {title: "Fecha Entrega", dataKey: "fecha"},
-            {title: "Cantidad", dataKey: "cantidad"}
+            {title: "Cantidad (g)", dataKey: "cantidad"}
         ];
     };
 
@@ -196,14 +196,18 @@ $scope.generarpqt= function(entrega) {
                   doc.addImage(base64Img, 'JPEG', data.settings.margin.left,5, 30, 30);
               }
               //doc.text("Cliente", data.settings.margin.left + 35, 22);
-              doc.text(entregas.cliente.nombres+' '+entregas.cliente.apellidos, data.settings.margin.left + 100, 30);
-
+              doc.text("REPORTE DETALLE DE ENTREGA", 55, 18);
+              doc.setFontSize(15);
+              doc.text("Cliente: "+entregas.cliente.nombres+' '+entregas.cliente.apellidos, data.settings.margin.left + 45, 30);
+              doc.text("___________________________________________________________________________________________________", 0, 35);
+              doc.text("___________________________________________________________________________________________________", 0, 36);
+              doc.setFontSize(12);
               doc.text("Datos de la Entrega", 14,45);
               // FOOTER
-              var str = "Page " + data.pageCount;
+              var str = "Página " + data.pageCount;
               // Total page number plugin only available in jspdf v1.0+
               if (typeof doc.putTotalPages === 'function') {
-                  str = str + " of " + totalPagesExp;
+                  str = str + " de " + totalPagesExp;
               }
               doc.setFontSize(10);
               doc.text(str, data.settings.margin.left, doc.internal.pageSize.height - 10);
@@ -236,13 +240,13 @@ $scope.generarpqt= function(entrega) {
                     }
                   });
 
-
-         doc.text('Piezas', 14, doc.autoTable.previous.finalY + 10);
+          doc.setFontSize(12);
+          doc.text('Piezas', 14, doc.autoTable.previous.finalY + 10);
 /***********************************Seccion de Entregas******************************************************************/
 
    /**********************************Seccion de Piezas*************************************************/             
         var columns = [ 
-            {title: "Id", dataKey: "id"},
+            {title: "Cod. Pieza", dataKey: "id"},
             {title: "Proveedor", dataKey: "proveedor"},
             {title: "Peso Bruto", dataKey: "peso_bruto"},//mostrar peso de entrega
             {title: "Ley", dataKey: "ley"},
