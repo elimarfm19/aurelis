@@ -1,0 +1,71 @@
+
+<div class="container">
+ </br><br>
+  <ul class="nav nav-tabs col-md-12" style="margin-left:0.2cm; " >
+    <li class="active"><a class="a" style="color:black; font-weight:600; font-family: 'Tahoma';" href="#entrega" data-toggle="tab">Reporte de Cierres</a></li>
+  </ul>
+
+  <div class="tab-pane col-md-9" style="margin-left: 1.5cm;" id="entrega" >
+    <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Cierres de Proveedores </h3>
+      <!--<br>
+      <br>-->
+    <div class="">
+      <div class="table-responsive" ng-controller="ctrl-cierre_p">
+        <table class="table table-hover" datatable="ng" dt-options="dtOptions" id="tabla_reporte" data-page-length='5'>
+          <thead>
+            <tr class="active">                          
+              <th class="center-align" style="border-radius: 400px 4px 0 0;">ID</th>
+              <th class="center-align">Proveedor</th>
+              <th class="center-align">Fecha Cierre</th>
+              <th class="center-align">Fecha Entrega</th> 
+              <th class="center-align">Cantidad (g)</th>
+              <th class="center-align">Precio (Bs)</th>
+              <th class="center-align">Total (g)</th>                         
+              <th class="center-align" style="border-radius: 0 400px 4px 0;"></th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr class="active">
+                <th class="center-align" style="border-radius: 0 0 4px 400px;"></th>
+                <th class="center-align"></th>
+                <th class="center-align"></th>
+                <th class="center-align"></th>
+                <th class="center-align"></th>
+                <th class="center-align"></th>
+                <th class="center-align"></th>
+                <th class="center-align" style="border-radius: 0 4px 400px 0; width: 3%"></th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <tr ng-repeat="cierre_p in cierres_p">
+              <td class="center-align" >
+                {{cierre_p.Cierre_pId}}
+              </td>
+              <td class="center-align">
+                {{cierre_p.proveedor.nombres}} {{cierre_p.proveedor.apellidos}}
+              </td>
+              <td class="center-align">
+                {{cierre_p.fecha_cierre | date:'dd/MM/yyyy' : shortDate}}
+              </td>
+              <td class="center-align" >
+                {{cierre_p.fecha_entrega | date:'dd/MM/yyyy' : shortDate}}
+              </td>
+              <td class="center-align" >
+                {{cierre_p.cantidad | currency: ''}} 
+              </td>
+              <td class="center-align" >
+                {{cierre_p.precio  | currency: ''}}
+              </td>
+              <td class="center-align" >
+                {{cierre_p.total  | currency: ''}}
+              </td>
+              <td>
+                <a href="" style="color: black;"><span ng-click="generarpqtDCP(cierre_p._id)" class="zmdi zmdi-collection-pdf zmdi-hc-2x" ></span></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>          
+    </div>                  
+  </div>
+</div>
