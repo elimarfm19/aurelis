@@ -27,15 +27,15 @@
                     <input type="text" id="fecha_entrega" ng-model="cierre.fecha_entrega"/> 
                   </div>
                 </div>
-                <div class="row ">
+                <div class="row ">                  
                   <div class="input-field col s6">
-                    <input ng-required="true" ng-model="cierre.precio" id="precio" format="number" ng-init="cierre.precio = 0" type="text" class="validate" style="text-align: right;">
-                    <label for="precio">Precio * g</label>
-                  </div> 
-                  <div class="input-field col s6">
-                    <input ng-required="true" ng-model="cierre.cantidad" gramos="number" g="true" id="cantidad" ng-init="cierre.cantidad = 0" type="text"  style="text-align: right;" class="validate" ng-keyup="calcularTotal()">
+                    <input ng-required="true" ng-model="cierre.cantidad" gramos="number" g="true" id="cantidad" ng-init="cierre.cantidad = 0" type="text"  style="text-align: right;" class="validate">
                     <label for="cantidad">Cantidad (g)</label>
-                  </div>                                                
+                  </div>
+                  <div class="input-field col s6">
+                    <input ng-required="true" ng-model="cierre.precio" id="precio" format="number" ng-init="cierre.precio = 0" type="text" class="validate" style="text-align: right;" ng-keyup="calcularTotal()">
+                    <label for="precio">Precio * g</label>
+                  </div>                                                 
                 </div>
                 <div class="row ">
                   <div class="input-field col s6">
@@ -57,7 +57,7 @@
                 <br>  
                 <div style="text-align:center">                        
                   <button class="btn btn-primary waves-effect waves-light" ng-click="add(cierre)" ng-disabled="!Codenx1.$valid" ng-show="!cierre.CierreId" type="submit">CREAR</button>
-                  <button class="btn btn-info waves-effect waves-light" ng-click="update(cierre)" ng-if="cierre._id" type="submit">ACTUALIZAR</button>
+                  <button class="btn btn-info waves-effect waves-light" ng-click="update(cierre)" ng-if="cierre._id" ng-disabled="!((cierre.cantidad - gramosp)==0)" type="submit">ACTUALIZAR</button>
                   <button class="btn waves-effect waves-light" ng-click="deselect()" ng-if="cierre._id">LIMPIAR</button>
                 </div>
                 <br>                                                                       
@@ -300,7 +300,7 @@
 
     $('#fecha_cierre').datepicker({
     language: "es",
-    format:"yyyy-mm-dd"
+    format:"dd-mm-yyy"
   });
 </script>
 

@@ -33,7 +33,7 @@
                 </tr>
               </tfoot>
               <tbody>
-                  <tr ng-repeat="proveedor in proveedores " ng-if="!proveedor.cerrado== 0">
+                  <tr ng-repeat="proveedor in proveedores " ng-if="(!proveedor.cerrado== 0) && !(proveedor.cerrado == proveedor.entregado)">
                     <td class="center-align" >
                       {{proveedor.nombres}} {{proveedor.apellidos}}
                     </td>
@@ -83,7 +83,7 @@
               </tr>
             </tfoot>
             <tbody>
-              <tr ng-repeat="cliente in clientes " ng-if="!cliente.cerrado== 0">
+              <tr ng-repeat="cliente in clientes " ng-if="(!cliente.cerrado== 0)&& !(cliente.cerrado == cliente.entregado)">
                 <td class="center-align" >
                   {{cliente.nombres}} {{cliente.apellidos}}
                 </td>

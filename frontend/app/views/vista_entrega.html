@@ -59,7 +59,6 @@
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Peso Bruto</th>
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Ley</th>
                       <th class="center-align" style="background: #337ab7; color: #ffffff;">Puro</th>
-                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Peso Entrega</th>
                       <th class="center-align" style="background: #337ab7; border-radius: 0 400px 4px 0; color: #ffffff;">Opciones</th>
                     </tr>
                   </thead>
@@ -70,16 +69,13 @@
                         {{pieza.piezaId}}
                       </td>
                       <td class="center-align">
-                        {{pieza.peso_bruto}}
+                        {{pieza.peso_entrega}}
                       </td>
                       <td class="center-align">
                         {{pieza.ley}}
                       </td>
                       <td class="center-align">
                         {{pieza.puro_c}}
-                      </td>
-                      <td class="center-align">
-                        {{pieza.peso_entrega}}
                       </td>
                       <td>  
                         <input type="checkbox" id="check{{pieza._id}}" ng-click="editE(pieza,entrega.cliente)" ng-model="check" ng-checked="pieza.entrega._id == entrega._id"> 
