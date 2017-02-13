@@ -245,7 +245,13 @@ $scope.suma_puroe = function(){
  //console.log($rootScope.sumaPuroE);
 }
 $scope.showPiezas = function(piezas){
-    return piezas.status === 'Disponible'
+  var entrega_id = document.getElementById('entrega_id').value;
+
+  if ((piezas.status === 'Disponible' ) || (piezas.entrega._id === entrega_id )) {
+    return true;
+  }else{
+    return false;
+  }
 };
 
 

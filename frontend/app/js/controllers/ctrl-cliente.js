@@ -178,14 +178,6 @@ $scope.generarpqt= function(entrega) {
                 //  }
         
         //console.log(base64Img);
-       
-
-       
-
-    
-   
-
-    
     $http.get("http://localhost:3001/piezas/entrega/"+entregas._id)
               .success(function(piezas){
 
