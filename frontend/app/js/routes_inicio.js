@@ -80,6 +80,16 @@ var route = 'http://localhost:3001/';//http://aurelis-backend.herokuapp.com/'; /
         controller: 'ctrl-pieza',
         controllerAs: 'inv'
       })
+      .when('/reportePorEntregar', {
+        templateUrl: '/views/vista_reportePorEntregar.html',
+        controller: 'ctrl-cliente',
+        controllerAs: 'RporEntregar'
+      })
+      .when('/reportePorRecibir', {
+        templateUrl: '/views/vista_reportePorRecibir.html',
+        controller: 'ctrl-proveedor',
+        controllerAs: 'RporRecibir'
+      })
       .when('/reporteCierreC', {
         templateUrl: '/views/vista_reporteCierreC.html',
         controller: 'ctrl-cierre',
@@ -98,22 +108,27 @@ var route = 'http://localhost:3001/';//http://aurelis-backend.herokuapp.com/'; /
       .when('/reporteRecepcion', {
         templateUrl: '/views/vista_reporteRecepcion.html',
         controller: 'ctrl-proveedor',
-        controllerAs: 'pro'
+        controllerAs: 'RRecepcion'
       })
       .when('/reporteRecepcionPro', {
         templateUrl: '/views/vista_reporteRecepcionP.html',
         controller: 'ctrl-proveedor',
-        controllerAs: 'pro'
+        controllerAs: 'RRecepcionP'
       })
       .when('/reporteEntrega', {
         templateUrl: '/views/vista_reporteEntrega.html',
         controller: 'ctrl-cliente',
-        controllerAs: 'cli'
+        controllerAs: 'REntrega'
       })
       .when('/reporteEntregaC', {
         templateUrl: '/views/vista_reporteEntregaC.html',
         controller: 'ctrl-cliente',
-        controllerAs: 'cli'
+        controllerAs: 'REntregaC'
+      })
+      .when('/reporteGanancia', {
+        templateUrl: '/views/vista_reporteGanancia.html',
+        controller: 'ctrl-cierre',
+        controllerAs: 'RGanancia'
       })
       // .when('/generarPDF', {
       //   templateUrl: '/views/vista_generarPDF.html',

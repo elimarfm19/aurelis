@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ctrl-recepcion', function($scope,Recepcion,Proveedor,CierreProveedor,ngProgress,$window) {
+app.controller('ctrl-recepcion', function($scope,Recepcion,Proveedor,CierreProveedor,$http,ngProgress,$window) {
 
 $scope.recepcion = new Recepcion();
 //$scope.proveedor = new Proveedor();

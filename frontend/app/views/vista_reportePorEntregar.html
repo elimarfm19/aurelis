@@ -1,0 +1,62 @@
+
+<div class="container" >
+ </br><br>
+  <ul class="nav nav-tabs col-md-12" style="margin-left:0.2cm; " >
+    <li class="active"><a class="a" style="color:black; font-weight:600; font-family: 'Tahoma';" data-toggle="tab">Reporte por Entregar</a></li>
+  </ul>
+
+  <div class="tab-content col-md-12" style="margin-left: 1.3cm;">
+    <div  class="tab-pane col-md-9 fade in active">
+      <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Por Entregar </h3>
+      <button class="btn btn-primary zmdi zmdi-collection-pdf zmdi-hc-2x waves-effect waves-light col-md-offset-10" ng-click="generarpqtPorEntregar()"> GENERAR</button>
+<!--       <a href="" style="color: black;"><span ng-click="generarpqtPorEntregar()" class="zmdi zmdi-collection-pdf zmdi-hc-2x" ></span></a> -->
+      <!--<br>
+      <br>-->
+      <div class="">
+        <div class="table-responsive">
+
+          <table class="table table-hover" datatable="ng" dt-options="dtOptions" id="tabla_inicio_p" data-page-length='5'>
+              <thead>
+                  <tr class="active">                          
+                    <th class="center-align" style="border-radius: 400px 4px 0 0;">Cliente</th>
+                    <th class="center-align">Cerrado (g)</th>
+                    <th class="center-align">Entregado (g)</th>
+                    <th class="center-align">Pendiente (g)</th>                         
+                    <th class="center-align" style="border-radius: 0 400px 4px 0;">Última Entrega</th>
+                  </tr>
+              </thead>
+              <tfoot>
+                <tr class="active">
+                    <th class="center-align" style="border-radius: 0 0 4px 400px;"></th>
+                    <th class="center-align"></th>
+                    <th class="center-align"></th>
+                    <th class="center-align"></th>
+                    <th class="center-align" style="border-radius: 0 4px 400px 0;"></th>
+                </tr>
+              </tfoot>
+              <tbody>
+                  <tr ng-repeat="cliente in clientes" ng-if="!cliente.cerrado== 0">
+                    <td class="center-align" >
+                      {{cliente.nombres}} {{cliente.apellidos}}
+                    </td>
+                    <td class="center-align" >
+                      {{cliente.cerrado | currency: ''}} 
+                    </td>
+                    <td class="center-align" >                            
+                      {{cliente.entregado  | currency: ''}}
+                    </td>
+                    <td class="center-align" field="por_cerrar">
+                      {{(cliente.entregado - cliente.cerrado) | number}}
+                    </td>
+                    <td class="center-align" field="fecha_entrega">
+                    <!-- aqui va la ultmima recepcion de este personaje-->
+                      {{cliente.ultima_entrega | date:'dd/MM/yyyy' : shortDate}}
+                    </td>
+                  </tr>
+              </tbody>
+          </table>
+        </div> 
+      </div>                
+    </div>
+</div>
+

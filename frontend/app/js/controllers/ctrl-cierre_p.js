@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ctrl-cierre_p', function($scope,$filter,$rootScope,CierreProveedor,ngProgress,$window,$http) {
+app.controller('ctrl-cierre_p', function($scope,$filter,$rootScope,CierreProveedor,DTOptionsBuilder,ngProgress,$window,$http) {
 
 $scope.cierre_p = new CierreProveedor();
 $scope.reporteCierre = true;
@@ -57,6 +57,38 @@ $scope.date = function() {
   $scope.date = $filter('date')($scope.cierre_p.fecha_entrega, "yyyy-MM-dd");
 }
 
+
+var language = {
+
+    "sProcessing":     "Procesando...",
+    "sLengthMenu":     "Mostrar _MENU_ registros",
+    "sZeroRecords":    "No se encontraron resultados",
+    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix":    "",
+    "sSearch":         "Buscar:",
+    "sUrl":            "",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+    },
+    "oAria": {
+        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    }
+}
+
+$scope.dtOptionsDCP = DTOptionsBuilder.newOptions()
+        
+        .withLanguage(language)
+        .withOption('info', false); 
+
 $scope.generarpqtDCP= function(cierre_p) {
 
 
@@ -103,12 +135,12 @@ $scope.generarpqtDCP= function(cierre_p) {
                  var data = []; 
                   //for (var i = 0; i < cierresProveedor.length; i++) {
                       data.push({
-                          id: cierre_p.Cierre_pId,
-                          fecha_cierre: moment(cierre_p.fecha_cierre).format('DD-MM-YYYY'),
-                          fecha_entrega: moment(cierre_p.fecha_entrega).format('DD-MM-YYYY'),
-                          cantidad: cierre_p.cantidad,
-                          precio: cierre_p.precio,
-                          total: cierre_p.total
+                          id: cierresProveedor.Cierre_pId,
+                          fecha_cierre: moment(cierresProveedor.fecha_cierre).format('DD-MM-YYYY'),
+                          fecha_entrega: moment(cierresProveedor.fecha_entrega).format('DD-MM-YYYY'),
+                          cantidad: cierresProveedor.cantidad,
+                          precio: cierresProveedor.precio,
+                          total: cierresProveedor.total
                       });
                 //  }
   
