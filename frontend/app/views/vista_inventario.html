@@ -16,24 +16,34 @@
       <div class="col-md-12">
         <div class="table-responsive" ng-controller="ctrl-pieza">
           <form name"Codenx" novalidate>
-            <table class="table table-hover" datatable="ng" dt-options="dtOptions" id="tabla_piezas_disponibles" data-page-length='3' >
+            <table class="table table-hover" datatable="ng" dt-options="dtOptions" id="tabla_piezas_disponibles" data-page-length='5' >
               <thead>
                 <tr class="active">                        
-                  <th class="center-align" style="border-radius: 400px 4px 0 0;">Proveedor</th>
-                  <th class="center-align">Cod. Pieza</th>
+                  <th class="center-align" style="border-radius: 400px 4px 0 0;">Cod. Pieza</th>
+                  <th class="center-align">Proveedor</th>
                   <th class="center-align">Peso Bruto (g)</th>
                   <th class="center-align">Ley</th>                          
                   <th class="center-align">Puro (g)</th>                          
                   <th class="center-align" style="border-radius: 0 400px 4px 0;">Peso Entrega (g)</th>                                  
                 </tr>
               </thead>
+              <tfoot>
+              <tr class="active">
+                  <th class="center-align" style="border-radius: 0 0 4px 400px;"></th>
+                  <th class="center-align"></th>
+                  <th class="center-align"></th>
+                  <th class="center-align"></th>
+                  <th class="center-align"></th>
+                  <th class="center-align" style="border-radius: 0 4px 400px 0;"></th>
+              </tr>
+            </tfoot>
               <tbody>
                 <tr ng-repeat="pieza in piezas" ng-if="pieza.status == 'Disponible'">
                   <td class="center-align">
-                    {{pieza.recepcion.proveedor.nombres}} {{pieza.recepcion.proveedor.apellidos}} 
+                    {{pieza.piezaId}}
                   </td>
                   <td class="center-align">
-                    {{pieza.piezaId}}
+                    {{pieza.recepcion.proveedor.nombres}} {{pieza.recepcion.proveedor.apellidos}} 
                   </td>
                   <td class="center-align">
                     {{pieza.peso_bruto}}
