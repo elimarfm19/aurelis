@@ -165,16 +165,18 @@ $scope.deselect = function() {
 $scope.addCierreProveedor = function(idCierre) {
 
   $scope.cierre_p.cierre = idCierre;
+  //console.log($scope.cierre_p.cierre);
+
+  $scope.cierre_p.fecha_entrega = $scope.cierre.fecha_entrega;
 
   $http.post("http://localhost:3001/cierresProveedor/",$scope.cierre_p)
-            .success(function(respuesta){
-               // console.log(respuesta);                
-                $scope.proveedores = Proveedor.query();  
+            .success(function(respuesta){   
+            console.log(respuesta);            
+                $scope.proveedores = Proveedor.query(); 
                 $scope.cierreproveedores = CierreProveedor.query();
                 //$scope.cierre_p ="";
                 $scope.monto_pagado();
                 $scope.gramos();
-
                   $scope.cierre_p.cantidad = 0;
                   $scope.cierre_p.precio = 0;
                   $scope.cierre_p.total = 0;
@@ -396,7 +398,7 @@ $scope.ganancia=function(total_pago,cierre_id){
 
   $http.put("http://localhost:3001/cierres/"+cierre_id,$scope.cierre)
     .success(function(respuesta){
-         console.log(respuesta); 
+        // console.log(respuesta); 
    });
 
  //console.log(total_pago+'/'+total_cierre);
@@ -521,9 +523,9 @@ $scope.generarpqt= function(entrega) {
         doc.setFontSize(20);
         doc.setTextColor(40);
         doc.setFontStyle('normal');
-        if (base64Img) {
-            doc.addImage(base64Img, 'JPEG', data.settings.margin.left, 15, 10, 10);
-        }
+        // if (base64Img) {
+        //     doc.addImage(base64Img, 'JPEG', data.settings.margin.left, 15, 10, 10);
+        // }
         doc.text("Report", data.settings.margin.left + 15, 22);
 
         // FOOTER
