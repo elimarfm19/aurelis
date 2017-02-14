@@ -47,6 +47,23 @@ function getEntregasCliente(req,res){
 
  	})
 }
+function getEntregasClienteFechas(req,res){
+
+	let ClienteId = req.params.id
+	let FechaInicio = req.params.fechai
+	let FechaFin = req.params.fechaf
+
+
+	Entrega.find({"fecha_entrega" : {"$gte" : FechaInicio, "$lte" : FechaFin}, "cliente": ClienteId},(err,entregas)=>{
+ 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+ 	if(entregas== "") return res.status(404).send({message:'No hay registros de entregas para este cliente'})
+ 	
+ 	Cliente.populate(entregas, {path: "cliente"},function(err, entregas){
+            res.status(200).send(entregas);
+        }); 
+
+ 	})
+}
 
 function getCierresPieza(req,res){
 
@@ -119,6 +136,7 @@ module.exports = {
 	getEntrega,
 	getEntregas,
 	getEntregasCliente,
+	getEntregasClienteFechas,
 	getCierresPieza,
 	storeEntrega,
 	updateEntrega,
