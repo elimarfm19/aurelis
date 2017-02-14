@@ -86,6 +86,7 @@ api.get('/entregas',cors(),entregaController.getEntregas)
 
 api.get('/entregas/:id',cors(),entregaController.getEntrega)
 api.get('/entregas/cliente/:id',cors(),entregaController.getEntregasCliente)
+api.get('/entregas/cliente/:id/:fechai/:fechaf',cors(),entregaController.getEntregasClienteFechas)
 api.post('/entregas',cors(),entregaController.storeEntrega)
 
 api.put('/entregas/:id',cors(),entregaController.updateEntrega)
