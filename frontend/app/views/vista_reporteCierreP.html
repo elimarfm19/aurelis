@@ -2,17 +2,17 @@
   <div class="tamanno">
     <br><br>
     <ul class="nav nav-tabs col-md-12" style="margin-left:0.2cm; " >
-      <li class="active"><a class="a" style="color:black; font-weight:600; font-family: 'Tahoma';" data-toggle="tab">Reporte de Recepción</a></li>
+      <li class="active"><a class="a" style="color:black; font-weight:600; font-family: 'Tahoma';" data-toggle="tab">Reporte de Cierre Proveedores</a></li>
     </ul>
 
-    <div class="container col-md-6 col-md-offset-2" style="margin-top:100px; " ng-show="reporteCierre"  ng-controller="ctrl-proveedor">
+    <div class="container col-md-6 col-md-offset-2" style="margin-top:100px; " ng-show="reporteCierre"  >
       <div class="row" style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
       <br>
         <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Proveedores</h3>
         <br>
         <form name="Codenx" novalidate class="col s12">
           <div class="row "> 
-            <div class="col-md-12" style="margin-left: 3cm;"> 
+            <div class="col-md-12" style="margin-left: 3cm;" > 
               <select class="select col-md-6" ng-model="proveedor._id" ng-change="buscarProveedor(proveedor._id)">
                 <option value="">Seleccione Proveedor</option>
                 <option ng-repeat="proveedor in proveedores" value="{{proveedor._id}}">{{proveedor.nombres}} {{proveedor.apellidos}}</option> 

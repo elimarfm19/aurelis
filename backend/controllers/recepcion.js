@@ -58,6 +58,24 @@ function getRecepcionesProveedor(req,res){
 
  	})
 }
+function getRecepcionesProveedorFechas(req,res){
+
+	let ProveedorId = req.params.id
+	let FechaInicio = req.params.fechai
+	let FechaFin = req.params.fechaf
+
+
+	Recepcion.find({"fecha_recepcion" : {"$gte" : FechaInicio, "$lte" : FechaFin}, "proveedor": ProveedorId},(err,recepciones)=>{
+ 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+ 	if(recepciones== "") return res.status(404).send({message:'No hay registros de recepciones para este proveedor'})
+ 	
+ 	Proveedor.populate(recepciones, {path: "proveedor"},function(err, recepciones){
+        res.status(200).send(recepciones);
+    }); 
+
+ 	})
+}
+
 
 function getCierresPieza(req,res){
 
@@ -132,6 +150,7 @@ module.exports = {
 	getRecepcion,
 	getRecepciones,
 	getRecepcionesProveedor,
+	getRecepcionesProveedorFechas,
 	getCierresPieza,
 	storeRecepcion,
 	updateRecepcion,
