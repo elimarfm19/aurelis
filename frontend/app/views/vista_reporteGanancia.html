@@ -17,7 +17,7 @@
           <table datatable="ng" dt-options="dtOptions" id="tabla_cierres" class="table table-hover" data-page-length='5'>
               <thead>
                <tr class="active">                          
-                <th class="center-align" style="border-radius: 400px 4px 0 0;">ID</th>
+                <th class="center-align" style="border-radius: 400px 4px 0 0;">Cod. Cierre</th>
                 <th class="center-align">Fecha Cierre</th>
                 <th class="center-align">Cliente</th> 
                 <th class="center-align">Cantidad (g)</th>
@@ -32,7 +32,7 @@
                     <th class="center-align"></th>
                     <th class="center-align"></th>
                     <th class="center-align"></th>
-                    <th class="center-align" style="border-radius: 0 4px 400px 0; width: 3%"></th>
+                    <th class="center-align" style="border-radius: 0 4px 400px 0; width: 25%"></th>
                 </tr>
               </tfoot>
               <tbody>
@@ -53,7 +53,7 @@
                     {{cierre.ganancia | currency: 'Bs ' }}
                   </td>
                   <td class="center-align" >
-                    {{cierre.observacion | currency: 'Bs ' }}
+                    {{cierre.observacion}}
                   </td>
                 </tr>
               </tbody>

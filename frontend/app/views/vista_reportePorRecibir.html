@@ -35,7 +35,7 @@
                 </tr>
               </tfoot>
               <tbody>
-                  <tr ng-repeat="proveedor in proveedores">
+                  <tr ng-repeat="proveedor in proveedores" ng-if="!proveedor.cerrado== 0">
                     <td class="center-align" >
                       {{proveedor.nombres}} {{proveedor.apellidos}}
                     </td>

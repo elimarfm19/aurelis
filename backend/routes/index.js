@@ -21,6 +21,7 @@ var cors = require('cors')
 const api = express.Router()
 
 api.put('http://localhost:9000/', cors())
+api.post('http://localhost:9000/', cors())
 api.delete('http://localhost:9000/', cors())
 
 api.options('/products/:id', cors())
@@ -65,10 +66,13 @@ api.delete('/proveedores/:id',cors(),proveedorController.deleteProveedor)
 api.options('/piezas/:id', cors())
 api.options('/piezas/', cors())
 api.options('/piezas/entrega/:id', cors())
+api.options('/piezas/recepcion/:id', cors())
 
 api.get('/piezas',cors(),piezaController.getPiezas)
 
 api.get('/piezas/entrega/:id',cors(),piezaController.getPiezasEntrega)
+
+api.get('/piezas/recepcion/:id',cors(),piezaController.getPiezasRecepcion)
 
 api.get('/piezas/:id',cors(),piezaController.getPieza)
 
@@ -101,6 +105,7 @@ api.get('/recepciones',cors(),recepcionController.getRecepciones)
 
 api.get('/recepciones/:id',cors(),recepcionController.getRecepcion)
 api.get('/recepciones/proveedor/:id',cors(),recepcionController.getRecepcionesProveedor)
+api.get('/recepciones/proveedor/:id/:fechai/:fechaf',cors(),recepcionController.getRecepcionesProveedorFechas)
 api.post('/recepciones',cors(),recepcionController.storeRecepcion)
 
 api.put('/recepciones/:id',cors(),recepcionController.updateRecepcion)
@@ -170,6 +175,7 @@ api.options('/cierres/cliente/:id', cors())
 api.get('/cierres',cors(),cierreController.getCierres)
 
 api.get('/cierres/cliente/:id',cors(),cierreController.getCierresCliente)
+api.get('/cierres/cliente/:id/:fechai/:fechaf',cors(),cierreController.getCierresClienteFechas)
 
 api.get('/cierres/:id',cors(),cierreController.getCierre)
 
@@ -183,8 +189,13 @@ api.delete('/cierres/:id',cors(),cierreController.deleteCierre)
 api.options('/cierresProveedor/:id', cors())
 api.options('/cierresProveedor/', cors())
 api.options('/cierresProveedor/proveedor/:id', cors())
+api.options('/cierresProveedor/cierres/:id', cors())
+
+
 api.get('/cierresProveedor',cors(),cierreControllerProveedor.getCierresP)
 api.get('/cierresProveedor/proveedor/:id',cors(),cierreControllerProveedor.getCierresProveedor)
+//api.get('/cierresProveedor/proveedor/:id',cors(),cierreControllerProveedor.getCierresProveedor)
+api.get('/cierresProveedor/cierres/:id',cors(),cierreControllerProveedor.getCierresProveedorCierres)
 api.get('/cierresProveedor/:id',cors(),cierreControllerProveedor.getCierreP)
 api.post('/cierresProveedor',cors(),cierreControllerProveedor.storeCierreP)
 api.put('/cierresProveedor/:id',cors(),cierreControllerProveedor.updateCierreP)

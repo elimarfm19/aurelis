@@ -29,11 +29,11 @@
                     <th class="center-align"></th>
                     <th class="center-align"></th>
                     <th class="center-align"></th>
-                    <th class="center-align" style="border-radius: 0 4px 400px 0;"></th>
+                    <th class="center-align" style="border-radius: 0 4px 400px 0;">
                 </tr>
               </tfoot>
               <tbody>
-                  <tr ng-repeat="proveedor in proveedores " ng-if="(!proveedor.cerrado== 0) && !(proveedor.cerrado == proveedor.entregado)">
+                  <tr ng-repeat="proveedor in proveedores" ng-if="(!proveedor.cerrado== 0) && !(proveedor.cerrado == proveedor.entregado)">
                     <td class="center-align" >
                       {{proveedor.nombres}} {{proveedor.apellidos}}
                     </td>
@@ -46,7 +46,7 @@
                     <td class="center-align" field="por_cerrar">
                       {{(proveedor.entregado - proveedor.cerrado) | number}}
                     </td>
-                    <td class="center-align" field="fecha_entrega">
+                    <td class="center-align" field="fecha_entrega" >
                     <!-- aqui va la ultmima recepcion de este personaje-->
                       {{proveedor.ultima_entrega | date:'dd/MM/yyyy' : shortDate}}
                     </td>

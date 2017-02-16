@@ -304,7 +304,7 @@ body, html{
     left: 50%;
     transform: translate(-50%,-50%);
     color: #333;
-    /*height: 39%;*/
+        /*height: 39%;*/
 }
 .container-login label{
     color: #333;

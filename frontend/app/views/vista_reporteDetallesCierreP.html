@@ -6,7 +6,7 @@
   </ul>
 
   <div class="tab-pane col-md-9" style="margin-left: 1.5cm;" id="entrega" >
-    <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Cierres de Proveedores </h3>
+    <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Detalle de Cierres </h3>
       <!--<br>
       <br>-->
     <div class="">
@@ -15,7 +15,7 @@
           <thead>
             <tr class="active">                          
               <th class="center-align" style="border-radius: 400px 4px 0 0;">Cod.Cierre</th>
-              <th class="center-align">Proveedor</th>
+              <th class="center-align">Cliente</th>
               <th class="center-align">Fecha Cierre</th>
               <th class="center-align">Fecha Entrega</th> 
               <th class="center-align">Cantidad (g)</th>
@@ -37,30 +37,30 @@
             </tr>
           </tfoot>
           <tbody>
-            <tr ng-repeat="cierre_p in cierres_p">
+            <tr ng-repeat="cierre in cierres">
               <td class="center-align" >
-                {{cierre_p.Cierre_pId}}
+                {{cierre.CierreId}}
               </td>
               <td class="center-align">
-                {{cierre_p.proveedor.nombres}} {{cierre_p.proveedor.apellidos}}
+                {{cierre.cliente.nombres}} {{cierre.cliente.apellidos}}
               </td>
               <td class="center-align">
-                {{cierre_p.fecha_cierre | date:'dd/MM/yyyy' : shortDate}}
+                {{cierre.fecha_cierre | date:'dd/MM/yyyy' : shortDate}}
               </td>
               <td class="center-align" >
-                {{cierre_p.fecha_entrega | date:'dd/MM/yyyy' : shortDate}}
+                {{cierre.fecha_entrega | date:'dd/MM/yyyy' : shortDate}}
               </td>
               <td class="center-align" >
-                {{cierre_p.cantidad | currency: ''}} 
+                {{cierre.cantidad | currency: ''}} 
               </td>
               <td class="center-align" >
-                {{cierre_p.precio  | currency: ''}}
+                {{cierre.precio  | currency: ''}}
               </td>
               <td class="center-align" >
-                {{cierre_p.total  | currency: ''}}
+                {{cierre.total  | currency: ''}}
               </td>
               <td>
-                <a href="" style="color: black;"><span ng-click="generarpqtDCP(cierre_p._id)" class="zmdi zmdi-collection-pdf zmdi-hc-2x" ></span></a>
+                <a href="" style="color: black;"><span ng-click="generarpqtDCP(cierre._id)" class="zmdi zmdi-collection-pdf zmdi-hc-2x" ></span></a>
               </td>
             </tr>
           </tbody>

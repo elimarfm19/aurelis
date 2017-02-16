@@ -1,6 +1,7 @@
 'use strict'
 
 const Cierre_p = require('../models/cierre_p')
+const Cierre = require('../models/cierre')
 const Proveedor = require('../models/proveedor')
 
  function getCierreP(req,res){
@@ -35,6 +36,63 @@ function getCierresProveedor(req,res){
 	Cierre_p.find({proveedor:ProveedorId},(err,cierres)=>{
  	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
  	if(cierres == "") return res.status(404).send({message:'No hay registros de Cierres'})
+ 	
+ 	Proveedor.populate(cierres, {path: "proveedor"},function(err, cierres){
+            res.status(200).send(cierres);
+        }); 
+
+ 	})
+}
+function getCierresProveedorCierres(req,res){
+
+	let CierreId = req.params.id
+	Cierre_p.find({ cierre: CierreId})
+	.populate({
+		path: 'cierre',
+		model: 'Cierre',
+		populate: {
+
+			path: 'cliente',
+			model: 'Cliente',
+			// populate: {
+			// path: 'proveedor',
+			// model: 'Proveedor'
+			// }
+		}
+	}).populate({
+		path: 'proveedor',
+		model: 'Proveedor',
+		// populate: {
+
+		// 	path: 'cliente',
+		// 	model: 'Cliente'
+		// }
+	})
+	.exec(function(err,pieza){
+		if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+			if(pieza == "") return res.status(404).send({message:'La Pieza no Existe'})
+				res.status(200).send(pieza);
+		});
+	// Cierre_p.find({cierre:CierreId},(err,cierres)=>{
+ // 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+ // 	if(cierres == "") return res.status(404).send({message:'No hay registros de Cierres'})
+ 	
+ // 	Proveedor.populate(cierres, {path: "proveedor"},function(err, cierres){
+ //            res.status(200).send(cierres);
+ //        }); 
+
+ // 	})
+}
+function getCierresProveedorFechas(req,res){
+
+	let ProveedorId = req.params.id
+	let FechaInicio = req.params.fechai
+	let FechaFin = req.params.fechaf
+
+
+	Cierre_p.find({"fecha_cierre" : {"$gte" : FechaInicio, "$lte" : FechaFin}, "proveedor": ProveedorId},(err,cierres)=>{
+ 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+ 	if(cierres== "") return res.status(404).send({message:'No hay registros de cierres para este proveedor'})
  	
  	Proveedor.populate(cierres, {path: "proveedor"},function(err, cierres){
             res.status(200).send(cierres);
@@ -147,6 +205,8 @@ module.exports = {
 	getCierreP,
 	getCierresP,
 	getCierresProveedor,
+	getCierresProveedorFechas,
+	getCierresProveedorCierres,
 	storeCierreP,
 	updateCierreP,
 	deleteCierreP
