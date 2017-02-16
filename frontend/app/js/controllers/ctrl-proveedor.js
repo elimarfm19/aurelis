@@ -213,13 +213,11 @@ $scope.generarpqt= function(recepcion) {
 /***********************************Seccion de Recepcion****************************************************************/
 
               var data = []; 
-              var pendiente=0;
               data.push({
                   id: recepcion.RecepcionId,
                   fecha: moment(recepcion.fecha_entrega).format('DD-MM-YYYY'),
                   cantidad: recepcion.cantidad       
               });
-              pendiente= recepcion.proveedor.entregado - recepcion.proveedor.cerrado;
 
               doc.autoTable(getColumns(), data, {
                     addPageContent: pageContent,
@@ -237,7 +235,6 @@ $scope.generarpqt= function(recepcion) {
 
           
           doc.setFontSize(12);
-          doc.text('Pendiente= ' + pendiente + ' (g)', 130, doc.autoTable.previous.finalY + 10);
           doc.text('Detalle de Piezas', 14, doc.autoTable.previous.finalY + 10);
 
 
@@ -406,11 +403,11 @@ var pageContent = function (data) {
 /***********************************Seccion de Recepciones****************************************************************/
     var data = []; 
     var recibido=0;
-    var pendiente=0;
+    //var pendiente=0;
     for (var i = 0; i < recepciones.length; i++) {
 
-        recibido+= recepciones[i].cantidad;
-        pendiente = recepciones[0].proveedor.entregado - recepciones[0].proveedor.cerrado;
+        recibido+= parseFloat(recepciones[i].cantidad).toFixed(2);
+        //pendiente = parseFloat(recepciones[0].proveedor.entregado - recepciones[0].proveedor.cerrado).toFixed(2);
 
         data.push({
             id: recepciones[i].RecepcionId,
@@ -435,7 +432,7 @@ var pageContent = function (data) {
     });
     doc.setFontSize(12);
     doc.text('Total Recepción= '+ recibido + ' (g)', 14, doc.autoTable.previous.finalY + 10);
-    doc.text('Pendiente= ' + pendiente + ' (g)', 130, doc.autoTable.previous.finalY + 10);
+   // doc.text('Pendiente= ' + pendiente + ' (g)', 130, doc.autoTable.previous.finalY + 10);
 
 /***********************************Seccion de Recepciones****************************************************************/
 
@@ -559,7 +556,7 @@ $scope.generarpqtPorRecibir= function() {
         }
     });
     doc.setFontSize(12);
-    doc.text('Total Pendiente: - '+ parseFloat(pendiente).toFixed(2) + ' (g)', 14, doc.autoTable.previous.finalY + 10);
+    doc.text('Total Pendiente: - '+ pendiente + ' (g)', 14, doc.autoTable.previous.finalY + 10);
 /***********************************Seccion de Recepciones Pendientes****************************************************************/  
     // Total page number plugin only available in jspdf v1.0+
     if (typeof doc.putTotalPages === 'function') {
