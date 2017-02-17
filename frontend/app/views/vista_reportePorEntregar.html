@@ -35,7 +35,7 @@
                 </tr>
               </tfoot>
               <tbody>
-                  <tr ng-repeat="cliente in clientes" ng-if="!cliente.cerrado== 0">
+                  <tr ng-repeat="cliente in clientes" ng-if="!((cliente.cerrado - cliente.entregado)== 0)">
                     <td class="center-align" >
                       {{cliente.nombres}} {{cliente.apellidos}}
                     </td>

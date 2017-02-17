@@ -529,7 +529,7 @@ $scope.generarpqtPorEntregar= function() {
     var data = [];
     var pendiente=0;
     for (var i = 0; i < clientes.length; i++) {
-      if ((clientes[i].cerrado != 0)&&(clientes[i].cerrado != null)){
+      if ((clientes[i].cerrado != 0)&&(clientes[i].cerrado != null)&&(((clientes[i].cerrado) - (clientes[i].entregado))>0)){
 
         pendiente-= parseFloat(clientes[i].entregado - clientes[i].cerrado).toFixed(2); 
 
@@ -567,7 +567,7 @@ $scope.generarpqtPorEntregar= function() {
 
 
       
-       //doc.save('table.pdf');
+    //    doc.save('Reporte por Entregar.pdf');
 
      doc.output('datauri');
 
