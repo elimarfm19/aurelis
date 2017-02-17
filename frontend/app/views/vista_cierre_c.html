@@ -44,13 +44,13 @@
                   </div>
                   <div class="input-field col s6">
                      <input disabled value="{{ cierre.ganancia | currency:'Bs '
-                     }}" type="text" class="validate" style="text-align: right;" id="ganancia">
-                     <label for="total_p">Ganancia</label> 
+                     }}" type="text" class="validate" style="text-align: right;" id="ganancia" ng-if="(gramosp>= cierre.cantidad)">
+                     <label for="total_p">Ganancia</label>
                   </div>                               
                 </div>
                 <div class="row">
                   <div class="input-field col s12">
-                     <input type="text" class="validate" style="text-align: center;" id="observacion" ng-model="cierre.observacion">
+                     <input type="text" class="validate" style="text-align: center;" id="observacion" ng-model="cierre.observacion" >
                      <label for="obsevacion">Observación</label> 
                   </div>
                 </div>

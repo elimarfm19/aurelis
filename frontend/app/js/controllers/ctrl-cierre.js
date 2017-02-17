@@ -146,8 +146,8 @@ $scope.update = function(cierre) {
 $scope.remove = function(cierre) {
   //console.log(cierre);
   cierre.$remove(function(){
-    refresh();
-     //$window.location.reload();
+    // refresh();
+     $window.location.reload();
   });
 };
 
