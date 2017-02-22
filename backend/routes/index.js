@@ -194,6 +194,7 @@ api.options('/cierresProveedor/cierres/:id', cors())
 
 api.get('/cierresProveedor',cors(),cierreControllerProveedor.getCierresP)
 api.get('/cierresProveedor/proveedor/:id',cors(),cierreControllerProveedor.getCierresProveedor)
+api.get('/cierresProveedor/proveedor/:id/:fechai/:fechaf',cors(),cierreControllerProveedor.getCierresProveedorFechas)
 //api.get('/cierresProveedor/proveedor/:id',cors(),cierreControllerProveedor.getCierresProveedor)
 api.get('/cierresProveedor/cierres/:id',cors(),cierreControllerProveedor.getCierresProveedorCierres)
 api.get('/cierresProveedor/:id',cors(),cierreControllerProveedor.getCierreP)

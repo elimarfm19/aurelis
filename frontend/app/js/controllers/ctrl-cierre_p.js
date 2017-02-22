@@ -178,8 +178,8 @@ var columns = [
             {title: "Fecha Entrega", dataKey: "fecha_entrega"},
             {title: "Cantidad (g)", dataKey: "cantidad"},
             {title: "Precio", dataKey: "precio"},
-            {title: "Total", dataKey: "total"},
-            {title: "Observación", dataKey: "observacion"}
+            {title: "Total", dataKey: "total"}
+            // {title: "Observación", dataKey: "observacion"}
 ];
 
 var rows = [];
@@ -191,6 +191,7 @@ rows.push({
           cantidad: cierresProveedor[0].cierre.cantidad,
           precio: cierresProveedor[0].cierre.precio,
           total: cierresProveedor[0].cierre.total
+          // observacion: cierresProveedor[0].cierre.observacion
       });
 
 doc.autoTable(columns, rows, {
@@ -332,7 +333,9 @@ $scope.generarpqtCierre= function(proveedor) {
                 .success(function(cierresProveedor){
                   //console.log(cierresProveedor);
                  var data = []; 
+                 var entregado=0;
                   for (var i = 0; i < cierresProveedor.length; i++) {
+                      entregado+= cierresProveedor[i].cantidad;
                       data.push({
                           id: cierresProveedor[i].Cierre_pId,
                           fecha_cierre: moment(cierresProveedor[i].fecha_cierre).format('DD-MM-YYYY'),
@@ -385,6 +388,20 @@ $scope.generarpqtCierre= function(proveedor) {
         halign: 'center'
       }
     });
+    if (route ==  "http://localhost:3001/cierresProveedor/proveedor/"+$scope.proveedor._id) {
+      doc.setFontSize(12);
+      doc.text('Total Cerrado: '+parseFloat(cierresProveedor[0].proveedor.cerrado).toFixed(2) +' (g)', 14, doc.autoTable.previous.finalY + 10);
+      doc.text('Total Entregado: '+parseFloat(cierresProveedor[0].proveedor.entregado).toFixed(2)+' (g)', 80, doc.autoTable.previous.finalY + 10);
+      doc.text('Pendiente: '+parseFloat((cierresProveedor[0].proveedor.entregado) - (cierresProveedor[0].proveedor.cerrado)).toFixed(2)+' (g)', 150, doc.autoTable.previous.finalY + 10);
+      // doc.text('Total Cerrado: '+parseFloat(cierresProveedor[0].proveedor.cerrado).toFixed(2) +' (g)', 14, doc.autoTable.previous.finalY + 10);
+      // doc.text('Total Entregado: '+parseFloat(cierresProveedor[0].proveedor.entregado).toFixed(2)+' (g)', 14, doc.autoTable.previous.finalY + 20);
+    }
+    else{
+      doc.setFontSize(12);
+      doc.text('Total Cerrado Parcial: '+parseFloat(entregado).toFixed(2) +' (g)', 14, doc.autoTable.previous.finalY + 10);
+    }
+
+
     // Total page number plugin only available in jspdf v1.0+
     if (typeof doc.putTotalPages === 'function') {
         doc.putTotalPages(totalPagesExp);

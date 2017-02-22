@@ -347,7 +347,7 @@ $scope.generarpqtC= function() {
           reader.onloadend = function() {
               callback(reader.result.replace('text/xml', 'image/jpeg'));
           };
-          reader.readAsDataURL(xhr.response);
+          reader.readAsDataURL(xhr.response); 
       };
       xhr.open('GET', url);
       xhr.send();
@@ -528,18 +528,24 @@ $scope.generarpqtPorEntregar= function() {
 /***********************************Seccion de Entregas Pendientes****************************************************************/  
     var data = [];
     var pendiente=0;
+    var ultima_entrega;
     for (var i = 0; i < clientes.length; i++) {
       if ((clientes[i].cerrado != 0)&&(clientes[i].cerrado != null)&&(((clientes[i].cerrado) - (clientes[i].entregado))>0)){
 
         pendiente-= parseFloat(clientes[i].entregado - clientes[i].cerrado).toFixed(2); 
 
-
+        if(!clientes[i].ultima_entrega){
+           ultima_entrega='' ;
+        }
+        else{
+          ultima_entrega= moment(clientes[i].ultima_entrega).format('DD-MM-YYYY');
+        }
         data.push({
             cliente: clientes[i].nombres +' '+ clientes[i].apellidos,
             cerrado: clientes[i].cerrado,
             entregado: parseFloat(clientes[i].entregado).toFixed(2),
             pendiente: parseFloat(clientes[i].entregado - clientes[i].cerrado).toFixed(2),
-            fecha_ultima_entrega: moment(clientes[i].ultima_entrega).format('DD-MM-YYYY')
+            fecha_ultima_entrega: ultima_entrega
         });
       }
    }

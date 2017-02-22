@@ -606,6 +606,8 @@ $scope.generarpqtC= function() {
       route  = "http://localhost:3001/cierres/cliente/"+$scope.cliente._id+"/"+$scope.fecha_inicio+"/"+$scope.fecha_fin;
      }else{
       route = "http://localhost:3001/cierres/cliente/"+$scope.cliente._id;
+
+
      }
        
     $http.get(route)
@@ -645,7 +647,10 @@ $scope.generarpqtC= function() {
 /***********************************Seccion de Cierre Cliente********************************************/
 
     var data = []; 
+    var entregado=0;
+
       for (var i = 0; i < cierres.length; i++) {
+        entregado+= cierres[i].cantidad;
         data.push({
           id: cierres[i].CierreId,
           fecha_cierre: moment(cierres[i].fecha_cierre).format('DD-MM-YYYY'),
@@ -654,6 +659,9 @@ $scope.generarpqtC= function() {
           precio: cierres[i].precio,
           total: cierres[i].total
         });
+
+
+
       }
 
       doc.autoTable(getColumns(), data, {
@@ -669,6 +677,20 @@ $scope.generarpqtC= function() {
         halign: 'center'
       }
     });
+
+      if (route ==  "http://localhost:3001/cierres/cliente/"+$scope.cliente._id) {
+        doc.setFontSize(12);
+        doc.text('Total Cerrado: '+parseFloat(cierres[0].cliente.cerrado).toFixed(2) +' (g)', 14, doc.autoTable.previous.finalY + 10);
+        doc.text('Total Entregado: '+parseFloat(cierres[0].cliente.entregado).toFixed(2)+' (g)', 80, doc.autoTable.previous.finalY + 10);
+        doc.text('Pendiente: '+parseFloat((cierres[0].cliente.entregado) - (cierres[0].cliente.cerrado)).toFixed(2)+' (g)', 150, doc.autoTable.previous.finalY + 10);
+      }
+      else{
+        doc.setFontSize(12);
+        doc.text('Total Cerrado Parcial: '+parseFloat(entregado).toFixed(2) +' (g)', 14, doc.autoTable.previous.finalY + 10);
+      }
+
+
+      
 /***********************************Seccion de Cierre Cliente********************************************/
     
     // Total page number plugin only available in jspdf v1.0+

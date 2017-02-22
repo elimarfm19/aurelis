@@ -15,7 +15,7 @@
             <div class="col-md-12" style="margin-left: 3cm;"> 
               <select class="select col-md-6" ng-model="cliente._id" ng-change="buscarCliente(cliente._id)">
                 <option value="">Seleccione Cliente</option>
-                <option ng-repeat="cliente in clientes" value="{{cliente._id}}">{{cliente.nombres}} {{cliente.apellidos}}</option> 
+                <option ng-repeat="cliente in clientes" value="{{cliente._id}}" ng-if="!cliente.entregado==0">{{cliente.nombres}} {{cliente.apellidos}}</option> 
               </select>
             </div>
           </div> 

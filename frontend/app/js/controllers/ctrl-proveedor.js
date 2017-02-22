@@ -326,7 +326,7 @@ $scope.generarpqtP= function() {
     var getColumns = function () {
         return [
             {title: "Cod. Recepción", dataKey: "id"},
-            {title: "Fecha Entrega", dataKey: "fecha"},
+            {title: "Fecha Recepción", dataKey: "fecha"},
             {title: "Cantidad (g)", dataKey: "cantidad"}
         ];
     };
@@ -413,7 +413,6 @@ var pageContent = function (data) {
             id: recepciones[i].RecepcionId,
             fecha: moment(recepciones[i].fecha_entrega).format('DD-MM-YYYY'),
             cantidad: recepciones[i].cantidad,
-
         });
    }
 
@@ -430,9 +429,18 @@ var pageContent = function (data) {
           halign: 'center'
         }
     });
-    doc.setFontSize(12);
-    doc.text('Total Recepción= '+ recibido + ' (g)', 14, doc.autoTable.previous.finalY + 10);
-   // doc.text('Pendiente= ' + pendiente + ' (g)', 130, doc.autoTable.previous.finalY + 10);
+
+    if(route == "http://localhost:3001/recepciones/proveedor/"+$scope.proveedor._id){
+      doc.setFontSize(12);
+      doc.text('Total Cerrado= '+ parseFloat(recepciones[0].proveedor.cerrado).toFixed(2) + ' (g)', 14, doc.autoTable.previous.finalY + 10);
+      doc.text('Total Recibido= '+ parseFloat(recepciones[0].proveedor.entregado).toFixed(2) + ' (g)', 80, doc.autoTable.previous.finalY + 10);
+      doc.text('Pendiente= ' + parseFloat(recepciones[0].proveedor.entregado - recepciones[0].proveedor.cerrado).toFixed(2) + ' (g)', 150, doc.autoTable.previous.finalY + 10);
+    }
+    else{
+      // doc.text('Total Recibido Parcial= ', doc.autoTable.previous.finalY + 10);
+      doc.setFontSize(12);
+      doc.text('Total Recibido Parcial= '+ recibido+ ' (g)', 14, doc.autoTable.previous.finalY + 10);
+    }
 
 /***********************************Seccion de Recepciones****************************************************************/
 
@@ -527,18 +535,25 @@ $scope.generarpqtPorRecibir= function() {
 /***********************************Seccion de Recepciones Pendientes****************************************************************/      
     var data = [];
     var pendiente=0; 
+    var ultima_entrega;
       for (var i = 0; i < proveedores.length; i++) {
         if ((proveedores[i].cerrado != 0)&&(proveedores[i].cerrado != null)&&(((proveedores[i].cerrado) - (proveedores[i].entregado))>0)){
 
           pendiente-= parseFloat(proveedores[i].entregado - proveedores[i].cerrado).toFixed(2);
 
+          if(!proveedores[i].ultima_entrega){
+           ultima_entrega='' ;
+        }
+        else{
+          ultima_entrega= moment(proveedores[i].ultima_entrega).format('DD-MM-YYYY');
+        }
           data.push({
               
               proveedor: proveedores[i].nombres +' '+ proveedores[i].apellidos,
               cerrado: proveedores[i].cerrado,
               entregado: proveedores[i].entregado,
               pendiente: proveedores[i].entregado - proveedores[i].cerrado,
-              fecha_ultima_entrega: moment(proveedores[i].ultima_entrega).format('DD-MM-YYYY')
+              fecha_ultima_entrega: ultima_entrega
           });
     }}
   
