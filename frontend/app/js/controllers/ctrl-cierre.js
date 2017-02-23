@@ -717,7 +717,7 @@ $scope.generarpqtGanancia= function() {
     // Returns a new array each time to avoid pointer issues
     var getColumns = function () {
         return [
-            {title: "Id", dataKey: "id"},
+            {title: "Cod. Cierre", dataKey: "id"},
             {title: "Fecha Cierre", dataKey: "fecha_cierre"},
             {title: "Cliente", dataKey: "cliente"},
             {title: "Cantidad (g)", dataKey: "cantidad"},
@@ -820,10 +820,10 @@ $scope.generarpqtGanancia= function() {
                   halign: 'center',
                    // columnWidth: [100,80,30,45,45,45,30],
                   overflow: 'linebreak',
-                  id:{columnWidth: 10},
+                  id:{columnWidth: 20},
                   fecha_cierre:{columnWidth: 25},
                   cliente:{columnWidth: 40},
-                  cantidad:{columnWidth: 35},
+                  cantidad:{columnWidth: 25},
                   ganancia:{columnWidth: 35},
                   observacion:{columnWidth: 40}
                 }

@@ -386,7 +386,7 @@ $scope.generarpqtC= function() {
                   doc.addImage(base64Img, 'JPEG', data.settings.margin.left,5, 30, 30);
               }
               //doc.text("Cliente", data.settings.margin.left + 35, 22);
-              doc.text("REPORTE DETALLE DE ENTREGA", 55, 18);
+              doc.text("REPORTE DE ENTREGA", 55, 18);
               doc.setFontSize(15);
               doc.text("Cliente: "+entregas[0].cliente.nombres+' '+entregas[0].cliente.apellidos, data.settings.margin.left + 45, 30);
               doc.text("___________________________________________________________________________________________________", 0, 35);
@@ -432,7 +432,9 @@ $scope.generarpqtC= function() {
         }
     });
     doc.setFontSize(12);
-    doc.text('Total Entregado '+ entregado + ' (g)', 14, doc.autoTable.previous.finalY + 10);
+    doc.text('Total Cerrado= '+ parseFloat(entregas[0].cliente.cerrado).toFixed(2) + ' (g)', 14, doc.autoTable.previous.finalY + 10);
+    doc.text('Total Entregado= '+ entregado + ' (g)', 80, doc.autoTable.previous.finalY + 10);
+    doc.text('Pendiente= ' + parseFloat(entregado - entregas[0].cliente.cerrado ).toFixed(2) + ' (g)', 150, doc.autoTable.previous.finalY + 10);
 /***********************************Seccion de Entregas****************************************************************/
     // Total page number plugin only available in jspdf v1.0+
     if (typeof doc.putTotalPages === 'function') {

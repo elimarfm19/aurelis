@@ -4,7 +4,7 @@ app.controller('ctrl-pieza', function($scope,$rootScope,$http,Pieza,Recepcion,Cl
 
 $scope.pieza = new Pieza();
 $scope.cliente = new Cliente();
-//$scope.recepcion = new Recepcion();
+$scope.recepcion = new Recepcion();
 var refresh = function() {
   $scope.piezas = Pieza.query();
   $scope.recepciones = Recepcion.query();
@@ -42,9 +42,16 @@ $scope.update = function(pieza) {
 
 $scope.verificar = function(pieza) {
   pieza.status = 'Verificado'
-  $scope.pieza.$update(function(){
-    $window.location.reload();
+  $http.put("http://localhost:3001/piezas/"+pieza._id,pieza)
+              .success(function(piezaActualizada){ 
+                // console.log('Actualizando Pieza');
+                // console.log(piezaActualizada);
+                $window.location.reload();
   });
+  // console.log(pieza)
+  // $scope.pieza.$update(function(){
+    // $window.location.reload();
+  // });
 };
 
 $scope.ajuste = function(piezaNueva) {
@@ -116,14 +123,60 @@ $scope.ajuste = function(piezaNueva) {
 
           });
         }
+        $http.get("http://localhost:3001/recepciones/"+piezaVieja[0].recepcion._id)
+              .success(function(RecepcionVieja){ 
+               // console.log('Actualizando Pieza');
+               // console.log(piezaActualizada);
+               // $window.location.reload();
+               //$scope.recepcion = new Recepcion();
+               //RecepcionVieja.cantidad =  RecepcionVieja[0].cantidad;
+               // console.log( $scope.recepcion.cantidad );
+
+               RecepcionVieja.cantidad -= parseFloat(piezaVieja[0].puro_p).toFixed(2);
+               RecepcionVieja.cantidad += Number(piezaNueva.puro_p);
+
+          $http.put("http://localhost:3001/recepciones/"+RecepcionVieja._id,RecepcionVieja)
+              .success(function(RecepcionActualizada){ 
+                //console.log('Actualizando Pieza');
+               // console.log(piezaActualizada);
+                //$window.location.reload();
+          
+          });
+
+
+        });
+        $http.get("http://localhost:3001/entregas/"+piezaVieja[0].entrega._id)
+              .success(function(EntregaVieja){ 
+               // console.log('Actualizando Pieza');
+               // console.log(piezaActualizada);
+               // $window.location.reload();
+               //$scope.entrega = new Entrega();
+
+                //$scope.entrega.cantidad =  EntregaVieja[0].cantidad;
+
+                //console.log( $scope.entrega.cantidad );
+
+               EntregaVieja.cantidad -= parseFloat(piezaVieja[0].puro_c).toFixed(2);
+               EntregaVieja.cantidad += Number(piezaNueva.puro_c);
+
+          $http.put("http://localhost:3001/entregas/"+EntregaVieja._id,EntregaVieja)
+              .success(function(EntregaActualizada){ 
+                //console.log('Actualizando Pieza');
+               // console.log(piezaActualizada);
+                //$window.location.reload();
+          
+          });
+
+
+        });
 
 
    });
 
   $http.put("http://localhost:3001/piezas/"+piezaNueva._id,piezaNueva)
               .success(function(piezaActualizada){ 
-                console.log('Actualizando Pieza');
-                console.log(piezaActualizada);
+                // console.log('Actualizando Pieza');
+                // console.log(piezaActualizada);
                 $window.location.reload();
   });
 

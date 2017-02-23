@@ -258,9 +258,9 @@ $scope.generarpqt= function(recepcion) {
                       rows.push({
                           id: piezas[i].piezaId,
                          // proveedor: piezas[i].recepcion.proveedor.nombres+' '+piezas[i].recepcion.proveedor.apellidos,
-                          peso_bruto: piezas[i].peso_entrega,
+                          peso_bruto: piezas[i].peso_bruto,
                           ley: piezas[i].ley,
-                          puro: piezas[i].puro_c,
+                          puro: piezas[i].puro_p,
                           status: piezas[i].status,
                           observacion: piezas[i].observacion
                       });
@@ -405,15 +405,16 @@ var pageContent = function (data) {
     var recibido=0;
     //var pendiente=0;
     for (var i = 0; i < recepciones.length; i++) {
-
+      if(recepciones[i].cantidad>0){
         recibido+= parseFloat(recepciones[i].cantidad).toFixed(2);
         //pendiente = parseFloat(recepciones[0].proveedor.entregado - recepciones[0].proveedor.cerrado).toFixed(2);
-
         data.push({
             id: recepciones[i].RecepcionId,
             fecha: moment(recepciones[i].fecha_entrega).format('DD-MM-YYYY'),
             cantidad: recepciones[i].cantidad,
-        });
+        });        
+      }
+        
    }
 
  doc.autoTable(getColumns(), data, {

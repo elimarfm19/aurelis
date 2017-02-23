@@ -31,7 +31,7 @@
             </tr>
           </tfoot>
           <tbody>
-            <tr ng-repeat="recepcion in recepciones" >
+            <tr ng-repeat="recepcion in recepciones" ng-if="(recepcion.cantidad >0)">
               <td class="center-align" >
                 {{recepcion.RecepcionId}}
               </td>
