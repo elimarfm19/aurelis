@@ -40,12 +40,12 @@
                 <div class="row ">
                   <div class="input-field col s6">
                     <input ng-model="cierre.total" id="total_c" type="text" format="number" g="false" class="validate" style="text-align: right;" ng-keyup="calcularCantidad()" ng-init="cierre.total = 0">
-                    <label for="total_c">Total Cierre</label>
+                    <label for="total_c">Total Cerrado</label>
                   </div>
                   <div class="input-field col s6">
-                     <input disabled value="{{ cierre.ganancia | currency:'Bs '
+                     <input disabled value="{{ cierre.ganancia | currency:' '
                      }}" type="text" class="validate" style="text-align: right;" id="ganancia" ng-if="(gramosp>= cierre.cantidad)">
-                     <label for="total_p">Ganancia</label>
+                     <label for="total_p">Ganancia (g)</label>
                   </div>                               
                 </div>
                 <div class="row">
@@ -142,14 +142,14 @@
                     </table>
                     <div class="row">
                       <div class="col-md-6 text-right">
-                        <span class="label label-info" style="font-size: 12px;">Por cerrar: {{ cierre.cantidad - gramosp | currency: ' '}} (g) </span>
+                        <span class="label label-info" style="font-size: 12px;">Cerrado: {{  gramosp | currency: ' '}} (g) </span>
                       </div>
                       <div class="col-md-5 text-right">
-                        <span class="label label-primary" style="font-size: 12px;">Total de Pagos: {{ scopeRaiz | currency: 'Bs '}} </span>
-                        <br> <br>
-                        <span class="label label-primary" style="font-size: 12px;">Total de Cierre: {{ cierre.total | currency: 'Bs '}} </span>
+                        <span class="label label-primary" style="font-size: 12px;">Total Pagado: {{ scopeRaiz | currency: 'Bs '}} </span>
+                        <!--<br> <br>
+                        <span class="label label-primary" style="font-size: 12px;">Total de Cierre: {{ cierre.total | currency: 'Bs '}} </span>-->
                         <br><br>
-                        <span class="label label-success" style="font-size: 12px;">Ganancia: {{ cierre.total - scopeRaiz | currency: 'Bs '}} </span>
+                        <span class="label label-success" style="font-size: 12px;">Saldo: {{ (cierre.total - scopeRaiz) | number}} </span>
                       </div>
                     </div>
                 </div>
