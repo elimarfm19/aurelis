@@ -108,7 +108,7 @@ $scope.add = function(cierre) {
       .success(function(cliente){
        
        var historialCliente = {
-          fecha : moment(cierre.fecha_cierre+'T06:22:15.506Z').format('YYYY-MM-DD')+' / '+moment(cierre.fecha_entrega+'T06:22:15.506Z').format('YYYY-MM-DD'),
+          fecha : moment(cierre.fecha_cierre+'T06:22:15.506Z').format('DD-MM-YYYY')+' / '+moment(cierre.fecha_entrega+'T06:22:15.506Z').format('DD-MM-YYYY'),
           cierre : cierre._id,
           entrega : null,
           cliente : cierre.cliente,
@@ -194,7 +194,7 @@ $scope.addCierreProveedor = function(Cierre) {
                 .success(function(proveedor){
                  
                  var historialProveedor = {
-                    fecha : moment(cierreProveedor.fecha_cierre).format('YYYY-MM-DD')+' / '+moment(cierreProveedor.fecha_entrega).format('YYYY-MM-DD'),
+                    fecha : moment(cierreProveedor.fecha_cierre).format('DD-MM-YYYY')+' / '+moment(cierreProveedor.fecha_entrega).format('DD-MM-YYYY'),
                     cierre : cierreProveedor._id,
                     recepcion : null,
                     proveedor : cierreProveedor.proveedor,

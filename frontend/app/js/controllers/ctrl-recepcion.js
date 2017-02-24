@@ -35,7 +35,7 @@ $scope.update = function(recepcion) {
       .success(function(proveedor){
        
        var historialProveedor = {
-          fecha : moment(recepcionUpdated.fecha_entrega).format('YYYY-MM-DD'),
+          fecha : moment(recepcionUpdated.fecha_entrega).format('DD-MM-YYYY'),
           cierre : null,
           recepcion : recepcionUpdated._id,
           proveedor : recepcionUpdated.proveedor,

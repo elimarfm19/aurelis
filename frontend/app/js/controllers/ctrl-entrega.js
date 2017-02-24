@@ -50,7 +50,7 @@ $scope.update = function(entrega) {
       .success(function(cliente){
        
        var historialCliente = {
-          fecha : moment(entregaUpdated.fecha_entrega).format('YYYY-MM-DD'),
+          fecha : moment(entregaUpdated.fecha_entrega).format('DD-MM-YYYY'),
           cierre : null,
           entrega : entregaUpdated._id,
           cliente : entregaUpdated.cliente,

@@ -601,13 +601,13 @@ $scope.historialProveedor= function() {
         return [
             {title: "Fecha", dataKey: "fecha"},
             {title: "Cod. Cierre", dataKey: "id_cierre"},
-            {title: "Cantidad", dataKey: "cantidad_c"},
+            {title: "Cantidad (g)", dataKey: "cantidad_c"},
             {title: "Precio * (g)", dataKey: "precio"},
             {title: "Total Cerrado (Bs)", dataKey: "cerrado_bs"},
             {title: "Cod. Recepcion", dataKey: "id_recepcion"},
-            {title: "Recibido", dataKey: "recibido"},
-            {title: "Cerrado", dataKey: "cerrado"},
-            {title: "Pendiente", dataKey: "pendiente"}
+            {title: "Recibido (g)", dataKey: "recibido"},
+            {title: "Cerrado (g)", dataKey: "cerrado"},
+            {title: "Pendiente (g)", dataKey: "pendiente"}
         ];
     };
 
@@ -662,7 +662,7 @@ $scope.historialProveedor= function() {
                   doc.addImage(base64Img, 'JPEG', data.settings.margin.left,5, 30, 30);
               }
               //doc.text("Cliente", data.settings.margin.left + 35, 22);
-              doc.text("Historial de Proveedor", 55, 18);
+              doc.text("HISTORIAL DE PROVEEDOR", 55, 18);
               doc.setFontSize(15);
               doc.text("Proveedor: "+historiales[0].proveedor.nombres+' '+historiales[0].proveedor.apellidos, data.settings.margin.left + 45, 30);
               doc.text("___________________________________________________________________________________________________", 0, 35);
@@ -713,8 +713,7 @@ $scope.historialProveedor= function() {
         }
          
          
-          data.push({
-              
+          data.push({              
               fecha: historiales[i].fecha,
               id_cierre:cierreId,
               cantidad_c: cierreCantidad,
