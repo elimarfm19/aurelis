@@ -42,7 +42,23 @@ function getCierresCliente(req,res){
 
  	})
 }
+function getCierresFechas(req,res){
 
+	//let ClienteId = req.params.id
+	let FechaInicio = req.params.fechai
+	let FechaFin = req.params.fechaf
+
+
+	Cierre.find({"fecha_cierre" : {"$gte" : FechaInicio, "$lte" : FechaFin}},(err,cierres)=>{
+ 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
+ 	if(cierres== "") return res.status(404).send({message:'No hay registros de cierres para este cliente'})
+ 	
+ 	Cliente.populate(cierres, {path: "cliente"},function(err, cierres){
+            res.status(200).send(cierres);
+        }); 
+
+ 	})
+}
 function getCierresClienteFechas(req,res){
 
 	let ClienteId = req.params.id
@@ -74,6 +90,7 @@ function storeCierre(req,res){
     cierre.total = req.body.cantidad * req.body.precio
     cierre.observacion = req.body.observacion
     cierre.ganancia = 0
+    cierre.saldo = 0
     cierre.status = 'Abierto'
 
     Cliente.findById(req.body.cliente,function(err,cliente){
@@ -103,6 +120,7 @@ function updateCierre(req,res){
 	  	update.fecha_entrega = req.body.fecha_entrega
 	  	update.fecha_cierre = req.body.fecha_cierre
 	  	update.ganancia = req.body.ganancia
+	  	update.saldo = req.body.saldo
 	  	update.observacion = req.body.observacion
 
 
@@ -155,6 +173,7 @@ module.exports = {
 	getCierre,
 	getCierres,
 	getCierresCliente,
+	getCierresFechas,
 	getCierresClienteFechas,
 	storeCierre,
 	updateCierre,

@@ -178,7 +178,7 @@ api.get('/cierres',cors(),cierreController.getCierres)
 
 api.get('/cierres/cliente/:id',cors(),cierreController.getCierresCliente)
 api.get('/cierres/cliente/:id/:fechai/:fechaf',cors(),cierreController.getCierresClienteFechas)
-
+api.get('/cierres/:fechai/:fechaf',cors(),cierreController.getCierresFechas)
 api.get('/cierres/:id',cors(),cierreController.getCierre)
 
 api.post('/cierres',cors(),cierreController.storeCierre)

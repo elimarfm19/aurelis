@@ -1,0 +1,65 @@
+
+<div class="container" >
+ </br>
+ <br>
+  <ul class="nav nav-tabs col-md-12" style="margin-left:0.2cm; " >
+    <li class="active"><a class="a" style="color:black; font-weight:600; font-family: 'Tahoma';" data-toggle="tab">Cierres</a></li>
+  </ul>
+
+  <div class="tab-content col-md-9" style="margin-left: 1.3cm;">
+    <div class="tab-pane fade in active" >
+      <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Cierres </h3>
+      <button class="btn btn-primary zmdi zmdi-collection-pdf zmdi-hc-2x waves-effect waves-light col-md-offset-11" ng-click="generarpqtGanancia()"> GENERAR</button>
+<!--       <br>
+      <br> -->
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table datatable="ng" dt-options="dtOptions" id="tabla_cierres" class="table table-hover" data-page-length='5'>
+              <thead>
+               <tr class="active">                          
+                <th class="center-align" style="border-radius: 400px 4px 0 0;">Cod. Cierre</th>
+                <th class="center-align">Fecha Cierre</th>
+                <th class="center-align">Cliente</th> 
+                <th class="center-align">Cantidad (g)</th>
+                <th class="center-align">Ganancia (Bs)</th>                   
+                <th class="center-align" style="border-radius: 0 400px 4px 0;">Observación</th>
+              </tr>
+              </thead>
+              <tfoot>
+               <tr class="active">
+                    <th class="center-align" style="border-radius: 0 0 4px 400px;"></th>
+                    <th class="center-align"></th>
+                    <th class="center-align"></th>
+                    <th class="center-align"></th>
+                    <th class="center-align"></th>
+                    <th class="center-align" style="border-radius: 0 4px 400px 0; width: 25%"></th>
+                </tr>
+              </tfoot>
+              <tbody>
+                <tr ng-repeat="cierre in cierres">
+                  <td class="center-align" >
+                    {{cierre.CierreId}}
+                  </td>
+                  <td class="center-align" >                            
+                    {{cierre.fecha_cierre | date:'dd/MM/yyyy' : shortDate}}
+                  </td>
+                  <td class="center-align" >
+                    {{cierre.cliente.nombres}} {{cierre.cliente.apellidos}}
+                  </td>
+                  <td class="center-align" >
+                    {{cierre.cantidad | currency: '' }} (g)
+                  </td>
+                  <td class="center-align" >
+                    {{cierre.ganancia | currency: 'Bs ' }}
+                  </td>
+                  <td class="center-align" >
+                    {{cierre.observacion}}
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+      </div>                
+    </div>
+  </div>
+</div>

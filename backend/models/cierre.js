@@ -16,6 +16,7 @@ var Cierre = new Schema({
     precio: Number,
     total: Number,
     ganancia: Number,
+    saldo: Number,
     observacion: String,
     status: {
         type: String,

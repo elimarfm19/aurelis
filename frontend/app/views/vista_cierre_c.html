@@ -42,10 +42,11 @@
                     <input ng-model="cierre.total" id="total_c" type="text" format="number" g="false" class="validate" style="text-align: right;" ng-keyup="calcularCantidad()" ng-init="cierre.total = 0">
                     <label for="total_c">Total Cerrado</label>
                   </div>
-                  <div class="input-field col s6">
-                     <input disabled value="{{ cierre.ganancia | currency:' '
-                     }}" type="text" class="validate" style="text-align: right;" id="ganancia" ng-if="(gramosp>= cierre.cantidad)">
-                     <label for="total_p">Ganancia (g)</label>
+                  <div  class="input-field col s6">
+                  <input  disabled ng-model="cierre.ganancia" type="text" class="validate" style="text-align: right;" id="ganancia">
+                     <label  for="total_p">Ganancia (g)</label>
+                     <input hidden disabled ng-model="cierre.saldo" type="text" class="validate" style="text-align: right;" id="saldo">
+                     <!-- <label  for="saldo">Saldo Bs</label> -->
                   </div>                               
                 </div>
                 <div class="row">
