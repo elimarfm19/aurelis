@@ -4,7 +4,7 @@ app.controller('ctrl-pieza', function($scope,$rootScope,$http,Pieza,Recepcion,Cl
 
 $scope.pieza = new Pieza();
 $scope.cliente = new Cliente();
-$scope.recepcion = new Recepcion();
+//$scope.recepcion = new Recepcion();
 var refresh = function() {
   $scope.piezas = Pieza.query();
   $scope.recepciones = Recepcion.query();
