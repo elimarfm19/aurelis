@@ -107,7 +107,7 @@ function storeCierreP(req,res){
 	let cierre = new Cierre_p()
 	let proveedor = new Proveedor()
     cierre.proveedor = req.body.proveedor
-    cierre.fecha_cierre = new Date, 'dd/MM/yyyy'
+    cierre.fecha_cierre = req.body.fecha_cierre
     cierre.fecha_entrega = req.body.fecha_entrega
     cierre.cantidad = req.body.cantidad
     cierre.precio = req.body.precio

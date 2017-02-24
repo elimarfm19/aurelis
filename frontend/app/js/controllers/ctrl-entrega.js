@@ -30,7 +30,9 @@ $scope.add = function(entrega) {
   Entrega.save(entrega,function(entrega){
 
 
-       $scope.entrega = Entrega.get({ id: entrega._id });
+      
+
+        $scope.entrega = Entrega.get({ id: entrega._id });
      
        
        //$scope.cliente = Cliente.get({ id: entrega.cliente._id });
@@ -43,7 +45,25 @@ $scope.update = function(entrega) {
   entrega.cantidad = document.getElementById('cantidade').value;
   // console.log(entrega.cantidad);
   $scope.entrega.$update(function(entregaUpdated){
-    $window.location.reload();
+
+    $http.get("http://localhost:3001/clientes/"+entregaUpdated.cliente)
+      .success(function(cliente){
+       
+       var historialCliente = {
+          fecha : moment(entregaUpdated.fecha_entrega).format('YYYY-MM-DD'),
+          cierre : null,
+          entrega : entregaUpdated._id,
+          cliente : entregaUpdated.cliente,
+          pendiente : (- Number(cliente.cerrado) + Number(cliente.entregado) )
+       }
+        $http.post("http://localhost:3001/historial/cliente",historialCliente)
+            .success(function(historial){
+             console.log(historial); 
+            $window.location.reload();
+           
+        }); 
+    });
+    
   });
 };
 

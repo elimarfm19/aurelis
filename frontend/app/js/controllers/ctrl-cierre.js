@@ -102,11 +102,25 @@ $scope.add = function(cierre) {
     cierre.fecha_entrega = fecha_entrega;
   }
 
- // console.log(cierre.precio);
- //// console.log(cierre.total);
-  //console.log(cierre.cantidad);
   Cierre.save(cierre,function(cierre){
-    $scope.cierre = Cierre.get({ id: cierre._id });
+
+    $http.get("http://localhost:3001/clientes/"+cierre.cliente)
+      .success(function(cliente){
+       
+       var historialCliente = {
+          fecha : moment(cierre.fecha_cierre+'T06:22:15.506Z').format('YYYY-MM-DD')+' / '+moment(cierre.fecha_entrega+'T06:22:15.506Z').format('YYYY-MM-DD'),
+          cierre : cierre._id,
+          entrega : null,
+          cliente : cierre.cliente,
+          pendiente : (- Number(cliente.cerrado) + Number(cliente.entregado) )
+       }
+        $http.post("http://localhost:3001/historial/cliente",historialCliente)
+            .success(function(historial){
+             console.log(historial); 
+       
+             $scope.cierre = Cierre.get({ id: cierre._id });
+        }); 
+    });
   });
 };
 
@@ -166,28 +180,45 @@ $scope.addCierreProveedor = function(Cierre) {
 
 
   $scope.cierre_p.cierre = Cierre;
-  console.log(Cierre._id);
-
-  $scope.cierre_p.fecha_entrega = $scope.cierre.fecha_entrega;
+  //console.log(Cierre._id);
+  var fecha2 = moment();
+  $scope.cierre_p.fecha_cierre = moment(fecha2);
+  $scope.cierre_p.fecha_entrega = moment(fecha2.add(7,'days'));
 
   $http.post("http://localhost:3001/cierresProveedor/",$scope.cierre_p)
-            .success(function(respuesta){   
-            console.log(respuesta);            
-                $scope.proveedores = Proveedor.query(); 
-                $scope.cierreproveedores = CierreProveedor.query();
-                //$scope.cierre_p ="";
-                $scope.monto_pagado();
-                $scope.gramos();
-                  $scope.cierre_p.cantidad = 0;
-                  $scope.cierre_p.precio = 0;
-                  $scope.cierre_p.total = 0;
-              // $window.location.reload();
-                //refresh();
+            .success(function(cierreProveedor){   
+                 
+                
+
+            $http.get("http://localhost:3001/proveedores/"+cierreProveedor.proveedor)
+                .success(function(proveedor){
+                 
+                 var historialProveedor = {
+                    fecha : moment(cierreProveedor.fecha_cierre).format('YYYY-MM-DD')+' / '+moment(cierreProveedor.fecha_entrega).format('YYYY-MM-DD'),
+                    cierre : cierreProveedor._id,
+                    recepcion : null,
+                    proveedor : cierreProveedor.proveedor,
+                    pendiente : (- Number(proveedor.cerrado) + Number(proveedor.entregado) )
+                 }
+                  $http.post("http://localhost:3001/historial/proveedor",historialProveedor)
+                      .success(function(historial){
+                       console.log(historial); 
+                 
+                      $scope.proveedores = Proveedor.query(); 
+                      $scope.cierreproveedores = CierreProveedor.query();
+                      
+                      $scope.monto_pagado();
+                      $scope.gramos();
+                      $scope.cierre_p.cantidad = 0;
+                      $scope.cierre_p.precio = 0;
+                      $scope.cierre_p.total = 0;
+                  }); 
+              });
    });        
 
-  console.log($scope.cierre_p.cantidad );
-  console.log($scope.cierre_p.precio );
-  console.log($scope.cierre_p.total );
+ // console.log($scope.cierre_p.cantidad );
+ // console.log($scope.cierre_p.precio );
+ // console.log($scope.cierre_p.total );
 }; 
 
 $scope.deleteCierreProveedor = function(cierreProveedorId) {

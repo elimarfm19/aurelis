@@ -17,7 +17,7 @@ var refresh = function() {
 refresh();
 
 $scope.add = function(recepcion) {
-  console.log(recepcion);
+  //console.log(recepcion);
   Recepcion.save(recepcion,function(recepcion){
 
      $scope.recepcion = Recepcion.get({ id: recepcion._id });
@@ -28,9 +28,26 @@ $scope.add = function(recepcion) {
 $scope.update = function(recepcion) {
 
   recepcion.cantidad = document.getElementById('cantidad').value;
-  console.log(recepcion.cantidad);
+  //console.log(recepcion.cantidad);
   $scope.recepcion.$update(function(recepcionUpdated){
-    $window.location.reload();
+
+    $http.get("http://localhost:3001/proveedores/"+recepcionUpdated.proveedor)
+      .success(function(proveedor){
+       
+       var historialProveedor = {
+          fecha : moment(recepcionUpdated.fecha_entrega).format('YYYY-MM-DD'),
+          cierre : null,
+          recepcion : recepcionUpdated._id,
+          proveedor : recepcionUpdated.proveedor,
+          pendiente : (- Number(proveedor.cerrado) + Number(proveedor.entregado) )
+       }
+        $http.post("http://localhost:3001/historial/proveedor",historialProveedor)
+            .success(function(historial){
+             console.log(historial); 
+            $window.location.reload();
+           
+        }); 
+    });
   });
 };
 
@@ -50,8 +67,8 @@ $scope.deselect = function() {
   // $scope que acciona el ng-change
   $scope.mostrarCierres = function() { 
           // $scope.selCategorias NOS TRAE EL VALOR DEL SELECT DE CATEGORIAS
-        console.log( $scope.cierres);
-        console.log( $scope.recepcion.proveedor);
+      //  console.log( $scope.cierres);
+       // console.log( $scope.recepcion.proveedor);
     //$scope.isvalid = false;
         //console.log( $scope.cierres[0].cliente._id);
         $scope.cierresproveedor = [];

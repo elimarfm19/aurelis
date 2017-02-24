@@ -16,6 +16,8 @@ const cierreController = require('../controllers/cierre')
 const cierreControllerProveedor = require('../controllers/cierre_p')
 const ajusteController = require('../controllers/ajusteCierre')
 const detRecepcionController = require('../controllers/detRecepcion')
+const historialClienteController = require('../controllers/historial_cliente')
+const historialProveedorController = require('../controllers/historial_proveedor')
 
 var cors = require('cors')
 const api = express.Router()
@@ -214,4 +216,21 @@ api.post('/ajustes',cors(),ajusteController.storeAjuste)
 api.put('/ajustes/:id',cors(),ajusteController.updateAjuste)
 
 api.delete('/ajustes/:id',cors(),ajusteController.deleteAjuste)
+
+//Historial de Cliente
+api.options('/historial/cliente/:id', cors())
+api.options('/historial/cliente', cors())
+
+api.get('/historial/cliente/:id',cors(),historialClienteController.getHistorialCliente)
+api.post('/historial/cliente',cors(),historialClienteController.storeHistorialCliente)
+api.get('/historial/cliente/:id/:fechai/:fechaf',cors(),historialClienteController.getHistorialClienteFechas)
+
+//Historial de Proveedor
+api.options('/historial/proveedor/:id', cors())
+api.options('/historial/proveedor', cors())
+
+api.get('/historial/proveedor/:id',cors(),historialProveedorController.getHistorialProveedor)
+api.post('/historial/proveedor',cors(),historialProveedorController.storeHistorialProveedor)
+api.get('/historial/proveedor/:id/:fechai/:fechaf',cors(),historialProveedorController.getHistorialProveedorFechas)
+
 module.exports = api
