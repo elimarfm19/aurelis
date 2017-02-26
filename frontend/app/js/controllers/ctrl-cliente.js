@@ -224,7 +224,7 @@ $scope.generarpqt= function(entrega) {
                       data.push({
                           id: entregas.EntregaId,
                           fecha: moment(entregas.fecha_entrega).format('DD-MM-YYYY'),
-                          cantidad: entregas.cantidad
+                          cantidad: numeral(entregas.cantidad).format('0,0.00')
                       });
 
                   doc.autoTable(getColumns(), data, {
@@ -262,9 +262,9 @@ $scope.generarpqt= function(entrega) {
                       rows.push({
                           id: piezas[i].piezaId,
                           proveedor: piezas[i].recepcion.proveedor.nombres+' '+piezas[i].recepcion.proveedor.apellidos,
-                          peso_bruto: piezas[i].peso_entrega,
+                          peso_bruto: numeral(piezas[i].peso_entrega).format('0,0.00'),
                           ley: piezas[i].ley,
-                          puro: piezas[i].puro_c,
+                          puro: numeral(piezas[i].puro_c).format('0,0.00'),
                           status: piezas[i].status,
                           observacion: piezas[i].observacion
                       });
@@ -415,7 +415,7 @@ $scope.generarpqtC= function() {
           data.push({
               id: entregas[i].EntregaId,
               fecha: moment(entregas[i].fecha_entrega).format('DD-MM-YYYY'),
-              cantidad: entregas[i].cantidad
+              cantidad: numeral(entregas[i].cantidad).format('0,0.00')
           });
     }
     doc.autoTable(getColumns(), data, {
@@ -432,9 +432,9 @@ $scope.generarpqtC= function() {
         }
     });
     doc.setFontSize(12);
-    doc.text('Total Cerrado= '+ parseFloat(entregas[0].cliente.cerrado).toFixed(2) + ' (g)', 14, doc.autoTable.previous.finalY + 10);
-    doc.text('Total Entregado= '+ entregado + ' (g)', 80, doc.autoTable.previous.finalY + 10);
-    doc.text('Pendiente= ' + parseFloat(entregado - entregas[0].cliente.cerrado ).toFixed(2) + ' (g)', 150, doc.autoTable.previous.finalY + 10);
+    doc.text('Total Cerrado= '+ numeral(entregas[0].cliente.cerrado).format('0,0.00') + ' (g)', 14, doc.autoTable.previous.finalY + 10);
+    doc.text('Total Entregado= '+ numeral(entregado).format('0,0.00') + ' (g)', 80, doc.autoTable.previous.finalY + 10);
+    doc.text('Pendiente= ' + numeral(entregado - entregas[0].cliente.cerrado ).format('0,0.00') + ' (g)', 150, doc.autoTable.previous.finalY + 10);
 /***********************************Seccion de Entregas****************************************************************/
     // Total page number plugin only available in jspdf v1.0+
     if (typeof doc.putTotalPages === 'function') {
@@ -534,7 +534,7 @@ $scope.generarpqtPorEntregar= function() {
     for (var i = 0; i < clientes.length; i++) {
       if ((clientes[i].cerrado != 0)&&(clientes[i].cerrado != null)&&(((clientes[i].cerrado) - (clientes[i].entregado))>0)){
 
-        pendiente-= parseFloat(clientes[i].entregado - clientes[i].cerrado).toFixed(2); 
+        pendiente-= (clientes[i].entregado - clientes[i].cerrado); 
 
         if(!clientes[i].ultima_entrega){
            ultima_entrega='' ;
@@ -544,9 +544,9 @@ $scope.generarpqtPorEntregar= function() {
         }
         data.push({
             cliente: clientes[i].nombres +' '+ clientes[i].apellidos,
-            cerrado: clientes[i].cerrado,
-            entregado: parseFloat(clientes[i].entregado).toFixed(2),
-            pendiente: parseFloat(clientes[i].entregado - clientes[i].cerrado).toFixed(2),
+            cerrado: numeral(clientes[i].cerrado).format('0,0.00'),
+            entregado: numeral(clientes[i].entregado).format('0,0.00'),
+            pendiente: numeral(clientes[i].entregado - clientes[i].cerrado).format('0,0.00'),
             fecha_ultima_entrega: ultima_entrega
         });
       }
@@ -565,7 +565,7 @@ $scope.generarpqtPorEntregar= function() {
         }
     });
     doc.setFontSize(12);
-    doc.text('Total Pendiente: - '+ parseFloat(pendiente).toFixed(2) + ' (g)', 14, doc.autoTable.previous.finalY + 10);
+    doc.text('Total Pendiente: - '+ numeral(pendiente).format('0,0.00') + ' (g)', 14, doc.autoTable.previous.finalY + 10);
 /***********************************Seccion de Entregas Pendientes****************************************************************/
 
     // Total page number plugin only available in jspdf v1.0+
@@ -710,13 +710,13 @@ $scope.historialCliente= function() {
               
               fecha: historiales[i].fecha,
               id_cierre:cierreId,
-              cantidad_c: cierreCantidad,
-              precio:precioCierre,
-              cerrado_bs: cerradoBs, 
+              cantidad_c: numeral(cierreCantidad).format('0,0.00'),
+              precio: numeral(precioCierre).format('0,0.00'),
+              cerrado_bs: numeral(cerradoBs).format('0,0.00'), 
               id_entrega: entregaId,
-              cerrado: cierreCantidad,
-              entregado: cantidadEntrega,
-              pendiente: parseFloat(historiales[i].pendiente).toFixed(2)
+              cerrado: numeral(cierreCantidad).format('0,0.00'),
+              entregado: numeral(cantidadEntrega).format('0,0.00'),
+              pendiente: numeral(historiales[i].pendiente).format('0,0.00')
           });
           pendiente = historiales[i].pendiente;
     }
@@ -735,13 +735,13 @@ $scope.historialCliente= function() {
     });
     doc.setFontSize(12);
     if ($scope.fecha_inicio && $scope.fecha_fin) {
-      doc.text('Total Cerrado Parcial= '+ parseFloat(total_cerrado).toFixed(2) + ' (g)', 14, doc.autoTable.previous.finalY + 10);
-      doc.text('Total Entregado Parcial= '+ parseFloat(total_entregado).toFixed(2) + ' (g)', 110, doc.autoTable.previous.finalY + 10);
-      doc.text('Pendiente Parcial= ' + parseFloat(pendiente).toFixed(2) + ' (g)', 210, doc.autoTable.previous.finalY + 10);
+      doc.text('Total Cerrado Parcial= '+ numeral(total_cerrado).format('0,0.00') + ' (g)', 14, doc.autoTable.previous.finalY + 10);
+      doc.text('Total Entregado Parcial= '+ numeral(total_entregado).format('0,0.00') + ' (g)', 110, doc.autoTable.previous.finalY + 10);
+      doc.text('Pendiente Parcial= ' + numeral(pendiente).format('0,0.00') + ' (g)', 210, doc.autoTable.previous.finalY + 10);
      }else{
-      doc.text('Total Cerrado= '+ parseFloat(total_cerrado).toFixed(2) + ' (g)', 14, doc.autoTable.previous.finalY + 10);
-      doc.text('Total Entregado= '+ parseFloat(total_entregado).toFixed(2) + ' (g)', 110, doc.autoTable.previous.finalY + 10);
-      doc.text('Pendiente= ' + parseFloat(pendiente).toFixed(2) + ' (g)', 210, doc.autoTable.previous.finalY + 10);
+      doc.text('Total Cerrado= '+ numeral(total_cerrado).format('0,0.00') + ' (g)', 14, doc.autoTable.previous.finalY + 10);
+      doc.text('Total Entregado= '+ numeral(total_entregado).format('0,0.00') + ' (g)', 110, doc.autoTable.previous.finalY + 10);
+      doc.text('Pendiente= ' + numeral(pendiente).format('0,0.00') + ' (g)', 210, doc.autoTable.previous.finalY + 10);
     }
     
     

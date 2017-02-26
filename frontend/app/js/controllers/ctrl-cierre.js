@@ -696,9 +696,9 @@ $scope.generarpqtC= function() {
           id: cierres[i].CierreId,
           fecha_cierre: moment(cierres[i].fecha_cierre).format('DD-MM-YYYY'),
           fecha_entrega: moment(cierres[i].fecha_entrega).format('DD-MM-YYYY'),
-          cantidad: cierres[i].cantidad,
-          precio: cierres[i].precio,
-          total: cierres[i].total
+          cantidad: numeral(cierres[i].cantidad).format('0,0.00'),
+          precio: numeral(cierres[i].precio).format('0,0.00'),
+          total: numeral(cierres[i].total).format('0,0.00')
         });
 
 
@@ -721,13 +721,13 @@ $scope.generarpqtC= function() {
 
       if (route ==  "http://localhost:3001/cierres/cliente/"+$scope.cliente._id) {
         doc.setFontSize(12);
-        doc.text('Total Cerrado: '+parseFloat(cierres[0].cliente.cerrado).toFixed(2) +' (g)', 14, doc.autoTable.previous.finalY + 10);
-        doc.text('Total Entregado: '+parseFloat(cierres[0].cliente.entregado).toFixed(2)+' (g)', 80, doc.autoTable.previous.finalY + 10);
-        doc.text('Pendiente: '+parseFloat((cierres[0].cliente.entregado) - (cierres[0].cliente.cerrado)).toFixed(2)+' (g)', 150, doc.autoTable.previous.finalY + 10);
+        doc.text('Total Cerrado: '+ numeral(cierres[0].cliente.cerrado).format('0,0.00') +' (g)', 14, doc.autoTable.previous.finalY + 10);
+        doc.text('Total Entregado: '+numeral(cierres[0].cliente.entregado).format('0,0.00')+' (g)', 80, doc.autoTable.previous.finalY + 10);
+        doc.text('Pendiente: '+numeral((cierres[0].cliente.entregado) - (cierres[0].cliente.cerrado)).format('0,0.00') +' (g)', 150, doc.autoTable.previous.finalY + 10);
       }
       else{
         doc.setFontSize(12);
-        doc.text('Total Cerrado Parcial: '+parseFloat(entregado).toFixed(2) +' (g)', 14, doc.autoTable.previous.finalY + 10);
+        doc.text('Total Cerrado Parcial: '+numeral(entregado).format('0,0.00') +' (g)', 14, doc.autoTable.previous.finalY + 10);
       }
 
 
@@ -838,8 +838,8 @@ $scope.generarpqtGanancia= function() {
                 //           precio: cierres[i].precio,
                 //           total: cierres[i].total,
                 //           saldo: cierres[i].saldo,                          
-                //           ganancia: parseFloat(cierres[i].ganancia).toFixed(2),
-                //           total_cerrado: parseFloat(cierres[i].cantidad + cierres[i].ganancia).toFixed(2),
+                //           ganancia: numeral(cierres[i].ganancia).toFixed(2),
+                //           total_cerrado: numeral(cierres[i].cantidad + cierres[i].ganancia).toFixed(2),
                 //           observacion: observacion
                 //       });
                 //       cerrado += cierres[i].cantidad;
@@ -854,9 +854,9 @@ var string =
                           id: cierres[i].CierreId,
                           fecha_cierre: moment(cierres[i].fecha_cierre).format('DD-MM-YYYY'),
                           cliente: cierres[i].cliente.nombres +' '+cierres[i].cliente.apellidos,
-                          cantidad: cierres[i].cantidad,
-                          total_cerrado: parseFloat(cierres[i].cantidad + cierres[i].ganancia).toFixed(2),
-                          ganancia: parseFloat(cierres[i].ganancia).toFixed(2),
+                          cantidad: numeral(cierres[i].cantidad).format('0,0.00'),
+                          total_cerrado: numeral(cierres[i].cantidad + cierres[i].ganancia).format('0,0.00'),
+                          ganancia: numeral(cierres[i].ganancia).format('0,0.00'),
                           saldo: numeral(cierres[i].saldo).format('0,0.00'), 
                           observacion: observacion
                       });
@@ -934,24 +934,19 @@ var string =
                 }
               });
       doc.setFontSize(10);      
-      // doc.text('Total Cerrado Cliente = '+ parseFloat(cerrado).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 10);
-      // doc.text('Total Cerrado Proveedor = '+ parseFloat(total).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 15);
-      // doc.text('Ganancia = ' + parseFloat(ganancia).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 20);
-      // doc.text('Saldo Acumulado Parcial = '+ parseFloat(saldo).toFixed(2) + ' Bs', 10, doc.autoTable.previous.finalY + 25); 
-      doc.text('Total Cerrado Cliente = '+ parseFloat(cerrado).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 10);
-      doc.text('Total Cerrado Proveedor = '+ parseFloat(total).toFixed(2) + ' (g)', 80, doc.autoTable.previous.finalY + 10);
-      doc.text('Ganancia = ' + parseFloat(ganancia).toFixed(2) + ' (g)', 155, doc.autoTable.previous.finalY + 10);
-      doc.text('Saldo Acumulado Parcial = '+ numeral(saldo).format('0,0.00') + ' Bs', 200, doc.autoTable.previous.finalY + 10); 
+      // doc.text('Total Cerrado Cliente = '+ numeral(cerrado).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 10);
+      // doc.text('Total Cerrado Proveedor = '+ numeral(total).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 15);
+      // doc.text('Ganancia = ' + numeral(ganancia).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 20);
+      // doc.text('Saldo Acumulado Parcial = '+ numeral(saldo).toFixed(2) + ' Bs', 10, doc.autoTable.previous.finalY + 25); 
+      doc.text('Total Cerrado Cliente = '+ numeral(cerrado).format('0,0.00') + ' (g)', 10, doc.autoTable.previous.finalY + 10);
+      doc.text('Total Cerrado Proveedor = '+ numeral(total).format('0,0.00') + ' (g)', 85, doc.autoTable.previous.finalY + 10);
+      doc.text('Ganancia = ' + numeral(ganancia).format('0,0.00') + ' (g)', 162, doc.autoTable.previous.finalY + 10);
+      doc.text('Saldo Acumulado = '+ numeral(saldo).format('0,0.00') + ' Bs', 210, doc.autoTable.previous.finalY + 10); 
     if (typeof doc.putTotalPages === 'function') {
         doc.putTotalPages(totalPagesExp);
     } 
-
-
       doc.output('datauri'); 
        //doc.save('HistorialCierres.pdf');
-
-    
-
     });
              
 } 
