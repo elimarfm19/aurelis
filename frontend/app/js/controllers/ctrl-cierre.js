@@ -423,7 +423,7 @@ $scope.gramos=function(){
 $scope.ganancia=function(total_pago,cierre_id,ganancia){
 
 if (ganancia > $scope.cierre.cantidad) {
-  $scope.cierre.ganancia = ganancia - $scope.cierre.cantidad;
+  $scope.cierre.ganancia = parseFloat(ganancia - $scope.cierre.cantidad).toFixed(2);
 }else{
   $scope.cierre.ganancia = 0;
 }
