@@ -758,16 +758,30 @@ $scope.generarpqtGanancia= function() {
     // Returns a new array each time to avoid pointer issues
     var getColumns = function () {
         return [
+            // {title: "Cod. Cierre", dataKey: "id"},
+            // {title: "Fecha", dataKey: "fecha_cierre"},
+            // {title: "Cliente", dataKey: "cliente"},
+            // {title: "Cantidad (g)", dataKey: "cantidad"},
+            // {title: "Precio (Bs)", dataKey: "precio"},
+            // {title: "Total (Bs)", dataKey: "total"},
+            // {title: "Saldo (Bs)", dataKey: "saldo"},            
+            // {title: "Ganancia (g)", dataKey: "ganancia"},
+            // {title: "Total (g)", dataKey: "total_cerrado"},
+            // {title: "Observación", dataKey: "observacion"}
+
             {title: "Cod. Cierre", dataKey: "id"},
             {title: "Fecha", dataKey: "fecha_cierre"},
             {title: "Cliente", dataKey: "cliente"},
-            {title: "Precio (Bs)", dataKey: "precio"},
-            {title: "Total (Bs)", dataKey: "total"},
-            {title: "Saldo (Bs)", dataKey: "saldo"},
-            {title: "Cantidad (g)", dataKey: "cantidad"},
+            {title: "Cerrado Cliente (g)", dataKey: "cantidad"},
+            {title: "Cerrado Proveedores (g)", dataKey: "total_cerrado"},
             {title: "Ganancia (g)", dataKey: "ganancia"},
-            {title: "Total (g)", dataKey: "total_cerrado"},
+            {title: "Saldo (Bs)", dataKey: "saldo"},            
             {title: "Observación", dataKey: "observacion"}
+            
+            // {title: "Precio (Bs)", dataKey: "precio"},
+            // {title: "Total (Bs)", dataKey: "total"},            
+            // {title: "Observación", dataKey: "observacion"}
+
         ];
     };
 
@@ -816,16 +830,34 @@ $scope.generarpqtGanancia= function() {
                     if (cierres[i].observacion!= null) {
                         observacion = cierres[i].observacion;
                     }
-                      data.push({
+                //       data.push({
+                //           id: cierres[i].CierreId,
+                //           fecha_cierre: moment(cierres[i].fecha_cierre).format('DD-MM-YYYY'),
+                //           cliente: cierres[i].cliente.nombres +' '+cierres[i].cliente.apellidos,
+                //           cantidad: cierres[i].cantidad,
+                //           precio: cierres[i].precio,
+                //           total: cierres[i].total,
+                //           saldo: cierres[i].saldo,                          
+                //           ganancia: parseFloat(cierres[i].ganancia).toFixed(2),
+                //           total_cerrado: parseFloat(cierres[i].cantidad + cierres[i].ganancia).toFixed(2),
+                //           observacion: observacion
+                //       });
+                //       cerrado += cierres[i].cantidad;
+                //       cerrado_bs += cierres[i].total;
+                //       saldo += cierres[i].saldo;
+                //       total += (cierres[i].cantidad + cierres[i].ganancia);
+                //       ganancia += cierres[i].ganancia; 
+                //  }
+
+
+                data.push({
                           id: cierres[i].CierreId,
                           fecha_cierre: moment(cierres[i].fecha_cierre).format('DD-MM-YYYY'),
                           cliente: cierres[i].cliente.nombres +' '+cierres[i].cliente.apellidos,
-                          precio: cierres[i].precio,
-                          total: cierres[i].total,
-                          saldo: cierres[i].saldo,
                           cantidad: cierres[i].cantidad,
-                          ganancia: cierres[i].ganancia,
-                          total_cerrado: cierres[i].cantidad + cierres[i].ganancia,
+                          total_cerrado: parseFloat(cierres[i].cantidad + cierres[i].ganancia).toFixed(2),
+                          ganancia: parseFloat(cierres[i].ganancia).toFixed(2),
+                          saldo: cierres[i].saldo, 
                           observacion: observacion
                       });
                       cerrado += cierres[i].cantidad;
@@ -847,13 +879,13 @@ $scope.generarpqtGanancia= function() {
         if (base64Img) {
              doc.addImage(base64Img, 'JPEG', data.settings.margin.left,5, 30, 30);
         }
-        doc.text("REPORTE DE GANANCIAS", 70, 23);
+        doc.text("HISTORIAL DE CIERRES", 70, 23);
         //doc.setFontSize(15);
        // doc.text("Cliente: "+cierres[0].cliente.nombres+' '+cierres[0].cliente.apellidos, data.settings.margin.left + 45, 30);
         doc.text("___________________________________________________________________________________________________", 0, 35);
         doc.text("___________________________________________________________________________________________________", 0, 36);
-        doc.setFontSize(18);
-        doc.text("Cierres", 14,45);
+        // doc.setFontSize(18);
+        // doc.text("Cierres", 14,45);
         // FOOTER
         var str = "Página " + data.pageCount;
         // Total page number plugin only available in jspdf v1.0+
@@ -866,7 +898,7 @@ $scope.generarpqtGanancia= function() {
 
     doc.autoTable(getColumns(), data, {
                 addPageContent: pageContent,
-                margin: {top: 50},
+                margin: {top: 45},
                 styles: {
                   //overflow: 'linebreak',
                  //columnWidth: 'wrap'
@@ -898,21 +930,22 @@ $scope.generarpqtGanancia= function() {
                   // observacion:{columnWidth: 40}
                 }
               });
-      doc.setFontSize(12);
-      doc.text('Total Parcial = '+ parseFloat(cerrado_bs).toFixed(2) + ' Bs', 10, doc.autoTable.previous.finalY + 10);
-      doc.text('Saldo Acumulado Parcial = '+ parseFloat(saldo).toFixed(2) + ' Bs', 10, doc.autoTable.previous.finalY + 20);
-      doc.text('Cerrado Parcial = '+ parseFloat(cerrado).toFixed(2) + ' (g)', 82, doc.autoTable.previous.finalY + 10);
-      doc.text('Ganancia Parcial = ' + parseFloat(ganancia).toFixed(2) + ' (g)', 143, doc.autoTable.previous.finalY + 10);
-      doc.text('Total Parcial = '+ parseFloat(total).toFixed(2) + ' (g)', 220, doc.autoTable.previous.finalY + 10);
-
-    // Total page number plugin only available in jspdf v1.0+
+      doc.setFontSize(10);      
+      // doc.text('Total Cerrado Cliente = '+ parseFloat(cerrado).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 10);
+      // doc.text('Total Cerrado Proveedor = '+ parseFloat(total).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 15);
+      // doc.text('Ganancia = ' + parseFloat(ganancia).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 20);
+      // doc.text('Saldo Acumulado Parcial = '+ parseFloat(saldo).toFixed(2) + ' Bs', 10, doc.autoTable.previous.finalY + 25); 
+      doc.text('Total Cerrado Cliente = '+ parseFloat(cerrado).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 10);
+      doc.text('Total Cerrado Proveedor = '+ parseFloat(total).toFixed(2) + ' (g)', 80, doc.autoTable.previous.finalY + 10);
+      doc.text('Ganancia = ' + parseFloat(ganancia).toFixed(2) + ' (g)', 155, doc.autoTable.previous.finalY + 10);
+      doc.text('Saldo Acumulado Parcial = '+ parseFloat(saldo).toFixed(2) + ' Bs', 200, doc.autoTable.previous.finalY + 10); 
     if (typeof doc.putTotalPages === 'function') {
         doc.putTotalPages(totalPagesExp);
     } 
 
 
       doc.output('datauri'); 
-       //doc.save('table.pdf');
+       //doc.save('HistorialCierres.pdf');
 
     
 
