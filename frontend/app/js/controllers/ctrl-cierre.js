@@ -849,7 +849,7 @@ $scope.generarpqtGanancia= function() {
                 //       ganancia += cierres[i].ganancia; 
                 //  }
 
-
+var string = 
                 data.push({
                           id: cierres[i].CierreId,
                           fecha_cierre: moment(cierres[i].fecha_cierre).format('DD-MM-YYYY'),
@@ -857,7 +857,7 @@ $scope.generarpqtGanancia= function() {
                           cantidad: cierres[i].cantidad,
                           total_cerrado: parseFloat(cierres[i].cantidad + cierres[i].ganancia).toFixed(2),
                           ganancia: parseFloat(cierres[i].ganancia).toFixed(2),
-                          saldo: cierres[i].saldo, 
+                          saldo: numeral(cierres[i].saldo).format('0,0.00'), 
                           observacion: observacion
                       });
                       cerrado += cierres[i].cantidad;
@@ -880,6 +880,9 @@ $scope.generarpqtGanancia= function() {
              doc.addImage(base64Img, 'JPEG', data.settings.margin.left,5, 30, 30);
         }
         doc.text("HISTORIAL DE CIERRES", 70, 23);
+        doc.setFontSize(16);
+        doc.text(moment($scope.fecha_inicio).format("DD-MM-YYYY")+" / ", 70, 32);
+        doc.text(" "+moment($scope.fecha_fin).format("DD-MM-YYYY"), 103, 32);
         //doc.setFontSize(15);
        // doc.text("Cliente: "+cierres[0].cliente.nombres+' '+cierres[0].cliente.apellidos, data.settings.margin.left + 45, 30);
         doc.text("___________________________________________________________________________________________________", 0, 35);
@@ -938,7 +941,7 @@ $scope.generarpqtGanancia= function() {
       doc.text('Total Cerrado Cliente = '+ parseFloat(cerrado).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 10);
       doc.text('Total Cerrado Proveedor = '+ parseFloat(total).toFixed(2) + ' (g)', 80, doc.autoTable.previous.finalY + 10);
       doc.text('Ganancia = ' + parseFloat(ganancia).toFixed(2) + ' (g)', 155, doc.autoTable.previous.finalY + 10);
-      doc.text('Saldo Acumulado Parcial = '+ parseFloat(saldo).toFixed(2) + ' Bs', 200, doc.autoTable.previous.finalY + 10); 
+      doc.text('Saldo Acumulado Parcial = '+ numeral(saldo).format('0,0.00') + ' Bs', 200, doc.autoTable.previous.finalY + 10); 
     if (typeof doc.putTotalPages === 'function') {
         doc.putTotalPages(totalPagesExp);
     } 
