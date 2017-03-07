@@ -1,7 +1,18 @@
 'use strict';
 
-app.controller('ctrl-cierre', function($scope,$http,DTOptionsBuilder,$routeParams,$rootScope,$filter,Cierre,Cliente,Proveedor,CierreProveedor,Pago,ngProgress,$window) {
+app.controller('ctrl-cierre', function($scope,$http,DTOptionsBuilder,$routeParams,$rootScope,$filter,Cierre,Cliente,Proveedor,CierreProveedor,Pago,ngProgress,$window,$localStorage) {
 
+// var route_frontend = "http://localhost:9000/";
+var route_frontend = "https://aurelis-frontend.herokuapp.com/";
+// var route_backend = "http://localhost:3001/";
+var route_backend = "https://aurelis-backend.herokuapp.com/";
+if (typeof($localStorage.username) != 'undefined') {
+   // console.log($localStorage.username);
+    document.getElementById("cont").value = 600;
+  }
+  else{
+   window.location = route_frontend;
+  } 
 $scope.cierre = new Cierre();
 $scope.cliente = new Cliente();
 $scope.proveedor = new Proveedor();
@@ -45,7 +56,7 @@ function monto_pagado(){
 
   //var cierresProveedor;
   if ($routeParams.cierreId != ''){
-    $http.get("http://localhost:3001/cierresProveedor/")
+    $http.get(route_backend+"cierresProveedor/")
     .success(function(cierres){
       //console.log(cierres);
        for (var i=0; i < cierres.length; i++){
@@ -67,7 +78,7 @@ function gramos(){
   var total=0;
   //var cierresProveedor;
   if ($routeParams.cierreId != ''){
-    $http.get("http://localhost:3001/cierresProveedor/")
+    $http.get(route_backend+"cierresProveedor/")
     .success(function(cierres){
       //console.log(cierres);
        for (var i=0; i < cierres.length; i++){
@@ -107,7 +118,7 @@ $scope.add = function(cierre) {
 
   Cierre.save(cierre,function(cierre){
 
-    $http.get("http://localhost:3001/clientes/"+cierre.cliente)
+    $http.get(route_backend+"clientes/"+cierre.cliente)
       .success(function(cliente){
        
        var historialCliente = {
@@ -117,7 +128,7 @@ $scope.add = function(cierre) {
           cliente : cierre.cliente,
           pendiente : (- Number(cliente.cerrado) + Number(cliente.entregado) )
        }
-        $http.post("http://localhost:3001/historial/cliente",historialCliente)
+        $http.post(route_backend+"historial/cliente",historialCliente)
             .success(function(historial){
              console.log(historial); 
        
@@ -133,18 +144,18 @@ $scope.update = function(cierre) {
   cierre.fecha_cierre =document.getElementById('fecha_cierre').value;
 
 
-  $http.get("http://localhost:3001/cierres/"+cierre._id)
+  $http.get(route_backend+"cierres/"+cierre._id)
     .success(function(cierreViejo){
 
 
-    $http.get("http://localhost:3001/clientes/"+cierreViejo.cliente)
+    $http.get(route_backend+"clientes/"+cierreViejo.cliente)
       .success(function(cliente){
         //console.log(cliente);
         cliente.cerrado -= cierreViejo.cantidad;       
       
         cliente.cerrado += parseFloat(cierre.cantidad);
 
-      $http.put("http://localhost:3001/clientes/"+cliente._id,cliente)
+      $http.put(route_backend+"clientes/"+cliente._id,cliente)
         .success(function(cliente2){
          //console.log(cliente2); 
    
@@ -155,8 +166,8 @@ $scope.update = function(cierre) {
   });
 
   $scope.cierre.$update(function(cierreUpdated){
-  	
-  	refresh();
+    
+    refresh();
   });
 };
 
@@ -188,12 +199,12 @@ $scope.addCierreProveedor = function(Cierre) {
   $scope.cierre_p.fecha_cierre = moment(fecha2);
   $scope.cierre_p.fecha_entrega = moment(fecha2.add(7,'days'));
 
-  $http.post("http://localhost:3001/cierresProveedor/",$scope.cierre_p)
+  $http.post(route_backend+"cierresProveedor/",$scope.cierre_p)
             .success(function(cierreProveedor){   
                  
                 
 
-            $http.get("http://localhost:3001/proveedores/"+cierreProveedor.proveedor)
+            $http.get(route_backend+"proveedores/"+cierreProveedor.proveedor)
                 .success(function(proveedor){
                  
                  var historialProveedor = {
@@ -203,7 +214,7 @@ $scope.addCierreProveedor = function(Cierre) {
                     proveedor : cierreProveedor.proveedor,
                     pendiente : (- Number(proveedor.cerrado) + Number(proveedor.entregado) )
                  }
-                  $http.post("http://localhost:3001/historial/proveedor",historialProveedor)
+                  $http.post(route_backend+"historial/proveedor",historialProveedor)
                       .success(function(historial){
                        console.log(historial); 
                  
@@ -227,14 +238,14 @@ $scope.addCierreProveedor = function(Cierre) {
 $scope.deleteCierreProveedor = function(cierreProveedorId) {
 
 
-  $http.get("http://localhost:3001/pagos/")
+  $http.get(route_backend+"pagos/")
               .success(function(pagos){
      
                for (var i=0; i < pagos.length; i++){
 
                  if (pagos[i].cierre_p._id == cierreProveedorId) {
 
-                 $http.delete("http://localhost:3001/pagos/"+pagos[i]._id)
+                 $http.delete(route_backend+"pagos/"+pagos[i]._id)
                     .success(function(respuesta){
                          console.log("Eliminando Pago"+ pagos[i]._id);
                    });                 
@@ -244,7 +255,7 @@ $scope.deleteCierreProveedor = function(cierreProveedorId) {
               //$scope.ganancia(total,cierre_id);
            });  
 
-    $http.delete("http://localhost:3001/cierresProveedor/"+cierreProveedorId)
+    $http.delete(route_backend+"cierresProveedor/"+cierreProveedorId)
             .success(function(respuesta){
 
 
@@ -282,7 +293,7 @@ $scope.openPagosProveedor = function(idCierreProveedor) {
   var total=0;
   //var cierresProveedor;
   if (cierre_p_id != ''){
-    $http.get("http://localhost:3001/pagos/cierre/"+cierre_p_id)
+    $http.get(route_backend+"pagos/cierre/"+cierre_p_id)
     .success(function(pagos){
      
        for (var i=0; i < pagos.length; i++){
@@ -316,7 +327,7 @@ $scope.addPagosProveedor = function(pago) {
 
   pago.cierre_p =  document.getElementById('cierre_pId').value;
 
-  $http.post("http://localhost:3001/pagos/",pago)
+  $http.post(route_backend+"pagos/",pago)
     .success(function(respuesta){
           $scope.pagos = Pago.query();
           $scope.pago="";
@@ -329,7 +340,7 @@ $scope.deletePagosProveedor = function(idPago) {
 
   //pago.cierre_p =  document.getElementById('cierre_pId').value;
 
-  $http.delete("http://localhost:3001/pagos/"+idPago)
+  $http.delete(route_backend+"pagos/"+idPago)
     .success(function(respuesta){
           $scope.pagos = Pago.query();
           $scope.pago="";
@@ -345,7 +356,7 @@ $scope.monto_pagado=function(){
   var ganancia = 0
   //var cierresProveedor;
   if (cierre_id != ''){
-    $http.get("http://localhost:3001/cierresProveedor/")
+    $http.get(route_backend+"cierresProveedor/")
     .success(function(cierres){
       //console.log(cierres);
        for (var i=0; i < cierres.length; i++){
@@ -372,7 +383,7 @@ $scope.monto_pagado_cierre_p=function(){
   var total=0;
   //var cierresProveedor;
   if (cierre_p_id != ''){
-    $http.get("http://localhost:3001/pagos/cierre/"+cierre_p_id)
+    $http.get(route_backend+"pagos/cierre/"+cierre_p_id)
     .success(function(pagos){
       //console.log(cierres);
        for (var i=0; i < pagos.length; i++){
@@ -401,7 +412,7 @@ $scope.gramos=function(){
   var total=0;
   //var cierresProveedor;
   if (cierre_id != ''){
-    $http.get("http://localhost:3001/cierresProveedor/")
+    $http.get(route_backend+"cierresProveedor/")
     .success(function(cierres){
       //console.log(cierres);
        for (var i=0; i < cierres.length; i++){
@@ -423,7 +434,7 @@ $scope.gramos=function(){
 $scope.ganancia=function(total_pago,cierre_id,ganancia){
 
 if (ganancia > $scope.cierre.cantidad) {
-  $scope.cierre.ganancia = parseFloat(ganancia - $scope.cierre.cantidad).toFixed(2);
+  $scope.cierre.ganancia = ganancia - $scope.cierre.cantidad;
 }else{
   $scope.cierre.ganancia = 0;
 }
@@ -438,7 +449,7 @@ if (ganancia > $scope.cierre.cantidad) {
   // console.log($scope.cierre);
  $rootScope.saldo = $scope.cierre.saldo;
 
-  $http.put("http://localhost:3001/cierres/"+cierre_id,$scope.cierre)
+  $http.put(route_backend+"cierres/"+cierre_id,$scope.cierre)
     .success(function(respuesta){
         // console.log(respuesta); 
    });
@@ -545,7 +556,7 @@ $scope.generarpqt= function(entrega) {
         base64Img = base64;
     }); 
        
-    $http.get("http://localhost:3001/entregas/"+entrega)
+    $http.get(route_backend+"entregas/"+entrega)
                 .success(function(entregas){
                   console.log(entregas);
                  var data = []; 
@@ -644,9 +655,9 @@ $scope.generarpqtC= function() {
 
     var route;
      if ($scope.fecha_inicio && $scope.fecha_fin) {
-      route  = "http://localhost:3001/cierres/cliente/"+$scope.cliente._id+"/"+$scope.fecha_inicio+"/"+$scope.fecha_fin;
+      route  = route_backend+"cierres/cliente/"+$scope.cliente._id+"/"+$scope.fecha_inicio+"/"+$scope.fecha_fin;
      }else{
-      route = "http://localhost:3001/cierres/cliente/"+$scope.cliente._id;
+      route = route_backend+"cierres/cliente/"+$scope.cliente._id;
 
 
      }
@@ -696,9 +707,9 @@ $scope.generarpqtC= function() {
           id: cierres[i].CierreId,
           fecha_cierre: moment(cierres[i].fecha_cierre).format('DD-MM-YYYY'),
           fecha_entrega: moment(cierres[i].fecha_entrega).format('DD-MM-YYYY'),
-          cantidad: numeral(cierres[i].cantidad).format('0,0.00'),
-          precio: numeral(cierres[i].precio).format('0,0.00'),
-          total: numeral(cierres[i].total).format('0,0.00')
+          cantidad: cierres[i].cantidad,
+          precio: cierres[i].precio,
+          total: cierres[i].total
         });
 
 
@@ -719,15 +730,15 @@ $scope.generarpqtC= function() {
       }
     });
 
-      if (route ==  "http://localhost:3001/cierres/cliente/"+$scope.cliente._id) {
+      if (route ==  route_backend+"cierres/cliente/"+$scope.cliente._id) {
         doc.setFontSize(12);
-        doc.text('Total Cerrado: '+ numeral(cierres[0].cliente.cerrado).format('0,0.00') +' (g)', 14, doc.autoTable.previous.finalY + 10);
-        doc.text('Total Entregado: '+numeral(cierres[0].cliente.entregado).format('0,0.00')+' (g)', 80, doc.autoTable.previous.finalY + 10);
-        doc.text('Pendiente: '+numeral((cierres[0].cliente.entregado) - (cierres[0].cliente.cerrado)).format('0,0.00') +' (g)', 150, doc.autoTable.previous.finalY + 10);
+        doc.text('Total Cerrado: '+parseFloat(cierres[0].cliente.cerrado).toFixed(2) +' (g)', 14, doc.autoTable.previous.finalY + 10);
+        doc.text('Total Entregado: '+parseFloat(cierres[0].cliente.entregado).toFixed(2)+' (g)', 80, doc.autoTable.previous.finalY + 10);
+        doc.text('Pendiente: '+parseFloat((cierres[0].cliente.entregado) - (cierres[0].cliente.cerrado)).toFixed(2)+' (g)', 150, doc.autoTable.previous.finalY + 10);
       }
       else{
         doc.setFontSize(12);
-        doc.text('Total Cerrado Parcial: '+numeral(entregado).format('0,0.00') +' (g)', 14, doc.autoTable.previous.finalY + 10);
+        doc.text('Total Cerrado Parcial: '+parseFloat(entregado).toFixed(2) +' (g)', 14, doc.autoTable.previous.finalY + 10);
       }
 
 
@@ -811,9 +822,9 @@ $scope.generarpqtGanancia= function() {
 
      var route;
      if ($scope.fecha_inicio && $scope.fecha_fin) {
-      route  = "http://localhost:3001/cierres/"+$scope.fecha_inicio+"/"+$scope.fecha_fin;
+      route  = route_backend+"cierres/"+$scope.fecha_inicio+"/"+$scope.fecha_fin;
      }else{
-      route = "http://localhost:3001/cierres/";
+      route = route_backend+"cierres/";
      } 
     $http.get(route)
                 .success(function(cierres){
@@ -838,8 +849,8 @@ $scope.generarpqtGanancia= function() {
                 //           precio: cierres[i].precio,
                 //           total: cierres[i].total,
                 //           saldo: cierres[i].saldo,                          
-                //           ganancia: numeral(cierres[i].ganancia).toFixed(2),
-                //           total_cerrado: numeral(cierres[i].cantidad + cierres[i].ganancia).toFixed(2),
+                //           ganancia: parseFloat(cierres[i].ganancia).toFixed(2),
+                //           total_cerrado: parseFloat(cierres[i].cantidad + cierres[i].ganancia).toFixed(2),
                 //           observacion: observacion
                 //       });
                 //       cerrado += cierres[i].cantidad;
@@ -854,9 +865,9 @@ var string =
                           id: cierres[i].CierreId,
                           fecha_cierre: moment(cierres[i].fecha_cierre).format('DD-MM-YYYY'),
                           cliente: cierres[i].cliente.nombres +' '+cierres[i].cliente.apellidos,
-                          cantidad: numeral(cierres[i].cantidad).format('0,0.00'),
-                          total_cerrado: numeral(cierres[i].cantidad + cierres[i].ganancia).format('0,0.00'),
-                          ganancia: numeral(cierres[i].ganancia).format('0,0.00'),
+                          cantidad: cierres[i].cantidad,
+                          total_cerrado: parseFloat(cierres[i].cantidad + cierres[i].ganancia).toFixed(2),
+                          ganancia: parseFloat(cierres[i].ganancia).toFixed(2),
                           saldo: numeral(cierres[i].saldo).format('0,0.00'), 
                           observacion: observacion
                       });
@@ -934,19 +945,24 @@ var string =
                 }
               });
       doc.setFontSize(10);      
-      // doc.text('Total Cerrado Cliente = '+ numeral(cerrado).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 10);
-      // doc.text('Total Cerrado Proveedor = '+ numeral(total).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 15);
-      // doc.text('Ganancia = ' + numeral(ganancia).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 20);
-      // doc.text('Saldo Acumulado Parcial = '+ numeral(saldo).toFixed(2) + ' Bs', 10, doc.autoTable.previous.finalY + 25); 
-      doc.text('Total Cerrado Cliente = '+ numeral(cerrado).format('0,0.00') + ' (g)', 10, doc.autoTable.previous.finalY + 10);
-      doc.text('Total Cerrado Proveedor = '+ numeral(total).format('0,0.00') + ' (g)', 85, doc.autoTable.previous.finalY + 10);
-      doc.text('Ganancia = ' + numeral(ganancia).format('0,0.00') + ' (g)', 162, doc.autoTable.previous.finalY + 10);
-      doc.text('Saldo Acumulado = '+ numeral(saldo).format('0,0.00') + ' Bs', 210, doc.autoTable.previous.finalY + 10); 
+      // doc.text('Total Cerrado Cliente = '+ parseFloat(cerrado).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 10);
+      // doc.text('Total Cerrado Proveedor = '+ parseFloat(total).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 15);
+      // doc.text('Ganancia = ' + parseFloat(ganancia).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 20);
+      // doc.text('Saldo Acumulado Parcial = '+ parseFloat(saldo).toFixed(2) + ' Bs', 10, doc.autoTable.previous.finalY + 25); 
+      doc.text('Total Cerrado Cliente = '+ parseFloat(cerrado).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 10);
+      doc.text('Total Cerrado Proveedor = '+ parseFloat(total).toFixed(2) + ' (g)', 80, doc.autoTable.previous.finalY + 10);
+      doc.text('Ganancia = ' + parseFloat(ganancia).toFixed(2) + ' (g)', 155, doc.autoTable.previous.finalY + 10);
+      doc.text('Saldo Acumulado Parcial = '+ numeral(saldo).format('0,0.00') + ' Bs', 200, doc.autoTable.previous.finalY + 10); 
     if (typeof doc.putTotalPages === 'function') {
         doc.putTotalPages(totalPagesExp);
     } 
+
+
       doc.output('datauri'); 
        //doc.save('HistorialCierres.pdf');
+
+    
+
     });
              
 } 
