@@ -2,6 +2,18 @@
 
 app.controller('ctrl-recepcion', function($scope,Recepcion,Proveedor,CierreProveedor,$http,ngProgress,$window) {
 
+var route_frontend = "http://localhost:9000/";
+// var route_frontend = "https://aurelis-frontend.herokuapp.com/";
+var route_backend = "http://localhost:3001/";
+// var route_backend = "https://aurelis-backend.herokuapp.com/";
+
+if (localStorage.getItem("username") !== null) {
+   // console.log($localStorage.username);
+    document.getElementById("cont").value = 600;
+  }
+  else{
+   window.location = route_frontend;
+  } 
 $scope.recepcion = new Recepcion();
 //$scope.proveedor = new Proveedor();
 $scope.cierre_p = new CierreProveedor();
@@ -31,7 +43,7 @@ $scope.update = function(recepcion) {
   //console.log(recepcion.cantidad);
   $scope.recepcion.$update(function(recepcionUpdated){
 
-    $http.get("http://localhost:3001/proveedores/"+recepcionUpdated.proveedor)
+    $http.get(route_backend+"proveedores/"+recepcionUpdated.proveedor)
       .success(function(proveedor){
        
        var historialProveedor = {
@@ -41,7 +53,7 @@ $scope.update = function(recepcion) {
           proveedor : recepcionUpdated.proveedor,
           pendiente : (- Number(proveedor.cerrado) + Number(proveedor.entregado) )
        }
-        $http.post("http://localhost:3001/historial/proveedor",historialProveedor)
+        $http.post(route_backend+"historial/proveedor",historialProveedor)
             .success(function(historial){
              console.log(historial); 
             $window.location.reload();

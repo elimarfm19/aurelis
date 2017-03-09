@@ -5,22 +5,21 @@
           </div>
           <form action="">
               <div class="input-field">
-                  <input id="UserName" type="text" class="validate">
+                  <input ng-model="username" id="UserName" type="text" class="validate" value="">
                   <label for="UserName"><i class="zmdi zmdi-account"></i>&nbsp; Nombre</label>
               </div>
               <div class="input-field col s12">
-                  <input id="Password" type="password" class="validate">
+                  <input ng-model="password" id="Password" type="password" class="validate" value="">
                   <label for="Password"><i class="zmdi zmdi-lock"></i>&nbsp; Contraseña</label>
               </div>
-              
-
-             
           </form>
           <br>
-          <button class="btn btn-primary waves-effect waves-light" > 
-            <a id="login" onclick="login()" href="aurelis.html" style="background: #26a69a; color: black;">Ingresar &nbsp; 
+          <button class="btn btn-primary waves-effect waves-light"  ng-click="submit()"> 
+           <!--  <a id="login" href="aurelis.html" style="background: #26a69a; color: black;">Ingresar &nbsp; 
               <i class="zmdi zmdi-mail-send"></i>
-            </a>
+            </a> -->
+
+            <i class="zmdi zmdi-mail-send"></i> Ingresar
           </button>
           <br><br>
           <!-- <div class="divider" style="margin: 20px 0;"></div>

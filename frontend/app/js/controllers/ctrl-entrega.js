@@ -2,6 +2,18 @@
 
 app.controller('ctrl-entrega', function($scope,Entrega,$http,Cliente,DTOptionsBuilder,ngProgress,$window) {
 
+var route_frontend = "http://localhost:9000/";
+// var route_frontend = "https://aurelis-frontend.herokuapp.com/";
+var route_backend = "http://localhost:3001/";
+// var route_backend = "https://aurelis-backend.herokuapp.com/";
+
+if (localStorage.getItem("username") !== null) {
+    //console.log($localStorage.username);
+    document.getElementById("cont").value = 600;
+  }
+  else{
+   window.location = route_frontend;
+  } 
 $scope.entrega = new Entrega();
 //$scope.cliente = new Cliente();
 //$scope.cierre = new Cierre();
@@ -20,7 +32,7 @@ $scope.add = function(entrega) {
 
  // console.log(entrega.cliente);
 
-  $http.get("http://localhost:3001/clientes/"+entrega.cliente)
+  $http.get(route_backend+"clientes/"+entrega.cliente)
             .success(function(cliente){
                 //console.log(respuesta);
         $scope.restante = cliente.cerrado - cliente.entregado;
@@ -46,7 +58,7 @@ $scope.update = function(entrega) {
   // console.log(entrega.cantidad);
   $scope.entrega.$update(function(entregaUpdated){
 
-    $http.get("http://localhost:3001/clientes/"+entregaUpdated.cliente)
+    $http.get(route_backend+"clientes/"+entregaUpdated.cliente)
       .success(function(cliente){
        
        var historialCliente = {
@@ -56,7 +68,7 @@ $scope.update = function(entrega) {
           cliente : entregaUpdated.cliente,
           pendiente : (- Number(cliente.cerrado) + Number(cliente.entregado) )
        }
-        $http.post("http://localhost:3001/historial/cliente",historialCliente)
+        $http.post(route_backend+"historial/cliente",historialCliente)
             .success(function(historial){
              console.log(historial); 
             $window.location.reload();

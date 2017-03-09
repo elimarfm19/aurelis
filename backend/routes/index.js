@@ -18,13 +18,17 @@ const ajusteController = require('../controllers/ajusteCierre')
 const detRecepcionController = require('../controllers/detRecepcion')
 const historialClienteController = require('../controllers/historial_cliente')
 const historialProveedorController = require('../controllers/historial_proveedor')
+const userController = require('../controllers/user')
 
 var cors = require('cors')
 const api = express.Router()
 
-api.put('http://localhost:9000/', cors())
-api.post('http://localhost:9000/', cors())
-api.delete('http://localhost:9000/', cors())
+ //route_frontend = "http://localhost:9000/";
+//route_frontend = "https://aurelis-frontend.herokuapp.com/";
+
+api.put("https://aurelis-frontend.herokuapp.com/", cors())
+api.post("https://aurelis-frontend.herokuapp.com/", cors())
+api.delete("https://aurelis-frontend.herokuapp.com/", cors())
 
 api.options('/products/:id', cors())
 api.options('/products/', cors())
@@ -233,4 +237,18 @@ api.get('/historial/proveedor/:id',cors(),historialProveedorController.getHistor
 api.post('/historial/proveedor',cors(),historialProveedorController.storeHistorialProveedor)
 api.get('/historial/proveedor/:id/:fechai/:fechaf',cors(),historialProveedorController.getHistorialProveedorFechas)
 
+// Modulo de Usuarios
+api.options('/user/:id', cors())
+//api.options('/ajustes/', cors())
+api.get('/users',cors(),userController.getUsers)
+
+api.get('/user/:id',cors(),userController.getUserId)
+
+api.get('/user/:username/:password',cors(),userController.getUser)
+
+api.post('/user',cors(),userController.storeUser)
+
+api.put('/user/:id',cors(),userController.updateUser)
+
+api.delete('/user/:id',cors(),userController.deleteUser)
 module.exports = api

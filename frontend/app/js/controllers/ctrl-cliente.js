@@ -1,13 +1,13 @@
 'use strict';
 
-app.controller('ctrl-cliente', function($scope,Cliente,Cierre,ngProgress,DTOptionsBuilder,$window,$http,$localStorage) {
+app.controller('ctrl-cliente', function($scope,Cliente,Cierre,ngProgress,DTOptionsBuilder,$window,$http) {
 
-// var route_frontend = "http://localhost:9000/";
-var route_frontend = "https://aurelis-frontend.herokuapp.com/";
-// var route_backend = "http://localhost:3001/";
-var route_backend = "https://aurelis-backend.herokuapp.com/";
+var route_frontend = "http://localhost:9000/";
+// var route_frontend = "https://aurelis-frontend.herokuapp.com/";
+var route_backend = "http://localhost:3001/";
+// var route_backend = "https://aurelis-backend.herokuapp.com/";
 
-if (typeof($localStorage.username) != 'undefined') {
+if (localStorage.getItem("username") !== null) {
     //console.log($localStorage.username);
     document.getElementById("cont").value = 600;
   }

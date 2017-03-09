@@ -1,13 +1,13 @@
 'use strict';
 
-app.controller('ctrl-cierre_p', function($scope,$filter,$rootScope,Cierre,CierreProveedor,Proveedor,DTOptionsBuilder,ngProgress,$window,$http,$localStorage) {
+app.controller('ctrl-cierre_p', function($scope,$filter,$rootScope,Cierre,CierreProveedor,Proveedor,DTOptionsBuilder,ngProgress,$window,$http) {
 
-// var route_frontend = "http://localhost:9000/";
-var route_frontend = "https://aurelis-frontend.herokuapp.com/";
-// var route_backend = "http://localhost:3001/";
-var route_backend = "https://aurelis-backend.herokuapp.com/";
+var route_frontend = "http://localhost:9000/";
+// var route_frontend = "https://aurelis-frontend.herokuapp.com/";
+var route_backend = "http://localhost:3001/";
+// var route_backend = "https://aurelis-backend.herokuapp.com/";
 
-if (typeof($localStorage.username) != 'undefined') {
+if (localStorage.getItem("username") !== null) {
     //console.log($localStorage.username);
     document.getElementById("cont").value = 600;
   }
@@ -30,7 +30,7 @@ $scope.add = function(cierre_p) {
   // console.log(cierre_p);
   cierre_p.fecha_entrega =document.getElementById('fecha_entrega').value;
   CierreProveedor.save(cierre_p,function(cierre_p){
-    
+  	
    //refresh();
    $scope.cierre_p = CierreProveedor.get({ id: cierre_p._id });
   });
@@ -42,8 +42,8 @@ console.log("Valor Raiz "+$rootScope.scopeRaiz);
   cierre_p.fecha_entrega =document.getElementById('fecha_entrega').value;
   cierre_p.monto_pagado = $rootScope.scopeRaiz;
   $scope.cierre_p.$update(function(cierre_pUpdated){ 
-    
-    refresh();
+  	
+  	refresh();
   });
 };
 

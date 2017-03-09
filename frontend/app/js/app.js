@@ -8,16 +8,17 @@
  *
  * Main module of the application.
  */
-angular
-  .module('aurelisApp', [
+var app =  angular.module('aurelisApp', [
     'ngAnimate',
     'ngCookies',
+    'ngStorage',
     'ngResource',
     'ngRoute',
     'ngSanitize',
     'ngTouch'
-  ])
-  .config(function ($routeProvider) {
+  ]);
+
+app.config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/login.html',

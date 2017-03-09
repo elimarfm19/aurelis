@@ -12,18 +12,22 @@ var app = angular.module('aurelisApp', ['ngResource','ngAnimate','ngProgress','d
     'ngCookies',
     'ngResource',
     'ngRoute',
+    'ngStorage',
     'ngSanitize',
     'ngTouch']);
 
-var route = 'http://localhost:3001/';//http://aurelis-backend.herokuapp.com/'; //
+ var route_frontend = "http://localhost:9000/";
+// var route_frontend = "https://aurelis-frontend.herokuapp.com/";
+var route_backend = "http://localhost:3001/";
+// var route_backend = "https://aurelis-backend.herokuapp.com/";
 
 
   app.config(function ($routeProvider) {
     $routeProvider
        .when('/', {
         templateUrl: '/views/vista_inicio.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        controller: 'ctrl-inicio',
+        controllerAs: 'ctrli'
       })
       .when('/cliente', {
         templateUrl: '/views/vista_cliente.html',
@@ -145,11 +149,11 @@ var route = 'http://localhost:3001/';//http://aurelis-backend.herokuapp.com/'; /
       //   controller: 'ctrl-cliente',
       //   controllerAs: 'cli'
       // })
-      .when('/about', {
-        templateUrl: '/views/views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
+      // .when('/about', {
+      //   templateUrl: '/views/views/about.html',
+      //   controller: 'AboutCtrl',
+      //   controllerAs: 'about'
+      // })
       .otherwise({
         redirectTo: '/'
       });
@@ -205,7 +209,7 @@ app.directive('gramos', ['$filter', function ($filter) {
 
   // Create a resource factory to access clientes table from database 
 app.factory('Cliente', function($resource) {
-  return $resource(route+'clientes/:id', { id: '@_id' }, {
+  return $resource(route_backend+'clientes/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }
@@ -213,7 +217,7 @@ app.factory('Cliente', function($resource) {
 });
 // Create a resource factory to access proveedores table from database 
 app.factory('Proveedor', function($resource) {
-  return $resource(route+'proveedores/:id', { id: '@_id' }, {
+  return $resource(route_backend+'proveedores/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }
@@ -221,7 +225,7 @@ app.factory('Proveedor', function($resource) {
 });
 // Create a resource factory to access cierres table from database 
 app.factory('Cierre', function($resource) {
-  return $resource(route+'cierres/:id', { id: '@_id' }, {
+  return $resource(route_backend+'cierres/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }
@@ -229,7 +233,7 @@ app.factory('Cierre', function($resource) {
 });
 // Create a resource factory to access pagos table from database 
 app.factory('Pago', function($resource) {
-  return $resource(route+'pagos/:id', { id: '@_id' }, {
+  return $resource(route_backend+'pagos/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }
@@ -237,7 +241,7 @@ app.factory('Pago', function($resource) {
 });
 // Create a resource factory to access pagoProveedor table from database 
 app.factory('PagoProveedor', function($resource) {
-  return $resource(route+'pagosProveedor/:id', { id: '@_id' }, {
+  return $resource(route_backend+'pagosProveedor/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }
@@ -245,7 +249,7 @@ app.factory('PagoProveedor', function($resource) {
 });
 // Create a resource factory to access cierresProveedor table from database 
 app.factory('CierreProveedor', function($resource) {
-  return $resource(route+'cierresProveedor/:id', { id: '@_id' }, {
+  return $resource(route_backend+'cierresProveedor/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }
@@ -253,7 +257,7 @@ app.factory('CierreProveedor', function($resource) {
 });
 // Create a resource factory to access inventario table from database 
 app.factory('Pieza', function($resource) {
-  return $resource(route+'piezas/:id', { id: '@_id' }, {
+  return $resource(route_backend+'piezas/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }
@@ -262,7 +266,7 @@ app.factory('Pieza', function($resource) {
 
   // Create a resource factory to access clientes table from database 
 app.factory('Recepcion', function($resource) {
-  return $resource(route+'recepciones/:id', { id: '@_id' }, {
+  return $resource(route_backend+'recepciones/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }
@@ -270,24 +274,9 @@ app.factory('Recepcion', function($resource) {
 });
 
 app.factory('Entrega', function($resource) {
-  return $resource(route+'entregas/:id', { id: '@_id' }, {
+  return $resource(route_backend+'entregas/:id', { id: '@_id' }, {
     update: { // We need to define this method manually as it is not provided with ng-resource
       method: 'PUT'
     }
   });
 });
-// app.factory('HistorialCliente', function($resource) {
-//   return $resource(route+'historial/:id', { id: '@_id' }, {
-//     update: { // We need to define this method manually as it is not provided with ng-resource
-//       method: 'PUT'
-//     }
-//   });
-// });
-
-// app.factory('Entrega', function($resource) {
-//   return $resource(route+'entregas/cliente/:id', { id: '@_id' }, {
-//     update: { // We need to define this method manually as it is not provided with ng-resource
-//       method: 'PUT'
-//     }
-//   });
-// });

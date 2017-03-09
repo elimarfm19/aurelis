@@ -1,12 +1,12 @@
 'use strict';
 
-app.controller('ctrl-cierre', function($scope,$http,DTOptionsBuilder,$routeParams,$rootScope,$filter,Cierre,Cliente,Proveedor,CierreProveedor,Pago,ngProgress,$window,$localStorage) {
+app.controller('ctrl-cierre', function($scope,$http,DTOptionsBuilder,$routeParams,$rootScope,$filter,Cierre,Cliente,Proveedor,CierreProveedor,Pago,ngProgress,$window) {
 
-// var route_frontend = "http://localhost:9000/";
-var route_frontend = "https://aurelis-frontend.herokuapp.com/";
-// var route_backend = "http://localhost:3001/";
-var route_backend = "https://aurelis-backend.herokuapp.com/";
-if (typeof($localStorage.username) != 'undefined') {
+var route_frontend = "http://localhost:9000/";
+// var route_frontend = "https://aurelis-frontend.herokuapp.com/";
+var route_backend = "http://localhost:3001/";
+// var route_backend = "https://aurelis-backend.herokuapp.com/";
+if (localStorage.getItem("username") !== null) {
    // console.log($localStorage.username);
     document.getElementById("cont").value = 600;
   }
@@ -135,6 +135,19 @@ $scope.add = function(cierre) {
              $scope.cierre = Cierre.get({ id: cierre._id });
         }); 
     });
+      $http.get(route_backend+"user/1")
+          .success(function(user){
+
+            user[0].remanente += Number(cierre.total);
+
+            $http.put(route_backend+"user/"+user[0]._id,user[0])
+                  .success(function(userUpdated){
+
+                    console.log(userUpdated);
+                  });
+
+          });
+
   });
 };
 
@@ -166,8 +179,8 @@ $scope.update = function(cierre) {
   });
 
   $scope.cierre.$update(function(cierreUpdated){
-    
-    refresh();
+  	
+  	refresh();
   });
 };
 
@@ -228,6 +241,20 @@ $scope.addCierreProveedor = function(Cierre) {
                       $scope.cierre_p.total = 0;
                   }); 
               });
+
+          $http.get(route_backend+"user/1")
+              .success(function(user){
+
+                user[0].remanente -= Number(cierreProveedor.total);
+
+                $http.put(route_backend+"user/"+user[0]._id,user[0])
+                      .success(function(userUpdated){
+
+                        console.log(userUpdated);
+                      });
+
+              });
+
    });        
 
  // console.log($scope.cierre_p.cantidad );
@@ -273,6 +300,8 @@ $scope.deleteCierreProveedor = function(cierreProveedorId) {
 
 
 
+
+
                 
    //            //  $scope.cierre_p ="";
    //            // monto_pagado();
@@ -281,6 +310,27 @@ $scope.deleteCierreProveedor = function(cierreProveedorId) {
    //           // refresh();
 
    });
+
+    $http.get(route_backend+"cierresProveedor/"+cierreProveedorId)
+          .success(function(cierreProveedor){
+
+            $http.get(route_backend+"user/1")
+                .success(function(user){
+
+                  user[0].remanente += Number(cierreProveedor.total);
+
+                  $http.put(route_backend+"user/"+user[0]._id,user[0])
+                        .success(function(userUpdated){
+
+                          console.log(userUpdated);
+                        });
+
+                });
+
+
+          });
+    
+
 };
 
 $scope.openPagosProveedor = function(idCierreProveedor) {
@@ -482,7 +532,7 @@ $scope.calcularTotalP = function(){
 
 $scope.calcularCantidadP = function(){
 
-  $scope.cierre_p.cantidad = parseFloat($scope.cierre_p.total / $scope.cierre_p.precio).toFixed(2);
+  $scope.cierre_p.cantidad = parseFloat(($scope.cierre_p.total / $scope.cierre_p.precio)).toFixed(2);
 
 }
 

@@ -1,7 +1,19 @@
 'use strict';
-
+// 
 app.controller('ctrl-pago_p', function($scope,$rootScope,PagoProveedor,ngProgress) {
 
+var route_frontend = "http://localhost:9000/";
+// var route_frontend = "https://aurelis-frontend.herokuapp.com/";
+var route_backend = "http://localhost:3001/";
+// var route_backend = "https://aurelis-backend.herokuapp.com/";
+
+if (localStorage.getItem("username") !== null) {
+   // console.log($localStorage.username);
+    document.getElementById("cont").value = 600;
+  }
+  else{
+   window.location = route_frontend;
+  } 
 $scope.pago_p = new PagoProveedor();
 
 var refresh = function() {

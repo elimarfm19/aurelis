@@ -1,7 +1,19 @@
-'use strict'
+'use strict';
 
 app.controller('ctrl-pieza', function($scope,$rootScope,$http,Pieza,Recepcion,Cliente,Entrega,ngProgress,DTOptionsBuilder,$window) {
 
+var route_frontend = "http://localhost:9000/";
+// var route_frontend = "https://aurelis-frontend.herokuapp.com/";
+var route_backend = "http://localhost:3001/";
+// var route_backend = "https://aurelis-backend.herokuapp.com/";
+
+if (localStorage.getItem("username") !== null) {
+   // console.log($localStorage.username);
+    document.getElementById("cont").value = 600;
+  }
+  else{
+   window.location = route_frontend;
+  } 
 $scope.pieza = new Pieza();
 $scope.cliente = new Cliente();
 //$scope.recepcion = new Recepcion();
@@ -42,7 +54,7 @@ $scope.update = function(pieza) {
 
 $scope.verificar = function(pieza) {
   pieza.status = 'Verificado'
-  $http.put("http://localhost:3001/piezas/"+pieza._id,pieza)
+  $http.put(route_backend+"piezas/"+pieza._id,pieza)
               .success(function(piezaActualizada){ 
                 // console.log('Actualizando Pieza');
                 // console.log(piezaActualizada);
@@ -60,14 +72,14 @@ $scope.ajuste = function(piezaNueva) {
   piezaNueva.puro_c = parseFloat(piezaNueva.peso_entrega*(piezaNueva.ley/1000)).toFixed(2);
   piezaNueva.puro_p = parseFloat(piezaNueva.peso_bruto*(piezaNueva.ley/1000)).toFixed(2);
 
-   $http.get("http://localhost:3001/piezas/"+piezaNueva._id)
+   $http.get(route_backend+"piezas/"+piezaNueva._id)
     .success(function(piezaVieja){
 
         if (piezaVieja.ley!=piezaNueva.ley){ 
           // console.log(piezaVieja[0].recepcion.proveedor._id);
           //console.log(piezaVieja.recepcion.proveedor._id);
 
-          $http.get("http://localhost:3001/proveedores/"+piezaVieja[0].recepcion.proveedor._id)
+          $http.get(route_backend+"proveedores/"+piezaVieja[0].recepcion.proveedor._id)
           .success(function(proveedor){
             // console.log(Number(piezaNueva.puro_p).toFixed(2));
             //console.log('Proveedor '+proveedor.entregado);
@@ -78,7 +90,7 @@ $scope.ajuste = function(piezaNueva) {
               proveedor.entregado += Number(piezaNueva.puro_p); 
 
              //console.log('Proveedor '+proveedor.entregado);
-            $http.put("http://localhost:3001/proveedores/"+proveedor._id,proveedor)
+            $http.put(route_backend+"proveedores/"+proveedor._id,proveedor)
               .success(function(proveedorNuevo){ 
                // console.log('Actualizando proveedor');
                 //console.log(proveedorNuevo);
@@ -87,14 +99,14 @@ $scope.ajuste = function(piezaNueva) {
 
           });
 
-          $http.get("http://localhost:3001/clientes/"+piezaVieja[0].entrega.cliente._id)
+          $http.get(route_backend+"clientes/"+piezaVieja[0].entrega.cliente._id)
           .success(function(cliente){
               // console.log('Cliente '+cliente.entregado);
               cliente.entregado -= parseFloat(piezaVieja[0].puro_c).toFixed(2);
               //console.log('Cliente '+cliente.entregado);
               cliente.entregado += Number(piezaNueva.puro_c); 
             //   console.log('Cliente '+cliente.entregado);
-            $http.put("http://localhost:3001/clientes/"+cliente._id,cliente)
+            $http.put(route_backend+"clientes/"+cliente._id,cliente)
               .success(function(clienteNuevo){ 
                 //console.log('Actualizando cliente');
                // console.log(clienteNuevo);
@@ -107,14 +119,14 @@ $scope.ajuste = function(piezaNueva) {
 
         if (piezaVieja.peso_entrega!=piezaNueva.peso_entrega){
           //console.log('modifica el peso_entrega');
-          $http.get("http://localhost:3001/clientes/"+piezaVieja[0].entrega.cliente._id)
+          $http.get(route_backend+"clientes/"+piezaVieja[0].entrega.cliente._id)
           .success(function(cliente){
               // console.log('Cliente '+cliente.entregado);
               cliente.entregado -= parseFloat(piezaVieja[0].puro_c).toFixed(2);
               //console.log('Cliente '+cliente.entregado);
               cliente.entregado += Number(piezaNueva.puro_c); 
             //   console.log('Cliente '+cliente.entregado);
-            $http.put("http://localhost:3001/clientes/"+cliente._id,cliente)
+            $http.put(route_backend+"clientes/"+cliente._id,cliente)
               .success(function(clienteNuevo){ 
                 //console.log('Actualizando cliente');
                 //console.log(clienteNuevo);
@@ -123,7 +135,7 @@ $scope.ajuste = function(piezaNueva) {
 
           });
         }
-        $http.get("http://localhost:3001/recepciones/"+piezaVieja[0].recepcion._id)
+        $http.get(route_backend+"recepciones/"+piezaVieja[0].recepcion._id)
               .success(function(RecepcionVieja){ 
                // console.log('Actualizando Pieza');
                // console.log(piezaActualizada);
@@ -135,7 +147,7 @@ $scope.ajuste = function(piezaNueva) {
                RecepcionVieja.cantidad -= parseFloat(piezaVieja[0].puro_p).toFixed(2);
                RecepcionVieja.cantidad += Number(piezaNueva.puro_p);
 
-          $http.put("http://localhost:3001/recepciones/"+RecepcionVieja._id,RecepcionVieja)
+          $http.put(route_backend+"recepciones/"+RecepcionVieja._id,RecepcionVieja)
               .success(function(RecepcionActualizada){ 
                 //console.log('Actualizando Pieza');
                // console.log(piezaActualizada);
@@ -145,7 +157,7 @@ $scope.ajuste = function(piezaNueva) {
 
 
         });
-        $http.get("http://localhost:3001/entregas/"+piezaVieja[0].entrega._id)
+        $http.get(route_backend+"entregas/"+piezaVieja[0].entrega._id)
               .success(function(EntregaVieja){ 
                // console.log('Actualizando Pieza');
                // console.log(piezaActualizada);
@@ -159,7 +171,7 @@ $scope.ajuste = function(piezaNueva) {
                EntregaVieja.cantidad -= parseFloat(piezaVieja[0].puro_c).toFixed(2);
                EntregaVieja.cantidad += Number(piezaNueva.puro_c);
 
-          $http.put("http://localhost:3001/entregas/"+EntregaVieja._id,EntregaVieja)
+          $http.put(route_backend+"entregas/"+EntregaVieja._id,EntregaVieja)
               .success(function(EntregaActualizada){ 
                 //console.log('Actualizando Pieza');
                // console.log(piezaActualizada);
@@ -173,7 +185,7 @@ $scope.ajuste = function(piezaNueva) {
 
    });
 
-  $http.put("http://localhost:3001/piezas/"+piezaNueva._id,piezaNueva)
+  $http.put(route_backend+"piezas/"+piezaNueva._id,piezaNueva)
               .success(function(piezaActualizada){ 
                 // console.log('Actualizando Pieza');
                 // console.log(piezaActualizada);
@@ -197,7 +209,7 @@ $scope.remove = function(pieza) {
 
 $scope.edit = function(id) {
 
-  $http.get("http://localhost:3001/piezas/"+id)
+  $http.get(route_backend+"piezas/"+id)
               .success(function(pieza){ 
 
                 $scope.pieza = new Pieza();//Pieza.get({ id: pieza._id });
@@ -244,12 +256,12 @@ $scope.editE = function(pieza,cliente) {
  
   //console.log(pieza.entrega);
  //console.log(cliente.entregado);
-  $http.put("http://localhost:3001/piezas/"+pieza._id, pieza)
+  $http.put(route_backend+"piezas/"+pieza._id, pieza)
             .success(function(respuesta){
                 console.log(respuesta);
                 refresh();
    });
-   $http.put("http://localhost:3001/clientes/"+cliente._id, cliente)
+   $http.put(route_backend+"clientes/"+cliente._id, cliente)
             .success(function(respuesta){
                 console.log(respuesta);
                 refresh();

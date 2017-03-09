@@ -32,8 +32,12 @@ $(document).ready(function(){
             animation: "slide-from-top",   
             closeOnConfirm: false,
             cancelButtonText: "Cancelar"
-        }, function(){   
-            window.location='index.html'; 
+        }, function(){  
+           var route_frontend = "http://localhost:9000/";
+        // var route_frontend = "https://aurelis-frontend.herokuapp.com/";
+        
+            window.localStorage.clear();
+            window.location = route_frontend;
         });
     });     
 });
