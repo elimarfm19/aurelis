@@ -30,6 +30,7 @@ var refresh = function() {
   $scope.pago="";
   monto_pagado();
   gramos();
+  calcularRemanente();
   //$rootScope.gramosp =0;
  // $rootScope.scopeRaiz =0;
 }
@@ -37,6 +38,8 @@ var refresh2 = function(){
 
 if ($routeParams.cierreId) {
   $scope.cierre = Cierre.get({ id: $routeParams.cierreId });
+  //$scope.calcularRemanente();
+  calcularRemanente();
   monto_pagado();
   gramos();
 }
@@ -48,6 +51,16 @@ else{
 refresh();
 refresh2();
 
+
+function calcularRemanente(){
+
+   $http.get(route_backend+"user/1")
+              .success(function(user){
+
+                 $scope.remanente = user[0].remanente ;
+
+              });
+}
 function monto_pagado(){
    //var cierre_id = document.getElementById('cierre_id').value;
   // console.log();
@@ -133,6 +146,7 @@ $scope.add = function(cierre) {
              console.log(historial); 
        
              $scope.cierre = Cierre.get({ id: cierre._id });
+             $scope.calcularRemanente();
         }); 
     });
       $http.get(route_backend+"user/1")
@@ -147,7 +161,7 @@ $scope.add = function(cierre) {
                   });
 
           });
-
+           
   });
 };
 
@@ -176,11 +190,25 @@ $scope.update = function(cierre) {
    
     });
 
+      $http.get(route_backend+"user/1")
+              .success(function(user){
+
+                user[0].remanente -= Number(cierreViejo.total);
+                user[0].remanente += Number(cierre.total);
+                $http.put(route_backend+"user/"+user[0]._id,user[0])
+                      .success(function(userUpdated){
+
+                        console.log(userUpdated);
+                      });
+
+              });
+
   });
 
   $scope.cierre.$update(function(cierreUpdated){
   	
   	refresh();
+    $scope.calcularRemanente();
   });
 };
 
@@ -236,6 +264,7 @@ $scope.addCierreProveedor = function(Cierre) {
                       
                       $scope.monto_pagado();
                       $scope.gramos();
+                      $scope.calcularRemanente();
                       $scope.cierre_p.cantidad = 0;
                       $scope.cierre_p.precio = 0;
                       $scope.cierre_p.total = 0;
@@ -250,10 +279,11 @@ $scope.addCierreProveedor = function(Cierre) {
                 $http.put(route_backend+"user/"+user[0]._id,user[0])
                       .success(function(userUpdated){
 
-                        console.log(userUpdated);
+                       // console.log(userUpdated);
                       });
 
               });
+             
 
    });        
 
@@ -280,55 +310,57 @@ $scope.deleteCierreProveedor = function(cierreProveedorId) {
              // console.log(total);
                 } 
               //$scope.ganancia(total,cierre_id);
-           });  
+           }); 
+
+           $http.get(route_backend+"cierresProveedor/"+cierreProveedorId)
+                      .success(function(cierreProveedor){
+
+                        $http.get(route_backend+"user/1")
+                            .success(function(user){
+
+                              user[0].remanente += Number(cierreProveedor.total);
+
+                              $http.put(route_backend+"user/"+user[0]._id,user[0])
+                                    .success(function(userUpdated){
+
+                                      console.log(userUpdated);
+
+
+                                    });
+
+                            });
+
+
+                      }); 
+            
 
     $http.delete(route_backend+"cierresProveedor/"+cierreProveedorId)
             .success(function(respuesta){
 
-
-
-
-              $scope.proveedores = Proveedor.query();  
-                $scope.cierreproveedores = CierreProveedor.query();
-                //$scope.cierre_p ="";
-                $scope.monto_pagado();
-                $scope.gramos();
-
-                  $scope.cierre_p.cantidad = 0;
-                  $scope.cierre_p.precio = 0;
-                  $scope.cierre_p.total = 0;
-
-
-
-
-
+                console.log("estoy borrando cierre de proveedor");
                 
+                                      $scope.proveedores = Proveedor.query();  
+                                      $scope.cierreproveedores = CierreProveedor.query();
+                                      //$scope.cierre_p ="";
+                                      $scope.monto_pagado();
+                                      $scope.gramos();
+                                      $scope.calcularRemanente();
+                                        $scope.cierre_p.cantidad = 0;
+                                        $scope.cierre_p.precio = 0;
+                                        $scope.cierre_p.total = 0;
+
+   
    //            //  $scope.cierre_p ="";
    //            // monto_pagado();
    //            //gramos();
    //            // $window.location.reload();
-   //           // refresh();
+          //   refresh2();
 
    });
+  
 
-    $http.get(route_backend+"cierresProveedor/"+cierreProveedorId)
-          .success(function(cierreProveedor){
-
-            $http.get(route_backend+"user/1")
-                .success(function(user){
-
-                  user[0].remanente += Number(cierreProveedor.total);
-
-                  $http.put(route_backend+"user/"+user[0]._id,user[0])
-                        .success(function(userUpdated){
-
-                          console.log(userUpdated);
-                        });
-
-                });
-
-
-          });
+    
+         
     
 
 };
@@ -418,7 +450,13 @@ $scope.monto_pagado=function(){
      // console.log(total);
       $rootScope.scopeRaiz = total;
       $scope.ganancia(total,cierre_id,ganancia);
-   });
+   }).error(function(error){
+        var cierre_id = document.getElementById('cierre_id').value;
+    
+        $rootScope.scopeRaiz = 0;
+        $scope.ganancia(0,cierre_id,0);
+    });
+
    
   }
 
@@ -472,7 +510,12 @@ $scope.gramos=function(){
       }
      //console.log(total);
       $rootScope.gramosp = total;
-   });
+   }).error(function(error){
+    
+       $rootScope.gramosp = 0;
+       
+    });
+
    
   }
 
@@ -536,6 +579,18 @@ $scope.calcularCantidadP = function(){
 
 }
 
+$scope.calcularRemanente = function(){
+
+  $http.get(route_backend+"user/1")
+              .success(function(user){
+
+                 $scope.remanente = user[0].remanente ;
+
+              });
+
+ 
+}
+
 var language = {
 
     "sProcessing":     "Procesando...",
@@ -567,6 +622,10 @@ var language = {
 $scope.dtOptions = DTOptionsBuilder.newOptions()
         
         .withLanguage(language)
+        .withOption('bFilter', false)
+        .withOption('paging', false)
+        .withOption('rowreorder', true)
+        .withOption('responsive', true)
         .withOption('info', false); 
 
 $scope.generarpqt= function(entrega) {

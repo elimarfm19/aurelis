@@ -124,6 +124,8 @@ var language = {
 $scope.dtOptions = DTOptionsBuilder.newOptions()
         
         .withLanguage(language)
+        .withOption('rowreorder', true)
+        .withOption('responsive', true)
         .withOption('info', false)
         .withOption('order', [4, 'desc']);  
 
@@ -645,9 +647,9 @@ $scope.historialCliente= function() {
      //{"$and" : [{"fecha_entrega" : {"$gte" : ISODate("2017-01-01")}}, {"fecha_entrega" : {"$lte" : ISODate("2017-01-30")}}]}
     var route;
      if ($scope.fecha_inicio && $scope.fecha_fin) {
-     route  = "historial/cliente/"+$scope.cliente._id+"/"+$scope.fecha_inicio+"/"+$scope.fecha_fin+"T23:59";
+     route  = route_backend+"historial/cliente/"+$scope.cliente._id+"/"+$scope.fecha_inicio+"/"+$scope.fecha_fin+"T23:59";
      }else{
-     route = "historial/cliente/"+$scope.cliente._id;
+     route = route_backend+"historial/cliente/"+$scope.cliente._id;
     }
     //console.log(route); 
     

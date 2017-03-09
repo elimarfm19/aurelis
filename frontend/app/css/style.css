@@ -8,6 +8,17 @@ body, html{
     height: 100%;
    /* color: #333;*/
 }
+
+.bordear-izquierda{
+    border-radius: 400px 4px 0 0;
+    background: #337AB7;
+    color: black;
+}
+.bordear-derecha{
+    border-radius: 0px 400px 4px 0;
+    background: #337AB7;
+    color: black;
+}
 .full-width{
     margin: 0;
     padding: 0;
@@ -488,6 +499,10 @@ body, html{
 /*///////////////////////// MediaQueries /////////////////////////*/
 @media (max-width: 767px){
     /*===Timeline*/
+
+    tr.active > th{
+        border-radius: 0px;
+    }
      ul.timeline:before {
         left: 40px;
     }

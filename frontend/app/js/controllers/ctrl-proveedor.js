@@ -140,7 +140,10 @@ $scope.dtOptions = DTOptionsBuilder.newOptions()
         
         .withLanguage(language)
         .withOption('info', false)
+        .withOption('rowreorder', true)
+        .withOption('responsive', true)
         .withOption('order', [4, 'desc']); 
+
 
 
 $scope.generarpqt= function(recepcion) {

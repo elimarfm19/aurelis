@@ -9,18 +9,18 @@
   </br>
   </br>
 
-  <div class="tab-content col-md-9" style="margin-left: 1.3cm;">
+  <div class="tab-content" style="margin-left: 1.3cm;" ng-controller="ctrl-pieza">
     <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Inventario de Piezas Disponibles </h3>
 
       <br>
-      <div class="col-md-12">
-        <div class="table-responsive" ng-controller="ctrl-pieza">
+      <!-- <div class="col-md-12"> -->
+        <!-- <div class="table-responsive" > -->
           <form name"Codenx" novalidate>
             <table class="table table-hover" datatable="ng" dt-options="dtOptions" id="tabla_piezas_disponibles" data-page-length='5' >
               <thead>
                 <tr class="active">                        
                   <th class="center-align" style="border-radius: 400px 4px 0 0;">Cod. Pieza</th>
-                  <th class="center-align">Proveedor</th>
+                  <th class="center-align" style="width: 30%">Proveedor</th>
                   <th class="center-align">Peso Bruto (g)</th>
                   <th class="center-align">Ley</th>                          
                   <th class="center-align">Puro (g)</th>                          
@@ -61,8 +61,8 @@
               </tbody>
             </table>
           </form>
-        </div>
-      </div>                
+        <!-- </div> -->
+      <!-- </div>                 -->
     </div>
   </div>
 <div data-loading></div>

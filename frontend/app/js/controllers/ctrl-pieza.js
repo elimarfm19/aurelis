@@ -349,6 +349,8 @@ $scope.showPiezas = function(piezas){
 $scope.dtOptions = DTOptionsBuilder.newOptions()
         
         .withLanguage(language)
+        .withOption('rowreorder', true)
+        .withOption('responsive', true)
         .withOption('info', false); 
   
 
