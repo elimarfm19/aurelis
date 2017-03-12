@@ -1,6 +1,9 @@
 'use strict';
 
-app.controller('ctrl-cierre', function($scope,$http,DTOptionsBuilder,$routeParams,$rootScope,$filter,Cierre,Cliente,Proveedor,CierreProveedor,Pago,ngProgress,$window) {
+app.controller('ctrl_cierre', function($compile,$scope,$http,DTOptionsBuilder,DTColumnDefBuilder,$routeParams,$rootScope,$filter,Cierre,Cliente,Proveedor,CierreProveedor,Pago,ngProgress,$window) {
+//alert(isMobile.mobilecheck());
+ // if(document.querySelector("data-dtr-index")){console.log("esta responsivo");} else {console.log("no esta responsivo");}
+//console.log(screen.width + " x " + screen.height);
 
 var route_frontend = "http://localhost:9000/";
 // var route_frontend = "https://aurelis-frontend.herokuapp.com/";
@@ -20,7 +23,7 @@ $scope.cierre_p = new CierreProveedor();
 $scope.pago = new Pago();
 
 $scope.reporteCierre = true;
-
+var vm = this;
 var refresh = function() {
   $scope.cierres = Cierre.query();
   $scope.clientes = Cliente.query();
@@ -259,8 +262,8 @@ $scope.addCierreProveedor = function(Cierre) {
                       .success(function(historial){
                        console.log(historial); 
                  
-                      $scope.proveedores = Proveedor.query(); 
-                      $scope.cierreproveedores = CierreProveedor.query();
+                      //$scope.proveedores = Proveedor.query(); 
+                     // $scope.cierreproveedores = CierreProveedor.query();
                       
                       $scope.monto_pagado();
                       $scope.gramos();
@@ -268,6 +271,37 @@ $scope.addCierreProveedor = function(Cierre) {
                       $scope.cierre_p.cantidad = 0;
                       $scope.cierre_p.precio = 0;
                       $scope.cierre_p.total = 0;
+
+                      if ( isMobile.mobilecheck() || screen.width < 1024) {
+
+                        $window.location.reload();
+                      }
+                      
+                      else{
+                      //vm.cierreproveedores.push(angular.copy(cierreProveedor));
+                        for (var i = 0; i < vm.cierreproveedores.length; i++) {
+                   
+                       var padre0 = document.getElementById(vm.cierreproveedores[i]._id).parentNode;
+
+                       //vm.cierreproveedores.splice(padre0.getAttribute('name'), 1);
+                        var padre = padre0.parentNode;
+
+
+                       // console.log(padre0.getAttribute("id") + " / " + padre.getAttribute("id"));
+                       // var padre = document.getElementById(index);
+                           if (padre.parentNode) {
+                             padre.parentNode.removeChild(padre);
+                          }
+                        }
+                  
+                          vm.cierreproveedores = CierreProveedor.query();
+
+                      }
+                     
+                 
+             
+                 
+                
                   }); 
               });
 
@@ -287,14 +321,37 @@ $scope.addCierreProveedor = function(Cierre) {
 
    });        
 
- // console.log($scope.cierre_p.cantidad );
- // console.log($scope.cierre_p.precio );
- // console.log($scope.cierre_p.total );
 }; 
 
-$scope.deleteCierreProveedor = function(cierreProveedorId) {
+$scope.deleteCierreProveedor = function() {
+
+document.onclick = captura_click;
+var cierreProveedorId ="";
+var index = "";
+function captura_click(e) {
+  // Funcion para capturar el click del raton
+  var HaHechoClick;
+  if (e == null) {
+    // Si hac click un elemento, lo leemos
+    HaHechoClick = event.srcElement;
+  } else {
+    // Si ha hecho click sobre un destino, lo leemos
+    HaHechoClick = e.target;
+  }
+  // Añadimos el elemento al array de elementos
+  //ElementosClick.push(HaHechoClick);
+  // Una prueba con salida en consola
+ // console.log("Contenido sobre lo que ha hecho click: "+HaHechoClick.id); 
+
+ cierreProveedorId = HaHechoClick.id; 
+ index = HaHechoClick.getAttribute('name'); 
 
 
+}
+
+captura_click();
+console.log(index);
+console.log(cierreProveedorId);
   $http.get(route_backend+"pagos/")
               .success(function(pagos){
      
@@ -315,7 +372,16 @@ $scope.deleteCierreProveedor = function(cierreProveedorId) {
            $http.get(route_backend+"cierresProveedor/"+cierreProveedorId)
                       .success(function(cierreProveedor){
 
-                        $http.get(route_backend+"user/1")
+                      
+
+
+                      
+            
+
+    $http.delete(route_backend+"cierresProveedor/"+cierreProveedorId)
+            .success(function(respuesta){
+
+                 $http.get(route_backend+"user/1")
                             .success(function(user){
 
                               user[0].remanente += Number(cierreProveedor.total);
@@ -323,44 +389,47 @@ $scope.deleteCierreProveedor = function(cierreProveedorId) {
                               $http.put(route_backend+"user/"+user[0]._id,user[0])
                                     .success(function(userUpdated){
 
-                                      console.log(userUpdated);
+                                    //  console.log(userUpdated);
 
-
-                                    });
-
-                            });
-
-
-                      }); 
-            
-
-    $http.delete(route_backend+"cierresProveedor/"+cierreProveedorId)
-            .success(function(respuesta){
-
-                console.log("estoy borrando cierre de proveedor");
-                
-                                      $scope.proveedores = Proveedor.query();  
-                                      $scope.cierreproveedores = CierreProveedor.query();
-                                      //$scope.cierre_p ="";
-                                      $scope.monto_pagado();
+                                       $scope.monto_pagado();
                                       $scope.gramos();
-                                      $scope.calcularRemanente();
+                                      //$scope.calcularRemanente();
+                                      $scope.remanente = userUpdated.remanente;
                                         $scope.cierre_p.cantidad = 0;
                                         $scope.cierre_p.precio = 0;
                                         $scope.cierre_p.total = 0;
 
-   
-   //            //  $scope.cierre_p ="";
-   //            // monto_pagado();
-   //            //gramos();
-   //            // $window.location.reload();
-          //   refresh2();
+                                    if ( isMobile.mobilecheck() || screen.width < 1024) {
+
+                                        $window.location.reload();
+                                      }else{
+
+                                           vm.cierreproveedores.splice(index, 1);
+                                           var padre = document.getElementById(index);
+                                            if (padre.parentNode) {
+                                              padre.parentNode.removeChild(padre);
+                                            }
+                                        
+
+                                      }
+                                         
+                                       // vm.cierreproveedores = CierreProveedor.query();
+
+                                    });
+
+                            });
+    //             console.log("estoy borrando cierre de proveedor");
+                
+                                     // $scope.proveedores = Proveedor.query();  
+                                      //$scope.cierreproveedores = CierreProveedor.query();
+                                      //$scope.cierre_p ="";
+                                     
 
    });
   
 
     
-         
+        });  
     
 
 };
@@ -572,12 +641,17 @@ $scope.calcularTotalP = function(){
   $scope.cierre_p.total = $scope.cierre_p.cantidad * $scope.cierre_p.precio;
 
 }
+// function calcularTotalP(){
+//   $scope.calcularTotalP();
+// }
 
 $scope.calcularCantidadP = function(){
 
   $scope.cierre_p.cantidad = parseFloat(($scope.cierre_p.total / $scope.cierre_p.precio)).toFixed(2);
 
 }
+
+
 
 $scope.calcularRemanente = function(){
 
@@ -618,15 +692,72 @@ var language = {
     // "ordering": false,
     // "info":     false,
 }
+ function renderer( api, rowIdx, columns ) {
+  //console.log("responsivo");
+                var data = $.map( columns, function ( col, i ) {
+                     return col.hidden ?
+                         '<li data-dtr-index="'+col.columnIndex+'" data-dt-row="'+col.rowIndex+'" data-dt-column="'+col.columnIndex+'">'+
+                              '<span class="dtr-title">'+
+                                  col.title+
+                            '</span> '+
+                            '<span class="dtr-data">'+
+                                col.data+
+                           '</span>'+
+                       '</li>' : 
+                       '';
+                   }).join('');
 
-$scope.dtOptions = DTOptionsBuilder.newOptions()
+                   return data ?
+                       $compile(angular.element($('<ul data-dtr-index="'+rowIdx+'"/>').append( data )))($scope) :  
+                        false;
+}
+// function ActualizarTabla($resource, DTOptionsBuilder, DTColumnDefBuilder) {
+   // var vm = this;
+    //vm.persons = [];
+     //$scope.proveedores = Proveedor.query();  
+  //$scope.cierreproveedores = CierreProveedor.query();
+  //$scope.pagos = Pago.query();
+
+  //function ctrl_cierre($resource, DTOptionsBuilder, DTColumnDefBuilder) {
+    var vm = this;
+    vm.cierreproveedores = [];
+    vm.proveedores = [];
+
+    vm.dtOptions =  DTOptionsBuilder.newOptions()
+     .withLanguage(language)
         
-        .withLanguage(language)
         .withOption('bFilter', false)
         .withOption('paging', false)
+         //.withOption('processing', true)
+        //.withOption('serverSide', true)
+        //.withOption('order', ['asc'])
         .withOption('rowreorder', true)
-        .withOption('responsive', true)
-        .withOption('info', false); 
+        .withOption('responsive', {
+          details: {
+              renderer: renderer
+          }
+        })
+        .withOption('info', false);
+    vm.dtColumnDefs = [
+        DTColumnDefBuilder.newColumnDef(0).notSortable(),
+        DTColumnDefBuilder.newColumnDef(1).notSortable(),
+        DTColumnDefBuilder.newColumnDef(2).notSortable(),
+        DTColumnDefBuilder.newColumnDef(3).notSortable(),
+        DTColumnDefBuilder.newColumnDef(4).notSortable(),
+        DTColumnDefBuilder.newColumnDef(5).notSortable()
+    ];
+
+    vm.dtInstance = {};
+
+    CierreProveedor.query().$promise.then(function(persons) {
+        vm.cierreproveedores = persons;
+        //vm.proveedores = Proveedor.query();
+    });
+    Proveedor.query().$promise.then(function(persons2) {
+        //vm.cierreproveedores = persons;
+        vm.proveedores = persons2;
+    });
+
 
 $scope.generarpqt= function(entrega) {
 
@@ -841,13 +972,13 @@ $scope.generarpqtC= function() {
 
       if (route ==  route_backend+"cierres/cliente/"+$scope.cliente._id) {
         doc.setFontSize(12);
-        doc.text('Total Cerrado: '+parseFloat(cierres[0].cliente.cerrado).toFixed(2) +' (g)', 14, doc.autoTable.previous.finalY + 10);
-        doc.text('Total Entregado: '+parseFloat(cierres[0].cliente.entregado).toFixed(2)+' (g)', 80, doc.autoTable.previous.finalY + 10);
-        doc.text('Pendiente: '+parseFloat((cierres[0].cliente.entregado) - (cierres[0].cliente.cerrado)).toFixed(2)+' (g)', 150, doc.autoTable.previous.finalY + 10);
+        doc.text('Total Cerrado: '+numeral(cierres[0].cliente.cerrado).format('0,0.00') +' (g)', 14, doc.autoTable.previous.finalY + 10);
+        doc.text('Total Entregado: '+numeral(cierres[0].cliente.entregado).format('0,0.00')+' (g)', 80, doc.autoTable.previous.finalY + 10);
+        doc.text('Pendiente: '+numeral((cierres[0].cliente.entregado) - (cierres[0].cliente.cerrado)).format('0,0.00')+' (g)', 150, doc.autoTable.previous.finalY + 10);
       }
       else{
         doc.setFontSize(12);
-        doc.text('Total Cerrado Parcial: '+parseFloat(entregado).toFixed(2) +' (g)', 14, doc.autoTable.previous.finalY + 10);
+        doc.text('Total Cerrado Parcial: '+numeral(entregado).format('0,0.00') +' (g)', 14, doc.autoTable.previous.finalY + 10);
       }
 
 
@@ -974,9 +1105,9 @@ var string =
                           id: cierres[i].CierreId,
                           fecha_cierre: moment(cierres[i].fecha_cierre).format('DD-MM-YYYY'),
                           cliente: cierres[i].cliente.nombres +' '+cierres[i].cliente.apellidos,
-                          cantidad: cierres[i].cantidad,
-                          total_cerrado: parseFloat(cierres[i].cantidad + cierres[i].ganancia).toFixed(2),
-                          ganancia: parseFloat(cierres[i].ganancia).toFixed(2),
+                          cantidad: numeral(cierres[i].cantidad).format('0,0.00'),
+                          total_cerrado: numeral((cierres[i].cantidad + cierres[i].ganancia)).format('0,0.00'),
+                          ganancia: numeral(cierres[i].ganancia).format('0,0.00'),
                           saldo: numeral(cierres[i].saldo).format('0,0.00'), 
                           observacion: observacion
                       });
@@ -1058,9 +1189,9 @@ var string =
       // doc.text('Total Cerrado Proveedor = '+ parseFloat(total).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 15);
       // doc.text('Ganancia = ' + parseFloat(ganancia).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 20);
       // doc.text('Saldo Acumulado Parcial = '+ parseFloat(saldo).toFixed(2) + ' Bs', 10, doc.autoTable.previous.finalY + 25); 
-      doc.text('Total Cerrado Cliente = '+ parseFloat(cerrado).toFixed(2) + ' (g)', 10, doc.autoTable.previous.finalY + 10);
-      doc.text('Total Cerrado Proveedor = '+ parseFloat(total).toFixed(2) + ' (g)', 80, doc.autoTable.previous.finalY + 10);
-      doc.text('Ganancia = ' + parseFloat(ganancia).toFixed(2) + ' (g)', 155, doc.autoTable.previous.finalY + 10);
+      doc.text('Total Cerrado Cliente = '+ numeral(cerrado).format('0,0.00') + ' (g)', 10, doc.autoTable.previous.finalY + 10);
+      doc.text('Total Cerrado Proveedor = '+ numeral(total).format('0,0.00') + ' (g)', 80, doc.autoTable.previous.finalY + 10);
+      doc.text('Ganancia = ' + numeral(ganancia).format('0,0.00') + ' (g)', 155, doc.autoTable.previous.finalY + 10);
       doc.text('Saldo Acumulado Parcial = '+ numeral(saldo).format('0,0.00') + ' Bs', 200, doc.autoTable.previous.finalY + 10); 
     if (typeof doc.putTotalPages === 'function') {
         doc.putTotalPages(totalPagesExp);

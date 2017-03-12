@@ -98,11 +98,39 @@ var language = {
         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
     }
 }
+function renderer( api, rowIdx, columns ) {
+                var data = $.map( columns, function ( col, i ) {
+                     return col.hidden ?
+                         '<li data-dtr-index="'+col.columnIndex+'" data-dt-row="'+col.rowIndex+'" data-dt-column="'+col.columnIndex+'">'+
+                              '<span class="dtr-title">'+
+                                  col.title+
+                            '</span> '+
+                            '<span class="dtr-data">'+
+                                col.data+
+                           '</span>'+
+                       '</li>' : 
+                       '';
+                   }).join('');
 
-$scope.dtOptionsDCP = DTOptionsBuilder.newOptions()
+                   return data ?
+                       $compile(angular.element($('<ul data-dtr-index="'+rowIdx+'"/>').append( data )))($scope) :  
+                        false;
+}
+
+
+$scope.Show.dtOptions = DTOptionsBuilder.newOptions()
         
         .withLanguage(language)
-        .withOption('info', false); 
+        
+        .withOption('bFilter', false)
+        .withOption('paging', false)
+        .withOption('rowreorder', true)
+         .withOption('responsive', {
+          details: {
+              renderer: renderer
+          }
+        })
+        .withOption('info', false);
 
 $scope.generarpqtDCP= function(cierre) {
 

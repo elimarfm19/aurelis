@@ -136,7 +136,7 @@ $scope.verifyDuplicate = function() {
     }
 }
 
-$scope.dtOptions = DTOptionsBuilder.newOptions()
+$scope.Show.dtOptions = DTOptionsBuilder.newOptions()
         
         .withLanguage(language)
         .withOption('info', false)

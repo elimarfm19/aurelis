@@ -36,12 +36,12 @@ var route_backend = "http://localhost:3001/";
       })
       .when('/cierre_cliente', {
         templateUrl: '/views/vista_cierre_c.html',
-        controller: 'ctrl-cierre',
+        controller: 'ctrl_cierre',
         controllerAs: 'cie'
       })
       .when('/cierre_cliente/:cierreId', {
         templateUrl: '/views/vista_cierre_c.html',
-        controller: 'ctrl-cierre',
+        controller: 'ctrl_cierre',
         controllerAs: 'cie'
       })
       .when('/proveedores', {

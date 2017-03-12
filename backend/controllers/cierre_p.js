@@ -68,10 +68,10 @@ function getCierresProveedorCierres(req,res){
 		// 	model: 'Cliente'
 		// }
 	})
-	.exec(function(err,pieza){
+	.exec(function(err,CierresProveedor){
 		if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
-			if(pieza == "") return res.status(404).send({message:'La Pieza no Existe'})
-				res.status(200).send(pieza);
+			if(CierresProveedor == "") return res.status(404).send({message:'Los CierresProveedor no Existen'})
+				res.status(200).send(CierresProveedor);
 		});
 	// Cierre_p.find({cierre:CierreId},(err,cierres)=>{
  // 	if(err) return res.status(500).send({message:`Error al realizar la peticion: ${ err }`})
@@ -190,8 +190,8 @@ function deleteCierreP(req,res){
 			proveedor.save();
 		})
 
-		if(err) return res.status(500).send({message:`Error al borrar el cierre: ${ err }`})
-		if(!cierre_p) return res.status(404).send({message:'el cierre no existe'})
+		// if(err) return res.status(500).send({message:`Error al borrar el cierre: ${ err }`})
+		// if(!cierre_p) return res.status(404).send({message:'el cierre no existe'})
 
 		cierre_p.remove(err => {
 			if(err) return res.status(500).send({message:`Error al borrar el cierre: ${ err }`})

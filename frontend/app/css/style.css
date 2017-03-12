@@ -11,13 +11,13 @@ body, html{
 
 .bordear-izquierda{
     border-radius: 400px 4px 0 0;
-    background: #337AB7;
-    color: black;
+    background-color: #337ab7;
+    color: white;
 }
 .bordear-derecha{
     border-radius: 0px 400px 4px 0;
     background: #337AB7;
-    color: black;
+    color: white;
 }
 .full-width{
     margin: 0;
