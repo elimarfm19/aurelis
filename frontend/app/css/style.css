@@ -646,7 +646,7 @@ body, html{
 @media (min-width: 768px) and (max-width:1366px) {
     .NavLateral{
         width: 20%;
-        height: 91.5%;
+        height: 91.5% !important;
         font-size: 14px;
     }
     .NavLateral-title {
@@ -695,6 +695,15 @@ body, html{
     }
     .container-login{
         height: 53% !important;
+    }
+    .bajar-izquierda {
+        margin-top: 2% !important;
+        margin-left: 3.75% !important;
+        margin-right: 0.25% !important;
+    }
+    .col-lg-12-modificado {
+        width: 92% !important;
+        margin-left: 3.75% !important;
     }
 
 }
@@ -919,6 +928,13 @@ div.dataTables_wrapper div.dataTables_info {
     border-bottom-color: transparent;*/
 }
 
+h2{
+    color:black !important; 
+    font-weight:600 !important; 
+    font-size: 12px !important; 
+    font-family: 'Tahoma' !important; 
+}
+
 h3{
     color:black !important; 
     font-weight:600 !important; 
@@ -934,7 +950,7 @@ h4{
 
 .bajar-izquierda{
     margin-top: 10%;
-    margin-left: -0.25% !important;
+    margin-left: -0.25%;
     margin-right: 0.25% !important;
 }
 
@@ -968,4 +984,14 @@ option{
 
 .manito{
     cursor: pointer;
+}
+
+.container-cierre{
+    background-color:#ffffff; 
+    border-radius: 10px; 
+    box-shadow: 8px 8px 8px black;
+}
+
+.bajar{
+    margin-top:100px;
 }
