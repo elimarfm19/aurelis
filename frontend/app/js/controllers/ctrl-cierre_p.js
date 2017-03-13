@@ -118,7 +118,7 @@ function renderer( api, rowIdx, columns ) {
 }
 
 
-$scope.Show.dtOptions = DTOptionsBuilder.newOptions()
+$scope.dtOptions = DTOptionsBuilder.newOptions()
         
         .withLanguage(language)
         

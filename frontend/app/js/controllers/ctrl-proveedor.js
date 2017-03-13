@@ -62,14 +62,15 @@ $scope.direccion = function(id) {
 };
 
 $scope.contacto = function(id) {
-  //  console.log($scope.contacto);
+    // console.log($scope.contacto);
   $scope.proveedor = Proveedor.get({ id: id });
  
 };
 
 $scope.tlf = function(id) {
-  //  console.log($scope.contacto);
+  // console.log(id);
   $scope.proveedor = Proveedor.get({ id: id });
+  console.log($scope.proveedor);
  
 };
 
@@ -136,7 +137,7 @@ $scope.verifyDuplicate = function() {
     }
 }
 
-$scope.Show.dtOptions = DTOptionsBuilder.newOptions()
+$scope.dtOptions = DTOptionsBuilder.newOptions()
         
         .withLanguage(language)
         .withOption('info', false)

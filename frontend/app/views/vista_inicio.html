@@ -1,42 +1,43 @@
-
-<div class="container" >
-<!-- <button hidden id="logout" ng-click="logout()">Salir</button> -->
+<div class="col-lg-10 col-lg-offset-1">
  </br><br>
-  <ul class="nav nav-tabs col-md-12" style="margin-left:0.2cm; " >
-    <li class="active"><a class="a" style="color:black; font-weight:600; font-family: 'Tahoma';" href="#proveedores_" data-toggle="tab">Proveedores</a></li>
-    <li><a class="a" style="color:black; font-weight:600; font-family: 'Tahoma';" href="#clientes_" data-toggle="tab">Clientes</a></li>
+  <ul class="nav nav-tabs" >
+    <li class="active"><a href="#proveedores_" data-toggle="tab">Proveedores</a></li>
+    <li><a href="#clientes_" data-toggle="tab">Clientes</a></li>
   </ul>
-
-  <div class="tab-content col-md-12" style="margin-left: 1.3cm;">
-    <div  class="tab-pane col-md-9 fade in active" id="proveedores_" ng-controller="ctrl-cierre_p">
-      <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Recepciones de Proveedores </h3>
-      <!--<br>
-      <br>-->
-      <!-- <div class="" > -->
+  <div class="tab-content">
+    <div  class="tab-pane fade in active" id="proveedores_">
+      <h3 class="center-align">Recepciones de Proveedores </h3>
         <div class="" ng-controller="ctrl-proveedor">
-          <table class="table table-hover" datatable="ng" dt-options="dtOptions" id="tabla_inicio_p" data-page-length='5'>
+          <table class="table table-hover" datatable="ng" dt-options="dtOptions" id="tabla_inicio_p" data-page-length='10'>
               <thead>
                   <tr class="active">                          
                     <th class="center-align bordear-izquierda">Proveedor</th>
+                    <th class="center-align">Tlf</th>
                     <th class="center-align">Cerrado (g)</th>
                     <th class="center-align">Entregado (g)</th>
-                    <th class="center-align">Pendiente (g)</th>                          
-                    <th class="center-align bordear-derecha" >Ultima Entrega</th>
+                    <th class="center-align">Pendiente (g)</th>
+                    <th class="center-align">Vencido (g)</th>
+                    <th class="center-align bordear-derecha">Última Entrega</th>
                   </tr>
               </thead>
               <tfoot>
                 <tr class="active">
-                    <th class="center-align" style="border-radius: 0 0 4px 400px;"></th>
+                    <th class="center-align bordear-izquierda-abajo"></th>
                     <th class="center-align"></th>
                     <th class="center-align"></th>
                     <th class="center-align"></th>
-                    <th class="center-align" style="border-radius: 0 4px 400px 0;">
+                    <th class="center-align"></th>
+                    <th class="center-align"></th>
+                    <th class="center-align bordear-derecha-abajo"></th>
                 </tr>
               </tfoot>
               <tbody>
                   <tr ng-repeat="proveedor in proveedores" ng-if="(!proveedor.cerrado== 0) && !(proveedor.cerrado == proveedor.entregado)">
                     <td class="center-align" >
                       {{proveedor.nombres}} {{proveedor.apellidos}}
+                    </td>
+                    <td class="center-align">
+                      <a class="zmdi zmdi-phone zmdi-hc-2x" data-toggle="modal" data-target="#tlfModal" ng-click="tlf(proveedor._id)" style="color: black;"></a>
                     </td>
                     <td class="center-align" >
                       {{proveedor.cerrado | currency: ''}} 
@@ -47,40 +48,37 @@
                     <td class="center-align" field="por_cerrar">
                       {{(proveedor.entregado - proveedor.cerrado) | number}}
                     </td>
+                    <td class="center-align" field="por_cerrar">
+                      {{(proveedor.entregado - proveedor.cerrado) | number}}
+                    </td>
                     <td class="center-align" field="fecha_entrega" >
-                    <!-- aqui va la ultmima recepcion de este personaje-->
                       {{proveedor.ultima_entrega | date:'dd/MM/yyyy' : shortDate}}
                     </td>
                   </tr>
               </tbody>
           </table>
         </div> 
-      <!-- </div>                 -->
     </div>
-
-    <div class="tab-pane col-md-9" id="clientes_" ng-controller="ctrl-cierre">
-      <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Próximas Entregas a Clientes </h3>
-      <!--<br>
-      <br>-->
-      <!-- <div class="" > -->
+    <div class="tab-pane" id="clientes_" >
+      <h3 class="center-align">Próximas Entregas a Clientes </h3>
         <div class="" ng-controller="ctrl-cliente">
-          <table class="table table-hover" datatable="ng" dt-options="dtOptions" id="tabla_inicio_c" data-page-length='5'>
+          <table class="table table-hover" datatable="ng" dt-options="dtOptions" id="tabla_inicio_c" data-page-length='10'>
             <thead>
                 <tr class="active">                          
-                  <th class="center-align" style="border-radius: 400px 4px 0 0;">Cliente</th>
+                  <th class="center-align bordear-izquierda">Cliente</th>
                   <th class="center-align">Cerrado (g)</th>
                   <th class="center-align">Entregado (g)</th>
                   <th class="center-align">Pendiente (g)</th>                          
-                  <th class="center-align" style="border-radius: 0 400px 4px 0;">Ultima Entrega</th>
+                  <th class="center-align bordear-derecha">Ultima Entrega</th>
                 </tr>
             </thead>
             <tfoot>
               <tr class="active">
-                  <th class="center-align" style="border-radius: 0 0 4px 400px;"></th>
+                  <th class="center-align bordear-izquierda-abajo"></th>
                   <th class="center-align"></th>
                   <th class="center-align"></th>
                   <th class="center-align"></th>
-                  <th class="center-align" style="border-radius: 0 4px 400px 0;"></th>
+                  <th class="center-align bordear-derecha-abajo"></th>
               </tr>
             </tfoot>
             <tbody>
@@ -97,15 +95,41 @@
                 <td class="center-align" field="por_cerrar">
                   {{(cliente.entregado - cliente.cerrado ) | number}}
                 </td>
-                <td class="center-align" field="fecha_entrega">                          
+                <td class="center-align" field="fecha_entrega">
                   {{cliente.ultima_entrega | date:'dd/MM/yyyy' : shortDate}}
                 </td>
               </tr>
             </tbody>
-            </table>
+          </table>
         </div>          
-      <!-- </div>                   -->
     </div>
   </div>
 </div>
 
+<div class="container">
+    <!-- Modal -->
+  <div class="modal fade" id="tlfModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="tamanno">
+          <div class="" style="margin-top:100px; ">
+            <div class="row " style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
+            <br>
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h3 class="center-align modal-title">Teléfono del Proveedor</h3>  
+            </div>      
+            <br>
+            <form class="col s12">              
+             <div class="row">
+                <div class="center-align">
+                 {{ proveedor.tlf }}                  
+                </div>
+             </div>            
+             <br><br><br>                                                
+           </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>

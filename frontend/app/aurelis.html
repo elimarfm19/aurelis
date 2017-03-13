@@ -5,19 +5,11 @@
     <title>Inicio</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" /> -->
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
     <!-- Normalize CSS -->
   	<link rel="stylesheet" href="../css/normalize.css">
     <!-- Materialize CSS -->
   	<!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="../css/materialize.min.css">
-
     <!-- Material Design Iconic Font CSS -->
   	<link rel="stylesheet" href="../css/material-design-iconic-font.min.css">
     <!-- Malihu jQuery custom content scroller CSS -->
@@ -27,11 +19,8 @@
     <!-- MaterialDark CSS -->
 	  <link rel="stylesheet" href="../css/style.css">
   	<link rel="stylesheet" href="../css/bootstrap.css">
-  	<!-- <link rel="stylesheet" href="../css/bootstrap.min.css"> -->
-    <!-- <link rel="stylesheet" href="../css/ngProgress.css"> -->
     <link rel="stylesheet" href="../css/bootstrap-datepicker.min.css">
-    <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
-    
+    <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">  
     <link rel="stylesheet" href="../css/angular-datatables.min.css">
     <link rel="stylesheet" href="css/rowReorder.dataTables.min.css">
     <link rel="stylesheet" href="css/responsive.dataTables.min.css">
@@ -67,165 +56,146 @@
       <!-- Nav Lateral -->
       <section class="NavLateral full-width">
         <div class="NavLateral-FontMenu full-width ShowHideMenu"></div>
-          <div class="NavLateral-content full-width">
-            <header class="NavLateral-title full-width center-align">
-              <i class="zmdi zmdi-close NavLateral-title-btn ShowHideMenu"></i>
-            </header>
-            <figure class="full-width NavLateral-logo">
-              <a target="_blank" ng-href="http://www.techsoluxy.com" ><img src="../assets/img/logo.png" alt="software a medida" class="responsive-img center-box"></a>
-              <!--  <figcaption class="center-align">User</figcaption>-->
-            </figure>
-            <div class="NavLateral-Nav">
-              <ul class="full-width">
-                <li class="NavLateralDivider"></li>
-                <li>
-                  <a ng-href="#inicio" class="waves-effect waves-light">
-                    <i class="zmdi zmdi-home zmdi-hc-fw"></i> 
-                    Inicio
-                  </a>                  
-      
-                </li>
-                <li class="NavLateralDivider"></li>
-                <li>
-                  <a ng-href="#cierre_cliente" class="waves-effect waves-light">
-                  <i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i>
-                   Cierre
-                  </a>            
-                </li>
-                <li class="NavLateralDivider"></li>
-                <li>
-                  <a ng-ref="" class="NavLateral-DropDown waves-effect waves-light">
-                    <i class="zmdi zmdi-assignment-account zmdi-hc-fw"></i> 
-                    <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i>Clientes
-                  </a>
-                  <ul class="full-width">
-                  <li>
-                    <a href="#cliente" class="waves-effect waves-light">
-                      <i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Gestión
-                    </a>
-                  </li>    
-<!--                   <li class="NavLateralDivider"></li>
-                  <li>
-                    <a ng-href="#cierre_cliente" class="waves-effect waves-light">
-                      <i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i> Cierre
-                    </a>
-                  </li> -->
-                  <li class="NavLateralDivider"></li>  
-                  <li>
-                    <a ng-href="#entrega" class="waves-effect waves-light"><i class="zmdi zmdi-upload zmdi-hc-fw"></i> Entrega</a>
-                  </li>
-                </li>							
-              </ul>
-                        
+        <div class="NavLateral-content full-width">
+          <header class="NavLateral-title full-width center-align">
+            <i class="zmdi zmdi-close NavLateral-title-btn ShowHideMenu"></i>
+          </header>
+          <figure class="full-width NavLateral-logo">
+            <a target="_blank" ng-href="http://www.techsoluxy.com" ><img src="../assets/img/logo.png" alt="software a medida" class="responsive-img center-box"></a>
+          </figure>
+          <div class="NavLateral-Nav">
+            <ul class="full-width">
               <li class="NavLateralDivider"></li>
               <li>
-                <a ng-href="#" class="NavLateral-DropDown waves-effect waves-light">
-                  <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
-                  <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i>Edición
-                </a>
-                <ul class="full-width">                          
-                  <li class="NavLateralDivider"></li>
-                  <li><a ng-href="#ajusteCierre" class="waves-effect waves-light"><i class="zmdi zmdi-wrench zmdi-hc-fw"></i> Ajuste de Cierre</a></li>
-                  <!-- <li><a ng-href="#ajusteCierre" class="waves-effect waves-light"><i class="zmdi zmdi-wrench zmdi-hc-fw"></i> Ajuste de Cierre Cliente</a></li>
-                  <li class="NavLateralDivider"></li>
-                  <li><a ng-href="#ajusteCierreProveedor" class="waves-effect waves-light"><i class="zmdi zmdi-wrench zmdi-hc-fw"></i> Ajuste de Cierre Proveedor</a></li> -->
-                  <li class="NavLateralDivider"></li>
-                  <li><a ng-href="#ajustePieza" class="waves-effect waves-light"><i class="zmdi zmdi-puzzle-piece zmdi-hc-fw"></i> Ajuste de Pieza</a></li>
-                </ul>
+                <a ng-href="#inicio" class="waves-effect waves-light">
+                  <i class="zmdi zmdi-home zmdi-hc-fw "></i> 
+                  Inicio
+                </a>                  
               </li>
               <li class="NavLateralDivider"></li>
               <li>
-                <a ng-href="#inventario" class="waves-effect waves-light">
-                <!--<a ng-href="#inventario" class="NavLateral-DropDown waves-effect waves-light">-->
-                  <i class="zmdi zmdi-collection-plus zmdi-hc-fw"></i>
-                   Inventario
+                <a ng-href="#cierre_cliente" class="waves-effect waves-light">
+                <i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i>
+                 Cierre
                 </a>            
               </li>
               <li class="NavLateralDivider"></li>
               <li>
-                <a class="NavLateral-DropDown  waves-effect waves-light"><i class="zmdi zmdi-card zmdi-hc-fw"></i> <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i>Proveedores</a>
+                <a ng-ref="" class="NavLateral-DropDown waves-effect waves-light">
+                  <i class="zmdi zmdi-assignment-account zmdi-hc-fw"></i> 
+                  <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i>Clientes
+                </a>
                 <ul class="full-width">
+                <li>
+                  <a href="#cliente" class="waves-effect waves-light">
+                    <i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Gestión
+                  </a>
+                </li>
+                <li class="NavLateralDivider"></li>  
                   <li>
-                    <a ng-href="#proveedores" class="waves-effect waves-light">
-                      <i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Gestión
-                    </a>
-                  </li>
-<!--                   <li class="NavLateralDivider"></li>
-                  <li>
-                    <a ng-href="#cierre_proveedor" class="waves-effect waves-light">
-                      <i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i> Cierre
-                    </a>
-                  </li> -->
+                    <a ng-href="#entrega" class="waves-effect waves-light"><i class="zmdi zmdi-upload zmdi-hc-fw"></i> Entrega</a>
+                  </li>    
+              </li>							
+            </ul>         
+            <li class="NavLateralDivider"></li>
+            <li>
+              <a ng-href="#" class="NavLateral-DropDown waves-effect waves-light">
+                <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
+                <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i>Edición
+              </a>
+              <ul class="full-width">                          
+                <li class="NavLateralDivider"></li>
+                <li><a ng-href="#ajusteCierre" class="waves-effect waves-light"><i class="zmdi zmdi-wrench zmdi-hc-fw"></i> Ajuste de Cierre</a></li>
+                <li class="NavLateralDivider"></li>
+                <li><a ng-href="#ajustePieza" class="waves-effect waves-light"><i class="zmdi zmdi-puzzle-piece zmdi-hc-fw"></i> Ajuste de Pieza</a></li>
+              </ul>
+            </li>
+            <li class="NavLateralDivider"></li>
+            <li>
+              <a ng-href="#inventario" class="waves-effect waves-light">
+                <i class="zmdi zmdi-collection-plus zmdi-hc-fw"></i>
+                 Inventario
+              </a>            
+            </li>
+            <li class="NavLateralDivider"></li>
+            <li>
+              <a class="NavLateral-DropDown  waves-effect waves-light"><i class="zmdi zmdi-card zmdi-hc-fw"></i> <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i>Proveedores</a>
+              <ul class="full-width">
+                <li>
+                  <a ng-href="#proveedores" class="waves-effect waves-light">
+                    <i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Gestión
+                  </a>
+                </li>
+                <li class="NavLateralDivider"></li>
+                <li>
+                  <a ng-href="#recepcion" class="waves-effect waves-light">
+                    <i class="zmdi zmdi-download zmdi-hc-fw"></i> Recepción
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="NavLateralDivider"></li>
+            <li>
+              <a ng-href="#" class="NavLateral-DropDown  waves-effect waves-light"><i class="zmdi zmdi-collection-pdf zmdi-hc-fw"></i> <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i>Reportes</a>
+              <ul class="full-width">
                   <li class="NavLateralDivider"></li>
                   <li>
-                    <a ng-href="#recepcion" class="waves-effect waves-light">
-                      <i class="zmdi zmdi-download zmdi-hc-fw"></i> Recepción
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="NavLateralDivider"></li>
-              <li>
-                <a ng-href="#" class="NavLateral-DropDown  waves-effect waves-light"><i class="zmdi zmdi-collection-pdf zmdi-hc-fw"></i> <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i>Reportes</a>
-                <ul class="full-width">
-                    <li class="NavLateralDivider"></li>
-                    <li>
-                      <a ng-href="#historialCliente" class="waves-effect waves-light "><i class="zmdi zmdi zmdi-assignment-return zmdi-hc-fw"></i> Historial de Cliente</a>
-                    </li>
-                    <li class="NavLateralDivider"></li>
-                    <li>
-                      <a ng-href="#historialProveedor" class="waves-effect waves-light "><i class="zmdi zmdi zmdi-assignment-returned zmdi-hc-fw"></i> Historial de Proveedor</a>
-                    </li>                  
-                  <li class="NavLateralDivider"></li>
-                    <li>
-                      <a ng-href="#reporteGanancia" class="waves-effect waves-light "><i class="zmdi zmdi zmdi-money zmdi-hc-fw"></i> Historial de Cierres</a>
-                    </li>
-                    <li class="NavLateralDivider"></li>
-                  <li>
-                    <a ng-href="#reportePorEntregar" class="waves-effect waves-light "><i class="zmdi zmdi-upload zmdi-hc-fw"></i> Por Entregar</a>    
-                  </li>
-                  <li class="NavLateralDivider"></li>
-                  <li>
-                    <a ng-href="#reportePorRecibir" class="waves-effect waves-light "><i class="zmdi zmdi-download zmdi-hc-fw"></i> Por Recibir</a>    
-                  </li>
-                  <li class="NavLateralDivider"></li>
-                  <li>
-                    <a ng-href="#reporteCierreC" class="waves-effect waves-light "><i class="zmdi zmdi-assignment-account zmdi-hc-fw"></i> Cierre por Cliente</a>    
-                  </li>
-                  <li class="NavLateralDivider"></li>
-                  <li>
-                    <a ng-href="#reporteCierreP" class="waves-effect waves-light "><i class="zmdi zmdi-card zmdi-hc-fw"></i> Cierre por Proveedor</a>    
-                  </li>
-                  <li class="NavLateralDivider"></li>
-                  <li>
-                    <a ng-href="#reporteDetalleCierreP" class="waves-effect waves-light "><i class="zmdi zmdi-collection-text zmdi-hc-fw"></i> Detalle de Cierre</a>    
-                  </li>
-                  <li class="NavLateralDivider"></li>
-                  <li>
-                    <a ng-href="#reporteRecepcionPro" class="waves-effect waves-light "><i class="zmdi zmdi-case-download zmdi-hc-fw"></i> Recepción de Proveedores</a>    
+                    <a ng-href="#historialCliente" class="waves-effect waves-light "><i class="zmdi zmdi zmdi-assignment-return zmdi-hc-fw"></i> Historial de Cliente</a>
                   </li>
                   <li class="NavLateralDivider"></li>
                   <li>
-                    <a ng-href="#reporteRecepcion" class="waves-effect waves-light "><i class="zmdi zmdi-collection-text zmdi-hc-fw"></i> Detalles de Recepción</a>    
+                    <a ng-href="#historialProveedor" class="waves-effect waves-light "><i class="zmdi zmdi zmdi-assignment-returned zmdi-hc-fw"></i> Historial de Proveedor</a>
+                  </li>                  
+                <li class="NavLateralDivider"></li>
+                  <li>
+                    <a ng-href="#reporteGanancia" class="waves-effect waves-light "><i class="zmdi zmdi zmdi-money zmdi-hc-fw"></i> Historial de Cierres</a>
                   </li>
                   <li class="NavLateralDivider"></li>
-                    <li>
-                      <a ng-href="#reporteEntregaC" class="waves-effect waves-light "><i class="zmdi zmdi-label zmdi-hc-fw"></i> Entrega a Clientes</a>
-                    </li>
-                  <li class="NavLateralDivider"></li>
-                    <li>
-                      <a ng-href="#reporteEntrega" class="waves-effect waves-light "><i class="zmdi zmdi-collection-text zmdi-hc-fw"></i> Detalles de Entrega</a>    
-                    </li>                    
-                </ul>
-              </li>
-              <li class="NavLateralDivider"></li>
-              <!--Salir menu vertical-->
-              <li>
-                <a ng-href="inicio.html" class="NavLateral-DropDown waves-effect waves-light btn-ExitSystem"><i class="zmdi zmdi-power zmdi-hc-fw"></i> Salir</a>
-              </li>
-              <li class="NavLateralDivider"></li>
-            </div>
+                <li>
+                  <a ng-href="#reportePorEntregar" class="waves-effect waves-light "><i class="zmdi zmdi-upload zmdi-hc-fw"></i> Por Entregar</a>    
+                </li>
+                <li class="NavLateralDivider"></li>
+                <li>
+                  <a ng-href="#reportePorRecibir" class="waves-effect waves-light "><i class="zmdi zmdi-download zmdi-hc-fw"></i> Por Recibir</a>    
+                </li>
+                <li class="NavLateralDivider"></li>
+                <li>
+                  <a ng-href="#reporteCierreC" class="waves-effect waves-light "><i class="zmdi zmdi-assignment-account zmdi-hc-fw"></i> Cierre por Cliente</a>    
+                </li>
+                <li class="NavLateralDivider"></li>
+                <li>
+                  <a ng-href="#reporteCierreP" class="waves-effect waves-light "><i class="zmdi zmdi-card zmdi-hc-fw"></i> Cierre por Proveedor</a>    
+                </li>
+                <li class="NavLateralDivider"></li>
+                <li>
+                  <a ng-href="#reporteDetalleCierreP" class="waves-effect waves-light "><i class="zmdi zmdi-collection-text zmdi-hc-fw"></i> Detalle de Cierre</a>    
+                </li>
+                <li class="NavLateralDivider"></li>
+                <li>
+                  <a ng-href="#reporteRecepcionPro" class="waves-effect waves-light "><i class="zmdi zmdi-case-download zmdi-hc-fw"></i> Recepción de Proveedores</a>    
+                </li>
+                <li class="NavLateralDivider"></li>
+                <li>
+                  <a ng-href="#reporteRecepcion" class="waves-effect waves-light "><i class="zmdi zmdi-collection-text zmdi-hc-fw"></i> Detalles de Recepción</a>    
+                </li>
+                <li class="NavLateralDivider"></li>
+                  <li>
+                    <a ng-href="#reporteEntregaC" class="waves-effect waves-light "><i class="zmdi zmdi-label zmdi-hc-fw"></i> Entrega a Clientes</a>
+                  </li>
+                <li class="NavLateralDivider"></li>
+                  <li>
+                    <a ng-href="#reporteEntrega" class="waves-effect waves-light "><i class="zmdi zmdi-collection-text zmdi-hc-fw"></i> Detalles de Entrega</a>    
+                  </li>                    
+              </ul>
+            </li>
+            <li class="NavLateralDivider"></li>
+            <!--Salir menu vertical-->
+            <li>
+              <a ng-href="inicio.html" class="NavLateral-DropDown waves-effect waves-light btn-ExitSystem"><i class="zmdi zmdi-power zmdi-hc-fw"></i> Salir</a>
+            </li>
+            <li class="NavLateralDivider"></li>
           </div>
+        </div>
       </section>
 
 
