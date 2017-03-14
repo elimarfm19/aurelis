@@ -692,6 +692,9 @@ var language = {
     // "ordering": false,
     // "info":     false,
 }
+
+
+
  function renderer( api, rowIdx, columns ) {
   //console.log("responsivo");
                 var data = $.map( columns, function ( col, i ) {
@@ -759,8 +762,8 @@ var language = {
         DTColumnDefBuilder.newColumnDef(1).notSortable(),
         DTColumnDefBuilder.newColumnDef(2).notSortable(),
         DTColumnDefBuilder.newColumnDef(3).notSortable(),
-        DTColumnDefBuilder.newColumnDef(4).notSortable(),
-        DTColumnDefBuilder.newColumnDef(5).notSortable()
+        DTColumnDefBuilder.newColumnDef(4).notSortable()
+        // DTColumnDefBuilder.newColumnDef(5).notSortable()
     ];
 
     vm.dtInstanceCierre = {};
