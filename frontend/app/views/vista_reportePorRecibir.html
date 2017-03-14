@@ -1,62 +1,55 @@
-
-<div class="container" >
+<div class="col-lg-10 col-lg-offset-1">
  </br><br>
-  <ul class="nav nav-tabs col-md-12" style="margin-left:0.2cm; " >
-    <li class="active"><a class="a" style="color:black; font-weight:600; font-family: 'Tahoma';" data-toggle="tab">Reporte por Recibir</a></li>
+  <ul class="nav nav-tabs">
+    <li class="active"><a class="a" data-toggle="tab">Reporte por Recibir</a></li>
   </ul>
 
-  <div class="tab-content col-md-12" style="margin-left: 1.3cm;">
-    <div  class="tab-pane col-md-9 fade in active">
-      <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Por Recibir </h3>
+  <div class="tab-content">
+    <div class="tab-pane fade in active">
+      <h3 class="center-align">Por Recibir </h3>
       <button class="btn btn-primary zmdi zmdi-collection-pdf zmdi-hc-2x waves-effect waves-light col-md-offset-10" ng-click="generarpqtPorRecibir()"> GENERAR</button>
-<!--       <a href="" style="color: black;"><span ng-click="generarpqtPorEntregar()" class="zmdi zmdi-collection-pdf zmdi-hc-2x" ></span></a> -->
-      <!--<br>
-      <br>-->
       <div class="">
-        <div class="table-responsive">
-
-          <table class="table table-hover" datatable="ng" dt-options="dtOptions" id="tabla_inicio_p" data-page-length='5'>
-              <thead>
-                  <tr class="active">                          
-                    <th class="center-align bordear-izquierda">Proveedor</th>
-                    <th class="center-align">Cerrado (g)</th>
-                    <th class="center-align">Entregado (g)</th>
-                    <th class="center-align">Pendiente (g)</th>                         
-                    <th class="center-align bordear-derecha">Última Entrega</th>
-                  </tr>
-              </thead>
-              <tfoot>
-                <tr class="active">
-                    <th class="center-align" style="border-radius: 0 0 4px 400px;"></th>
-                    <th class="center-align"></th>
-                    <th class="center-align"></th>
-                    <th class="center-align"></th>
-                    <th class="center-align" style="border-radius: 0 4px 400px 0;"></th>
-                </tr>
-              </tfoot>
-              <tbody>
-                  <tr ng-repeat="proveedor in proveedores" ng-if="!((proveedor.cerrado - proveedor.entregado)== 0)">
-                    <td class="center-align" >
-                      {{proveedor.nombres}} {{proveedor.apellidos}}
-                    </td>
-                    <td class="center-align" >
-                      {{proveedor.cerrado | currency: ''}} 
-                    </td>
-                    <td class="center-align" >                            
-                      {{proveedor.entregado  | currency: ''}}
-                    </td>
-                    <td class="center-align" field="por_cerrar">
-                      {{(proveedor.entregado - proveedor.cerrado) | number}}
-                    </td>
-                    <td class="center-align" field="fecha_entrega">
-                    <!-- aqui va la ultmima recepcion de este personaje-->
-                      {{proveedor.ultima_entrega | date:'dd/MM/yyyy' : shortDate}}
-                    </td>
-                  </tr>
-              </tbody>
-          </table>
-        </div> 
-      </div>                
-    </div>
+        <table class="table table-hover" datatable="ng" dt-options="dtOptions" id="tabla_inicio_p" data-page-length='5'>
+          <thead>
+              <tr class="active">                          
+                <th class="center-align bordear-izquierda">Proveedor</th>
+                <th class="center-align">Cerrado (g)</th>
+                <th class="center-align">Entregado (g)</th>
+                <th class="center-align">Pendiente (g)</th>                         
+                <th class="center-align bordear-derecha">Última Entrega</th>
+              </tr>
+          </thead>
+          <tfoot>
+            <tr class="active">
+                <th class="center-align bordear-izquierda-abajo"></th>
+                <th class="center-align"></th>
+                <th class="center-align"></th>
+                <th class="center-align"></th>
+                <th class="center-align bordear-derecha-abajo"></th>
+            </tr>
+          </tfoot>
+          <tbody>
+              <tr ng-repeat="proveedor in proveedores" ng-if="!((proveedor.cerrado - proveedor.entregado)== 0)">
+                <td class="center-align" >
+                  {{proveedor.nombres}} {{proveedor.apellidos}}
+                </td>
+                <td class="center-align" >
+                  {{proveedor.cerrado | currency: ''}} 
+                </td>
+                <td class="center-align" >                            
+                  {{proveedor.entregado  | currency: ''}}
+                </td>
+                <td class="center-align" field="por_cerrar">
+                  {{(proveedor.entregado - proveedor.cerrado) | number}}
+                </td>
+                <td class="center-align" field="fecha_entrega">
+                <!-- aqui va la ultmima recepcion de este personaje-->
+                  {{proveedor.ultima_entrega | date:'dd/MM/yyyy' : shortDate}}
+                </td>
+              </tr>
+          </tbody>
+      </table> 
+    </div>                
+  </div>
 </div>
 

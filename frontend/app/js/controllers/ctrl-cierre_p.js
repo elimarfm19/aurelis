@@ -228,9 +228,9 @@ rows.push({
           id: cierresProveedor[0].cierre.CierreId,
           fecha_cierre: moment(cierresProveedor[0].cierre.fecha_cierre).format('DD-MM-YYYY'),
           fecha_entrega: moment(cierresProveedor[0].cierre.fecha_entrega).format('DD-MM-YYYY'),
-          cantidad: cierresProveedor[0].cierre.cantidad,
-          precio: cierresProveedor[0].cierre.precio,
-          total: cierresProveedor[0].cierre.total
+          cantidad: numeral(cierresProveedor[0].cierre.cantidad).format('0,0.00'),
+          precio: numeral(cierresProveedor[0].cierre.precio).format('0,0.00'),
+          total: numeral(cierresProveedor[0].cierre.total).format('0,0.00')
           // observacion: cierresProveedor[0].cierre.observacion
       });
 
@@ -262,9 +262,9 @@ doc.text('Cierres con Proveedores', 14, doc.autoTable.previous.finalY + 10);
               proveedor: cierresProveedor[i].proveedor.nombres + ' '+ cierresProveedor[i].proveedor.apellidos,
               fecha_cierre: moment(cierresProveedor[i].fecha_cierre).format('DD-MM-YYYY'),
               fecha_entrega: moment(cierresProveedor[i].fecha_entrega).format('DD-MM-YYYY'),
-              cantidad: cierresProveedor[i].cantidad,
-              precio: cierresProveedor[i].precio,
-              total: cierresProveedor[i].total
+              cantidad: numeral(cierresProveedor[i].cantidad).format('0,0.00'),
+              precio: numeral(cierresProveedor[i].precio).format('0,0.00'),
+              total: numeral(cierresProveedor[i].total).format('0,0.00')
           });
                   }
    doc.autoTable(getColumns(), data, {
@@ -306,13 +306,8 @@ doc.text('Cierres con Proveedores', 14, doc.autoTable.previous.finalY + 10);
     if (typeof doc.putTotalPages === 'function') {
         doc.putTotalPages(totalPagesExp);
     } 
-
-
-      doc.output('datauri'); 
-       //doc.save('DetalleCierreProveedor.pdf');
-
-    
-
+      // doc.output('datauri'); 
+      doc.save('DetalleCierre'+cierresProveedor[0].cierre.cliente.nombres+' '+cierresProveedor[0].cierre.cliente.apellidos+'.pdf');
     });
              
 }
@@ -380,9 +375,9 @@ $scope.generarpqtCierre= function(proveedor) {
                           id: cierresProveedor[i].Cierre_pId,
                           fecha_cierre: moment(cierresProveedor[i].fecha_cierre).format('DD-MM-YYYY'),
                           fecha_entrega: moment(cierresProveedor[i].fecha_entrega).format('DD-MM-YYYY'),
-                          cantidad: cierresProveedor[i].cantidad,
-                          precio: cierresProveedor[i].precio,
-                          total: cierresProveedor[i].total
+                          cantidad: numeral(cierresProveedor[i].cantidad).format('0,0.00'),
+                          precio: numeral(cierresProveedor[i].precio).format('0,0.00'),
+                          total: numeral(cierresProveedor[i].total).format('0,0.00')
                       });
                  }
   
@@ -430,15 +425,15 @@ $scope.generarpqtCierre= function(proveedor) {
     });
     if (route ==  route_backend+"cierresProveedor/proveedor/"+$scope.proveedor._id) {
       doc.setFontSize(12);
-      doc.text('Total Cerrado: '+parseFloat(cierresProveedor[0].proveedor.cerrado).toFixed(2) +' (g)', 14, doc.autoTable.previous.finalY + 10);
-      doc.text('Total Entregado: '+parseFloat(cierresProveedor[0].proveedor.entregado).toFixed(2)+' (g)', 80, doc.autoTable.previous.finalY + 10);
-      doc.text('Pendiente: '+parseFloat((cierresProveedor[0].proveedor.entregado) - (cierresProveedor[0].proveedor.cerrado)).toFixed(2)+' (g)', 150, doc.autoTable.previous.finalY + 10);
-      // doc.text('Total Cerrado: '+parseFloat(cierresProveedor[0].proveedor.cerrado).toFixed(2) +' (g)', 14, doc.autoTable.previous.finalY + 10);
-      // doc.text('Total Entregado: '+parseFloat(cierresProveedor[0].proveedor.entregado).toFixed(2)+' (g)', 14, doc.autoTable.previous.finalY + 20);
+      doc.text('Total Cerrado: '+numeral(cierresProveedor[0].proveedor.cerrado).format('0,0.00') +' (g)', 14, doc.autoTable.previous.finalY + 10);
+      doc.text('Total Entregado: '+numeral(cierresProveedor[0].proveedor.entregado).format('0,0.00')+' (g)', 80, doc.autoTable.previous.finalY + 10);
+      doc.text('Pendiente: '+numeral((cierresProveedor[0].proveedor.entregado) - (cierresProveedor[0].proveedor.cerrado)).format('0,0.00')+' (g)', 150, doc.autoTable.previous.finalY + 10);
+      // doc.text('Total Cerrado: '+numeral(cierresProveedor[0].proveedor.cerrado).format('0,0.00') +' (g)', 14, doc.autoTable.previous.finalY + 10);
+      // doc.text('Total Entregado: '+numeral(cierresProveedor[0].proveedor.entregado).format('0,0.00')+' (g)', 14, doc.autoTable.previous.finalY + 20);
     }
     else{
       doc.setFontSize(12);
-      doc.text('Total Cerrado Parcial: '+parseFloat(entregado).toFixed(2) +' (g)', 14, doc.autoTable.previous.finalY + 10);
+      doc.text('Total Cerrado Parcial: '+numeral(entregado).format('0,0.00') +' (g)', 14, doc.autoTable.previous.finalY + 10);
     }
 
 
@@ -448,8 +443,8 @@ $scope.generarpqtCierre= function(proveedor) {
     } 
 
 
-      doc.output('datauri'); 
-       //doc.save('table.pdf');
+      // doc.output('datauri'); 
+       doc.save('CierresProveedor-'+cierresProveedor[0].proveedor.nombres+' '+cierresProveedor[0].proveedor.apellidos+'.pdf');
 
     
 

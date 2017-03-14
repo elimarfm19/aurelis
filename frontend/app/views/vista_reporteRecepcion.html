@@ -1,16 +1,12 @@
-
-<div class="container">
+<div class="col-lg-10 col-lg-offset-1">
  </br><br>
-  <ul class="nav nav-tabs col-md-12" style="margin-left:0.2cm; " >
-    <li class="active"><a class="a" style="color:black; font-weight:600; font-family: 'Tahoma';" href="#entrega" data-toggle="tab">Reporte de Recepciones</a></li>
+  <ul class="nav nav-tabs">
+    <li class="active"><a class="a" href="#entrega" data-toggle="tab">Reporte de Recepciones</a></li>
   </ul>
 
-  <div class="tab-pane col-md-9" style="margin-left: 1.5cm;" id="entrega" >
-    <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Recepciones de Proveedores </h3>
-      <!--<br>
-      <br>-->
-    <div class="">
-      <div class="table-responsive" ng-controller="ctrl-recepcion">
+  <div class="tab-pane">
+    <h3 class="center-align">Recepciones de Proveedores </h3>
+      <div class="" ng-controller="ctrl-recepcion">
         <table class="table table-hover" datatable="ng" dt-options="dtOptions" id="tabla_reporte" data-page-length='5'>
           <thead>
             <tr class="active">                          
@@ -23,11 +19,11 @@
           </thead>
           <tfoot>
             <tr class="active">
-                <th class="center-align" style="border-radius: 0 0 4px 400px;"></th>
+                <th class="center-align bordear-izquierda-abajo"></th>
                 <th class="center-align"></th>
                 <th class="center-align"></th>
                 <th class="center-align"></th>
-                <th class="center-align" style="border-radius: 0 4px 400px 0; width: 3%"></th>
+                <th class="center-align bordear-derecha-abajo"></th>
             </tr>
           </tfoot>
           <tbody>
@@ -50,7 +46,6 @@
             </tr>
           </tbody>
         </table>
-      </div>          
-    </div>                  
+      </div>                        
   </div>
 </div>

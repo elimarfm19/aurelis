@@ -278,7 +278,7 @@ $scope.generarpqt= function(entrega) {
                           id: piezas[i].piezaId,
                           proveedor: piezas[i].recepcion.proveedor.nombres+' '+piezas[i].recepcion.proveedor.apellidos,
                           peso_bruto: numeral(piezas[i].peso_entrega).format('0,0.00'),
-                          ley: numeral(piezas[i].ley).format('0,0.00'),
+                          ley: piezas[i].ley,
                           puro: numeral(piezas[i].puro_c).format('0,0.00'),
                           status: piezas[i].status,
                           observacion: piezas[i].observacion
@@ -327,8 +327,9 @@ $scope.generarpqt= function(entrega) {
               doc.putTotalPages(totalPagesExp);
           } 
 
-          doc.output('datauri'); 
-          //doc.save('table.pdf');   
+           // doc.output('datauri'); 
+          // doc.save('table.pdf');   
+          doc.save('DetalleEntrega-'+entregas.cliente.nombres+' '+entregas.cliente.apellidos+'.pdf');    
     });
 
   });
@@ -460,8 +461,8 @@ $scope.generarpqtC= function() {
     } 
 
 
-        doc.output('datauri'); 
-      // doc.save('table.pdf');
+        // doc.output('datauri'); 
+      doc.save('Entrega-'+entregas[0].cliente.nombres+' '+entregas[0].cliente.apellidos+'.pdf');
 
     
 
@@ -590,12 +591,8 @@ $scope.generarpqtPorEntregar= function() {
     if (typeof doc.putTotalPages === 'function') {
         doc.putTotalPages(totalPagesExp);
     } 
-
-
-      
-    //    doc.save('Reporte por Entregar.pdf');
-
-     doc.output('datauri');
+     // doc.output('datauri');
+     doc.save('EntregasPendientes-'+moment().format('DD-MM-YYYY')+'.pdf');
 
     });
              
@@ -708,7 +705,7 @@ $scope.historialCliente= function() {
         if(historiales[i].entrega !=null){
             entregaId = historiales[i].entrega.EntregaId;
             cantidadEntrega = historiales[i].entrega.cantidad;
-            total_entregado += Number(historiales[i].entrega.cantidad);
+            total_entregado += Number(historiales[i].entrega.cantidad); 
         }
         var cierreId ='';
         var cierreCantidad = '';
@@ -770,8 +767,8 @@ $scope.historialCliente= function() {
     } 
 
 
-        doc.output('datauri'); 
-      // doc.save('table.pdf');
+       // doc.output('datauri'); 
+      doc.save('HistorialCliente-'+historiales[0].cliente.nombres+' '+historiales[0].cliente.apellidos+'.pdf');
 
     
 

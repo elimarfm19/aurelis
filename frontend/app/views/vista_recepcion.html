@@ -1,40 +1,37 @@
-<div class="container"> 
-      <div class="tamanno">
-			  <div class="container col-md-6 col-md-offset-2" style="margin-top:100px; ">
-	        <div class="row"  style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
-				    <br>
-	          <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nueva Recepción de Proveedor</h3>
-            <h2 style="color:black; text-align: right; font-weight:600; font-size: 15px; font-family: 'Tahoma'; margin-right: 5%;">Cod. Recepción: {{recepcion.RecepcionId}}</h2>            
-            <br>
-	          <form name="Codenx" novalidate class="col s12">
-              <div class="row col-md-12">                            
-                <div class="" ng-controller="ctrl-proveedor" > 
-                  <select class="select col-md-6" ng-model="recepcion.proveedor" ng-change="buscarProveedor(recepcion.proveedor)" ng-disabled="recepcion.RecepcionId" required>
-                    <option value="">Seleccione Proveedor</option>
-                    <option ng-repeat="proveedor in proveedores" ng-if="(proveedor.cerrado - proveedor.entregado) > 0" value="{{proveedor._id}}">{{proveedor.nombres}} {{proveedor.apellidos}}</option> 
-                  </select>
-                  <div class="col-md-6">
-                    <input disabled="true" value="Restante: {{proveedor.entregado - proveedor.cerrado | number}} (g)" style="color:black; font-weight:600; font-size: 15px; font-family: 'Tahoma'; text-align: center;"></input> 
-                  </div>
-                </div>      
-              </div>
-              <br>                
-              <div style="text-align:center">
-              <!-- Trigger the modal with a button -->
-                <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#piezasModal" ng-if="recepcion.RecepcionId">Piezas
-                  <i class="zmdi zmdi-puzzle-piece"></i>
-                </button>
-              </div> 
-              <br>  
-              <div style="text-align:center">                        
-                <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#piezasModal" ng-click="add(recepcion)" ng-if="!recepcion._id" type="submit" ng-disabled="!Codenx.$valid">AÑADIR</button>
-              </div>
-              <br>                                                                       
-	        </form>           
-	      </div>
-	    </div>
-     </div>
-     <br>
+<div class="container col-lg-6 col-lg-offset-2 bajar"> 
+	<div class="row container-cierre">
+    <br>
+    <h3 class="center-align">Nueva Recepción de Proveedor</h3>
+    <h2 class="right-align cod">Cod. Recepción: {{recepcion.RecepcionId}}</h2>            
+    <br>
+    <form name="Codenx" novalidate class="col-lg-12">
+      <div class="row">                            
+        <div class="" ng-controller="ctrl-proveedor" > 
+          <select class="select col-lg-6" ng-model="recepcion.proveedor" ng-change="buscarProveedor(recepcion.proveedor)" ng-disabled="recepcion.RecepcionId" required>
+            <option value="">Seleccione Proveedor</option>
+            <option ng-repeat="proveedor in proveedores" ng-if="(proveedor.cerrado - proveedor.entregado) > 0" value="{{proveedor._id}}">{{proveedor.nombres}} {{proveedor.apellidos}}</option> 
+          </select>
+          <div class="col-md-6">
+            <input class="input center-align" disabled="true" value="Restante: {{proveedor.entregado - proveedor.cerrado | number}} (g)"></input> 
+          </div>
+        </div>      
+      </div>
+      <br>                
+      <div class="center-align">
+      <!-- Trigger the modal with a button -->
+        <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#piezasModal" ng-if="recepcion.RecepcionId">Piezas
+          <i class="zmdi zmdi-puzzle-piece"></i>
+        </button>
+      </div> 
+      <br>  
+      <div class="center-align">                        
+        <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#piezasModal" ng-click="add(recepcion)" ng-if="!recepcion._id" type="submit" ng-disabled="!Codenx.$valid">AÑADIR</button>
+      </div>
+      <br>                                                                       
+    </form>           
+  </div>
+</div>
+<br>
 
 <div class="container">
     <!-- Modal -->
@@ -45,25 +42,37 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" ng-click="update(recepcion)">&times;</button>
-          <h4 class="modal-title center-align" style="color:black; font-weight:600; font-family: 'Tahoma';">Detalle de Piezas</h4>
+          <h4 class="modal-title center-align">Detalle de Piezas</h4>
         </div>
         <div class="modal-body">
           <div class="row" ng-controller="ctrl-pieza">
             <!-- <div class="table-responsive"> -->
               <form name="Codenx" novalidate>
-                <div class="row" style="text-align: right; margin-right: 0%;">
+                <div class="row right-align">
                   <button class="btn btn-primary waves-effect waves-light" ng-click="add(pieza)" ng-if="!pieza._id" type="submit" ng-disabled="!Codenx.$valid">Añadir</button>
                   <button class="btn btn-info waves-effect waves-light" ng-click="update(pieza)" ng-if="pieza._id" type="submit">Actualizar</button>
+                </div>
+                <div class="col-lg-3">
+                  <input class="form-control center-align" ng-model="pieza.peso_bruto" required="" placeholder="145.7">
+                </div>
+                <div class="col-lg-3">
+                  <input class="form-control center-align" ng-model="pieza.ley" required="" placeholder="930">
+                </div>
+                <div class="col-lg-3">
+                  <input class="form-control center-align" ng-model="pieza.peso_entrega" required="" placeholder="146">
+                </div>
+                <div class="col-lg-3">
+                  <input class="form-control center-align" required="" disabled type="text" class="validate" value="{{(pieza.peso_bruto * (pieza.ley/1000)) | currency:''}} ">
                 </div>
                 <table class="table table-hover table-striped">
                   <thead>
                     <tr class="active">
-                      <th class="center-align bordear-izquierda" style="width: 15%">Cod. Pieza</th>
-                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Peso Bruto</th>
-                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Ley</th>                      
-                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Peso Entrega</th>
-                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Puro</th>
-                      <th class="center-align bordear-derecha" style=" width: 14%;">Opciones</th>
+                      <th class="center-align bordear-izquierda tablas" style="width: 15%">Cod. Pieza</th>
+                      <th class="center-align tablas">Peso Bruto</th>
+                      <th class="center-align tablas">Ley</th>                      
+                      <th class="center-align tablas">Peso Entrega</th>
+                      <th class="center-align tablas">Puro</th>
+                      <th class="center-align bordear-derecha tablas" style=" width: 14%;">Opciones</th>
                     </tr>
                   </thead>
                    <tbody>
@@ -71,18 +80,6 @@
                       <td ng-controller="ctrl-proveedor">
                         <input hidden type="text" ng-model="recepcion._id">
                         <input hidden value="{{recepcion._id}}" id="recepcion_id">                       
-                      </td>
-                      <td>
-                        <input class="form-control center-align" ng-model="pieza.peso_bruto" required="" placeholder="145.7">
-                      </td>
-                      <td style="width: 20%;">
-                        <input class="form-control center-align" ng-model="pieza.ley" required="" placeholder="930">
-                      </td>                      
-                      <td>
-                        <input class="form-control center-align" ng-model="pieza.peso_entrega" required="" placeholder="146">
-                      </td>
-                      <td style="width: 20%;">
-                        <input class="form-control center-align" required="" disabled type="text" class="validate" value="{{(pieza.peso_bruto * (pieza.ley/1000)) | currency:''}} ">
                       </td>
                     </tr>
                     <tr ng-repeat="pieza in piezas | filter: recepcion._id" >
@@ -102,28 +99,22 @@
                         {{pieza.puro_p}}
                       </td>
                       <td class="center-align" style="width: 14%">
-                          <span class="zmdi zmdi-edit zmdi-hc-2x" style="cursor: pointer;" ng-click=edit(pieza._id)/>
-                          <span class="zmdi zmdi-delete zmdi-hc-2x" style="cursor: pointer;" ng-click='remove(pieza)'/>
+                          <span class="zmdi zmdi-edit zmdi-hc-2x manito" ng-click=edit(pieza._id)/>
+                          <span class="zmdi zmdi-delete zmdi-hc-2x manito" ng-click='remove(pieza)'/>
                       </td>
                     </tr>
-                      <tr>
-                        <td colspan="5" style="text-align: right;">  
-                          <input hidden ng-model="sumaPuro" id="cantidad">
-                          <span class="label label-primary" style="font-size: 12px;" >Total de Recepción: {{ suma_puro() }} {{ sumaPuro | currency: ' '}} (g)</span>
-                      </tr>
-                      <tr>
-                        <td colspan="5" style="text-align: right;">  
-                          <span class="label label-primary" style="font-size: 12px;" >Total de Cierres:  {{recepcion.proveedor.cerrado - recepcion.proveedor.entregado  | currency: ' '}} (g) </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td colspan="5" style="text-align: right;">  
-                          <span class="label label-danger" style="font-size: 12px;">Diferencia: {{
-                          (recepcion.proveedor.cerrado - recepcion.proveedor.entregado) - sumaPuro | currency: ' '}} (g) </span>
-                        </td>
-                      </tr>
                   </tbody>
                 </table>
+                <div class="col-lg-4">
+                  <input hidden ng-model="sumaPuro" id="cantidad">
+                  <span class="label label-primary palabras">Total de Recepción: {{ suma_puro() }} {{ sumaPuro | currency: ' '}} (g)</span>
+                </div>
+                <div class="col-lg-4">
+                  <span class="label label-primary palabras">Total de Cierres:  {{recepcion.proveedor.cerrado - recepcion.proveedor.entregado  | currency: ' '}} (g) </span>
+                </div>
+                <div class="col-lg-4">
+                  <span class="label label-danger palabras">Diferencia: {{ (recepcion.proveedor.cerrado - recepcion.proveedor.entregado) - sumaPuro | currency: ' '}} (g) </span>
+                </div>
              </form>
             <!-- </div> -->
           </div>

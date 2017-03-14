@@ -1,36 +1,34 @@
-<div class="container" id="container" > 
-  <div class="tamanno">
-    <br><br>
-    <ul class="nav nav-tabs col-md-12" style="margin-left:0.2cm; " >
-      <li class="active"><a class="a" style="color:black; font-weight:600; font-family: 'Tahoma';" data-toggle="tab">Reporte de Ganancias</a></li>
-    </ul>
+<div class="col-lg-10 col-lg-offset-1">
+  <br><br>
+  <ul class="nav nav-tabs">
+    <li class="active"><a class="a" data-toggle="tab">Reporte de Ganancias</a></li>
+  </ul>
 
-	  <div class="container col-md-6 col-md-offset-2" style="margin-top:100px; ">
-      <div class="row" style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
-	    <br>
-        <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Ganancias</h3>
+  <div class="container col-lg-6 col-lg-offset-2 bajar">
+    <div class="row container-cierre">
+    <br>
+      <h3 class="center-align">Ganancias</h3>
+      <br>
+      <form name="Codenx" novalidate class="col s12">
+        <div class="row">
         <br>
-        <form name="Codenx" novalidate class="col s12">
-          <div class="row">
-          <br>
-            <div class="col-md-6">
-              <h2 style="color:black; font-weight:600; font-size: 12px; font-family: 'Tahoma';text-align: left;">Fecha de Inicio:</h2>
-              <input type="text" id="fecha_inicio" ng-model="fecha_inicio" style="text-align: center;"/>
-            </div>
-            <div class="col-md-6">
-              <h2 style="color:black; font-weight:600; font-size: 12px; font-family: 'Tahoma'; text-align: left;">Fecha de Fin:</h2>
-              <input type="text" id="fecha_fin" ng-model="fecha_fin" style="text-align: center;" /> 
-            </div>
-          </div>                       
-          <br>                              
-          <div style="text-align:center">                        
-            <button class="btn btn-primary waves-effect waves-light" ng-disabled="!(fecha_inicio && fecha_fin)" type="submit" ng-click="generarpqtGanancia()">GENERAR REPORTE </button>
-          </div>           
-          <br>                                                                       
-        </form>           
-      </div>
-    </div>        
-  </div>
+          <div class="col-lg-6">
+            <h2 class="left-align">Fecha de Inicio:</h2>
+            <input class="center-align" type="text" id="fecha_inicio" ng-model="fecha_inicio"/>
+          </div>
+          <div class="col-lg-6">
+            <h2 class="left-align">Fecha de Fin:</h2>
+            <input class="center-align" type="text" id="fecha_fin" ng-model="fecha_fin"/> 
+          </div>
+        </div>                       
+        <br>                              
+        <div class="center-align">                        
+          <button class="btn btn-primary waves-effect waves-light" ng-disabled="!(fecha_inicio && fecha_fin)" type="submit" ng-click="generarpqtGanancia()">GENERAR REPORTE </button>
+        </div>           
+        <br>                                                                       
+      </form>           
+    </div>
+  </div>        
 </div>
 <br>
 

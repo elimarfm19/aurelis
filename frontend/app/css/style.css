@@ -718,7 +718,7 @@ body, html{
 @media (min-width: 1024px) and (max-width:1280px) {
     .NavLateral{
         width: 20%;
-        height: 93.5% !important;
+        height: 94% !important;
     }
     .ContentPage{
         width: 80%;
@@ -1001,5 +1001,21 @@ option{
 
 .letra-btn{
     font-weight: 600; 
+    font-family: 'Tahoma';
+}
+
+.ojito-direccion{
+    max-width: 20px; 
+    height: 20px;
+}
+
+.cod{
+    margin-right: 5%;
+}
+
+.input{
+    color:black;
+    font-weight:600; 
+    font-size: 15px; 
     font-family: 'Tahoma';
 }

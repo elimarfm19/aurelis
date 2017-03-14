@@ -23,7 +23,7 @@ $scope.cierre_p = new CierreProveedor();
 $scope.pago = new Pago();
 
 $scope.reporteCierre = true;
-var vm = this;
+//var vm = this;
 var refresh = function() {
   $scope.cierres = Cierre.query();
   $scope.clientes = Cliente.query();
@@ -279,22 +279,28 @@ $scope.addCierreProveedor = function(Cierre) {
                       
                       else{
                       //vm.cierreproveedores.push(angular.copy(cierreProveedor));
-                        for (var i = 0; i < vm.cierreproveedores.length; i++) {
+                       //  for (var i = 0; i < vm.cierreproveedores.length; i++) {
                    
-                       var padre0 = document.getElementById(vm.cierreproveedores[i]._id).parentNode;
+                       // var padre0 = document.getElementById(vm.cierreproveedores[i]._id).parentNode;
 
-                       //vm.cierreproveedores.splice(padre0.getAttribute('name'), 1);
-                        var padre = padre0.parentNode;
+                       // //vm.cierreproveedores.splice(padre0.getAttribute('name'), 1);
+                       //  var padre = padre0.parentNode;
 
 
-                       // console.log(padre0.getAttribute("id") + " / " + padre.getAttribute("id"));
-                       // var padre = document.getElementById(index);
-                           if (padre.parentNode) {
-                             padre.parentNode.removeChild(padre);
-                          }
-                        }
+                       // // console.log(padre0.getAttribute("id") + " / " + padre.getAttribute("id"));
+                       // // var padre = document.getElementById(index);
+                       //     if (padre.parentNode) {
+                       //       padre.parentNode.removeChild(padre);
+                       //    }
+                       //  }
                   
-                          vm.cierreproveedores = CierreProveedor.query();
+                        $http.get(route_backend+"cierresProveedor/cierres/"+document.getElementById("cierre_id").value)
+                          .success(function(cierres){
+                          console.log(cierres)
+                           $scope.cierreproveedores =cierres;
+                        });
+                   
+                         
 
                       }
                      
@@ -404,11 +410,16 @@ console.log(cierreProveedorId);
                                         $window.location.reload();
                                       }else{
 
-                                           vm.cierreproveedores.splice(index, 1);
-                                           var padre = document.getElementById(index);
-                                            if (padre.parentNode) {
-                                              padre.parentNode.removeChild(padre);
-                                            }
+                                        $http.get(route_backend+"cierresProveedor/cierres/"+document.getElementById("cierre_id").value)
+                                          .success(function(cierres){
+                                            console.log(cierres)
+                                            $scope.cierreproveedores =cierres;
+                                          });
+                                           // vm.cierreproveedores.splice(index, 1);
+                                           // var padre = document.getElementById(index);
+                                           //  if (padre.parentNode) {
+                                           //    padre.parentNode.removeChild(padre);
+                                           //  }
                                         
 
                                       }
@@ -725,8 +736,8 @@ var language = {
      $scope.dtOptions =  DTOptionsBuilder.newOptions()
      .withLanguage(language)
         
-        .withOption('bFilter', false)
-        .withOption('paging', false)
+        .withOption('bFilter', true)
+        .withOption('paging', true)
          //.withOption('processing', true)
         //.withOption('serverSide', true)
         //.withOption('order', ['asc'])
@@ -736,17 +747,17 @@ var language = {
               renderer: renderer
           }
         })
-        .withOption('info', false);
+        .withOption('info', true);
 
-    var vm = this;
-    vm.cierreproveedores = [];
-    vm.proveedores = [];
+   // var vm = this;
+    //vm.cierreproveedores = [];
+    //$scope.proveedores = [];
 
-    vm.dtOptionsCierre =  DTOptionsBuilder.newOptions()
+    $scope.dtOptionsCierre =  DTOptionsBuilder.newOptions()
      .withLanguage(language)
         
         .withOption('bFilter', false)
-        .withOption('paging', false)
+        .withOption('paging', true)
          //.withOption('processing', true)
         //.withOption('serverSide', true)
         //.withOption('order', ['asc'])
@@ -757,25 +768,24 @@ var language = {
           }
         })
         .withOption('info', false);
-    vm.dtColumnDefsCierre = [
+    $scope.dtColumnDefsCierre = [
         DTColumnDefBuilder.newColumnDef(0).notSortable(),
         DTColumnDefBuilder.newColumnDef(1).notSortable(),
         DTColumnDefBuilder.newColumnDef(2).notSortable(),
         DTColumnDefBuilder.newColumnDef(3).notSortable(),
-        DTColumnDefBuilder.newColumnDef(4).notSortable(),
-        DTColumnDefBuilder.newColumnDef(5).notSortable()
+        DTColumnDefBuilder.newColumnDef(4).notSortable()
     ];
 
-    vm.dtInstanceCierre = {};
+    $scope.dtInstanceCierre = {};
 
-    CierreProveedor.query().$promise.then(function(persons) {
-        vm.cierreproveedores = persons;
-        //vm.proveedores = Proveedor.query();
-    });
-    Proveedor.query().$promise.then(function(persons2) {
-        //vm.cierreproveedores = persons;
-        vm.proveedores = persons2;
-    });
+    // CierreProveedor.query().$promise.then(function(persons) {
+    //     vm.cierreproveedores = persons;
+    //     //vm.proveedores = Proveedor.query();
+    // });
+    // Proveedor.query().$promise.then(function(persons2) {
+    //     //vm.cierreproveedores = persons;
+    //     $scope.proveedores = persons2;
+    // });
 
 
 $scope.generarpqt= function(entrega) {
@@ -966,9 +976,9 @@ $scope.generarpqtC= function() {
           id: cierres[i].CierreId,
           fecha_cierre: moment(cierres[i].fecha_cierre).format('DD-MM-YYYY'),
           fecha_entrega: moment(cierres[i].fecha_entrega).format('DD-MM-YYYY'),
-          cantidad: cierres[i].cantidad,
-          precio: cierres[i].precio,
-          total: cierres[i].total
+          cantidad: numeral(cierres[i].cantidad).format('0,0.00'),
+          precio: numeral(cierres[i].precio).format('0,0.00'),
+          total: numeral(cierres[i].total).format('0,0.00')
         });
 
 
@@ -1010,11 +1020,8 @@ $scope.generarpqtC= function() {
     } 
 
 
-      doc.output('datauri'); 
-      //doc.save('table.pdf');
-
-    
-
+      // doc.output('datauri'); 
+      doc.save('CierresCliente-'+cierres[0].cliente.nombres+' '+cierres[0].cliente.apellidos+'.pdf');
     });
 
 }
@@ -1217,8 +1224,8 @@ var string =
     } 
 
 
-      doc.output('datauri'); 
-       //doc.save('HistorialCierres.pdf');
+      // doc.output('datauri'); 
+       doc.save('HistorialCierres '+moment($scope.fecha_inicio).format("DD-MM-YYYY")+"/"+moment($scope.fecha_fin).format("DD-MM-YYYY")+'.pdf');
 
     
 

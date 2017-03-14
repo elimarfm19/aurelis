@@ -1,40 +1,36 @@
-<div class="container"> 
-      <div class="tamanno">
-			  <div class="container col-md-6 col-md-offset-2" style="margin-top:100px; ">
-	        <div class="row"  style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
-            <br>
-            <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Nueva Entrega a Cliente</h3>
-            <h2 style="color:black; text-align: right; font-weight:600; font-size: 15px; font-family: 'Tahoma'; margin-right: 5%;">Cod. Recepción: {{entrega.EntregaId}}</h2>            
-            <br>
-	          <form name="Codenx" novalidate class="col s12">
-              <div class="row col-md-12">                            
-                <div class="" ng-controller="ctrl-cliente"> 
-                  <select id="cliente" class="select col-md-6" ng-model="entrega.cliente" ng-change="buscarCliente(entrega.cliente)"   required>
-                    <option value="">Seleccione un Cliente</option>
-                    <option ng-repeat="cliente in clientes" ng-if="(cliente.cerrado - cliente.entregado) > 0" value="{{cliente._id}}">{{cliente.nombres}} {{cliente.apellidos}}</option> 
-                  </select>
-                  <div class="col-md-6">
-                    <input disabled="true" id="restante" value="Restante: {{ cliente.entregado - cliente.cerrado | number}} (g)" style="color:black; font-weight:600; font-size: 15px; font-family: 'Tahoma'; text-align: center;"></input> 
-                  </div>
-                </div>      
-              </div>
-              <br>                
-              <div style="text-align:center">
-              <!-- Trigger the modal with a button -->
-                <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#piezasModal" ng-if="entrega.EntregaId">Piezas
-                  <i class="zmdi zmdi-puzzle-piece"></i>
-                </button>
-              </div> 
-              <br>  
-              <div style="text-align:center">                        
-                <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#piezasModal" ng-click="add(entrega)" ng-if="!entrega._id" type="submit" ng-disabled="!Codenx.$valid">AÑADIR</button>
-              </div>
-              <br>                                                                       
-          </form>        
-	      </div>
-	    </div>
-     </div>
-     <br>
+<div class="container col-lg-6 col-lg-offset-2 bajar">
+  <div class="row container-cierre">
+    <br>
+    <h3 class="center-align">Nueva Entrega a Cliente</h3>
+    <h2 class="right-align cod">Cód. Recepción: {{entrega.EntregaId}}</h2>            
+    <br>
+    <form name="Codenx" novalidate>
+      <div class="row col-lg-12">                            
+        <div class="" ng-controller="ctrl-cliente"> 
+          <select id="cliente" class="select col-lg-6" ng-model="entrega.cliente" ng-change="buscarCliente(entrega.cliente)" required>
+            <option value="">Seleccione un Cliente</option>
+            <option ng-repeat="cliente in clientes" ng-if="(cliente.cerrado - cliente.entregado) > 0" value="{{cliente._id}}">{{cliente.nombres}} {{cliente.apellidos}}</option> 
+          </select>
+          <div class="col-lg-6">
+            <input class="input center-align" disabled="true" id="restante" value="Restante: {{ cliente.entregado - cliente.cerrado | number}} (g)"></input> 
+          </div>
+        </div>      
+      </div>
+      <br>                
+      <div class="center-align">
+      <!-- Trigger the modal with a button -->
+        <button type="button" class="btn waves-effect waves-light btn-success waves-teal btn-flat" data-toggle="modal" data-target="#piezasModal" ng-if="entrega.EntregaId">Piezas
+          <i class="zmdi zmdi-puzzle-piece"></i>
+        </button>
+      </div> 
+      <br>  
+      <div class="center-align">                        
+        <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#piezasModal" ng-click="add(entrega)" ng-if="!entrega._id" type="submit" ng-disabled="!Codenx.$valid">AÑADIR</button>
+      </div>
+      <br>                                                                       
+  </form>        
+</div>
+<br>
 
 <div class="container">
     <!-- Modal -->
@@ -44,7 +40,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" ng-click="update(entrega)">&times;</button>
-          <h4 class="modal-title center-align" style="color:black; font-weight:600; font-family: 'Tahoma';">Detalle de Piezas Disponibles</h4>
+          <h4 class="modal-title center-align">Detalle de Piezas Disponibles</h4>
         </div>
         <div class="modal-body">
           <div class="row" ng-controller="ctrl-pieza">
@@ -55,16 +51,15 @@
                 <table class="table table-hover table-striped">
                   <thead>
                     <tr class="active">
-                      <th class="center-align bordear-izquierda">Cod. Pieza</th>
-                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Peso Bruto</th>
-                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Ley</th>
-                      <th class="center-align" style="background: #337ab7; color: #ffffff;">Puro</th>
-                      <th class="center-align bordear-derecha" >Opciones</th>
+                      <th class="center-align bordear-izquierda tablas">Cod. Pieza</th>
+                      <th class="center-align tablas">Peso Bruto</th>
+                      <th class="center-align tablas">Ley</th>
+                      <th class="center-align tablas">Puro</th>
+                      <th class="center-align bordear-derecha tablas" >Opciones</th>
                     </tr>
                   </thead>
                    <tbody>
-                    <tr ng-repeat="pieza in piezas | filter: showPiezas" >
-
+                    <tr ng-repeat="pieza in piezas | filter: showPiezas">
                       <td class="center-align">
                         {{pieza.piezaId}}
                       </td>
@@ -81,23 +76,18 @@
                         <input type="checkbox" id="check{{pieza._id}}" ng-click="editE(pieza,entrega.cliente)" ng-model="check" ng-checked="pieza.entrega._id == entrega._id"> 
                       </td>
                     </tr>
-                      <tr>
-                        <td colspan="5" style="text-align: right;">  
-                          <input hidden ng-model="sumaPuroe" id="cantidade">
-                          <span class="label label-primary" style="font-size: 12px;" >Total de Entrega: {{ suma_puroe() }} {{ sumaPuroe | currency: ''}} (g)</span>
-                      </tr>
-                      <tr>
-                        <td colspan="5" style="text-align: right;" >  
-                          <span class="label label-primary" style="font-size: 12px;" >Total de Restantes:  {{ restante | currency: '' }} (g)</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td colspan="5" style="text-align: right;">  
-                          <span class="label label-danger" style="font-size: 12px;">Diferencia: {{ restante - sumaPuroe | currency: ' '}} (g)</span>
-                        </td>
-                      </tr>
                   </tbody>
-                </table>
+                </table>  
+                <input hidden ng-model="sumaPuroe" id="cantidade">
+                <div class="col-lg-4 center-align">
+                  <span class="label label-primary" style="font-size: 12px;" >Total de Entrega: {{ suma_puroe() }} {{ sumaPuroe | currency: ''}} (g)</span>  
+                </div>
+                <div class="col-lg-4 center-align">
+                  <span class="label label-primary" style="font-size: 12px;" >Total de Restantes:  {{ restante | currency: '' }} (g)</span> 
+                </div>
+                <div class="col-lg-4 center-align">
+                  <span class="label label-danger" style="font-size: 12px;">Diferencia: {{ restante - sumaPuroe | currency: ' '}} (g)</span>
+                </div>
              </form>
             <!-- </div> -->
           </div>

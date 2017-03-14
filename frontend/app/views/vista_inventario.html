@@ -1,22 +1,18 @@
-
-<div class="container" >
+<div class="col-lg-10 col-lg-offset-1">
   </br>
   </br>
-  <ul class="nav nav-tabs col-md-12" style="margin-left:0.2cm; " >
-          <li class="active"><a class="a" style="color:black; font-weight:600; font-family: 'Tahoma';" href="" data-toggle="tab">Inventario</a></li>
+  <ul class="nav nav-tabs">
+    <li class="active"><a class="a" href="" data-toggle="tab">Inventario</a></li>
   </ul>
-  </br>
-  </br>
-  </br>
 
-  <div class="tab-content" style="margin-left: 1.3cm;" ng-controller="ctrl-pieza">
-    <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align">Inventario de Piezas Disponibles </h3>
+  <div class="tab-content" ng-controller="ctrl-pieza">
+    <h3 class="center-align">Inventario de Piezas Disponibles </h3>
 
       <br>
       <!-- <div class="col-md-12"> -->
         <!-- <div class="table-responsive" > -->
           <form name"Codenx" novalidate>
-            <table class="table table-hover" datatable="ng" dt-options="dtOptions" id="tabla_piezas_disponibles" data-page-length='5' >
+            <table class="table table-hover" datatable="ng" dt-options="dtOptions" id="tabla_piezas_disponibles" data-page-length='10' >
               <thead>
                 <tr class="active">                        
                   <th class="center-align bordear-izquierda">Cod. Pieza</th>
@@ -29,12 +25,12 @@
               </thead>
               <tfoot>
               <tr class="active">
-                  <th class="center-align" style="border-radius: 0 0 4px 400px;"></th>
+                  <th class="center-align bordear-izquierda-abajo"></th>
                   <th class="center-align"></th>
                   <th class="center-align"></th>
                   <th class="center-align"></th>
                   <th class="center-align"></th>
-                  <th class="center-align" style="border-radius: 0 4px 400px 0;"></th>
+                  <th class="center-align bordear-derecha-abajo"></th>
               </tr>
             </tfoot>
               <tbody>
@@ -65,4 +61,4 @@
       <!-- </div>                 -->
     </div>
   </div>
-<div data-loading></div>
+</div>
