@@ -137,7 +137,7 @@ $scope.verifyDuplicate = function() {
     }
 }
 
-$scope.ShowCase.dtOptions = DTOptionsBuilder.newOptions()
+$scope.dtOptions = DTOptionsBuilder.newOptions()
         
         .withLanguage(language)
         .withOption('info', false)
