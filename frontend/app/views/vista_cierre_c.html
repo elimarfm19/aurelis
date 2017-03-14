@@ -103,7 +103,7 @@
                       <tr class="active">
                         <th class="center-align bordear-izquierda tablas">  Proveedor</th>
                         <!-- <th class="center-align tablas">Tlf</th> -->
-                        <th class="center-align tablas">Cantidad (g)</th>
+                        <th class="center-align tablas" style="width: 20%">Cantidad (g)</th>
                         <th class="center-align tablas">Precio * g</th>
                         <th class="center-align tablas">Total</th>
                         <th class="center-align bordear-derecha tablas"></th>
@@ -169,6 +169,20 @@
                   <button class="btn btn-primary" ng-click="addPagosProveedor(pago)" ng-if="!pago._id" type="submit" ng-disabled="!Codenx.$valid">Añadir</button>
                   <button class="btn btn-info" ng-click="update(pago)" ng-if="pago._id" type="submit">Actualizar</button>
                 </div>
+                <div class="row col-lg-12">
+                  <div class="col-lg-3">
+                    <input class="form-control center-align" ng-model="pago.ci" required="" placeholder="12345678">
+                  </div>
+                  <div class="col-lg-3">
+                    <input class="form-control center-align" ng-model="pago.titular" required="" placeholder="NombreApellido">
+                  </div>
+                  <div class="col-lg-3">
+                    <input class="form-control center-align" ng-model="pago.banco" required="" placeholder="Nombre Banco">
+                  </div>
+                  <div class="col-lg-3">
+                    <input class="form-control center-align" ng-model="pago.monto_pagado" required="" placeholder="25.000.000.000">
+                  </div>
+                </div>
                 <table class="table table-hover table-striped">
                   <thead>
                     <tr class="active">
@@ -189,18 +203,7 @@
                         <input hidden value="" id="cierre_pId" ng-model="cierre_pId">
                        <!-- <input type="date" class="form-control center-align" ng-model="pago.fecha" required="" placeholder="Pago Fecha">-->
                       </td>
-                      <td>
-                        <input class="form-control center-align" ng-model="pago.ci" required="" placeholder="12345678">
-                      </td>
-                      <td style="width: 20%;">
-                        <input class="form-control center-align" ng-model="pago.titular" required="" placeholder="NombreApellido">
-                      </td>
-                      <td style="width: 20%;">
-                        <input class="form-control center-align" ng-model="pago.banco" required="" placeholder="Nombre Banco">
-                      </td>
-                      <td>
-                        <input class="form-control center-align" ng-model="pago.monto_pagado" required="" placeholder="25.000.000.000">
-                      </td>
+
                     </tr>
                     <tr ng-repeat="pago in pagos | filter: pago.cierre_p._id = cierre_pId" >
                       <td class="center-align">
@@ -222,23 +225,17 @@
                           <span class="zmdi zmdi-delete zmdi-hc-2x manito" ng-click='deletePagosProveedor(pago._id)'/>
                       </td>
                     </tr>
-                    <tr>
-                      <td colspan="5" class="right-align">  
-                        <span class="label label-primary palabras">Total de Pagos: {{ totalPagos | currency: 'Bs '}} </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colspan="5" class="right-align">  
-                        <span class="label label-primary palabras">Total de Cierre: {{ totalCierreProveedor | currency: 'Bs '}} </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colspan="5" class="right-align">  
-                        <span class="label label-danger palabras">Diferencia: {{ totalCierreProveedor - totalPagos | currency: 'Bs '}} </span>
-                      </td>
-                    </tr>
                   </tbody>
                 </table>
+                <div class="center-align col-lg-4">  
+                    <span class="label label-primary palabras">Total de Pagos: {{ totalPagos | currency: 'Bs '}} </span>
+                </div>
+                <div class="center-align col-lg-4">  
+                  <span class="label label-primary palabras">Total de Cierre: {{ totalCierreProveedor | currency: 'Bs '}} </span>
+                </div>
+                <div class="center-align col-lg-4">  
+                  <span class="label label-danger palabras">Diferencia: {{ totalCierreProveedor - totalPagos | currency: 'Bs '}} </span>
+                </div>
              </form>
             <!-- </div> -->
           </div>
