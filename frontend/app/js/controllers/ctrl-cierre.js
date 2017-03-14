@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ctrl_cierre', function($compile,$scope,$http,DTOptionsBuilder,DTColumnDefBuilder,$routeParams,$rootScope,$filter,Cierre,Cliente,Proveedor,CierreProveedor,Pago,ngProgress,$window) {
+app.controller('ctrl-cierre', function($compile,$scope,$http,DTOptionsBuilder,DTColumnDefBuilder,$routeParams,$rootScope,$filter,Cierre,Cliente,Proveedor,CierreProveedor,Pago,ngProgress,$window) {
 //alert(isMobile.mobilecheck());
  // if(document.querySelector("data-dtr-index")){console.log("esta responsivo");} else {console.log("no esta responsivo");}
 //console.log(screen.width + " x " + screen.height);
@@ -719,11 +719,7 @@ var language = {
   //$scope.pagos = Pago.query();
 
   //function ctrl_cierre($resource, DTOptionsBuilder, DTColumnDefBuilder) {
-    var vm = this;
-    vm.cierreproveedores = [];
-    vm.proveedores = [];
-
-    vm.dtOptions =  DTOptionsBuilder.newOptions()
+     $scope.dtOptions =  DTOptionsBuilder.newOptions()
      .withLanguage(language)
         
         .withOption('bFilter', false)
@@ -738,7 +734,27 @@ var language = {
           }
         })
         .withOption('info', false);
-    vm.dtColumnDefs = [
+
+    var vm = this;
+    vm.cierreproveedores = [];
+    vm.proveedores = [];
+
+    vm.dtOptionsCierre =  DTOptionsBuilder.newOptions()
+     .withLanguage(language)
+        
+        .withOption('bFilter', false)
+        .withOption('paging', false)
+         //.withOption('processing', true)
+        //.withOption('serverSide', true)
+        //.withOption('order', ['asc'])
+        .withOption('rowreorder', true)
+        .withOption('responsive', {
+          details: {
+              renderer: renderer
+          }
+        })
+        .withOption('info', false);
+    vm.dtColumnDefsCierre = [
         DTColumnDefBuilder.newColumnDef(0).notSortable(),
         DTColumnDefBuilder.newColumnDef(1).notSortable(),
         DTColumnDefBuilder.newColumnDef(2).notSortable(),
@@ -747,7 +763,7 @@ var language = {
         DTColumnDefBuilder.newColumnDef(5).notSortable()
     ];
 
-    vm.dtInstance = {};
+    vm.dtInstanceCierre = {};
 
     CierreProveedor.query().$promise.then(function(persons) {
         vm.cierreproveedores = persons;
