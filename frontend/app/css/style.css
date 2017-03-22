@@ -8,7 +8,9 @@ body, html{
     height: 100%;
    /* color: #333;*/
 }
-
+.alinear-buttons{
+    display: inherit;
+}
 .bordear-izquierda{
     border-radius: 400px 4px 0 0;
     background-color: #337ab7;
@@ -702,8 +704,8 @@ body, html{
         margin-right: 0.25% !important;
     }*/
     .col-lg-12-modificado {
-        width: 92% !important;
-        margin-left: 3.75% !important;
+        width: 96% !important;
+        margin-left: 2.00% !important;
     }
 
 }

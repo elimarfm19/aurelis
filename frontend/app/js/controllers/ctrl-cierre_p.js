@@ -306,8 +306,9 @@ doc.text('Cierres con Proveedores', 14, doc.autoTable.previous.finalY + 10);
     if (typeof doc.putTotalPages === 'function') {
         doc.putTotalPages(totalPagesExp);
     } 
+      doc.output('dataurlnewwindow'); 
       // doc.output('datauri'); 
-      doc.save('DetalleCierre'+cierresProveedor[0].cierre.cliente.nombres+' '+cierresProveedor[0].cierre.cliente.apellidos+'.pdf');
+      //doc.save('DetalleCierre'+cierresProveedor[0].cierre.cliente.nombres+' '+cierresProveedor[0].cierre.cliente.apellidos+'.pdf');
     });
              
 }
@@ -442,9 +443,9 @@ $scope.generarpqtCierre= function(proveedor) {
         doc.putTotalPages(totalPagesExp);
     } 
 
-
+      doc.output('dataurlnewwindow'); 
       // doc.output('datauri'); 
-       doc.save('CierresProveedor-'+cierresProveedor[0].proveedor.nombres+' '+cierresProveedor[0].proveedor.apellidos+'.pdf');
+       //doc.save('CierresProveedor-'+cierresProveedor[0].proveedor.nombres+' '+cierresProveedor[0].proveedor.apellidos+'.pdf');
 
     
 

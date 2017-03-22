@@ -1,195 +1,167 @@
-<div class="col-lg-10 col-lg-offset-1">
-</br>
-<br>
-  <ul class="nav nav-tabs">
-    <li class="active"><a class="a" href="#proveedores" data-toggle="tab">Proveedores</a></li>
-  </ul>
+</br><br>
+          <ul class="nav nav-tabs col-lg-10 col-lg-offset-1">
+            <li class="active"><a class="a" href="#proveedoress" data-toggle="tab">Proveedores</a></li>
+          </ul>
 
-  <div class="tab-content">
-      <div class="tab-pane fade in active" >
-        <h3 class="center-align">Gestión de Proveedores</h3>
-      
-        <button type="button" class="btn btn-primary waves-effect waves-light col-md-offset-11" data-toggle="modal" data-target="#myModal" ng-click="deselect()">
-              <span class="glyphicon glyphicon-plus letra-btn"> Nuevo</span>
-        </button>
+        <div class="tab-content col-md-10 col-lg-offset-1">
+            <div class="tab-pane fade in active" >
+              <h3 class="center-align">Gestión de Proveedores</h3>
+              <!--<br>-->
+              <button type="button" class="btn btn-primary waves-effect waves-light col-md-offset-10" data-toggle="modal" data-target="#myModal" ng-click="deselect()">
+                  <span class="glyphicon glyphicon-plus letra-btn"> Nuevo</span>
+              </button>
+              <br>
+              <div class="col-lg-12">
+                <!-- <div class=""> -->
+                  <form name="Codenx" novalidate>
+                    <table datatable="ng" dt-options="dtOptions" id="tabla_proveedores" class="table table-hover" data-page-length='5'>
+                        <thead>
+                            <tr class="active">
+                              <th class="center-align bordear-izquierda" >C.I. / Rif</th>
+                              <th class="center-align">Proveedor</th>
+                              <th class="center-align">Teléfono</th>
+                              <th class="center-align">Dirección</th>
+                              <th class="center-align">Email</th>
+                              <th class="center-align">Contacto</th>
+                              <th class="center-align bordear-derecha">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                          <tr class="active">
+                              <th class="center-align bordear-izquierda-abajo"></th>
+                              <th class="center-align"></th>
+                              <th class="center-align"></th>
+                              <th class="center-align"></th>
+                              <th class="center-align"></th>
+                              <th class="center-align"></th>
+                              <th class="center-align bordear-derecha-abajo"></th>
+                          </tr>
+                        </tfoot> 
+                        <tbody>
+                            <tr ng-repeat="proveedor in proveedores">
+                              <td class="center-align">
+                                {{proveedor.nacionalidad}}{{proveedor.ced_rif}}
+                              </td>
+                              <td class="center-align">
+                                {{proveedor.nombres}} {{proveedor.apellidos}}
+                              </td>
+                              <td class="center-align">
+                                <a class="zmdi zmdi-phone zmdi-hc-2x" data-toggle="modal" data-target="#tlfModal" ng-click="tlf(proveedor.tlf)" style="color: black;"></a>
+                              </td>
+                              <td class="center-align">
+                               <img src="../assets/img/eye.png" class="ojito-direccion" alt="Paris" data-toggle="modal" data-target="#direccionModal" ng-click="direccion(proveedor._id)">
+                              </td>
+                              <td class="center-align">
+                                {{proveedor.email}}
+                              </td>
+                              <td class="center-align">
+                                <a class="zmdi zmdi-accounts zmdi-hc-2x" data-toggle="modal" data-target="#contactoModal" ng-click="contacto(proveedor._id)" style="color: black;"></a>
+                              </td>
+                              <td class="center-align">                                
+                                <div>
+                                  <!--<button class="btn btn-danger glyphicon glyphicon-trash btn-xs" ng-click="remove(proveedor)"></button>-->
+                                  <button class="btn btn-warning zmdi zmdi-edit btn-xs waves-effect waves-light" ng-click="edit(proveedor._id)" data-toggle="modal" data-target="#myModal"></button>
 
-        <br>
-        <form name="Codenx" novalidate>
-          <table datatable="ng" id="tabla_proveedores" dt-options="dtOptions" class="table table-hover" data-page-length='5'>
-            <thead>
-                <tr class="active">
-                  <th class="center-align bordear-izquierda" >C.I. / Rif</th>
-                  <th class="center-align">Proveedor</th>
-                  <th class="center-align">Teléfono</th>
-                  <th class="center-align">Dirección</th>
-                  <th class="center-align">Email</th>
-                  <th class="center-align">Contacto</th>
-                  <th class="center-align bordear-derecha">Edición</th>
-                </tr>
-            </thead>
-            <tfoot>
-              <tr class="active">
-                  <th class="center-align bordear-izquierda-abajo"></th>
-                  <th class="center-align"></th>
-                  <th class="center-align"></th>
-                  <th class="center-align"></th>
-                  <th class="center-align"></th>
-                  <th class="center-align"></th>
-                  <th class="center-align bordear-derecha-abajo"></th>
-              </tr>
-            </tfoot>
-            <tbody>
-              <tr ng-repeat="proveedor in proveedores">
-                <td class="center-align">
-                  {{proveedor.nacionalidad}}{{proveedor.ced_rif}}
-                </td>
-                <td class="center-align">
-                  {{proveedor.nombres}} {{proveedor.apellidos}}
-                </td>
-                <td class="center-align">
-                  <a class="zmdi zmdi-phone zmdi-hc-2x" data-toggle="modal" data-target="#tlfModal" ng-click="tlf(proveedor._id)" style="color: black;"></a>
-                </td>
-                <td class="center-align">
-                 <img class="ojito-direccion" src="../assets/img/eye.png" alt="Paris" data-toggle="modal" data-target="#direccionModal" ng-click="direccion(proveedor._id)">
-                </td>                          
-                <td class="center-align">
-                  {{proveedor.email}}
-                </td>
-                <td class="center-align">
-                  <a class="zmdi zmdi-accounts zmdi-hc-2x" data-toggle="modal" data-target="#contactoModal" ng-click="contacto(proveedor._id)" style="color: black;"></a>
-                </td>
-                <td class="center-align">                                  
-                  <!--<button class="btn btn-danger glyphicon glyphicon-trash btn-xs" ng-click="remove(proveedor)"></button>-->
-                  <button class="btn btn-warning zmdi zmdi-edit zmdi-hc-2x waves-effect waves-light" ng-click="edit(proveedor._id)" data-toggle="modal" data-target="#myModal"></button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </form>                
-      </div>
-  </div>
-</div>
+                                  <button class="btn btn-info zmdi zmdi-assignment-o btn-xs waves-effect waves-light" type="submit" ng-click="historialProveedorURL(proveedor._id)"></button>
+                                </div>
+                              </td>
+                            </tr>
+                        </tbody>
+                      </table>
+                    </form>
+                   
+                  <!-- </div> -->
+                </div>                
+            </div>
+        </div>
 
 <div class="container">
     <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
         <div class="tamanno">
-			    <div class="bajar">
-	          <div class="row container-cierre">
-				    <br>
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" ng-click="deselect()">&times;</button>
-              <h3 class="center-align modal-title">Nuevo Proveedor</h3>                  
-            </div>	    
+          <div class="" style="margin-top:100px; ">
+            <div class="row " style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
             <br>
-	          <form name="Codenx" novalidate class="col s12">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align modal-title ">Nuevo Proveedor</h3>                  
+            </div>      
+            <br>
+            <form name="Codenx" novalidate class="col s12">
               <div class="row">
                 <div class="input-field col s6">
-                  <input ng-required="true" id="nombre" type="text" class="validate right-align" ng-model="proveedor.nombres">
+                  <input ng-required="true" id="nombre" type="text" class="validate" ng-model="proveedor.nombres" style="text-align: left;" placeholder="José Alexander">
                   <label for="nombre">Nombre(s)</label>
                 </div>
                 <div class="input-field col s6">
-                  <input ng-required="true" id="apellido" type="text" class="validate right-align" ng-model="proveedor.apellidos">
+                  <input ng-required="true" id="apellido" type="text" class="validate" ng-model="proveedor.apellidos" style="text-align: left;" placeholder="Guzman Paredes">
                   <label for="apellido">Apellidos</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s2">
-                  <select class="select" name="nacionalidad" id="nacionalidad" ng-model="proveedor.nacionalidad">
+                  <select class="select" name="nacionalidad" id="nacionalidad" ng-model="proveedor.nacionalidad" >
                       <option value="V" ng-selected="true">V</option>
                       <option value="E">E</option>
                       <option value="J">J</option>
                   </select>
-                </div>
+                </div>  
                 <div class="input-field col s4">                 
-                   <input ng-required="true" id="ced_rif" type="text" class="validate right-align" ng-model="proveedor.ced_rif" ng-change="verifyDuplicate()">
+                   <input ng-required="true" id="ced_rif" type="text" class="validate" ng-model="proveedor.ced_rif" ng-change="verifyDuplicate()" style="text-align: left;" placeholder="9.999.999">
                    <label for="ced_rif">C.I. / RIF</label>
-                   <div class="card-panel red lighten-2" ng-show="isvalid" ng-model="isvalid" style="color:white" >                   Cédula Existe 
+                   <div class="card-panel red lighten-2"  ng-show="isvalid" ng-model="isvalid" style="color:white">                   Cédula Existe 
                    </div>
                 </div>
                 <div class="input-field col s6">
-                   <input ng-required="true" id="tlf" type="tel" class="validate right-align" ng-model="proveedor.tlf">
+                   <input ng-required="true" id="tlf" type="tel" class="validate" ng-model="proveedor.tlf" style="text-align: left;" placeholder="0424-999.9999 / 0416-888.8888">
                    <label for="tlf">Teléfono</label>
                 </div>
              </div>
              <div class="row">
                 <div class="input-field col s12">
-                   <input ng-required="true" id="email" type="email" class="validate center-align" ng-model="proveedor.email">
+                   <input ng-required="true" id="email" type="email" class="validate" ng-model="proveedor.email" style="text-align: left; " placeholder="joseagp@gmail.com">
                    <label for="email">Email</label>
                 </div>
              </div>
              <div class="row">
                 <div class="input-field col s12">
-                   <input ng-required="true" id="direccion" type="text" class="validate center-align" ng-model="proveedor.direccion">
+                   <input ng-required="true" id="direccion" type="text" class="validate" ng-model="proveedor.direccion" style="text-align: left;" placeholder="Av. Atlantico, Urb. Doña Luisa casa 9 manzana 3 - Pto Ordaz">
                    <label for="direccion">Dirección</label>
                 </div>
              </div>
-             <div class="row">
-                <div class="input-field col s12">
-                   <input ng-required="true" id="contacto" type="text" class="validate center-align" ng-model="proveedor.contacto">
-                   <label for="contacto">Contacto</label>
-                </div>
-             </div>
-             <div class="center-align">
+             <div style="text-align:center">
                  <button class="btn btn-primary waves-effect waves-light" ng-click="add(proveedor)" ng-if="!proveedor._id" type="submit" ng-disabled="!Codenx.$valid" data-dismiss="modal">AÑADIR</button>
-                 <button class="btn btn-info waves-effect waves-light" ng-click="update(proveedor)" ng-if="proveedor._id" type="submit" ng-change="verifyDuplicate()" data-dismiss="modal">ACTUALIZAR</button>
+                 <button class="btn btn-info waves-effect waves-light" ng-click="update(proveedor)" ng-if="proveedor._id" type="submit" data-dismiss="modal">ACTUALIZAR</button>
                  <button class="btn waves-effect waves-light" ng-click="deselect()" ng-if="proveedor._id">LIMPIAR</button>
              </div>
              <br>                                                
-	         </form>
-	        </div>
-	      </div>
+           </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>  
 </div>
+<div data-loading></div>
 
 <div class="container">
     <!-- Modal -->
   <div class="modal fade" id="direccionModal" role="dialog">
     <div class="modal-dialog">
         <div class="tamanno">
-			    <div class="bajar">
-	          <div class="row container-cierre">
-				    <br>
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h3 class="center-align modal-title">Dirección del Proveedor</h3>                  
-            </div>	    
-            <br>
-	          <form class="col s12">              
-             <div class="row">
-                <div class="center-align">
-                 {{ proveedor.direccion }}                  
-                </div>
-             </div>            
-             <br><br><br>                                                
-	         </form>
-	        </div>
-	      </div>
-      </div>
-    </div>
-  </div>  
-</div>
-
-<div class="container">
-    <!-- Modal -->
-  <div class="modal fade" id="contactoModal" role="dialog">
-    <div class="modal-dialog">
-        <div class="tamanno">
-          <div class="bajar">
-            <div class="row container-cierre">
+          <div class="" style="margin-top:100px; ">
+            <div class="row " style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
             <br>
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h3 class="center-align modal-title">Contacto del Proveedor</h3>                  
+              <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align modal-title">Dirección del Proveedor</h3>                  
             </div>      
             <br>
             <form class="col s12">              
              <div class="row">
                 <div class="center-align">
-                 {{ proveedor.contacto }}                  
+                 {{ proveedor.direccion }}                  
                 </div>
              </div>            
              <br><br><br>                                                
@@ -206,18 +178,18 @@
   <div class="modal fade" id="tlfModal" role="dialog">
     <div class="modal-dialog">
         <div class="tamanno">
-          <div class="bajar">
-            <div class="row container-cierre">
+          <div class="" style="margin-top:100px; ">
+            <div class="row " style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
             <br>
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h3 class="center-align modal-title">Teléfono del Proveedor</h3>                  
+              <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align modal-title">Teléfono del Proveedor</h3>                  
             </div>      
             <br>
             <form class="col s12">              
              <div class="row">
-                <div class="center-align">
-                 {{ proveedor.tlf }}                  
+                <div class="center-align" id="telefono">
+                    {{ telefono }}           
                 </div>
              </div>            
              <br><br><br>                                                
@@ -229,3 +201,40 @@
   </div>  
 </div>
 
+<div class="container">
+    <!-- Modal -->
+  <div class="modal fade" id="contactoModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="tamanno">
+          <div class="" style="margin-top:100px; ">
+            <div class="row " style=" background-color:#ffffff; border-radius: 10px; box-shadow: 8px 8px 8px black;">
+            <br>
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align modal-title">Dirección del Proveedor</h3>                  
+            </div>      
+            <br>
+            <form class="col s12">              
+             <div class="row">
+                <div class="center-align">
+                 {{ proveedor.contacto }}                  
+                </div>
+             </div>            
+             <br><br><br>                                                
+           </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>  
+
+<!-- <script type="text/javascript">
+$(document).ready(function() {
+        $('#tabla_clientes').DataTable( {
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json"
+            }
+        } );
+    } );
+</script> -->

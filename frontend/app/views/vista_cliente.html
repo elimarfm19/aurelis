@@ -22,7 +22,7 @@
                               <th class="center-align">Teléfono</th>
                               <th class="center-align">Dirección</th>
                               <th class="center-align">Email</th>
-                              <th class="center-align bordear-derecha">Edición</th>
+                              <th class="center-align bordear-derecha">Opciones</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -53,8 +53,12 @@
                                 {{cliente.email}}
                               </td>
                               <td class="center-align">                                  
-                                <!--<button class="btn btn-danger glyphicon glyphicon-trash btn-xs" ng-click="remove(cliente)"></button>-->
-                                <button class="btn btn-warning zmdi zmdi-edit zmdi-hc-2x waves-effect waves-light" ng-click="edit(cliente._id)" data-toggle="modal" data-target="#myModal"></button>
+                                 <div>
+                                  <!--<button class="btn btn-danger glyphicon glyphicon-trash btn-xs" ng-click="remove(cliente)"></button>-->
+                                  <button class="btn btn-warning zmdi zmdi-edit btn-xs waves-effect waves-light" ng-click="edit(cliente._id)" data-toggle="modal" data-target="#myModal"></button>
+
+                                  <button class="btn btn-info zmdi zmdi-assignment-o btn-xs waves-effect waves-light" type="submit" ng-click="historialClienteURL(cliente._id)"></button>
+                                </div>
                               </td>
                             </tr>
                         </tbody>
@@ -76,17 +80,17 @@
 				    <br>
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align modal-title">Nuevo Cliente</h3>                  
+              <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align modal-title ">Nuevo Cliente</h3>                  
             </div>	    
             <br>
 	          <form name="Codenx" novalidate class="col s12">
               <div class="row">
                 <div class="input-field col s6">
-                  <input ng-required="true" id="nombre" type="text" class="validate" ng-model="cliente.nombres" style="text-align: right;">
+                  <input ng-required="true" id="nombre" type="text" class="validate" ng-model="cliente.nombres" style="text-align: left;" placeholder="José Alexander">
                   <label for="nombre">Nombre(s)</label>
                 </div>
                 <div class="input-field col s6">
-                  <input ng-required="true" id="apellido" type="text" class="validate" ng-model="cliente.apellidos" style="text-align: right;">
+                  <input ng-required="true" id="apellido" type="text" class="validate" ng-model="cliente.apellidos" style="text-align: left;" placeholder="Guzman Paredes">
                   <label for="apellido">Apellidos</label>
                 </div>
               </div>
@@ -99,25 +103,25 @@
                   </select>
                 </div>  
                 <div class="input-field col s4">                 
-                   <input ng-required="true" id="ced_rif" type="text" class="validate" ng-model="cliente.ced_rif" ng-change="verifyDuplicate()" style="text-align: right;">
+                   <input ng-required="true" id="ced_rif" type="text" class="validate" ng-model="cliente.ced_rif" ng-change="verifyDuplicate()" style="text-align: left;" placeholder="9.999.999">
                    <label for="ced_rif">C.I. / RIF</label>
                    <div class="card-panel red lighten-2"  ng-show="isvalid" ng-model="isvalid" style="color:white">                   Cédula Existe 
                    </div>
                 </div>
                 <div class="input-field col s6">
-                   <input ng-required="true" id="tlf" type="tel" class="validate" ng-model="cliente.tlf" style="text-align: right;">
+                   <input ng-required="true" id="tlf" type="tel" class="validate" ng-model="cliente.tlf" style="text-align: left;" placeholder="0424-999.9999 / 0416-888.8888">
                    <label for="tlf">Teléfono</label>
                 </div>
              </div>
              <div class="row">
                 <div class="input-field col s12">
-                   <input ng-required="true" id="email" type="email" class="validate" ng-model="cliente.email" style="text-align: center;">
+                   <input ng-required="true" id="email" type="email" class="validate" ng-model="cliente.email" style="text-align: left; " placeholder="joseagp@gmail.com">
                    <label for="email">Email</label>
                 </div>
              </div>
              <div class="row">
                 <div class="input-field col s12">
-                   <input ng-required="true" id="direccion" type="text" class="validate" ng-model="cliente.direccion" style="text-align: center;">
+                   <input ng-required="true" id="direccion" type="text" class="validate" ng-model="cliente.direccion" style="text-align: left;" placeholder="Av. Atlantico, Urb. Doña Luisa casa 9 manzana 3 - Pto Ordaz">
                    <label for="direccion">Dirección</label>
                 </div>
              </div>

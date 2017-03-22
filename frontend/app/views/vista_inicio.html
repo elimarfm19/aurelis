@@ -8,7 +8,7 @@
     <div  class="tab-pane fade in active" id="proveedores_">
       <h3 class="center-align">Recepciones de Proveedores </h3>
         <div class="" ng-controller="ctrl-proveedor">
-          <table class="table table-hover" datatable="ng" dt-options="dtOptions" id="tabla_inicio_p" data-page-length='10'>
+          <table class="table table-hover" datatable="ng" dt-options="dtOptions" id="tabla_inicio_p" data-page-length='8'>
               <thead>
                   <tr class="active">                          
                     <th class="center-align bordear-izquierda">Proveedor</th>
@@ -37,7 +37,7 @@
                       {{proveedor.nombres}} {{proveedor.apellidos}}
                     </td>
                     <td class="center-align">
-                      <a class="zmdi zmdi-phone zmdi-hc-2x" data-toggle="modal" data-target="#tlfModal" ng-click="tlf(proveedor._id)" style="color: black;"></a>
+                      <a class="zmdi zmdi-phone zmdi-hc-2x" data-toggle="modal" data-target="#tlfModal" ng-click="tlf(proveedor.tlf)" style="color: black;"></a>
                     </td>
                     <td class="center-align" >
                       {{proveedor.cerrado | currency: ''}} 
@@ -121,8 +121,8 @@
             <br>
             <form class="col s12">              
              <div class="row">
-                <div class="center-align">
-                 {{ proveedor.tlf }}                  
+                <div class="center-align" id="telefono">
+                    {{ telefono }}           
                 </div>
              </div>            
              <br><br><br>                                                

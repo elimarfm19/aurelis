@@ -46,16 +46,28 @@
                     {{cierre.fecha_cierre}}
                   </td>
                   <td class="center-align" >
-                    {{cierre.cantidad | currency: '' }} (g)
+                    {{cierre.cantidad | currency: '' }}
                   </td>
                   <td class="center-align" >
-                    {{cierre.precio | currency: 'Bs ' }}
+                    {{cierre.precio | currency: ' ' }}
                   </td>
                   <td class="center-align" >
-                    {{cierre.total | currency: 'Bs '}}
+                    {{cierre.total | currency: ''}}
                   </td>
                   <td class="center-align">
-                    <a class="btn btn-warning zmdi zmdi-edit zmdi-hc-2x waves-effect waves-light"  ng-href="/aurelis.html#/cierre_cliente/{{cierre._id}}"></a>
+
+                    <div>
+                      <!--<button class="btn btn-danger glyphicon glyphicon-trash btn-xs" ng-click="remove(cliente)"></button>-->
+                      <!-- <button class="btn btn-warning zmdi zmdi-edit btn-xs waves-effect waves-light" ng-click="edit(cliente._id)" data-toggle="modal" data-target="#myModal"></button> -->
+                      <a ng-href="/aurelis.html#/cierre_cliente/{{cierre._id}}">
+                        <button class="btn btn-warning zmdi zmdi-edit btn-xs waves-effect waves-light">
+                        </button> 
+                      </a> 
+
+                      <button class="btn btn-info zmdi zmdi-assignment-o btn-xs waves-effect waves-light"  ng-click="generarpqtDCP(cierre._id)"></button>
+                    </div>
+
+                    <!-- <a class="btn btn-warning zmdi zmdi-edit zmdi-hc-2x waves-effect waves-light"  ng-href="/aurelis.html#/cierre_cliente/{{cierre._id}}"></a> -->
                     <!-- <button class="btn btn-danger zmdi zmdi-delete zmdi-hc-2x waves-effect waves-light" ng-click="remove(cierre)" data-toggle="modal" data-target="#myModal"></button> -->
                   </td>
                 </tr>

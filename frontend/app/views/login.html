@@ -3,7 +3,7 @@
               <i class="zmdi zmdi-account-circle zmdi-hc-5x"></i>
               <p>Inicio de sesión</p>
           </div>
-          <form action="">
+          <form action="" ng-submit="submit()">
               <div class="input-field">
                   <input ng-model="username" id="UserName" type="text" class="validate" value="">
                   <label for="UserName"><i class="zmdi zmdi-account"></i>&nbsp; Nombre</label>
@@ -12,15 +12,16 @@
                   <input ng-model="password" id="Password" type="password" class="validate" value="">
                   <label for="Password"><i class="zmdi zmdi-lock"></i>&nbsp; Contraseña</label>
               </div>
-          </form>
+          
           <br>
-          <button class="btn btn-primary waves-effect waves-light"  ng-click="submit()"> 
+          <button type="submit" class="btn btn-primary waves-effect waves-light" > 
            <!--  <a id="login" href="aurelis.html" style="background: #26a69a; color: black;">Ingresar &nbsp; 
               <i class="zmdi zmdi-mail-send"></i>
             </a> -->
 
             <i class="zmdi zmdi-mail-send"></i> Ingresar
           </button>
+          </form>
           <br><br>
           <!-- <div class="divider" style="margin: 20px 0;"></div>
           <a id="login" onclick="login()" href="aurelis.html">Crear cuenta</a>

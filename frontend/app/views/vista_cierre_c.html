@@ -31,21 +31,21 @@
                 </div>
                 <div class="row ">                  
                   <div class="input-field col-lg-6">
-                    <input ng-required="true" ng-model="cierre.cantidad" gramos="number" g="true" id="cantidad" ng-init="cierre.cantidad = 0" type="text" class="validate right-align">
+                    <input ng-required="true" ng-model="cierre.cantidad" gramos="number" g="true" id="cantidad" ng-init="cierre.cantidad = 0" type="text" class="validate left-align">
                     <label for="cantidad">Cantidad (g)</label>
                   </div>
                   <div class="input-field col-lg-6">
-                    <input ng-required="true" ng-model="cierre.precio" id="precio" format="number" ng-init="cierre.precio = 0" type="text" class="validate right-align" ng-keyup="calcularTotal()">
+                    <input ng-required="true" ng-model="cierre.precio" id="precio" format="number" ng-init="cierre.precio = 0" type="text" class="validate left-align" ng-keyup="calcularTotal()">
                     <label for="precio">Precio * g</label>
                   </div>                                                 
                 </div>
                 <div class="row ">
                   <div class="input-field col-lg-6">
-                    <input ng-model="cierre.total" id="total_c" type="text" format="number" g="false" class="validate right-align" ng-keyup="calcularCantidad()" ng-init="cierre.total = 0">
+                    <input ng-model="cierre.total" id="total_c" type="text" format="number" g="false" class="validate left-align" ng-keyup="calcularCantidad()" ng-init="cierre.total = 0">
                     <label for="total_c">Total Cerrado</label>
                   </div>
                   <div class="input-field col-lg-6">
-                     <input ng-disabled ng-model="cierre.ganancia" type="text" gramos="number"class="validate right-align" id="ganancia">
+                     <input ng-disabled ng-model="cierre.ganancia" type="text" gramos="number"class="validate left-align" id="ganancia">
                      <label for="total_p">Ganancia (g)</label>
                      <input hidden ng-disabled="true" ng-model="cierre.saldo" type="text" class="validate right-align" id="saldo">
                      <!-- <label  for="saldo">Saldo Bs</label> -->
@@ -53,7 +53,7 @@
                 </div>
                 <div class="row">
                   <div class="input-field col-lg-12">
-                     <input type="text" class="validate center-align" id="observacion" ng-model="cierre.observacion" >
+                     <input type="text" class="validate left-align" id="observacion" ng-model="cierre.observacion" >
                      <label for="obsevacion">Observación</label> 
                   </div>
                 </div>
@@ -94,18 +94,18 @@
                 <div class="input-field col-lg-3">
                   <input ng-model="cierre_p.total" id="total_p" type="text" class="form-control center-align" ng-keyup="calcularCantidadP()" ng-disabled="!cierre.CierreId"  ng-required="true" format="number" ng-init="cierre_p.total = 0">
                 </div>
-                <button class="btn btn-primary waves-effect waves-light col-lg-1 center-align" ng-disabled="!Codenx2.$valid" ng-click="addCierreProveedor(cierre)"><i class="zmdi zmdi-check" ></i></button>
+                <button class="btn btn-primary waves-effect waves-light col-lg-1 center-align" ng-disabled="(!Codenx2.$valid)||(cierre_p.cantidad==0)||(cierre_p.precio==0)||(cierre_p.total==0)" ng-click="addCierreProveedor(cierre)"><i class="zmdi zmdi-check" ></i></button>
 
 
-                <div class="col-lg-12" >
+                <!-- <div class="col-lg-12" > -->
                   <table class="table table-hover table-striped" id="tabla_cierreProveedor" datatable="ng" dt-options="dtOptionsCierre" dt-column-defs="dtColumnDefsCierre">
                     <thead>
                       <tr class="active">
                         <th class="center-align bordear-izquierda tablas">  Proveedor</th>
                         <!-- <th class="center-align tablas">Tlf</th> -->
                         <th class="center-align tablas" style="width: 25%">Cantidad (g)</th>
-                        <th class="center-align tablas">Precio * g</th>
-                        <th class="center-align tablas">Total</th>
+                        <th class="center-align tablas">Precio * g (Bs)</th>
+                        <th class="center-align tablas">Total (Bs)</th>
                         <th class="center-align bordear-derecha tablas"></th>
                       </tr>
                     </thead>
@@ -119,14 +119,18 @@
                           {{cierre_p.cantidad  | currency: ''}}
                         </td>
                         <td class="center-align">
-                          {{cierre_p.precio  | currency: 'Bs '}}
+                          {{cierre_p.precio  | currency: ''}}
                         </td>
                         <td class="center-align">
-                          {{cierre_p.cantidad*cierre_p.precio | currency: 'Bs '}}
+                          {{cierre_p.cantidad*cierre_p.precio | currency: ''}}
                         </td>
-                        <td class="center-align" >
-                          <span class="zmdi zmdi-money-box zmdi-hc-2x waves-effect waves-light modal-pagos" data-toggle="modal" data-target="#pagosModal" ng-click="openPagosProveedor(cierre_p._id)"/>
-                          <span id="{{cierre_p._id}}" name="{{ $index }}" ng-click="deleteCierreProveedor()" class="zmdi zmdi-delete zmdi-hc-2x waves-effect waves-light icono-borrar" /> 
+                        <td class="center-align col-md-2">
+
+                            <span class="zmdi zmdi-money-box zmdi-hc-2x waves-effect waves-light modal-pagos" data-toggle="modal" data-target="#pagosModal" ng-click="openPagosProveedor(cierre_p._id)"/>
+
+                            <span id="{{cierre_p._id}}" name="{{ $index }}" ng-click="deleteCierreProveedor()" class="zmdi zmdi-delete zmdi-hc-2x waves-effect waves-light icono-borrar" /> 
+                        
+                          
                         </td>
                       </tr>
                       </tbody>
@@ -147,7 +151,7 @@
                         <span class="label label-success">Saldo: Bs {{ remanente | number}} </span>
                       </div>
                     </div>
-                </div>
+                <!-- </div> -->
               </form>
             </div>
           </div>

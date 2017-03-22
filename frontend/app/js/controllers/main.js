@@ -27,7 +27,7 @@ var route_backend = "http://localhost:3001/";
  $scope.submit = function(){
      $http({
         method: 'GET',
-        url: route_backend+"user/"+$scope.username+"/"+$scope.password
+        url: route_backend+"user/"+($scope.username).toLowerCase()+"/"+$scope.password
      }).then(function (success){
   
         localStorage.setItem("username", $scope.username);
