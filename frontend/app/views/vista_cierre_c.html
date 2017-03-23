@@ -103,7 +103,7 @@
                       <tr class="active">
                         <th class="center-align bordear-izquierda tablas">  Proveedor</th>
                         <!-- <th class="center-align tablas">Tlf</th> -->
-                        <th class="center-align tablas" style="width: 25%">Cantidad (g)</th>
+                        <th class="center-align tablas" style="width: 25%" >Cantidad (g)</th>
                         <th class="center-align tablas">Precio * g (Bs)</th>
                         <th class="center-align tablas">Total (Bs)</th>
                         <th class="center-align bordear-derecha tablas"></th>
@@ -124,12 +124,11 @@
                         <td class="center-align">
                           {{cierre_p.cantidad*cierre_p.precio | currency: ''}}
                         </td>
-                        <td class="center-align col-md-2">
-
-                            <span class="zmdi zmdi-money-box zmdi-hc-2x waves-effect waves-light modal-pagos" data-toggle="modal" data-target="#pagosModal" ng-click="openPagosProveedor(cierre_p._id)"/>
-
+                        <td class="center-align ">
+                          <div style="display: flex">     
+                            <span class="zmdi zmdi-money-box zmdi-hc-x waves-effect waves-light modal-pagos" data-toggle="modal" data-target="#pagosModal" ng-click="openPagosProveedor(cierre_p._id)"/>
                             <span id="{{cierre_p._id}}" name="{{ $index }}" ng-click="deleteCierreProveedor()" class="zmdi zmdi-delete zmdi-hc-2x waves-effect waves-light icono-borrar" /> 
-                        
+                          </div>
                           
                         </td>
                       </tr>
