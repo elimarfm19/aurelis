@@ -24,20 +24,24 @@ var route_backend = "http://localhost:3001/";
 // var route_backend = "https://aurelis-backend.herokuapp.com/";
 
 
- $scope.submit = function(){
-     $http({
-        method: 'GET',
-        url: route_backend+"user/"+($scope.username).toLowerCase()+"/"+$scope.password
-     }).then(function (success){
-  
-        localStorage.setItem("username", $scope.username);
-        //$localStorage.username = $scope.username;
 
+ $scope.submit = function(){
+  var username = ($scope.username).toLowerCase();
+
+      $http({
+        method: 'GET',
+        url: route_backend+"user/"+username+"/"+$scope.password
+      }).then(function (success){
+
+        localStorage.setItem("username", username);
         window.location = route_frontend+"aurelis.html#/";
-     },function (error){
-        //console.log(error);
-        alert("Datos de Ingreso Incorrectos");
-     });
+
+      },function (error){
+
+         alert("Datos de Ingreso Incorrectos"+error);
+
+      });
+ 
  };
 
   $scope.propertyName = 'ultima_entrega';

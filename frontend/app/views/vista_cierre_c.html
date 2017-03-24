@@ -45,7 +45,7 @@
                     <label for="total_c">Total Cerrado</label>
                   </div>
                   <div class="input-field col-lg-6">
-                     <input ng-disabled ng-model="cierre.ganancia" type="text" gramos="number"class="validate left-align" id="ganancia">
+                     <input ng-disabled ng-model="cierre.ganancia" type="text" gramos="number" class="validate left-align" id="ganancia">
                      <label for="total_p">Ganancia (g)</label>
                      <input hidden ng-disabled="true" ng-model="cierre.saldo" type="text" class="validate right-align" id="saldo">
                      <!-- <label  for="saldo">Saldo Bs</label> -->
@@ -143,10 +143,8 @@
                       <div class="col-lg-5 text-right">
                         <span class="label label-primary">Total Pagado: {{ scopeRaiz | currency: 'Bs '}} </span>
                         <br> <br>
-                        <span class="label label-info" >Remanente: Bs {{cierre.total - (remanente*-1) | number}} </span>
-
-                        {{remanente}} {{cierre.total*-1}}
-                        <br><br>
+                        <!-- <span class="label label-info" >Remanente: Bs {{remanente - cierre.total | number}} </span> -->
+                        <!-- <br><br> -->
                         <span class="label label-success">Saldo: Bs {{ remanente | number}} </span>
                       </div>
                     </div>

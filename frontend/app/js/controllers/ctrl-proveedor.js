@@ -8,7 +8,7 @@ var route_backend = "http://localhost:3001/";
 
 if (localStorage.getItem("username")!== null) {
     //console.log($localStorage.username);
-    document.getElementById("cont").value = 600;
+    document.getElementById("cont").value = 1200;
   }
   else{
    window.location = route_frontend;

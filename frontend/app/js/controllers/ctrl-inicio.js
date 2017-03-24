@@ -8,7 +8,7 @@ var route_frontend = "http://localhost:9000/";
   if (localStorage.getItem("username") !== null) {
     //console.log("si existe variable de sesion" + localStorage.getItem("username"));
     $rootScope.username = localStorage.getItem("username");
-    document.getElementById("cont").value = 600;
+    document.getElementById("cont").value = 1200;
   }
   else{
 
