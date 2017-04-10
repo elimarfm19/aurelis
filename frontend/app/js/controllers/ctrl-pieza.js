@@ -9,6 +9,7 @@ var route_backend = "http://localhost:3001/";
 
 if (localStorage.getItem("username") !== null) {
    // console.log($localStorage.username);
+    $rootScope.username = localStorage.getItem("username");
     document.getElementById("cont").value = 1200;
   }
   else{
@@ -106,6 +107,7 @@ $scope.ajuste = function(piezaNueva) {
               //console.log('Cliente '+cliente.entregado);
               cliente.entregado += Number(piezaNueva.puro_c); 
             //   console.log('Cliente '+cliente.entregado);
+
             $http.put(route_backend+"clientes/"+cliente._id,cliente)
               .success(function(clienteNuevo){ 
                 //console.log('Actualizando cliente');
@@ -173,14 +175,39 @@ $scope.ajuste = function(piezaNueva) {
 
           $http.put(route_backend+"entregas/"+EntregaVieja._id,EntregaVieja)
               .success(function(EntregaActualizada){ 
-                //console.log('Actualizando Pieza');
-               // console.log(piezaActualizada);
-                //$window.location.reload();
+              //console.log('Actualizando Pieza');
+              // console.log(piezaActualizada);
+              //$window.location.reload();
           
           });
 
 
         });
+
+        $http.get(route_backend+"historial/entrega/"+piezaVieja[0].entrega._id)
+              .success(function(historial){
+
+                $http.get(route_backend+"historial/entregas/"+historial[0].HistorialClienteId)
+                  .success(function(historiales){
+                  
+                    for (var i=0; i < historiales.length; i++){           
+                    
+                        console.log(historial);
+                        historiales[i].entregado -= parseFloat(piezaVieja[0].puro_c).toFixed(2);
+
+                        historiales[i].entregado += Number(piezaNueva.puro_c);
+                        
+                        historiales[i].pendiente = (- Number(historiales[i].cerrado) + Number(historiales[i].entregado)) ;
+                         console.log(historiales);
+                        $http.put(route_backend+"historial/"+historiales[i]._id,historiales[i])
+                          .success(function(historialNuevo){ 
+                           console.log(historialNuevo);
+                            //$window.location.reload();
+
+                        });
+                    }
+                  });
+              });
 
 
    });
@@ -189,7 +216,8 @@ $scope.ajuste = function(piezaNueva) {
               .success(function(piezaActualizada){ 
                 // console.log('Actualizando Pieza');
                 // console.log(piezaActualizada);
-                $window.location.reload();
+
+              
   });
 
 

@@ -72,6 +72,8 @@ function storeHistorialProveedor(req,res){
 	let historialProveedor = new HistorialProveedor()
 
     historialProveedor.fecha = req.body.fecha
+    historialProveedor.fecha_cierre = req.body.fecha_cierre
+    historialProveedor.fecha_entrega = req.body.fecha_entrega
     historialProveedor.cierre = req.body.cierre
     historialProveedor.recepcion = req.body.recepcion
     historialProveedor.proveedor = req.body.proveedor

@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ctrl-entrega', function($scope,Entrega,$http,Cliente,DTOptionsBuilder,ngProgress,$window) {
+app.controller('ctrl-entrega', function($scope,Entrega,$http,Cliente,DTOptionsBuilder,ngProgress,$window,$rootScope) {
 
 var route_frontend = "http://localhost:9000/";
 // var route_frontend = "https://aurelis-frontend.herokuapp.com/";
@@ -9,6 +9,7 @@ var route_backend = "http://localhost:3001/";
 
 if (localStorage.getItem("username") !== null) {
     //console.log($localStorage.username);
+     $rootScope.username = localStorage.getItem("username");
     document.getElementById("cont").value = 1200;
   }
   else{
@@ -66,6 +67,8 @@ $scope.update = function(entrega) {
           cierre : null,
           entrega : entregaUpdated._id,
           cliente : entregaUpdated.cliente,
+          cerrado: Number(cliente.cerrado),
+          entregado: Number(cliente.entregado),
           pendiente : (- Number(cliente.cerrado) + Number(cliente.entregado) )
        }
         $http.post(route_backend+"historial/cliente",historialCliente)

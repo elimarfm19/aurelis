@@ -11,6 +11,7 @@ var route_backend = "http://localhost:3001/";
 // var route_backend = "https://aurelis-backend.herokuapp.com/";
 if (localStorage.getItem("username") !== null) {
    // console.log($localStorage.username);
+    $rootScope.username = localStorage.getItem("username");
     document.getElementById("cont").value = 1200;
   }
   else{
@@ -139,9 +140,13 @@ $scope.add = function(cierre) {
        
        var historialCliente = {
           fecha : moment(cierre.fecha_cierre+'T06:22:15.506Z').format('DD-MM-YYYY')+' / '+moment(cierre.fecha_entrega+'T06:22:15.506Z').format('DD-MM-YYYY'),
+          fecha_cierre: moment(cierre.fecha_cierre+'T06:22:15.506Z').format('YYYY-MM-DD'),
+          fecha_entrega:moment(cierre.fecha_entrega+'T06:22:15.506Z').format('YYYY-MM-DD'),
           cierre : cierre._id,
           entrega : null,
           cliente : cierre.cliente,
+          cerrado: Number(cliente.cerrado),
+          entregado: Number(cliente.entregado),
           pendiente : (- Number(cliente.cerrado) + Number(cliente.entregado) )
        }
         $http.post(route_backend+"historial/cliente",historialCliente)
@@ -253,6 +258,8 @@ $scope.addCierreProveedor = function(Cierre) {
                  
                  var historialProveedor = {
                     fecha : moment(cierreProveedor.fecha_cierre).format('DD-MM-YYYY')+' / '+moment(cierreProveedor.fecha_entrega).format('DD-MM-YYYY'),
+                    fecha_cierre: moment(cierreProveedor.fecha_cierre),
+                    fecha_entrega:moment(cierreProveedor.fecha_entrega),
                     cierre : cierreProveedor._id,
                     recepcion : null,
                     proveedor : cierreProveedor.proveedor,

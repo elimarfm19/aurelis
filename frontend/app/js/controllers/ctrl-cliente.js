@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ctrl-cliente', function($scope,Cliente,Cierre,ngProgress,DTOptionsBuilder,$window,$http) {
+app.controller('ctrl-cliente', function($scope,Cliente,Cierre,ngProgress,DTOptionsBuilder,$window,$http,$rootScope) {
 
 var route_frontend = "http://localhost:9000/";
 // var route_frontend = "https://aurelis-frontend.herokuapp.com/";
@@ -9,6 +9,7 @@ var route_backend = "http://localhost:3001/";
 
 if (localStorage.getItem("username") !== null) {
     //console.log($localStorage.username);
+     $rootScope.username = localStorage.getItem("username");
     document.getElementById("cont").value = 1200;
   }
   else{

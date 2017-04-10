@@ -223,10 +223,14 @@ api.delete('/ajustes/:id',cors(),ajusteController.deleteAjuste)
 
 //Historial de Cliente
 api.options('/historial/cliente/:id', cors())
+api.options('/historial/:id', cors())
 api.options('/historial/cliente', cors())
 
 api.get('/historial/cliente/:id',cors(),historialClienteController.getHistorialCliente)
+api.get('/historial/entrega/:id',cors(),historialClienteController.getHistorialClienteEntrega)
+api.get('/historial/entregas/:id',cors(),historialClienteController.getHistorialClienteEntregas)
 api.post('/historial/cliente',cors(),historialClienteController.storeHistorialCliente)
+api.put('/historial/:id',cors(),historialClienteController.updateHistorialCliente)
 api.get('/historial/cliente/:id/:fechai/:fechaf',cors(),historialClienteController.getHistorialClienteFechas)
 
 //Historial de Proveedor

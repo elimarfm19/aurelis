@@ -74,6 +74,13 @@
               </li>
               <li class="NavLateralDivider"></li>
               <li>
+                <a ng-href="#vencidos" class="waves-effect waves-light">
+                  <i class="zmdi zmdi-home zmdi-hc-fw "></i> 
+                  Vencido
+                </a>                  
+              </li>
+              <li class="NavLateralDivider"></li>
+              <li>
                 <a ng-href="#cierre_cliente" class="waves-effect waves-light">
                 <i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i>
                  Cierre
@@ -285,6 +292,7 @@
     <script src="../js/controllers/ctrl-pieza.js"></script>
     <script src="../js/controllers/ctrl-entrega.js"></script>
     <script src="../js/controllers/ctrl-recepcion.js"></script>
+    <script src="../js/controllers/ctrl-vencido.js"></script>
 
     
     <!-- endbuild -->
@@ -315,8 +323,8 @@
       function validar_cookie(){
        document.getElementById("cont").value = document.getElementById("cont").value - 1;
        var cont = document.getElementById("cont").value;
-        console.log(cont);
-        //var route_frontend = "https://aurelis-frontend.herokuapp.com/";
+        //console.log(cont);
+        // var route_frontend = "https://aurelis-frontend.herokuapp.com/";
         var route_frontend = "http://localhost:9000/";
         if (cont <= 0) {
           //delete $localStorage.username;

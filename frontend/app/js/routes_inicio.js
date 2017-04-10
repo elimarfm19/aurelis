@@ -144,11 +144,11 @@ var route_backend = "http://localhost:3001/";
         controller: 'ctrl-proveedor',
         controllerAs: 'Hproveedor'
       })
-      // .when('/generarPDF', {
-      //   templateUrl: '/views/vista_generarPDF.html',
-      //   controller: 'ctrl-cliente',
-      //   controllerAs: 'cli'
-      // })
+      .when('/vencidos', {
+        templateUrl: '/views/vencidos.html',
+        controller: 'ctrl-vencido',
+        controllerAs: 'cven'
+      })
       // .when('/about', {
       //   templateUrl: '/views/views/about.html',
       //   controller: 'AboutCtrl',
