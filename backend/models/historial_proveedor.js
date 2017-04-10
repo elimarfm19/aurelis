@@ -10,6 +10,8 @@ var Recepcion = require('../models/recepcion');
 
 const HistorialProveedor = Schema({
      fecha: String,
+     fecha_cierre: String,
+     fecha_entrega: String,
      cierre: { type: Schema.ObjectId, ref: "CierreProveedor" },
      entrega: { type: Schema.ObjectId, ref: "Entrega" },
      recepcion: { type: Schema.ObjectId, ref: "Recepcion" }, 
