@@ -37,6 +37,8 @@ function storeCliente(req,res){
     cliente.email = req.body.email
     cliente.cerrado = 0
     cliente.entregado = 0
+	cliente.cerrado_m = req.body.cerrado_m
+	cliente.entregado_m = req.body.entregado_m
     
 	cliente.save((err,clienteStored)=>{
 

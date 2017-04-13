@@ -119,6 +119,22 @@
                 </div>
              </div>
              <div class="row">
+                <div class="input-field col s6">
+                  <input ng-required="true" id="cerrado_m" type="text" class="validate" ng-model="proveedor.cerrado_m" style="text-align: left;" placeholder="35.98">
+                  <label for="cerrado_m">Total cerrado migración</label>
+                </div>
+                <div class="input-field col s6">
+                  <input ng-required="true" id="entregado_m" type="text" class="validate" ng-model="proveedor.entregado_m" style="text-align: left;" placeholder="35.98">
+                  <label for="entregado_m">Total entregado migración</label>
+                </div>
+             </div>
+             <div class="row">
+                <div class="input-field col s12">
+                   <input ng-required="true" id="contacto" type="text" class="validate" ng-model="proveedor.contacto" style="text-align: left; " placeholder="Marcsos Damas">
+                   <label for="contacto">Contacto</label>
+                </div>
+             </div>
+             <div class="row">
                 <div class="input-field col s12">
                    <input ng-required="true" id="email" type="email" class="validate" ng-model="proveedor.email" style="text-align: left; " placeholder="joseagp@gmail.com">
                    <label for="email">Email</label>
@@ -211,7 +227,7 @@
             <br>
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align modal-title">Dirección del Proveedor</h3>                  
+              <h3 style="color:black; font-weight:600; font-family: 'Tahoma';" class="center-align modal-title">Contacto del Proveedor</h3>                  
             </div>      
             <br>
             <form class="col s12">              

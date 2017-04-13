@@ -21,6 +21,10 @@ const Cliente = Schema({
     email: String,
     cerrado:Number,
     entregado:Number,
+
+    cerrado_m: Number, // este es el total cerrado desde la migracion
+    entregado_m: Number,  // este es el total cerrado desde la migracion
+        
     ultima_entrega: Date  
 });
 module.exports = mongoose.model('Cliente', Cliente);

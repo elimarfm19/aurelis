@@ -37,6 +37,8 @@ function storeProveedor(req,res){
 	    proveedor.cerrado = 0
 	    proveedor.entregado = 0
 	    proveedor.contacto = req.body.contacto
+		proveedor.cerrado_m = req.body.cerrado_m
+		proveedor.entregado_m = req.body.entregado_m
 
 	proveedor.save((err,proveedorStored)=>{
 

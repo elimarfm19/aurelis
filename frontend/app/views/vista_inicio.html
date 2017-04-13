@@ -32,7 +32,7 @@
                 </tr>
               </tfoot>
               <tbody>
-                  <tr ng-repeat="proveedor in proveedores" ng-if="(!proveedor.cerrado== 0) && !(proveedor.cerrado == proveedor.entregado)">
+                  <tr ng-repeat="proveedor in proveedores" ng-if="(! (proveedor.cerrado + proveedor.cerrado_m) == 0) && !((proveedor.cerrado + proveedor.cerrado_m) == (proveedor.entregado + proveedor.entregado_m))">
                     <td class="center-align" >
                       {{proveedor.nombres}} {{proveedor.apellidos}}
                     </td>
@@ -40,13 +40,13 @@
                       <a class="zmdi zmdi-phone zmdi-hc-2x" data-toggle="modal" data-target="#tlfModal" ng-click="tlf(proveedor.tlf)" style="color: black;"></a>
                     </td>
                     <td class="center-align" >
-                      {{proveedor.cerrado | currency: ''}} 
+                      {{ (proveedor.cerrado + proveedor.cerrado_m) | currency: ''}} 
                     </td>
                     <td class="center-align" >                            
-                      {{proveedor.entregado  | currency: ''}}
+                      {{(proveedor.entregado + proveedor.entregado_m ) | currency: ''}}
                     </td>
                     <td class="center-align" field="por_cerrar">
-                      {{(proveedor.entregado - proveedor.cerrado) | number}}
+                      {{((proveedor.entregado + proveedor.entregado_m) - (proveedor.cerrado + proveedor.cerrado_m)) | number}}
                     </td>
                     <td class="center-align" field="por_cerrar">
                       {{(proveedor.entregado - proveedor.cerrado) | number}}
@@ -82,18 +82,18 @@
               </tr>
             </tfoot>
             <tbody>
-              <tr ng-repeat="cliente in clientes " ng-if="(!cliente.cerrado== 0)&& !(cliente.cerrado == cliente.entregado)">
+              <tr ng-repeat="cliente in clientes " ng-if="(!(cliente.cerrado + cliente.cerrado_m ) == 0) && !((cliente.cerrado +cliente.cerrado_m) == (cliente.entregado + cliente.entregado_m))">
                 <td class="center-align" >
                   {{cliente.nombres}} {{cliente.apellidos}}
                 </td>
                 <td class="center-align" >
-                  {{cliente.cerrado |currency: ''}} 
+                  {{ (cliente.cerrado + cliente.cerrado_m) |currency: ''}} 
                 </td>
                 <td class="center-align" >
-                  {{cliente.entregado  | currency: ''}}
+                  {{(cliente.entregado + cliente.entregado_m)  | currency: ''}}
                 </td>
                 <td class="center-align" field="por_cerrar">
-                  {{(cliente.entregado - cliente.cerrado ) | number}}
+                  {{((cliente.entregado + cliente.entregado_m) - (cliente.cerrado + cliente.cerrado_m) ) | number}}
                 </td>
                 <td class="center-align" field="fecha_entrega">
                   {{cliente.ultima_entrega | date:'dd/MM/yyyy' : shortDate}}

@@ -22,7 +22,9 @@ const Proveedor = Schema({
     cerrado:Number,
     entregado:Number,
     ultima_entrega: Date  ,
-    contacto: String
+    contacto: String,
+    cerrado_m: Number, // este es el total cerrado desde la migracion
+    entregado_m: Number  // este es el total cerrado desde la migracion 
 });
 
 module.exports = mongoose.model('Proveedor', Proveedor);
