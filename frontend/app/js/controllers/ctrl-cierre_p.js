@@ -427,9 +427,9 @@ $scope.generarpqtCierre= function(proveedor) {
     });
     if (route ==  route_backend+"cierresProveedor/proveedor/"+$scope.proveedor._id) {
       doc.setFontSize(12);
-      doc.text('Total Cerrado: '+numeral(cierresProveedor[0].proveedor.cerrado).format('0,0.00') +' (g)', 14, doc.autoTable.previous.finalY + 10);
-      doc.text('Total Entregado: '+numeral(cierresProveedor[0].proveedor.entregado).format('0,0.00')+' (g)', 80, doc.autoTable.previous.finalY + 10);
-      doc.text('Pendiente: '+numeral((cierresProveedor[0].proveedor.entregado) - (cierresProveedor[0].proveedor.cerrado)).format('0,0.00')+' (g)', 150, doc.autoTable.previous.finalY + 10);
+      doc.text('Total Cerrado: '+numeral(cierresProveedor[0].proveedor.cerrado + cierresProveedor[0].proveedor.cerrado_m).format('0,0.00') +' (g)', 14, doc.autoTable.previous.finalY + 10);
+      doc.text('Total Entregado: '+numeral(cierresProveedor[0].proveedor.entregado + cierresProveedor[0].proveedor.entregado_m).format('0,0.00')+' (g)', 80, doc.autoTable.previous.finalY + 10);
+      doc.text('Pendiente: '+numeral((cierresProveedor[0].proveedor.entregado +cierresProveedor[0].proveedor.entregado_m) - (cierresProveedor[0].proveedor.cerrado + cierresProveedor[0].proveedor.cerrado_m)).format('0,0.00')+' (g)', 150, doc.autoTable.previous.finalY + 10);
       // doc.text('Total Cerrado: '+numeral(cierresProveedor[0].proveedor.cerrado).format('0,0.00') +' (g)', 14, doc.autoTable.previous.finalY + 10);
       // doc.text('Total Entregado: '+numeral(cierresProveedor[0].proveedor.entregado).format('0,0.00')+' (g)', 14, doc.autoTable.previous.finalY + 20);
     }

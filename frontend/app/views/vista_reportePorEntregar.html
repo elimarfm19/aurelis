@@ -29,18 +29,18 @@
               </tr>
             </tfoot>
             <tbody>
-                <tr ng-repeat="cliente in clientes" ng-if="!((cliente.cerrado - cliente.entregado)== 0)">
+                <tr ng-repeat="cliente in clientes" ng-if="!(((cliente.cerrado + cliente.cerrado_m) - (cliente.entregado + cliente.entregado_m))== 0)">
                   <td class="center-align" >
                     {{cliente.nombres}} {{cliente.apellidos}}
                   </td>
                   <td class="center-align" >
-                    {{cliente.cerrado | currency: ''}} 
+                    {{(cliente.cerrado + cliente.cerrado_m)| currency: ''}} 
                   </td>
                   <td class="center-align" >                            
-                    {{cliente.entregado  | currency: ''}}
+                    {{(cliente.entregado  + cliente.entregado_m)| currency: ''}}
                   </td>
                   <td class="center-align" field="por_cerrar">
-                    {{(cliente.entregado - cliente.cerrado) | number}}
+                    {{((cliente.entregado  + cliente.entregado_m) - (cliente.cerrado + cliente.cerrado_m)) | number}}
                   </td>
                   <td class="center-align" field="fecha_entrega">
                   <!-- aqui va la ultmima recepcion de este personaje-->

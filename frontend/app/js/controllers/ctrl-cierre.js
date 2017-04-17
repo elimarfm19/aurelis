@@ -1009,9 +1009,9 @@ $scope.generarpqtC= function() {
 
       if (route ==  route_backend+"cierres/cliente/"+$scope.cliente._id) {
         doc.setFontSize(12);
-        doc.text('Total Cerrado: '+numeral(cierres[0].cliente.cerrado).format('0,0.00') +' (g)', 14, doc.autoTable.previous.finalY + 10);
-        doc.text('Total Entregado: '+numeral(cierres[0].cliente.entregado).format('0,0.00')+' (g)', 80, doc.autoTable.previous.finalY + 10);
-        doc.text('Pendiente: '+numeral((cierres[0].cliente.entregado) - (cierres[0].cliente.cerrado)).format('0,0.00')+' (g)', 150, doc.autoTable.previous.finalY + 10);
+        doc.text('Total Cerrado: '+numeral(cierres[0].cliente.cerrado + cierres[0].cliente.cerrado_m).format('0,0.00') +' (g)', 14, doc.autoTable.previous.finalY + 10);
+        doc.text('Total Entregado: '+numeral(cierres[0].cliente.entregado + cierres[0].cliente.entregado_m).format('0,0.00')+' (g)', 80, doc.autoTable.previous.finalY + 10);
+        doc.text('Pendiente: '+numeral((cierres[0].cliente.entregado + cierres[0].cliente.entregado_m) - (cierres[0].cliente.cerrado + cierres[0].cliente.cerrado_m)).format('0,0.00')+' (g)', 150, doc.autoTable.previous.finalY + 10);
       }
       else{
         doc.setFontSize(12);

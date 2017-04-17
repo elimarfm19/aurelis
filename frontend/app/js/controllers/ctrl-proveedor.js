@@ -556,9 +556,9 @@ $scope.generarpqtPorRecibir= function() {
     var pendiente=0; 
     var ultima_entrega;
       for (var i = 0; i < proveedores.length; i++) {
-        if ((proveedores[i].cerrado != 0)&&(proveedores[i].cerrado != null)&&(((proveedores[i].cerrado) - (proveedores[i].entregado))>0)){
+        if (((proveedores[i].cerrado + proveedores[i].cerrado_m) != 0)&&((proveedores[i].cerrado + proveedores[i].cerrado_m)!= null)&&(((proveedores[i].cerrado + proveedores[i].cerrado_m) - (proveedores[i].entregado+ proveedores[i].entregado_m))>0)){
 
-          pendiente-= parseFloat(proveedores[i].entregado - proveedores[i].cerrado).toFixed(2);
+          pendiente-= parseFloat((proveedores[i].entregado + proveedores[i].entregado_m) - (proveedores[i].cerrado + proveedores[i].cerrado_m)).toFixed(2);
 
           if(!proveedores[i].ultima_entrega){
            ultima_entrega='' ;
@@ -569,9 +569,9 @@ $scope.generarpqtPorRecibir= function() {
           data.push({
               
               proveedor: proveedores[i].nombres +' '+ proveedores[i].apellidos,
-              cerrado: numeral(proveedores[i].cerrado).format('0,0.00'),
-              entregado: numeral(proveedores[i].entregado).format('0,0.00'),
-              pendiente: numeral(proveedores[i].entregado - proveedores[i].cerrado).format('0,0.00'),
+              cerrado: numeral((proveedores[i].cerrado + proveedores[i].cerrado_m)).format('0,0.00'),
+              entregado: numeral((proveedores[i].entregado + proveedores[i].entregado_m)).format('0,0.00'),
+              pendiente: numeral((proveedores[i].entregado + proveedores[i].entregado_m) - (proveedores[i].cerrado + proveedores[i].cerrado_m)).format('0,0.00'),
               fecha_ultima_entrega: ultima_entrega
           });
     }}

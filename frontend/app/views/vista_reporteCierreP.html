@@ -14,7 +14,7 @@
             <div class="col-lg-8"> 
               <select class="select col-lg-offset-3" ng-model="proveedor._id" ng-change="buscarProveedor(proveedor._id)">
                 <option value="">Seleccione Proveedor</option>
-                <option ng-repeat="proveedor in proveedores" value="{{proveedor._id}}" ng-if="(proveedor.cerrado > 0)" >{{proveedor.nombres}} {{proveedor.apellidos}}</option>
+                <option ng-repeat="proveedor in proveedores" value="{{proveedor._id}}" ng-if="((proveedor.cerrado + proveedor.cerrado_m)> 0)" >{{proveedor.nombres}} {{proveedor.apellidos}}</option>
               </select>
             </div>
           </div> 
